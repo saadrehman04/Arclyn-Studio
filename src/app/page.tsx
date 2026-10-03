@@ -2,11 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/home/HeroSection';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
-import { TechMarquee } from '@/components/home/TechMarquee';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
 import { BentoGridSection } from '@/components/home/BentoGridSection';
-import { StatementMarquee } from '@/components/home/StatementMarquee';
 import { FeaturedProjects } from '@/components/home/FeaturedProjects';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { TeamSection } from '@/components/home/TeamSection';
@@ -42,25 +40,19 @@ export default function HomePage() {
       {/* 1. Hero Section (Pixel-matched with top light ribbon, Syne typography, 5.0 rating, dual pill buttons, and interactive project tabs with 3D ContainerScroll) */}
       <HeroSection />
 
-      {/* 2. Signature Dual Crossing Ticker (Fiery Orange & Dark Slate Slanted Ribbons) */}
+      {/* 2. Signature Dual Crossing Ticker (Electric Purple-Blue-Cyan & Dark Slate Slanted Ribbons) */}
       <DualCrossingTicker />
 
-      {/* 3. Infinite Tech Stack Marquee Ribbon */}
-      <TechMarquee />
-
-      {/* 4. 3D Iridescent Torus & Asymmetric 2x2 Capabilities */}
+      {/* 3. 3D Iridescent Torus & Asymmetric 2x2 Capabilities */}
       <Capability3DSection />
 
-      {/* 5. Smart Solutions for Modern Businesses (Services Overview with gold/cyan circular icons) */}
+      {/* 4. Smart Solutions for Modern Businesses (Services Overview with gold/cyan circular icons) */}
       <ServicesOverview />
 
-      {/* 6. Signature Bento Grid: AI + Human Expertise (4-card asymmetric layout with live telemetry) */}
+      {/* 5. Signature Bento Grid: AI + Human Expertise (4-card asymmetric layout with live telemetry) */}
       <BentoGridSection />
 
-      {/* 7. Inverted Kinetic Statement Marquee */}
-      <StatementMarquee />
-
-      {/* 8. Audited Case Studies & Shipped Products (2x2 verified production projects with live URLs) */}
+      {/* 6. Audited Case Studies & Shipped Products (2x2 verified production projects with live URLs) */}
       <FeaturedProjects />
 
       {/* 9. Driven by Innovation, Grounded in Results (Why Choose Us - 6-card broken rhythm with real portraits) */}

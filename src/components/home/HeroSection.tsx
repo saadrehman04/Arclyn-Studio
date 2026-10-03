@@ -91,7 +91,7 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* 5. Dual Pill CTA Buttons with Magnetic Physics */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-14">
                 <MagneticButton>
                   <Link
                     href="/contact"
