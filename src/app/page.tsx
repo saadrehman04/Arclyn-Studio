@@ -4,13 +4,12 @@ import { HeroSection } from '@/components/home/HeroSection';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
-import { BentoGridSection } from '@/components/home/BentoGridSection';
 import { FeaturedProjects } from '@/components/home/FeaturedProjects';
+import { PartnerProgramSection } from '@/components/home/PartnerProgramSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { TeamSection } from '@/components/home/TeamSection';
 import { PricingOverview } from '@/components/home/PricingOverview';
 import { IndustriesStrip } from '@/components/home/IndustriesStrip';
-import { PartnerTeaser } from '@/components/home/PartnerTeaser';
 import { FinalCta } from '@/components/home/FinalCta';
 
 export const metadata: Metadata = {
@@ -37,40 +36,37 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#050711]">
-      {/* 1. Hero Section (Pixel-matched with top light ribbon, Syne typography, 5.0 rating, dual pill buttons, and interactive project tabs with 3D ContainerScroll) */}
+      {/* 1. Hero Section (Cheesecake Factory active first, 3D ContainerScroll) */}
       <HeroSection />
 
-      {/* 2. Signature Dual Crossing Ticker (Electric Purple-Blue-Cyan & Dark Slate Slanted Ribbons) */}
+      {/* 2. Signature Dual Crossing Ticker */}
       <DualCrossingTicker />
 
       {/* 3. 3D Iridescent Torus & Asymmetric 2x2 Capabilities */}
       <Capability3DSection />
 
-      {/* 4. Smart Solutions for Modern Businesses (Services Overview with gold/cyan circular icons) */}
+      {/* 4. Smart Solutions for Modern Businesses (Services Overview) */}
       <ServicesOverview />
 
-      {/* 5. Signature Bento Grid: AI + Human Expertise (4-card asymmetric layout with live telemetry) */}
-      <BentoGridSection />
-
-      {/* 6. Audited Case Studies & Shipped Products (2x2 verified production projects with live URLs) */}
+      {/* 5. Audited Case Studies & Shipped Products (Shifted before partner section) */}
       <FeaturedProjects />
+
+      {/* 6. Partner Program Section (Replaces AI human expertise section with 30%-40% revenue share) */}
+      <PartnerProgramSection />
 
       {/* 7. What Founders Say (Real Client Testimonials & Verifiable ROI) */}
       <TestimonialsSection />
 
-      {/* 10. The Architects Behind the Code (Monochrome team portraits with color hover reveal) */}
+      {/* 8. The Architects Behind the Code */}
       <TeamSection />
 
-      {/* 11. Clear, Predictable Milestone Investment (3 pricing tiers + interactive scope calculator link) */}
+      {/* 9. Clear, Predictable Milestone Investment (PKR Packages & Terms) */}
       <PricingOverview />
 
-      {/* 12. Industry Concept Architectures */}
+      {/* 10. Industry Domains Strip */}
       <IndustriesStrip />
 
-      {/* 13. Partner & Referral Program Teaser */}
-      <PartnerTeaser />
-
-      {/* 14. High-Impact Final CTA with signature bottom light ribbon and dual magnetic pill buttons */}
+      {/* 11. High-Impact Final CTA */}
       <FinalCta />
     </div>
   );

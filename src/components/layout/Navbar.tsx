@@ -170,9 +170,13 @@ export const Navbar: React.FC = () => {
               <Logo size="md" />
             </div>
 
-            {/* 2. Sleek Glassmorphic Floating Pill Bar (Matching Reference Image) */}
-            <nav className="hidden lg:flex items-center bg-[#0A0E21]/80 hover:bg-[#0C122B]/90 backdrop-blur-2xl border border-white/12 rounded-full px-6 py-2.5 shadow-[0_10px_35px_rgba(0,0,0,0.5)] transition-all">
-              <div className="flex items-center gap-6 text-sm font-medium">
+            {/* 2. Sleek Glassmorphic Floating Pill Bar with Purple Liquid Glow (Matching Reference Image 4) */}
+            <nav className="hidden lg:flex items-center relative rounded-full px-6 py-2.5 backdrop-blur-2xl bg-gradient-to-r from-purple-900/40 via-[#0A0E21]/90 to-[#0A0E21]/95 border border-purple-500/30 hover:border-purple-400/50 shadow-[0_0_35px_rgba(168,85,247,0.3),0_12px_40px_rgba(0,0,0,0.6)] transition-all duration-300 group/nav overflow-hidden">
+              {/* Internal Liquid Magenta/Purple Sheen on Left */}
+              <div className="absolute -left-4 -top-8 w-44 h-24 bg-gradient-to-r from-fuchsia-500/35 via-purple-600/30 to-transparent blur-xl pointer-events-none" />
+              <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-purple-300/60 via-cyan-300/30 to-transparent pointer-events-none" />
+
+              <div className="flex items-center gap-6 text-sm font-medium relative z-10">
                 
                 {/* Home Dropdown */}
                 <div
