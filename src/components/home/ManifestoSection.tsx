@@ -1,10 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { MagneticButton } from '../shared/MagneticButton';
+import { Sparkles } from 'lucide-react';
 
 export const ManifestoSection: React.FC = () => {
   return (
@@ -30,7 +28,7 @@ export const ManifestoSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100 leading-[1.25] tracking-tight mb-10 max-w-4xl mx-auto"
+          className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-100 leading-[1.25] tracking-tight max-w-4xl mx-auto"
         >
           Arclyn Studio combines{' '}
           <span className="text-white underline decoration-cyan-400/50 decoration-wavy decoration-1 underline-offset-8">
@@ -41,24 +39,6 @@ export const ManifestoSection: React.FC = () => {
           visions into market-dominant digital products — shipped in{' '}
           <span className="text-white">weeks, not quarters</span>.
         </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex justify-center"
-        >
-          <MagneticButton>
-            <Link
-              href="#capabilities"
-              className="px-7 py-3.5 rounded-full text-sm font-semibold text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.14] hover:border-cyan-400/50 transition-all duration-300 inline-flex items-center gap-2 group shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-            >
-              <span>Explore Our Capabilities</span>
-              <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
-          </MagneticButton>
-        </motion.div>
 
       </div>
     </section>

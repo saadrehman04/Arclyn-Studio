@@ -4,160 +4,166 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Bot, Cpu, Gauge, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 
-const CAPABILITIES = [
+// Exact SVG Vector Icons from Reference Image
+const SparkleIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7] fill-current">
+    <path d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z" />
+  </svg>
+);
+
+const GridDotsIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7] fill-current">
+    <rect x="2.5" y="2.5" width="4.2" height="4.2" rx="0.6" />
+    <rect x="9.9" y="2.5" width="4.2" height="4.2" rx="0.6" />
+    <rect x="17.3" y="2.5" width="4.2" height="4.2" rx="0.6" />
+    <rect x="2.5" y="9.9" width="4.2" height="4.2" rx="0.6" />
+    <rect x="17.3" y="9.9" width="4.2" height="4.2" rx="0.6" />
+    <rect x="2.5" y="17.3" width="4.2" height="4.2" rx="0.6" />
+    <rect x="9.9" y="17.3" width="4.2" height="4.2" rx="0.6" />
+    <rect x="17.3" y="17.3" width="4.2" height="4.2" rx="0.6" />
+  </svg>
+);
+
+const FlowerBurstIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7] fill-current">
+    <rect x="10.5" y="1" width="3" height="5" rx="1.5" />
+    <rect x="10.5" y="18" width="3" height="5" rx="1.5" />
+    <rect x="1" y="10.5" width="5" height="3" rx="1.5" />
+    <rect x="18" y="10.5" width="5" height="3" rx="1.5" />
+    <rect x="4.2" y="4.2" width="3" height="5" rx="1.5" transform="rotate(-45 5.7 6.7)" />
+    <rect x="16.8" y="16.8" width="3" height="5" rx="1.5" transform="rotate(-45 18.3 19.3)" />
+    <rect x="16.8" y="4.2" width="3" height="5" rx="1.5" transform="rotate(45 18.3 6.7)" />
+    <rect x="4.2" y="16.8" width="3" height="5" rx="1.5" transform="rotate(45 5.7 19.3)" />
+  </svg>
+);
+
+const PinwheelIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 12V3.5h5" />
+    <path d="M12 12h8.5v5" />
+    <path d="M12 12v8.5H7" />
+    <path d="M12 12H3.5V7" />
+  </svg>
+);
+
+const CAPABILITY_ITEMS = [
   {
-    number: '01',
-    icon: Bot,
-    title: 'AI-Powered Autonomous Systems',
-    desc: 'Bespoke AI agents, LangChain/LangGraph orchestration, prompt caching, and custom RAG knowledge bases that automate high-complexity workflows.',
-    tag: 'LangGraph & Claude 3.5',
-    accent: 'from-purple-500/20 to-cyan-500/20',
-    iconColor: 'text-cyan-400',
-    borderColor: 'group-hover:border-cyan-400/40',
+    icon: SparkleIcon,
+    title: 'AI-Generated Prototypes',
+    desc: 'Get wireframes and mockups in hours, not weeks.',
+    borderClasses: 'border-b border-white/[0.08] sm:border-r sm:border-white/[0.08]',
   },
   {
-    number: '02',
-    icon: Cpu,
-    title: 'Full-Stack Software Craft',
-    desc: 'Production-ready Next.js 15, TypeScript, Node.js, and Supabase backends architected for zero latency, rock-solid security, and effortless scaling.',
-    tag: 'Next.js 15 & PostgreSQL',
-    accent: 'from-blue-500/20 to-purple-500/20',
-    iconColor: 'text-purple-400',
-    borderColor: 'group-hover:border-purple-400/40',
+    icon: GridDotsIcon,
+    title: 'Accelerated Development',
+    desc: 'AI-assisted coding speeds up delivery.',
+    borderClasses: 'border-b border-white/[0.08]',
   },
   {
-    number: '03',
-    icon: Gauge,
-    title: 'Smart QA & Sub-Second TTFB',
-    desc: 'Automated end-to-end regression suites, extreme image optimization, and caching strategies delivering verified 98+ Google Lighthouse scores.',
-    tag: '98+ Lighthouse Performance',
-    accent: 'from-cyan-500/20 to-emerald-500/20',
-    iconColor: 'text-emerald-400',
-    borderColor: 'group-hover:border-emerald-400/40',
+    icon: FlowerBurstIcon,
+    title: 'Smart QA Testing',
+    desc: 'AI-driven testing for fewer bugs and smoother launches.',
+    borderClasses: 'sm:border-r sm:border-white/[0.08]',
   },
   {
-    number: '04',
-    icon: ShieldCheck,
-    title: 'Enterprise DevOps & Support',
-    desc: 'CI/CD automation, Docker containerization, AWS & Vercel edge networks, continuous monitoring, and proactive SLA-backed maintenance.',
-    tag: '99.98% Uptime SLA',
-    accent: 'from-amber-500/20 to-purple-500/20',
-    iconColor: 'text-amber-400',
-    borderColor: 'group-hover:border-amber-400/40',
+    icon: PinwheelIcon,
+    title: 'Full Support',
+    desc: 'A dedicated team to guide you every step of the way.',
+    borderClasses: '',
   },
 ];
 
 export const Capability3DSection: React.FC = () => {
   return (
-    <section id="capabilities" className="relative py-24 sm:py-32 overflow-hidden bg-[#050711]">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-10 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
+    <section id="capabilities" className="relative py-20 sm:py-28 overflow-hidden bg-[#050711]">
+      {/* Background Liquid Chrome Ribbon Ambience */}
+      <div className="liquid-chrome-mid -top-20 -left-40 pointer-events-none opacity-25" />
+      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        {/* Top Centered Pill Button matching reference Image 3: [ → Find Out More ] */}
+        <div className="flex justify-center mb-16 sm:mb-20">
+          <MagneticButton>
+            <Link
+              href="/services"
+              className="px-7 py-3 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#2563EB] to-[#B113FE] hover:from-[#1D4ED8] hover:to-[#9333EA] transition-all duration-300 inline-flex items-center gap-2 shadow-[0_0_30px_rgba(177,19,254,0.65)] hover:shadow-[0_0_40px_rgba(177,19,254,0.85)] hover:scale-105"
+            >
+              <span className="text-base leading-none">→</span>
+              <span>Find Out More</span>
+            </Link>
+          </MagneticButton>
+        </div>
+
+        {/* 2-Column Split: 3D Torus on Left + 2x2 Minimal Grid on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: 3D Iridescent Torus Floating Sculpture */}
+          {/* Left Column: Free-Floating 3D Iridescent Torus */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 relative flex flex-col items-center"
+            className="lg:col-span-6 flex justify-center items-center relative"
           >
-            <div className="relative w-full max-w-[440px] aspect-square rounded-3xl p-3 bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/[0.1] backdrop-blur-2xl shadow-[0_0_60px_rgba(34,211,238,0.12)] group">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/60">
-                <Image
-                  src="/images/iridescent-torus.jpg"
-                  alt="Arclyn Studio 3D Iridescent Engineering Core"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 440px"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050711] via-transparent to-transparent opacity-60" />
-                
-                {/* Floating Metric Badge */}
-                <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-black/70 border border-white/[0.12] backdrop-blur-xl">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider mb-0.5">Architecture Core</div>
-                      <div className="text-sm font-bold text-white font-display">Algorithmic Precision + Speed</div>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-cyan-400/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300">
-                      <Sparkles className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <motion.div
+              animate={{
+                y: [-8, 8, -8],
+                rotate: [-1.2, 1.2, -1.2],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="relative w-full max-w-[480px] sm:max-w-[540px] aspect-square flex items-center justify-center"
+            >
+              {/* Image blends seamlessly with mix-blend-screen / dark background */}
+              <Image
+                src="/images/iridescent-torus-standalone.jpg"
+                alt="Arclyn Studio 3D Iridescent Engineering Core"
+                fill
+                priority
+                className="object-contain mix-blend-screen drop-shadow-[0_0_50px_rgba(34,211,238,0.25)]"
+                sizes="(max-width: 1024px) 100vw, 540px"
+              />
+            </motion.div>
           </motion.div>
 
-          {/* Right Column: 2x2 Asymmetric Capability Grid */}
-          <div className="lg:col-span-7">
-            <div className="mb-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-purple-400/30 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-4">
-                <span>Core Capabilities</span>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                Software Engineered for{' '}
-                <span className="text-gradient-hero">Continuous Dominance</span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {CAPABILITIES.map((cap, i) => {
-                const IconComponent = cap.icon;
+          {/* Right Column: 2x2 Clean Minimalist Crosshair Grid */}
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2">
+              {CAPABILITY_ITEMS.map((item, idx) => {
+                const IconComponent = item.icon;
                 return (
                   <motion.div
-                    key={cap.number}
-                    initial={{ opacity: 0, y: 20 }}
+                    key={item.title}
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className={`p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] ${cap.borderColor} backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.04] group hover:-translate-y-1 relative`}
+                    transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className={`p-6 sm:p-9 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
                   >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${cap.accent} border border-white/[0.1] flex items-center justify-center ${cap.iconColor} group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComponent className="w-5 h-5" />
-                      </div>
-                      <span className="font-mono text-xs text-slate-500 group-hover:text-slate-300 transition-colors">
-                        {cap.number}
-                      </span>
+                    {/* Golden Icon */}
+                    <div className="mb-6 text-[#E8DDA7] group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent />
                     </div>
 
-                    <h3 className="font-display text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                      {cap.title}
+                    {/* Headline */}
+                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-200 transition-colors">
+                      {item.title}
                     </h3>
-                    
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-                      {cap.desc}
-                    </p>
 
-                    <div className="inline-flex items-center px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.06] text-[11px] font-mono text-slate-300">
-                      {cap.tag}
-                    </div>
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
+                      {item.desc}
+                    </p>
                   </motion.div>
                 );
               })}
             </div>
-
-            <div className="mt-8 flex items-center gap-4">
-              <MagneticButton>
-                <Link
-                  href="/services"
-                  className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.12] hover:border-purple-400/50 transition-all duration-200 inline-flex items-center gap-2 group"
-                >
-                  <span>Explore All Services</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-purple-400 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </MagneticButton>
-            </div>
-
           </div>
 
         </div>
