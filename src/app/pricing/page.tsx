@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { PricingCalculator } from '@/components/pricing/PricingCalculator';
 import { Sparkles, ShieldCheck } from 'lucide-react';
+import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -12,8 +13,9 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen">
-      {/* Background ambient lighting */}
+    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
+      {/* 3D Liquid Chrome Ribbon Background */}
+      <PageHeroRibbon />
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

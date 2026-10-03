@@ -47,7 +47,8 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section className="relative pt-36 pb-24 overflow-hidden bg-cosmic-grid">
-      {/* Cinematic Top Curved Light Ribbon */}
+      {/* Cinematic Top 3D Liquid Chrome Ribbon & Ambient Glow */}
+      <div className="liquid-chrome-hero" />
       <div className="light-ribbon-top" />
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
 

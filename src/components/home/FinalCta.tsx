@@ -9,7 +9,8 @@ import { MagneticButton } from '../shared/MagneticButton';
 export const FinalCta: React.FC = () => {
   return (
     <section className="relative py-32 sm:py-44 bg-[#050711] overflow-hidden">
-      {/* Signature Bottom Curved Light Ribbon matching reference */}
+      {/* Signature Bottom 3D Liquid Chrome Ribbon & Light Sweep */}
+      <div className="liquid-chrome-bottom" />
       <div className="light-ribbon-bottom pointer-events-none" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none" />
 

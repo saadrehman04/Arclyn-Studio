@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { CustomCursor } from '@/components/shared/CustomCursor';
+import { LiquidChromeBackdrop } from '@/components/shared/LiquidChromeBackdrop';
 
 const syne = Syne({
   variable: '--font-syne',
@@ -104,8 +105,9 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-[#050711] text-slate-100 font-sans antialiased selection:bg-purple-600/30 selection:text-white bg-noise">
         <SmoothScroll>
           <CustomCursor />
+          <LiquidChromeBackdrop />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 relative z-10">{children}</main>
           <Footer />
         </SmoothScroll>
       </body>

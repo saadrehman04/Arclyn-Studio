@@ -76,6 +76,57 @@ p, blockquote, li {
   z-index: 0;
 }
 
+/* 3D Liquid Chrome Ribbon Background Utilities */
+.liquid-chrome-hero {
+  position: absolute;
+  top: -60px;
+  right: -120px;
+  width: 950px;
+  height: 650px;
+  background-image: url('/images/liquid-chrome-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at 65% 45%, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 65% 45%, black 25%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-chrome-bottom {
+  position: absolute;
+  bottom: -80px;
+  left: -100px;
+  width: 1000px;
+  height: 650px;
+  background-image: url('/images/liquid-chrome-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: scaleX(-1) rotate(15deg);
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at 40% 55%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 40% 55%, black 20%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-chrome-mid {
+  position: absolute;
+  width: 1100px;
+  height: 700px;
+  background-image: url('/images/liquid-chrome-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Background Cosmic Grid */
 .bg-cosmic-grid {
   background-image: 
