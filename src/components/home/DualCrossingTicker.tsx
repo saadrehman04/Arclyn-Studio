@@ -23,9 +23,9 @@ const GRADIENT_ITEMS = [
 export const DualCrossingTicker: React.FC = () => {
   return (
     <section className="relative py-14 sm:py-20 overflow-hidden bg-[#03050C] flex flex-col justify-center select-none">
-      {/* Ambient center illumination matching button gradient (purple & cyan) */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] bg-purple-600/20 rounded-full blur-[110px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/3 translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] bg-cyan-500/15 rounded-full blur-[110px] pointer-events-none" />
+      {/* Ambient center illumination matching the electric violet-to-magenta button glow */}
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[220px] bg-[#4608EE]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/3 translate-x-1/2 -translate-y-1/2 w-[550px] h-[220px] bg-[#CE00FC]/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative w-full py-8 flex flex-col items-center justify-center">
         {/* Ribbon 1: Dark Slate Band (Tilted -2.5deg) */}
@@ -42,8 +42,8 @@ export const DualCrossingTicker: React.FC = () => {
           </div>
         </div>
 
-        {/* Ribbon 2: Electric Purple → Royal Blue → Cyan Gradient Band (Matching Button Gradient, Crossing at +2.8deg over Ribbon 1) */}
-        <div className="w-[120vw] -ml-[10vw] -mt-6 sm:-mt-8 transform rotate-2 sm:rotate-[2.8deg] bg-gradient-to-r from-[#8B5CF6] via-[#2563EB] to-[#06B6D4] py-3.5 sm:py-4 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_40px_rgba(139,92,246,0.45)] border-y border-cyan-300/40 z-10">
+        {/* Ribbon 2: Electric Indigo → Vivid Violet → Neon Magenta Gradient Band (Sampled Directly from Reference Button, Crossing at +2.8deg over Ribbon 1) */}
+        <div className="w-[120vw] -ml-[10vw] -mt-6 sm:-mt-8 transform rotate-2 sm:rotate-[2.8deg] bg-gradient-to-r from-[#4608EE] via-[#8E00F4] to-[#CE00FC] py-3.5 sm:py-4 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_45px_rgba(177,19,254,0.5)] border-y border-[#CE00FC]/30 z-10">
           <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused]">
             {[...GRADIENT_ITEMS, ...GRADIENT_ITEMS, ...GRADIENT_ITEMS, ...GRADIENT_ITEMS].map((item, idx) => (
               <div key={idx} className="flex items-center gap-6 sm:gap-8 mx-4 sm:mx-6">
