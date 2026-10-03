@@ -78,9 +78,9 @@ const CAPABILITY_ITEMS = [
 export const Capability3DSection: React.FC = () => {
   return (
     <section id="capabilities" className="relative py-20 sm:py-28 overflow-hidden bg-[#050711]">
-      {/* Background Liquid Chrome Ribbon Ambience */}
-      <div className="liquid-chrome-mid -top-20 -left-40 pointer-events-none opacity-25" />
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* Pure subtle ambient glow — flower ribbon completely removed */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -97,53 +97,43 @@ export const Capability3DSection: React.FC = () => {
           </MagneticButton>
         </div>
 
-        {/* 2-Column Split: 3D Torus on Left + 2x2 Minimal Grid on Right */}
+        {/* 2-Column Split: Animated 3D Torus on Left + 2x2 Minimal Grid on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Free-Floating 3D Iridescent Torus */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 flex justify-center items-center relative"
-          >
+          {/* Left Column: Free-Floating Animated 3D Iridescent Torus with Pure Transparency */}
+          <div className="lg:col-span-6 flex justify-center items-center relative">
             <motion.div
               animate={{
-                y: [-8, 8, -8],
-                rotate: [-1.2, 1.2, -1.2],
+                y: [-12, 12, -12],
+                rotate: [-3, 3, -3],
+                scale: [1, 1.025, 1],
               }}
               transition={{
-                duration: 10,
+                duration: 8,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="relative w-full max-w-[480px] sm:max-w-[540px] aspect-square flex items-center justify-center"
+              className="relative w-full max-w-[460px] sm:max-w-[520px] aspect-square flex items-center justify-center select-none"
             >
-              {/* Image blends seamlessly with mix-blend-screen / dark background */}
               <Image
-                src="/images/iridescent-torus-standalone.jpg"
-                alt="Arclyn Studio 3D Iridescent Engineering Core"
+                src="/images/iridescent-torus-clean.png"
+                alt="Arclyn Studio 3D Iridescent Fluid Core"
                 fill
                 priority
-                className="object-contain mix-blend-screen drop-shadow-[0_0_50px_rgba(34,211,238,0.25)]"
-                sizes="(max-width: 1024px) 100vw, 540px"
+                className="object-contain drop-shadow-[0_0_70px_rgba(34,211,238,0.35)] filter contrast-105"
+                sizes="(max-width: 1024px) 100vw, 520px"
               />
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Right Column: 2x2 Clean Minimalist Crosshair Grid */}
           <div className="lg:col-span-6">
             <div className="grid grid-cols-1 sm:grid-cols-2">
-              {CAPABILITY_ITEMS.map((item, idx) => {
+              {CAPABILITY_ITEMS.map((item) => {
                 const IconComponent = item.icon;
                 return (
-                  <motion.div
+                  <div
                     key={item.title}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className={`p-6 sm:p-9 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
                   >
                     {/* Golden Icon */}
@@ -160,7 +150,7 @@ export const Capability3DSection: React.FC = () => {
                     <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
                       {item.desc}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

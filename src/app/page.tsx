@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { HeroSection } from '@/components/home/HeroSection';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
 import { TechMarquee } from '@/components/home/TechMarquee';
-import { ManifestoSection } from '@/components/home/ManifestoSection';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
 import { BentoGridSection } from '@/components/home/BentoGridSection';
@@ -48,9 +47,6 @@ export default function HomePage() {
 
       {/* 3. Infinite Tech Stack Marquee Ribbon */}
       <TechMarquee />
-
-      {/* 3. Editorial Typography Manifesto Statement */}
-      <ManifestoSection />
 
       {/* 4. 3D Iridescent Torus & Asymmetric 2x2 Capabilities */}
       <Capability3DSection />

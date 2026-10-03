@@ -370,14 +370,14 @@ export const Navbar: React.FC = () => {
               </div>
             </nav>
 
-            {/* 3. Glowing Gradient Pill Button: "→ Get Started" (Matching Reference Image) */}
+            {/* 3. Glowing Gradient Pill Button: "Start Your Project" matching the bottom hero CTA */}
             <div className="hidden sm:flex items-center gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#2563EB] to-[#D946EF] shadow-[0_0_25px_rgba(217,70,239,0.5)] hover:shadow-[0_0_35px_rgba(217,70,239,0.8)] hover:scale-105 transition-all duration-300"
+                className="px-6 py-2.5 rounded-full text-sm font-bold text-white btn-pill-primary inline-flex items-center gap-2 group"
               >
-                <ArrowRight className="w-4 h-4" />
-                <span>Get Started</span>
+                <span>Start Your Project</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
@@ -483,10 +483,10 @@ export const Navbar: React.FC = () => {
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#2563EB] to-[#D946EF] shadow-[0_0_25px_rgba(217,70,239,0.5)]"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full text-sm font-bold text-white btn-pill-primary group"
               >
-                <ArrowRight className="w-4 h-4" />
-                <span>Get Started</span>
+                <span>Start Your Project</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>

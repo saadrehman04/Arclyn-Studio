@@ -87,8 +87,12 @@ export const metadata: Metadata = {
     images: ['/brand/arclyn-logo.jpg'],
   },
   icons: {
-    icon: '/brand/arclyn-logo.jpg',
-    apple: '/brand/arclyn-logo.jpg',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [{ url: '/icon.png', sizes: '512x512', type: 'image/png' }],
   },
 };
 
