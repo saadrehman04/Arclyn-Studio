@@ -6,45 +6,53 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MagneticButton } from '../shared/MagneticButton';
 
-// Exact SVG Vector Icons from Reference Image
+// Exact SVG Vector Icons from Demo Website with Pale Champagne Color (#F3F5B4)
 const SparkleIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7] fill-current">
-    <path d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z" />
+  <svg viewBox="0 0 48 48" className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-[#F3F5B4] fill-current">
+    <path d="M 24 5 A 21 21 0 0 0 43 24 A 21 21 0 0 0 24 43 A 21 21 0 0 0 5 24 A 21 21 0 0 0 24 5 Z" />
   </svg>
 );
 
 const GridDotsIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7] fill-current">
-    <rect x="2.5" y="2.5" width="4.2" height="4.2" rx="0.6" />
-    <rect x="9.9" y="2.5" width="4.2" height="4.2" rx="0.6" />
-    <rect x="17.3" y="2.5" width="4.2" height="4.2" rx="0.6" />
-    <rect x="2.5" y="9.9" width="4.2" height="4.2" rx="0.6" />
-    <rect x="17.3" y="9.9" width="4.2" height="4.2" rx="0.6" />
-    <rect x="2.5" y="17.3" width="4.2" height="4.2" rx="0.6" />
-    <rect x="9.9" y="17.3" width="4.2" height="4.2" rx="0.6" />
-    <rect x="17.3" y="17.3" width="4.2" height="4.2" rx="0.6" />
+  <svg viewBox="0 0 48 48" className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-[#F3F5B4] fill-current">
+    <rect x="19.5" y="19.5" width="9" height="9" rx="1.5" />
+    <rect x="14" y="4" width="9" height="9" rx="1.5" />
+    <rect x="25" y="4" width="9" height="9" rx="1.5" />
+    <rect x="14" y="35" width="9" height="9" rx="1.5" />
+    <rect x="25" y="35" width="9" height="9" rx="1.5" />
+    <rect x="4" y="14" width="9" height="9" rx="1.5" />
+    <rect x="4" y="25" width="9" height="9" rx="1.5" />
+    <rect x="35" y="14" width="9" height="9" rx="1.5" />
+    <rect x="35" y="25" width="9" height="9" rx="1.5" />
   </svg>
 );
 
 const FlowerBurstIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7] fill-current">
-    <rect x="10.5" y="1" width="3" height="5" rx="1.5" />
-    <rect x="10.5" y="18" width="3" height="5" rx="1.5" />
-    <rect x="1" y="10.5" width="5" height="3" rx="1.5" />
-    <rect x="18" y="10.5" width="5" height="3" rx="1.5" />
-    <rect x="4.2" y="4.2" width="3" height="5" rx="1.5" transform="rotate(-45 5.7 6.7)" />
-    <rect x="16.8" y="16.8" width="3" height="5" rx="1.5" transform="rotate(-45 18.3 19.3)" />
-    <rect x="16.8" y="4.2" width="3" height="5" rx="1.5" transform="rotate(45 18.3 6.7)" />
-    <rect x="4.2" y="16.8" width="3" height="5" rx="1.5" transform="rotate(45 5.7 19.3)" />
+  <svg viewBox="0 0 48 48" className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-[#F3F5B4] fill-current">
+    <rect x="19" y="19" width="10" height="10" rx="2" />
+    <g id="cap-petal-pair">
+      <path d="M 19 18.5 C 18 13, 16 8, 13.5 5 C 17.5 4.5, 20.5 7.5, 22.5 18.5 Z" />
+      <path d="M 29 18.5 C 30 13, 32 8, 34.5 5 C 30.5 4.5, 27.5 7.5, 25.5 18.5 Z" />
+    </g>
+    <use href="#cap-petal-pair" transform="rotate(90 24 24)" />
+    <use href="#cap-petal-pair" transform="rotate(180 24 24)" />
+    <use href="#cap-petal-pair" transform="rotate(270 24 24)" />
   </svg>
 );
 
-const PinwheelIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#E8DDA7]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 12V3.5h5" />
-    <path d="M12 12h8.5v5" />
-    <path d="M12 12v8.5H7" />
-    <path d="M12 12H3.5V7" />
+const ApertureIcon = () => (
+  <svg viewBox="0 0 48 48" className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-[#F3F5B4] fill-current">
+    {[0, 60, 120, 180, 240, 300].map((deg) => (
+      <rect
+        key={deg}
+        x="27.5"
+        y="15.5"
+        width="13.5"
+        height="5.2"
+        rx="1.4"
+        transform={`rotate(${deg} 24 24)`}
+      />
+    ))}
   </svg>
 );
 
@@ -52,24 +60,42 @@ const CAPABILITY_ITEMS = [
   {
     icon: SparkleIcon,
     title: 'AI-Generated Prototypes',
+    titleFormatted: (
+      <>
+        <span className="inline-block">AI&#8209;Generated</span>
+        <br className="hidden sm:inline" />
+        {' '}
+        <span className="inline-block">Prototypes</span>
+      </>
+    ),
     desc: 'Get wireframes and mockups in hours, not weeks.',
-    borderClasses: 'border-b border-white/[0.08] sm:border-r sm:border-white/[0.08]',
+    borderClasses: 'border-b border-white/[0.1] sm:border-r sm:border-white/[0.1]',
   },
   {
     icon: GridDotsIcon,
     title: 'Accelerated Development',
+    titleFormatted: (
+      <>
+        <span className="inline-block">Accelerated</span>
+        <br className="hidden sm:inline" />
+        {' '}
+        <span className="inline-block">Development</span>
+      </>
+    ),
     desc: 'AI-assisted coding speeds up delivery.',
-    borderClasses: 'border-b border-white/[0.08]',
+    borderClasses: 'border-b border-white/[0.1]',
   },
   {
     icon: FlowerBurstIcon,
     title: 'Smart QA Testing',
+    titleFormatted: 'Smart QA Testing',
     desc: 'AI-driven testing for fewer bugs and smoother launches.',
-    borderClasses: 'sm:border-r sm:border-white/[0.08]',
+    borderClasses: 'border-b sm:border-b-0 sm:border-r border-white/[0.1]',
   },
   {
-    icon: PinwheelIcon,
+    icon: ApertureIcon,
     title: 'Full Support',
+    titleFormatted: 'Full Support',
     desc: 'A dedicated team to guide you every step of the way.',
     borderClasses: '',
   },
@@ -77,56 +103,56 @@ const CAPABILITY_ITEMS = [
 
 export const Capability3DSection: React.FC = () => {
   return (
-    <section id="capabilities" className="relative py-20 sm:py-28 overflow-hidden bg-[#050711]">
-      {/* Pure subtle ambient glow — flower ribbon completely removed */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
+    <section id="capabilities" className="relative py-24 sm:py-32 lg:py-40 xl:py-48 overflow-hidden bg-[#050711]">
+      {/* Subtle deep ambient glow behind the massive elements */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-600/10 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[180px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10">
         
-        {/* Top Centered Pill Button matching reference Image 3: [ → Find Out More ] */}
-        <div className="flex justify-center mb-16 sm:mb-20">
+        {/* Top Centered Pill Button matching reference: [ → Find Out More ] */}
+        <div className="flex justify-center mb-16 sm:mb-24">
           <MagneticButton>
             <Link
               href="/services"
-              className="px-7 py-3 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#2563EB] to-[#B113FE] hover:from-[#1D4ED8] hover:to-[#9333EA] transition-all duration-300 inline-flex items-center gap-2 shadow-[0_0_30px_rgba(177,19,254,0.65)] hover:shadow-[0_0_40px_rgba(177,19,254,0.85)] hover:scale-105"
+              className="px-8 py-3.5 rounded-full text-sm sm:text-base font-bold text-white bg-gradient-to-r from-[#2563EB] to-[#B113FE] hover:from-[#1D4ED8] hover:to-[#9333EA] transition-all duration-300 inline-flex items-center gap-2.5 shadow-[0_0_35px_rgba(177,19,254,0.7)] hover:shadow-[0_0_45px_rgba(177,19,254,0.9)] hover:scale-105"
             >
-              <span className="text-base leading-none">→</span>
+              <span className="text-lg leading-none">→</span>
               <span>Find Out More</span>
             </Link>
           </MagneticButton>
         </div>
 
-        {/* 2-Column Split: Animated 3D Torus on Left + 2x2 Minimal Grid on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* 2-Column Split: Massive Animated 3D Torus on Left + 2x2 Expansive Grid on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
           
-          {/* Left Column: Free-Floating Animated 3D Iridescent Torus with Pure Transparency */}
-          <div className="lg:col-span-6 flex justify-center items-center relative">
+          {/* Left Column: Free-Floating Giant Animated 3D Torus */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-start items-center relative pl-0 lg:pl-2 xl:pl-6">
             <motion.div
               animate={{
-                y: [-12, 12, -12],
+                y: [-16, 16, -16],
                 rotate: [-3, 3, -3],
-                scale: [1, 1.025, 1],
+                scale: [1, 1.03, 1],
               }}
               transition={{
                 duration: 8,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="relative w-full max-w-[460px] sm:max-w-[520px] aspect-square flex items-center justify-center select-none"
+              className="relative w-full max-w-[620px] sm:max-w-[720px] lg:max-w-[800px] xl:max-w-[860px] 2xl:max-w-[920px] aspect-square flex items-center justify-center select-none"
             >
               <Image
                 src="/images/iridescent-torus-clean.png"
                 alt="Arclyn Studio 3D Iridescent Fluid Core"
                 fill
                 priority
-                className="object-contain drop-shadow-[0_0_70px_rgba(34,211,238,0.35)] filter contrast-105"
-                sizes="(max-width: 1024px) 100vw, 520px"
+                className="object-contain drop-shadow-[0_0_120px_rgba(34,211,238,0.4)] filter contrast-110"
+                sizes="(max-width: 1024px) 100vw, 920px"
               />
             </motion.div>
           </div>
 
-          {/* Right Column: 2x2 Clean Minimalist Crosshair Grid */}
+          {/* Right Column: 2x2 Clean Minimalist Crosshair Grid with Large Icons & Headings */}
           <div className="lg:col-span-6">
             <div className="grid grid-cols-1 sm:grid-cols-2">
               {CAPABILITY_ITEMS.map((item) => {
@@ -134,20 +160,20 @@ export const Capability3DSection: React.FC = () => {
                 return (
                   <div
                     key={item.title}
-                    className={`p-6 sm:p-9 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
+                    className={`p-8 sm:p-10 lg:p-12 xl:p-14 2xl:p-16 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
                   >
-                    {/* Golden Icon */}
-                    <div className="mb-6 text-[#E8DDA7] group-hover:scale-110 transition-transform duration-300">
+                    {/* Golden Icon - Large scale matching demo site */}
+                    <div className="mb-8 sm:mb-10 lg:mb-12 text-[#F3F5B4] group-hover:scale-110 transition-transform duration-300 origin-left">
                       <IconComponent />
                     </div>
 
-                    {/* Headline */}
-                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-cyan-200 transition-colors">
-                      {item.title}
+                    {/* Headline - Large, bold, punchy */}
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-bold text-white mb-4 sm:mb-6 tracking-tight leading-[1.16] group-hover:text-cyan-200 transition-colors">
+                      {item.titleFormatted}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
+                    {/* Description - Generous readable sizing */}
+                    <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-neutral-300 font-light leading-relaxed max-w-sm sm:max-w-md">
                       {item.desc}
                     </p>
                   </div>
