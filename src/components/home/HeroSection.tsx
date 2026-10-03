@@ -48,10 +48,12 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section className="relative pt-24 sm:pt-28 pb-6 overflow-hidden bg-cosmic-grid">
-      {/* Cinematic Top 3D Liquid Chrome Ribbon & Ambient Glow */}
+      {/* Cinematic Top 3D Liquid Chrome Ribbons on Both Right & Left */}
       <div className="liquid-chrome-hero" />
+      <div className="liquid-chrome-hero-left" />
       <div className="light-ribbon-top" />
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ContainerScroll

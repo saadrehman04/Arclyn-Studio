@@ -94,6 +94,24 @@ p, blockquote, li {
   z-index: 0;
 }
 
+.liquid-chrome-hero-left {
+  position: absolute;
+  top: -60px;
+  left: -120px;
+  width: 950px;
+  height: 650px;
+  background-image: url('/images/liquid-chrome-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: scaleX(-1);
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at 65% 45%, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 65% 45%, black 25%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .liquid-chrome-bottom {
   position: absolute;
   bottom: -80px;
