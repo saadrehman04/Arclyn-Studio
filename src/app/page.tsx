@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/home/HeroSection';
+import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
 import { TechMarquee } from '@/components/home/TechMarquee';
 import { ManifestoSection } from '@/components/home/ManifestoSection';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
@@ -39,10 +40,13 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#050711]">
-      {/* 1. Hero Section (Pixel-matched with top light ribbon, Syne typography, 5.0 rating, dual pill buttons, and interactive project tabs) */}
+      {/* 1. Hero Section (Pixel-matched with top light ribbon, Syne typography, 5.0 rating, dual pill buttons, and interactive project tabs with 3D ContainerScroll) */}
       <HeroSection />
 
-      {/* 2. Infinite Tech Stack Marquee Ribbon */}
+      {/* 2. Signature Dual Crossing Ticker (Fiery Orange & Dark Slate Slanted Ribbons) */}
+      <DualCrossingTicker />
+
+      {/* 3. Infinite Tech Stack Marquee Ribbon */}
       <TechMarquee />
 
       {/* 3. Editorial Typography Manifesto Statement */}
