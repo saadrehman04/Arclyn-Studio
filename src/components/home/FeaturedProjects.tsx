@@ -177,7 +177,7 @@ export const FeaturedProjects: React.FC = () => {
               href="/work"
               className="px-8 py-4 rounded-full text-sm sm:text-base font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 group shadow-[0_0_30px_rgba(147,51,234,0.3)]"
             >
-              <span>View All 11 Projects in Portfolio</span>
+              <span>View All Projects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </MagneticButton>

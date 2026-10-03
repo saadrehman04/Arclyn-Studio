@@ -6,9 +6,8 @@ import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
 import { FeaturedProjects } from '@/components/home/FeaturedProjects';
 import { PartnerProgramSection } from '@/components/home/PartnerProgramSection';
-import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { TeamSection } from '@/components/home/TeamSection';
-import { PricingOverview } from '@/components/home/PricingOverview';
+import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { IndustriesStrip } from '@/components/home/IndustriesStrip';
 import { FinalCta } from '@/components/home/FinalCta';
 
@@ -48,25 +47,22 @@ export default function HomePage() {
       {/* 4. Smart Solutions for Modern Businesses (Services Overview) */}
       <ServicesOverview />
 
-      {/* 5. Audited Case Studies & Shipped Products (Shifted before partner section) */}
+      {/* 5. Audited Case Studies & Shipped Products */}
       <FeaturedProjects />
 
-      {/* 6. Partner Program Section (Replaces AI human expertise section with 30%-40% revenue share) */}
+      {/* 6. Partner Program Section (30%-40% revenue share) */}
       <PartnerProgramSection />
 
-      {/* 7. What Founders Say (Real Client Testimonials & Verifiable ROI) */}
-      <TestimonialsSection />
-
-      {/* 8. The Architects Behind the Code */}
+      {/* 7. Senior Leadership (The Architects Behind the Code) - Placed before Testimonials */}
       <TeamSection />
 
-      {/* 9. Clear, Predictable Milestone Investment (PKR Packages & Terms) */}
-      <PricingOverview />
+      {/* 8. What Founders Say (Real Client Testimonials & Verifiable ROI) */}
+      <TestimonialsSection />
 
-      {/* 10. Industry Domains Strip */}
+      {/* 9. Industry Domains Strip */}
       <IndustriesStrip />
 
-      {/* 11. High-Impact Final CTA */}
+      {/* 10. High-Impact Final CTA */}
       <FinalCta />
     </div>
   );

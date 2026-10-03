@@ -68,7 +68,7 @@ const HOME_SECTIONS = [
   { title: 'Capabilities & 3D Torus', href: '/#capabilities', desc: 'AI-accelerated development & testing' },
   { title: 'Bento Grid System', href: '/#bento', desc: 'Where AI meets human engineering' },
   { title: 'Verified Case Studies', href: '/#work', desc: 'Audited production architectures' },
-  { title: 'Milestone Pricing', href: '/#pricing', desc: 'Transparent sprint-based investment' },
+  { title: 'Milestone Pricing', href: '/pricing', desc: 'Transparent sprint-based investment' },
 ];
 
 const PAGES_LINKS = [
