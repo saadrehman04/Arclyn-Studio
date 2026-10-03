@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, CheckCircle2, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 interface Testimonial {
   id: string;
@@ -113,9 +114,8 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
 
   return (
     <section className={`relative ${hideHeader ? 'py-6' : 'py-28 sm:py-36'} bg-[#050711] overflow-hidden ${hideHeader ? '' : 'border-t border-white/5'} ${className}`}>
-      {/* Background radial spotlights & subtle liquid glow */}
-      <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-purple-600/10 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[550px] h-[550px] bg-cyan-600/10 rounded-full blur-[170px] pointer-events-none" />
+      {/* Neon Strand Background Atmosphere */}
+      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.35} flipX={true} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

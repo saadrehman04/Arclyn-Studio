@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 const TEAM_MEMBERS = [
   {
@@ -40,9 +41,9 @@ const TEAM_MEMBERS = [
 
 export const TeamSection: React.FC = () => {
   return (
-    <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[180px] pointer-events-none" />
+    <section id="leadership" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
+      {/* Dynamic Metallic Core & Constellation Nodes Background */}
+      <NeonSectionBackground variant="core-nodes" position="full" opacity={0.42} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

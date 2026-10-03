@@ -10,13 +10,13 @@ import {
   ShieldCheck, 
   Clock 
 } from 'lucide-react';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 export const PartnerProgramSection: React.FC = () => {
   return (
     <section id="partner-program" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden border-t border-white/5">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-[550px] h-[550px] bg-purple-700/10 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-0 w-[550px] h-[550px] bg-cyan-700/10 rounded-full blur-[170px] pointer-events-none" />
+      {/* Neon Strand Background Atmosphere */}
+      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.38} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

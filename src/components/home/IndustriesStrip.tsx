@@ -16,6 +16,7 @@ import {
   ExternalLink,
   Layers
 } from 'lucide-react';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 const ICON_MAP: Record<string, React.ElementType> = {
   'restaurants-hospitality': Utensils,
@@ -31,8 +32,8 @@ export const IndustriesStrip: React.FC = () => {
 
   return (
     <section className="relative py-24 sm:py-32 border-t border-white/10 bg-[#060915] overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Dynamic Core & Network Nodes Background */}
+      <NeonSectionBackground variant="core-nodes" position="full" opacity={0.32} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

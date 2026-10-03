@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@/data/projects';
 import { ArrowUpRight, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 export const FeaturedProjects: React.FC = () => {
   // Top 4 flagship verified case studies
@@ -14,9 +15,8 @@ export const FeaturedProjects: React.FC = () => {
 
   return (
     <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[180px] pointer-events-none" />
+      {/* Subtle Metallic Core & Constellation Nodes Background */}
+      <NeonSectionBackground variant="core-nodes" position="full" opacity={0.35} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

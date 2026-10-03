@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, ShieldCheck, Calendar, Clock } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 export const FinalCta: React.FC = () => {
   return (
     <section className="relative py-32 sm:py-44 bg-[#050711] overflow-hidden">
-      {/* Signature Bottom 3D Liquid Chrome Ribbon & Light Sweep */}
-      <div className="liquid-chrome-bottom" />
+      {/* Signature 3D Neon Metallic Liquid Strands */}
+      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.48} />
       <div className="light-ribbon-bottom pointer-events-none" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none" />
 

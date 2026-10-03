@@ -14,6 +14,7 @@ import {
   ArrowRight 
 } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
+import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 const SERVICE_CARDS = [
   {
@@ -63,9 +64,8 @@ const SERVICE_CARDS = [
 export const ServicesOverview: React.FC = () => {
   return (
     <section className="relative pt-6 sm:pt-10 pb-28 sm:pb-36 bg-[#050711] overflow-hidden">
-      {/* Ambient background accents */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* Subtle Dynamic Neon Liquid Strand Atmosphere */}
+      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.34} />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
