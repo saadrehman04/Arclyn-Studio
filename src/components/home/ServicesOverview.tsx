@@ -2,29 +2,63 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { SERVICES } from '@/data/services';
 import { 
-  Globe, 
-  Smartphone, 
-  Bot, 
-  Zap, 
-  Code2, 
+  Sparkles, 
+  Layers, 
+  Box, 
+  Rocket, 
   Cloud, 
-  ArrowRight, 
-  Sparkles,
-  CheckCircle2 
+  Flame, 
+  ArrowRight 
 } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 
-const ICON_MAP: Record<string, React.ElementType> = {
-  Globe,
-  Smartphone,
-  Bot,
-  Zap,
-  Code2,
-  Cloud,
-};
+const SERVICE_CARDS = [
+  {
+    id: 'ai-product',
+    slug: 'ai-agent-development',
+    title: 'AI-Accelerated Product Development',
+    desc: 'We combine advanced AI tools with expert engineering to take your concept from idea to MVP in record time — without sacrificing quality.',
+    icon: Sparkles,
+  },
+  {
+    id: 'custom-software',
+    slug: 'custom-software-saas-development',
+    title: 'Custom Software & App Development',
+    desc: 'From mobile apps to web platforms, we build scalable, high-performance solutions tailored to your market and business needs.',
+    icon: Layers,
+  },
+  {
+    id: 'prototyping-ux',
+    slug: 'website-ecommerce-development',
+    title: 'Prototyping & UX Design',
+    desc: 'Rapidly test ideas with interactive AI-generated prototypes and data-backed design decisions that put users first.',
+    icon: Box,
+  },
+  {
+    id: 'ai-automation',
+    slug: 'ai-integration-automation',
+    title: 'AI Integration & Automation',
+    desc: 'Enhance your product with AI features — from predictive analytics to smart chatbots — to improve efficiency and user engagement.',
+    icon: Rocket,
+  },
+  {
+    id: 'cloud-devops',
+    slug: 'cloud-architecture-devops',
+    title: 'Cloud Architecture & DevOps',
+    desc: 'Deploy with confidence. We design secure, scalable, and cost-efficient cloud infrastructure, with automated testing and CI/CD pipelines.',
+    icon: Cloud,
+  },
+  {
+    id: 'growth-consulting',
+    slug: 'partner-program',
+    title: 'Startup Growth Consulting',
+    desc: "We're more than a dev shop — we help you refine your business model, optimize workflows, and prepare for funding rounds.",
+    icon: Flame,
+  },
+];
 
 export const ServicesOverview: React.FC = () => {
   return (
@@ -33,7 +67,7 @@ export const ServicesOverview: React.FC = () => {
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
@@ -70,10 +104,10 @@ export const ServicesOverview: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* 6 Services Grid matching reference obsidian styling */}
+        {/* 6 Services Grid matching reference obsidian styling with shaded circular badges & corner liquid ribbons */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {SERVICES.map((service, index) => {
-            const Icon = ICON_MAP[service.iconName] || Globe;
+          {SERVICE_CARDS.map((service, index) => {
+            const Icon = service.icon;
 
             return (
               <motion.div
@@ -82,43 +116,36 @@ export const ServicesOverview: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative rounded-3xl p-8 bg-[#090d1a] border border-white/[0.08] hover:border-cyan-400/40 transition-all duration-400 flex flex-col justify-between overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1.5"
+                className="group relative rounded-3xl p-8 sm:p-9 bg-[#0c0f17] border border-white/[0.08] hover:border-cyan-400/40 transition-all duration-400 flex flex-col justify-between overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1.5"
               >
-                {/* Subtle corner hover illumination */}
-                <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-bl-full pointer-events-none group-hover:from-cyan-400/20 transition-all duration-500" />
+                {/* Subtle corner liquid ribbon reflection matching Image 3 */}
+                <div className="absolute -bottom-6 -right-6 w-36 h-36 opacity-30 group-hover:opacity-65 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-br-3xl">
+                  <Image
+                    src="/images/neon-ribbon-strands.jpg"
+                    alt=""
+                    fill
+                    className="object-cover object-left-top mix-blend-screen"
+                    sizes="150px"
+                  />
+                </div>
 
-                <div>
-                  {/* Circular Gold/Amber/Cyan Icon Treatment matching reference */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500/20 via-purple-500/10 to-cyan-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300 group-hover:scale-110 group-hover:border-cyan-400/60 group-hover:text-cyan-300 transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.15)]">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className="font-mono text-[11px] font-medium px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-slate-400 group-hover:text-slate-200">
-                      {service.badge}
-                    </span>
+                <div className="relative z-10">
+                  {/* Shaded Circular Icon Container matching Image 3 */}
+                  <div className="w-14 h-14 rounded-full bg-[#1b1e2a] border border-white/[0.1] shadow-[inset_0_2px_4px_rgba(255,255,255,0.12),0_4px_14px_rgba(0,0,0,0.6)] flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
+                    <Icon className="w-6 h-6 text-[#F3F5B4] drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]" />
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="font-display text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="font-display text-2xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors tracking-tight leading-snug">
                     {service.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-normal">
-                    {service.shortDesc}
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6 font-light">
+                    {service.desc}
                   </p>
-
-                  {/* Key Deliverable Highlights */}
-                  <div className="space-y-2 mb-6 pt-4 border-t border-white/[0.06]">
-                    {service.deliverables.slice(0, 2).map((item) => (
-                      <div key={item.title} className="flex items-center gap-2 text-xs text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-                        <span className="line-clamp-1">{item.title}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 {/* Bottom CTA Link */}
-                <div className="pt-4 border-t border-white/[0.06]">
+                <div className="pt-4 border-t border-white/[0.06] relative z-10">
                   <Link
                     href={`/services/${service.slug}`}
                     className="inline-flex items-center justify-between w-full text-xs font-semibold text-slate-300 group-hover:text-cyan-300 transition-colors"

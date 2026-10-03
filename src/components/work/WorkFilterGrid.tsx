@@ -15,7 +15,18 @@ import {
   Layers3
 } from 'lucide-react';
 
-const CATEGORIES = ['All', 'AI Agents', 'Automation', 'Full Stack', 'SaaS'] as const;
+const CATEGORIES = [
+  'All',
+  'Restaurants',
+  'Ecommerce',
+  'Real Estate',
+  'Gyms',
+  'Plumbers & Electricians',
+  'Medical & Dental',
+  'Farmhouses',
+  'Education',
+  'AI Agents & SaaS',
+] as const;
 
 export const WorkFilterGrid: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');

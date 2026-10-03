@@ -15,6 +15,8 @@ import {
   ShieldCheck
 } from 'lucide-react';
 
+import Image from 'next/image';
+
 export const metadata: Metadata = {
   title: 'Our Services & Capabilities',
   description:
@@ -36,7 +38,7 @@ export default function ServicesPage() {
   return (
     <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
       {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon />
+      <PageHeroRibbon variant="strands" opacity={0.65} />
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -70,17 +72,29 @@ export default function ServicesPage() {
               <div
                 key={service.id}
                 id={service.slug}
-                className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 hover:border-purple-500/40 transition-all duration-300 overflow-hidden relative"
+                className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 hover:border-purple-500/40 transition-all duration-300 overflow-hidden relative group"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                {/* Subtle corner liquid ribbon reflection */}
+                <div className="absolute -bottom-8 -right-8 w-48 h-48 opacity-25 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-br-3xl">
+                  <Image
+                    src="/images/neon-ribbon-strands.jpg"
+                    alt=""
+                    fill
+                    className="object-cover object-left-top mix-blend-screen"
+                    sizes="200px"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
                   
                   {/* Service Info */}
                   <div className={`lg:col-span-7 space-y-6 ${isEven ? 'lg:order-2' : ''}`}>
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-cyan-500 text-white flex items-center justify-center shadow-lg">
-                        <Icon className="w-6 h-6" />
+                    <div className="flex items-center gap-4">
+                      {/* Shaded Circular Icon Container */}
+                      <div className="w-14 h-14 rounded-full bg-[#1b1e2a] border border-white/[0.1] shadow-[inset_0_2px_4px_rgba(255,255,255,0.12),0_4px_14px_rgba(0,0,0,0.6)] flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                        <Icon className="w-6 h-6 text-[#F3F5B4] drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]" />
                       </div>
-                      <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-white/10 text-cyan-300">
+                      <span className="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-cyan-300">
                         {service.badge}
                       </span>
                     </div>

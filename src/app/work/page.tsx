@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
-      {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon />
+      {/* Full Background Neon Design Image in Hero Section matching reference */}
+      <PageHeroRibbon variant="chrome" fullHero opacity={0.85} />
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
