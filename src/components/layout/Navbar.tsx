@@ -20,7 +20,8 @@ import {
   Sparkles,
   Briefcase,
   Users,
-  Compass
+  Compass,
+  Star
 } from 'lucide-react';
 
 const SERVICE_LINKS = [
@@ -72,12 +73,14 @@ const HOME_SECTIONS = [
 
 const PAGES_LINKS = [
   { title: 'Our Work', href: '/work', desc: 'Complete verified project portfolio', icon: Briefcase },
+  { title: 'Testimonials', href: '/testimonials', desc: 'Verified reviews & client success stories', icon: Star },
   { title: 'Industries', href: '/industries', desc: 'Real Estate, Health, Dining, SaaS & more', icon: Compass },
   { title: 'Partner Program', href: '/partner-program', desc: 'High-earning 10-15% agency referral rewards', icon: Users },
   { title: 'About Arclyn', href: '/about', desc: 'Our engineering philosophy and team', icon: Sparkles },
 ];
 
 const SEARCH_ITEMS = [
+  { title: 'Testimonials & Reviews', subtitle: 'Verified Client Stories & Ratings', href: '/testimonials', category: 'Reviews' },
   { title: 'Prestige Estates', subtitle: 'Luxury Real Estate Showcase', href: '/work#prestige-estates', category: 'Project' },
   { title: 'Fitusion', subtitle: 'Athletics & Fitness Platform', href: '/work#fitusion', category: 'Project' },
   { title: 'The Cheesecake Factory', subtitle: 'Dining & Hospitality Platform', href: '/work#cheesecake-factory', category: 'Project' },

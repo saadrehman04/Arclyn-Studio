@@ -10,6 +10,14 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 const SHOWCASE_TABS = [
   {
+    id: 'cheesecake-factory',
+    title: 'Cheesecake Factory',
+    badge: 'Dining & Hospitality',
+    image: '/projects/cheesecake-factory.png',
+    url: 'https://www.thecheesecakefactory.com/',
+    metric: 'Interactive digital menu, sensory photography & online ordering',
+  },
+  {
     id: 'prestige',
     title: 'Prestige Estates',
     badge: 'Luxury Real Estate',
@@ -24,14 +32,6 @@ const SHOWCASE_TABS = [
     image: '/projects/fitusion.png',
     url: 'https://website-fitusion.vercel.app/',
     metric: 'Sculpt your body, elevate your spirit — 12k+ active members',
-  },
-  {
-    id: 'cheesecake-factory',
-    title: 'Cheesecake Factory',
-    badge: 'Dining & Hospitality',
-    image: '/projects/cheesecake-factory.png',
-    url: 'https://www.thecheesecakefactory.com/',
-    metric: 'Interactive digital menu, sensory photography & online ordering',
   },
   {
     id: 'mark-murphy-dds',

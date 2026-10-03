@@ -6,7 +6,7 @@ import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
 import { BentoGridSection } from '@/components/home/BentoGridSection';
 import { FeaturedProjects } from '@/components/home/FeaturedProjects';
-import { WhyChooseUs } from '@/components/home/WhyChooseUs';
+import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { TeamSection } from '@/components/home/TeamSection';
 import { PricingOverview } from '@/components/home/PricingOverview';
 import { IndustriesStrip } from '@/components/home/IndustriesStrip';
@@ -55,8 +55,8 @@ export default function HomePage() {
       {/* 6. Audited Case Studies & Shipped Products (2x2 verified production projects with live URLs) */}
       <FeaturedProjects />
 
-      {/* 9. Driven by Innovation, Grounded in Results (Why Choose Us - 6-card broken rhythm with real portraits) */}
-      <WhyChooseUs />
+      {/* 7. What Founders Say (Real Client Testimonials & Verifiable ROI) */}
+      <TestimonialsSection />
 
       {/* 10. The Architects Behind the Code (Monochrome team portraits with color hover reveal) */}
       <TeamSection />
