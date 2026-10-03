@@ -62,7 +62,7 @@ const SERVICE_CARDS = [
 
 export const ServicesOverview: React.FC = () => {
   return (
-    <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
+    <section className="relative pt-6 sm:pt-10 pb-28 sm:pb-36 bg-[#050711] overflow-hidden">
       {/* Ambient background accents */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[160px] pointer-events-none" />
@@ -70,7 +70,7 @@ export const ServicesOverview: React.FC = () => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -161,22 +161,22 @@ export const ServicesOverview: React.FC = () => {
           })}
         </div>
 
-        {/* Bottom Bar matching reference */}
+        {/* Bottom Bar with adjusted Find Out More button */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-400"
+          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-5 text-sm text-slate-300"
         >
-          <span>Looking for a bespoke architecture or tailored scope?</span>
+          <span className="text-slate-300 text-sm sm:text-base font-light">Looking for a bespoke architecture or tailored scope?</span>
           <MagneticButton>
             <Link
               href="/services"
-              className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.12] hover:border-cyan-400/50 transition-all duration-200 inline-flex items-center gap-2 group"
+              className="px-7 py-3 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#2563EB] to-[#B113FE] hover:from-[#1D4ED8] hover:to-[#9333EA] transition-all duration-300 inline-flex items-center gap-2 shadow-[0_0_25px_rgba(177,19,254,0.6)] hover:shadow-[0_0_35px_rgba(177,19,254,0.85)] hover:scale-105"
             >
-              <span>Explore All 6 Practices</span>
-              <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+              <span className="text-base leading-none">→</span>
+              <span>Find Out More</span>
             </Link>
           </MagneticButton>
         </motion.div>
