@@ -229,11 +229,6 @@ export const HeroSection: React.FC = () => {
                 </h1>
               </div>
 
-              {/* 3. Editorial Subheadline */}
-              <p className="text-sm sm:text-base lg:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto mb-4 sm:mb-5 font-normal">
-                Arclyn Studio combines full-stack web engineering with autonomous AI automation to turn ambitious ideas into market-ready products — websites, apps, and intelligent systems built to actually grow your business.
-              </p>
-
               {/* 4. Social Proof & Star Rating */}
               <div className="flex items-center justify-center gap-2 sm:gap-3 mb-5 sm:mb-7 text-xs sm:text-sm text-slate-300">
                 <div className="flex items-center text-amber-400">
