@@ -6,10 +6,7 @@ import Image from 'next/image';
 import { 
   Users, 
   ArrowRight, 
-  CheckCircle2, 
-  DollarSign, 
-  ShieldCheck, 
-  Clock 
+  CheckCircle2 
 } from 'lucide-react';
 import { BorderGlow } from '@/components/ui/BorderGlow';
 
@@ -155,80 +152,6 @@ export const PartnerProgramSection: React.FC = () => {
               </div>
             </div>
           </BorderGlow>
-        </div>
-
-        {/* 4-Step Client Handling Workflow */}
-        <div className="rounded-3xl p-8 sm:p-12 bg-[#090d1a] border border-white/[0.08] max-w-5xl mx-auto mb-16">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">Zero Headaches</span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">How The Workflow Works</h3>
-            <p className="text-sm text-slate-300 mt-2">
-              You introduce the client; our team handles the rest from technical architecture to delivery.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 font-bold flex items-center justify-center text-sm mb-4">
-                01
-              </div>
-              <h4 className="text-base font-bold text-white mb-2">Introduction</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                You manage initial contact and basic inquiries using our reference cheat sheet and packages.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-sm mb-4">
-                02
-              </div>
-              <h4 className="text-base font-bold text-white mb-2">Discovery & Quote</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Arclyn jumps on a 15-min discovery call, scopes the requirements, and issues clear milestone contracts.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-sm mb-4">
-                03
-              </div>
-              <h4 className="text-base font-bold text-white mb-2">5-7 Day Delivery</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Full-stack engineers build and deploy with unlimited revisions, free 1-year hosting, and testing.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm mb-4">
-                04
-              </div>
-              <h4 className="text-base font-bold text-white mb-2">Instant Payout</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Upon final client handover and payment, your 30% commission is immediately transferred.
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Clear Policies Highlight */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10 sm:mb-12 text-center">
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-            <Clock className="w-6 h-6 text-purple-400 mx-auto mb-3" />
-            <h5 className="text-sm font-bold text-white mb-1">5 to 7 Working Days</h5>
-            <p className="text-xs text-slate-400">Rapid turnaround with unlimited revisions during build</p>
-          </div>
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-            <ShieldCheck className="w-6 h-6 text-emerald-400 mx-auto mb-3" />
-            <h5 className="text-sm font-bold text-white mb-1">Free 1-Year Hosting</h5>
-            <p className="text-xs text-slate-400">100% domain ownership in client name + 1-year maintenance</p>
-          </div>
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-            <DollarSign className="w-6 h-6 text-cyan-400 mx-auto mb-3" />
-            <h5 className="text-sm font-bold text-white mb-1">30% | 20% | 50% Terms</h5>
-            <p className="text-xs text-slate-400">30% on approval, 20% pre-launch, 50% after launch & handover</p>
-          </div>
         </div>
 
         {/* CTA Banner */}
