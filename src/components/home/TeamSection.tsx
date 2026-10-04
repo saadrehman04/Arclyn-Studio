@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 
 const TEAM_MEMBERS = [
   {
@@ -42,8 +41,19 @@ const TEAM_MEMBERS = [
 export const TeamSection: React.FC = () => {
   return (
     <section id="leadership" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Dynamic Metallic Core & Constellation Nodes Background */}
-      <NeonSectionBackground variant="core-nodes" position="full" opacity={0.42} />
+      {/* Luxury 3D Dark Metallic Fluid Wave Background */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <Image
+          src="/images/dark-metallic-wave.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-left-top sm:object-left opacity-75 mix-blend-screen"
+        />
+        {/* Seamless smooth gradients to blend into dark obsidian background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050711] via-transparent to-[#050711] opacity-65 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#050711_95%)] opacity-50 pointer-events-none" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
