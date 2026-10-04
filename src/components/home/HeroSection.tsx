@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Star, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
+import { SpotlightTab } from '@/components/ui/spotlight-tab';
 
 const SHOWCASE_TABS = [
   {
@@ -132,20 +133,18 @@ export const HeroSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Interactive Tabs */}
+            {/* Interactive Tabs with Dynamic Cursor Spotlight Shine */}
             <div className="flex flex-wrap items-center gap-1.5">
               {SHOWCASE_TABS.map((tab) => (
-                <button
+                <SpotlightTab
                   key={tab.id}
+                  active={activeTab.id === tab.id}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    activeTab.id === tab.id
-                      ? 'bg-purple-600 text-white shadow-md shadow-purple-600/40'
-                      : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
-                  }`}
+                  glowColor="brand"
+                  className="px-3.5 py-1.5 text-xs font-semibold"
                 >
                   {tab.title}
-                </button>
+                </SpotlightTab>
               ))}
             </div>
           </div>

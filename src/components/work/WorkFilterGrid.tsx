@@ -14,6 +14,7 @@ import {
   Calendar,
   Layers3
 } from 'lucide-react';
+import { SpotlightTab } from '@/components/ui/spotlight-tab';
 
 const CATEGORIES = [
   'All',
@@ -38,7 +39,7 @@ export const WorkFilterGrid: React.FC = () => {
 
   return (
     <div>
-      {/* Category Tabs */}
+      {/* Category Tabs with Interactive Shine on Hover */}
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
         {CATEGORIES.map((cat) => {
           const isSelected = activeCategory === cat;
@@ -47,20 +48,22 @@ export const WorkFilterGrid: React.FC = () => {
             : PROJECTS.filter((p) => p.category === cat).length;
 
           return (
-            <button
+            <SpotlightTab
               key={cat}
+              active={isSelected}
               onClick={() => setActiveCategory(cat)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                isSelected
-                  ? 'bg-gradient-to-r from-purple-600 to-cyan-500 text-white shadow-lg shadow-purple-600/30 scale-105'
-                  : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10'
+              glowColor="brand"
+              className={`flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                isSelected ? 'scale-105' : ''
               }`}
+              badge={
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-400'}`}>
+                  {count}
+                </span>
+              }
             >
               <span>{cat}</span>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-400'}`}>
-                {count}
-              </span>
-            </button>
+            </SpotlightTab>
           );
         })}
       </div>
