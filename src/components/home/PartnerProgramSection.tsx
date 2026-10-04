@@ -2,29 +2,51 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
   Users, 
   ArrowRight, 
   CheckCircle2 
 } from 'lucide-react';
 import { BorderGlow } from '@/components/ui/BorderGlow';
+import GradientWaves from '@/components/ui/GradientWaves';
 
 export const PartnerProgramSection: React.FC = () => {
   return (
     <section id="partner-program" className="relative pt-20 sm:pt-24 pb-8 sm:pb-10 bg-[#050711] overflow-hidden border-t border-white/5">
-      {/* Luxury 3D Interwoven Metallic Ribbons Background */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <Image
-          src="/images/partner-luxury-mesh.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-45 mix-blend-screen"
+      {/* 3D WebGL Gradient Waves Interactive Background */}
+      <div 
+        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" 
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      >
+        <GradientWaves
+          horizonColor="#5227FF"
+          waveColor="#FF9FFC"
+          crestColor="#FFFFFF"
+          speed={0.4}
+          amplitude={2.5}
+          waveScale={0.6}
+          waveRatio={0.9}
+          swell={35}
+          turbulence={20}
+          tilt={1.11}
+          zoom={1.0}
+          height={5.5}
+          fogDepth={15}
+          detail="medium"
+          brightness={1.0}
+          opacity={0.85}
+          mouseInteraction={true}
+          parallaxStrength={0.5}
+          grain={true}
+          grainIntensity={0.05}
         />
-        {/* Smooth vertical blending into cosmic obsidian background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050711] via-transparent to-[#050711] opacity-75" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#050711_90%)] opacity-60" />
+        {/* Smooth cosmic ambient blending */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050711] via-transparent to-[#050711] opacity-75 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#050711_90%)] opacity-60 pointer-events-none" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

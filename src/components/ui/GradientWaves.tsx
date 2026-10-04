@@ -265,15 +265,17 @@ export const GradientWaves: React.FC<GradientWavesProps> = ({
 
     const onPointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
-      targetMouse[0] = (e.clientX - rect.left) / rect.width;
-      targetMouse[1] = 1.0 - (e.clientY - rect.top) / rect.height;
+      if (rect.width > 0 && rect.height > 0) {
+        targetMouse[0] = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        targetMouse[1] = Math.max(0, Math.min(1, 1.0 - (e.clientY - rect.top) / rect.height));
+      }
     };
     const onPointerLeave = () => {
       targetMouse[0] = 0.5;
       targetMouse[1] = 0.5;
     };
-    canvas.addEventListener('pointermove', onPointerMove);
-    canvas.addEventListener('pointerleave', onPointerLeave);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerleave', onPointerLeave, { passive: true });
 
     let raf = 0;
     let isVisible = true;
@@ -325,8 +327,8 @@ export const GradientWaves: React.FC<GradientWavesProps> = ({
       ro.disconnect();
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
-      canvas.removeEventListener('pointermove', onPointerMove);
-      canvas.removeEventListener('pointerleave', onPointerLeave);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerleave', onPointerLeave);
       ctxMap.delete(container);
       try {
         if (container.contains(canvas)) {
