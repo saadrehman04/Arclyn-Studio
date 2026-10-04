@@ -11,6 +11,7 @@ import {
   Clock 
 } from 'lucide-react';
 import { NeonSectionBackground } from '../shared/NeonSectionBackground';
+import { BorderGlow } from '@/components/ui/BorderGlow';
 
 export const PartnerProgramSection: React.FC = () => {
   return (
@@ -37,86 +38,113 @@ export const PartnerProgramSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Tier Cards: 30% vs 40% Commission */}
+        {/* Tier Cards with Booster Glow */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
           
           {/* Tier 1: Initial Referrals */}
-          <div className="relative rounded-3xl p-8 sm:p-10 bg-[#090d1a] border border-white/[0.08] hover:border-purple-500/40 transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col justify-between group">
-            <div className="absolute -top-3 left-8 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-purple-600/30 text-purple-300 border border-purple-500/40">
-              Starting Tier • First 3 Deals
-            </div>
-
-            <div>
-              <div className="flex items-baseline justify-between mb-4 mt-2">
-                <span className="font-display text-5xl sm:text-6xl font-black text-white">30%</span>
-                <span className="text-xs sm:text-sm font-semibold text-purple-300 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20">
-                  Fixed Revenue Share
-                </span>
+          <BorderGlow
+            edgeSensitivity={32}
+            glowColor="270 85 75"
+            backgroundColor="#090d1a"
+            borderRadius={24}
+            glowRadius={38}
+            glowIntensity={1.15}
+            coneSpread={26}
+            colors={['#c084fc', '#818cf8', '#a855f7']}
+            fillOpacity={0.28}
+            className="h-full"
+          >
+            <div className="relative p-8 sm:p-10 flex flex-col justify-between h-full group">
+              <div className="absolute -top-3 left-8 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-purple-600/30 text-purple-300 border border-purple-500/40">
+                Starting Tier • First 3 Deals
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Standard Partner Tier</h3>
-              <p className="text-sm text-slate-300 font-light leading-relaxed mb-6">
-                Receive 30% commission on every web development and AI automation contract closed. Paid reliably upon client milestone payment.
-              </p>
 
-              <div className="space-y-3 pt-4 border-t border-white/5 text-xs sm:text-sm text-slate-300">
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Website deals: Earn up to <strong>PKR 21,000</strong> per client</span>
+              <div>
+                <div className="flex items-baseline justify-between mb-4 mt-2">
+                  <span className="font-display text-5xl sm:text-6xl font-black text-white">30%</span>
+                  <span className="text-xs sm:text-sm font-semibold text-purple-300 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20">
+                    Fixed Revenue Share
+                  </span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>AI Automation: Earn up to <strong>PKR 12,000</strong> per workflow</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Commissions paid strictly on retained revenue</span>
+                <h3 className="text-xl font-bold text-white mb-2">Standard Partner Tier</h3>
+                <p className="text-sm text-slate-300 font-light leading-relaxed mb-6">
+                  Receive 30% commission on every web development and AI automation contract closed. Paid reliably upon client milestone payment.
+                </p>
+
+                <div className="space-y-3 pt-4 border-t border-white/5 text-xs sm:text-sm text-slate-300">
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>Website deals: Earn up to <strong>PKR 21,000</strong> per client</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>AI Automation: Earn up to <strong>PKR 12,000</strong> per workflow</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>Commissions paid strictly on retained revenue</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-8 pt-6 border-t border-white/5">
-              <span className="text-xs text-slate-400">Applies to your 1st, 2nd, and 3rd closed deals</span>
+              <div className="mt-8 pt-6 border-t border-white/5">
+                <span className="text-xs text-slate-400">Applies to your 1st, 2nd, and 3rd closed deals</span>
+              </div>
             </div>
-          </div>
+          </BorderGlow>
 
           {/* Tier 2: VIP Partner */}
-          <div className="relative rounded-3xl p-8 sm:p-10 bg-gradient-to-b from-[#13112c] to-[#090d1a] border border-cyan-400/40 shadow-[0_10px_50px_rgba(6,182,212,0.15)] flex flex-col justify-between group">
-            <div className="absolute -top-3 left-8 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/30">
-              VIP Tier • 4th Deal Onwards
-            </div>
-
-            <div>
-              <div className="flex items-baseline justify-between mb-4 mt-2">
-                <span className="font-display text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">40%</span>
-                <span className="text-xs sm:text-sm font-semibold text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-lg border border-cyan-500/30">
-                  Elevated Commission
-                </span>
+          <BorderGlow
+            edgeSensitivity={32}
+            glowColor="192 90 70"
+            backgroundColor="#0d112e"
+            borderRadius={24}
+            glowRadius={44}
+            glowIntensity={1.3}
+            coneSpread={28}
+            colors={['#38bdf8', '#06b6d4', '#c084fc']}
+            fillOpacity={0.36}
+            animated={true}
+            className="h-full"
+          >
+            <div className="relative p-8 sm:p-10 flex flex-col justify-between h-full group">
+              <div className="absolute -top-3 left-8 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/30">
+                VIP Tier • 4th Deal Onwards
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Elite Referral Partner</h3>
-              <p className="text-sm text-slate-300 font-light leading-relaxed mb-6">
-                After your 3rd successful referral, your commission automatically jumps to 40% for all subsequent deals indefinitely.
-              </p>
 
-              <div className="space-y-3 pt-4 border-t border-white/5 text-xs sm:text-sm text-slate-300">
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>Website deals: Earn up to <strong>PKR 28,000</strong> per client</span>
+              <div>
+                <div className="flex items-baseline justify-between mb-4 mt-2">
+                  <span className="font-display text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">40%</span>
+                  <span className="text-xs sm:text-sm font-semibold text-cyan-300 bg-cyan-500/10 px-3 py-1 rounded-lg border border-cyan-500/30">
+                    Elevated Commission
+                  </span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>AI Automation: Earn up to <strong>PKR 16,000</strong> per workflow</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>Direct Slack/WhatsApp line to founder & tech leads</span>
+                <h3 className="text-xl font-bold text-white mb-2">Elite Referral Partner</h3>
+                <p className="text-sm text-slate-300 font-light leading-relaxed mb-6">
+                  After your 3rd successful referral, your commission automatically jumps to 40% for all subsequent deals indefinitely.
+                </p>
+
+                <div className="space-y-3 pt-4 border-t border-white/5 text-xs sm:text-sm text-slate-300">
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span>Website deals: Earn up to <strong>PKR 28,000</strong> per client</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span>AI Automation: Earn up to <strong>PKR 16,000</strong> per workflow</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span>Direct Slack/WhatsApp line to founder & tech leads</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-8 pt-6 border-t border-white/5">
-              <span className="text-xs text-cyan-300 font-medium">Automatic upgrade after 3 completed projects</span>
+              <div className="mt-8 pt-6 border-t border-white/5">
+                <span className="text-xs text-cyan-300 font-medium">Automatic upgrade after 3 completed projects</span>
+              </div>
             </div>
-          </div>
+          </BorderGlow>
 
         </div>
 

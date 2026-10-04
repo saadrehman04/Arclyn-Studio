@@ -5,13 +5,34 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, ShieldCheck, Calendar, Clock } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { NeonSectionBackground } from '../shared/NeonSectionBackground';
+import { MoltenMetal } from '@/components/ui/MoltenMetal';
 
 export const FinalCta: React.FC = () => {
   return (
     <section className="relative py-32 sm:py-44 bg-[#050711] overflow-hidden">
-      {/* Signature 3D Neon Metallic Liquid Strands */}
-      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.48} />
+      {/* Interactive Molten Metal WebGL Caustics */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-65 mix-blend-screen" aria-hidden="true">
+        <MoltenMetal
+          color1="#4338CA"
+          color2="#8B5CF6"
+          color3="#06B6D4"
+          speed={0.28}
+          scale={3.6}
+          detail={4}
+          glow={1.8}
+          coreSize={0.09}
+          swirl={1.1}
+          fold={-0.22}
+          blackPoint={0.08}
+          brightness={1.35}
+          colorMode="molten"
+          grain={true}
+          grainIntensity={0.04}
+          mouseInteraction={true}
+          mouseStrength={0.35}
+          opacity={0.7}
+        />
+      </div>
       <div className="light-ribbon-bottom pointer-events-none" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none" />
 

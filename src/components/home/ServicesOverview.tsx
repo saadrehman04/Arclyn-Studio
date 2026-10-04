@@ -14,7 +14,7 @@ import {
   ArrowRight 
 } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { NeonSectionBackground } from '../shared/NeonSectionBackground';
+import { Grainient } from '@/components/ui/Grainient';
 
 const SERVICE_CARDS = [
   {
@@ -64,8 +64,24 @@ const SERVICE_CARDS = [
 export const ServicesOverview: React.FC = () => {
   return (
     <section className="relative pt-6 sm:pt-10 pb-28 sm:pb-36 bg-[#050711] overflow-hidden">
-      {/* Subtle Dynamic Neon Liquid Strand Atmosphere */}
-      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.34} />
+      {/* Dynamic Animated Grainient Background (Cyan, Purple & Deep Cosmic Obsidian) */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-40 mix-blend-screen" aria-hidden="true">
+        <Grainient
+          color1="#06B6D4"
+          color2="#8B5CF6"
+          color3="#050711"
+          timeSpeed={0.22}
+          warpStrength={0.85}
+          warpFrequency={4.5}
+          warpSpeed={1.6}
+          warpAmplitude={45.0}
+          grainAmount={0.06}
+          grainScale={2.0}
+          contrast={1.45}
+          saturation={1.2}
+          zoom={0.9}
+        />
+      </div>
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
