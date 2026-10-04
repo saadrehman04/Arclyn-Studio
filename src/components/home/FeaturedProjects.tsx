@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@/data/projects';
 import { ArrowUpRight, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { NeonSectionBackground } from '../shared/NeonSectionBackground';
+import { SideRays } from '@/components/ui/SideRays';
 
 export const FeaturedProjects: React.FC = () => {
   // Top 4 flagship verified case studies
@@ -15,8 +15,30 @@ export const FeaturedProjects: React.FC = () => {
 
   return (
     <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Subtle Metallic Core & Constellation Nodes Background */}
-      <NeonSectionBackground variant="core-nodes" position="full" opacity={0.35} />
+      {/* Animated SideRays light beams — spotlight sweeping over the case studies */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-70 mix-blend-screen"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 85%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 85%)',
+        }}
+        aria-hidden="true"
+      >
+        <SideRays
+          speed={1.6}
+          rayColor1="#8B5CF6"
+          rayColor2="#22D3EE"
+          intensity={1.4}
+          spread={2}
+          origin="top-right"
+          tilt={0}
+          saturation={1.4}
+          blend={0.6}
+          falloff={1.7}
+          opacity={0.85}
+          maxDpr={1}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
