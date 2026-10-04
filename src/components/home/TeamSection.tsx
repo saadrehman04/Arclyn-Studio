@@ -76,26 +76,23 @@ export const TeamSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex flex-col items-center w-full max-w-[240px] sm:max-w-[260px] group"
+              className="flex flex-col items-center w-full max-w-[210px] sm:max-w-[230px] md:max-w-[245px] group"
             >
-              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]">
+              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
                   src="/images/team/saad-rabbani-zoomed.jpg"
                   alt="Saad Rabbani"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 260px"
+                  sizes="(max-width: 640px) 100vw, 245px"
                 />
               </div>
-              <div className="mt-3 text-center">
+              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
                 <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                   Saad Rabbani
                 </h3>
-                <div className="text-xs font-semibold text-purple-400 mt-0.5">
+                <div className="text-xs font-semibold text-slate-400 mt-0.5">
                   Meta Ads Specialist
-                </div>
-                <div className="mt-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-white/[0.04] text-cyan-300 border border-cyan-400/25">
-                  Meta Ads &amp; Growth
                 </div>
               </div>
             </motion.div>
@@ -106,68 +103,53 @@ export const TeamSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col items-center w-full max-w-[240px] sm:max-w-[260px] group"
+              className="flex flex-col items-center w-full max-w-[210px] sm:max-w-[230px] md:max-w-[245px] group"
             >
-              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]">
+              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
                   src="/images/team/nadeem.jpg"
                   alt="Nadeem"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 260px"
+                  sizes="(max-width: 640px) 100vw, 245px"
                 />
               </div>
-              <div className="mt-3 text-center">
+              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
                 <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                   Nadeem
                 </h3>
-                <div className="text-xs font-semibold text-purple-400 mt-0.5">
+                <div className="text-xs font-semibold text-slate-400 mt-0.5">
                   Full Stack AI Engineer
-                </div>
-                <div className="mt-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-white/[0.04] text-cyan-300 border border-cyan-400/25">
-                  Full Stack AI Engineering
                 </div>
               </div>
             </motion.div>
 
             {/* 3. CENTER & ENLARGED: Saad Rehman (Founder & CEO) */}
             <motion.div
-              initial={{ opacity: 0, y: 24, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center w-full max-w-[290px] sm:max-w-[340px] md:max-w-[370px] z-20 md:-mb-2 group"
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="flex flex-col items-center w-full max-w-[320px] sm:max-w-[370px] md:max-w-[420px] z-20 group"
             >
-              {/* Zoomed close-up standing portrait, larger, elevated */}
-              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]">
-                {/* Subtle spotlight aura behind Saad */}
-                <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent opacity-60 pointer-events-none" />
+              {/* Significantly larger portrait grounded on same baseline */}
+              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
                   src="/images/team/saad-rehman-zoomed.jpg"
                   alt="Saad Rehman"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 370px"
+                  sizes="(max-width: 640px) 100vw, 420px"
                   priority
                 />
               </div>
 
-              <div className="mt-4 text-center">
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-500 text-white shadow-lg shadow-purple-500/40 mb-2">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Founder &amp; CEO</span>
-                </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
+              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                   Saad Rehman
                 </h3>
-                <div className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-300 to-pink-400 mt-1">
+                <div className="text-xs sm:text-sm font-semibold text-slate-300 mt-0.5">
                   Founder &amp; CEO • Full Stack Developer
-                </div>
-                <p className="text-xs text-slate-300 mt-2 max-w-xs mx-auto leading-relaxed">
-                  Systems architect with 3+ years experience building high-scale Next.js apps, autonomous AI pipelines, and 50+ shipped production solutions.
-                </p>
-                <div className="mt-2.5 inline-flex items-center px-3.5 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-400/40 backdrop-blur-md">
-                  System Architecture &amp; AI
                 </div>
               </div>
             </motion.div>
@@ -178,26 +160,23 @@ export const TeamSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center w-full max-w-[240px] sm:max-w-[260px] group"
+              className="flex flex-col items-center w-full max-w-[210px] sm:max-w-[230px] md:max-w-[245px] group"
             >
-              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]">
+              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
                   src="/images/team/abdullah.jpg"
                   alt="Abdullah"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 260px"
+                  sizes="(max-width: 640px) 100vw, 245px"
                 />
               </div>
-              <div className="mt-3 text-center">
+              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
                 <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                   Abdullah
                 </h3>
-                <div className="text-xs font-semibold text-purple-400 mt-0.5">
+                <div className="text-xs font-semibold text-slate-400 mt-0.5">
                   AI Automation Specialist
-                </div>
-                <div className="mt-1.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-white/[0.04] text-cyan-300 border border-cyan-400/25">
-                  AI Automations &amp; Agents
                 </div>
               </div>
             </motion.div>
