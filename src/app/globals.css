@@ -96,18 +96,17 @@ p, blockquote, li {
 
 .liquid-chrome-hero-left {
   position: absolute;
-  top: -60px;
-  left: -120px;
+  top: -40px;
+  left: -80px;
   width: 950px;
   height: 650px;
-  background-image: url('/images/liquid-chrome-bg.jpg');
+  background-image: url('/images/hero-left-ribbon.jpg');
   background-size: cover;
-  background-position: center;
-  transform: scaleX(-1);
-  opacity: 0.42;
+  background-position: left top;
+  opacity: 0.75;
   mix-blend-mode: screen;
-  mask-image: radial-gradient(ellipse at 65% 45%, black 25%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at 65% 45%, black 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 25% 45%, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 25% 40%, black 40%, transparent 80%);
   pointer-events: none;
   z-index: 0;
 }
