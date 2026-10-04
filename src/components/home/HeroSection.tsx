@@ -209,9 +209,6 @@ export const HeroSection: React.FC = () => {
                     Arclyn <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400">Studio</span>
                   </span>
                 </div>
-                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-cyan-300/80 mt-1">
-                  Autonomous AI &amp; Full-Stack Web Studio
-                </span>
               </div>
 
               {/* 1. Eyebrow Badge with Live Pulse Radar */}
