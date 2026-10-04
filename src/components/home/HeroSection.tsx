@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 import { ArrowRight, Star, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
@@ -44,30 +44,130 @@ const SHOWCASE_TABS = [
   },
 ];
 
+// Decorative floating micro-particles for live atmosphere
+const PARTICLES = [
+  { top: '15%', left: '12%', size: 3, duration: 6, delay: 0 },
+  { top: '25%', left: '85%', size: 4, duration: 7, delay: 1 },
+  { top: '40%', left: '8%', size: 2.5, duration: 8, delay: 0.5 },
+  { top: '30%', left: '92%', size: 3.5, duration: 6.5, delay: 1.5 },
+  { top: '55%', left: '15%', size: 3, duration: 7.5, delay: 2 },
+  { top: '65%', left: '88%', size: 2.5, duration: 8.5, delay: 1 },
+  { top: '20%', left: '50%', size: 3, duration: 9, delay: 0.2 },
+];
+
 export const HeroSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState(SHOWCASE_TABS[0]);
 
+  // Live mouse spotlight tracking
+  const mouseX = useMotionValue(600);
+  const mouseY = useMotionValue(300);
+  const smoothMouseX = useSpring(mouseX, { stiffness: 90, damping: 24 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 90, damping: 24 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  const spotlightBg = useMotionTemplate`radial-gradient(650px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(139, 92, 246, 0.16), rgba(6, 182, 212, 0.08) 35%, transparent 70%)`;
+
   return (
-    <section className="relative pt-24 sm:pt-28 pb-6 overflow-hidden bg-cosmic-grid">
-      {/* Cinematic Top 3D Liquid Chrome Ribbons on Both Right & Left */}
-      <div className="liquid-chrome-hero" />
-      <div className="liquid-chrome-hero-left" />
+    <section 
+      onMouseMove={handleMouseMove}
+      className="relative pt-8 sm:pt-12 pb-6 overflow-hidden bg-cosmic-grid"
+    >
+      {/* 1. Live Interactive Mouse Ambient Spotlight */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0 opacity-75 transition-opacity"
+        style={{ background: spotlightBg }}
+        aria-hidden="true"
+      />
+
+      {/* 2. Live Floating 3D Liquid Chrome Ribbons */}
+      <motion.div
+        animate={{
+          y: [0, -18, 0],
+          rotate: [0, 1.4, 0],
+          scale: [1, 1.025, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="liquid-chrome-hero"
+      />
+
+      <motion.div
+        animate={{
+          y: [0, 16, 0],
+          rotate: [0, -1.2, 0],
+          scale: [1, 1.02, 1],
+        }}
+        transition={{
+          duration: 9.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="liquid-chrome-hero-left"
+      />
+
+      {/* 3. Ambient Light Strands & Glowing Nebulae */}
       <div className="light-ribbon-top" />
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <motion.div 
+        animate={{ opacity: [0.12, 0.22, 0.12], scale: [1, 1.08, 1] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none" 
+      />
+      <motion.div 
+        animate={{ opacity: [0.15, 0.28, 0.15], scale: [1, 1.1, 1] }}
+        transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none" 
+      />
+
+      {/* 4. Live Drifting Micro-Luminescent Particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        {PARTICLES.map((p, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -40, 0],
+              opacity: [0.2, 0.85, 0.2],
+            }}
+            transition={{
+              duration: p.duration,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: p.delay,
+            }}
+            style={{
+              top: p.top,
+              left: p.left,
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+            }}
+            className="absolute rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(6,182,212,0.8)]"
+          />
+        ))}
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ContainerScroll
           titleComponent={
             <div className="flex flex-col items-center">
-              {/* 1. Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-6 sm:mb-8 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+              {/* 1. Eyebrow Badge with Live Pulse Radar */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-3.5 sm:mb-4.5 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)] group hover:border-amber-400/50 transition-colors">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+                </span>
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 <span>Full-Stack Engineering &amp; AI Systems</span>
               </div>
 
-              {/* 2. Massive Syne Headline */}
-              <div className="max-w-5xl mx-auto mb-6">
+              {/* 2. Massive Syne Headline with Crisp Spacing */}
+              <div className="max-w-5xl mx-auto mb-3.5 sm:mb-4">
                 <h1 className="font-display text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.02]">
                   Build Smarter. <br />
                   <span className="text-gradient-hero">Launch Faster.</span>
@@ -75,12 +175,12 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* 3. Editorial Subheadline */}
-              <p className="text-sm sm:text-base lg:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8 font-normal">
+              <p className="text-sm sm:text-base lg:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto mb-4 sm:mb-5 font-normal">
                 Arclyn Studio combines full-stack web engineering with autonomous AI automation to turn ambitious ideas into market-ready products — websites, apps, and intelligent systems built to actually grow your business.
               </p>
 
               {/* 4. Social Proof & Star Rating */}
-              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-10 text-xs sm:text-sm text-slate-300">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-5 sm:mb-7 text-xs sm:text-sm text-slate-300">
                 <div className="flex items-center text-amber-400">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
@@ -94,11 +194,11 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* 5. Dual Pill CTA Buttons with Magnetic Physics */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-14">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 sm:mb-8">
                 <MagneticButton>
                   <Link
                     href="/contact"
-                    className="px-8 py-4 rounded-full text-sm sm:text-base font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 group"
+                    className="px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 group shadow-lg shadow-purple-600/30"
                   >
                     <span>Start Your Project</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -108,7 +208,7 @@ export const HeroSection: React.FC = () => {
                 <MagneticButton>
                   <Link
                     href="/work"
-                    className="px-8 py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 btn-pill-secondary inline-flex items-center gap-2 group"
+                    className="px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 btn-pill-secondary inline-flex items-center gap-2 group hover:text-white"
                   >
                     <span>Explore Verified Work</span>
                     <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />

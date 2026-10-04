@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Users, 
   ArrowRight, 
@@ -10,14 +11,24 @@ import {
   ShieldCheck, 
   Clock 
 } from 'lucide-react';
-import { NeonSectionBackground } from '../shared/NeonSectionBackground';
 import { BorderGlow } from '@/components/ui/BorderGlow';
 
 export const PartnerProgramSection: React.FC = () => {
   return (
-    <section id="partner-program" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden border-t border-white/5">
-      {/* Neon Strand Background Atmosphere */}
-      <NeonSectionBackground variant="minimalist-strands" position="full" opacity={0.38} />
+    <section id="partner-program" className="relative pt-20 sm:pt-24 pb-8 sm:pb-10 bg-[#050711] overflow-hidden border-t border-white/5">
+      {/* Luxury 3D Interwoven Metallic Ribbons Background */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <Image
+          src="/images/partner-luxury-mesh.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-45 mix-blend-screen"
+        />
+        {/* Smooth vertical blending into cosmic obsidian background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050711] via-transparent to-[#050711] opacity-75" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#050711_90%)] opacity-60" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -202,7 +213,7 @@ export const PartnerProgramSection: React.FC = () => {
         </div>
 
         {/* Clear Policies Highlight */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10 sm:mb-12 text-center">
           <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
             <Clock className="w-6 h-6 text-purple-400 mx-auto mb-3" />
             <h5 className="text-sm font-bold text-white mb-1">5 to 7 Working Days</h5>

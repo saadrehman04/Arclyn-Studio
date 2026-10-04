@@ -40,7 +40,7 @@ const TEAM_MEMBERS = [
 
 export const TeamSection: React.FC = () => {
   return (
-    <section id="leadership" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
+    <section id="leadership" className="relative pt-6 sm:pt-10 pb-20 sm:pb-28 bg-[#050711] overflow-hidden">
       {/* Luxury 3D Dark Metallic Fluid Wave Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <Image
@@ -58,7 +58,7 @@ export const TeamSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header matching reference */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
