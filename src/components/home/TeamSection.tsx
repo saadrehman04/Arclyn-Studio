@@ -9,32 +9,32 @@ import { MagneticButton } from '../shared/MagneticButton';
 
 const TEAM_MEMBERS = [
   {
-    name: 'Saad R.',
-    role: 'Founder & Lead Systems Architect',
-    bio: 'Full-stack engineer with 3+ years architecting high-scale Next.js apps, autonomous agent pipelines, and 50+ shipped production solutions.',
-    image: '/images/team-saad.jpg',
+    name: 'Saad Rehman',
+    role: 'Founder & CEO • Full Stack Developer',
+    bio: 'Systems architect with 3+ years experience building high-scale Next.js apps, autonomous AI pipelines, and 50+ shipped production solutions.',
+    image: '/images/team/saad-rehman.jpg',
     specialty: 'System Architecture & AI',
   },
   {
-    name: 'Sarah Chen',
-    role: 'Head of AI & Machine Learning',
-    bio: 'Specialist in LangGraph orchestration, RAG pipelines, fine-tuned embedding models, and sub-second context retrieval.',
-    image: '/images/team-sarah.jpg',
-    specialty: 'Autonomous Agents & LLMs',
+    name: 'Nadeem',
+    role: 'Full Stack AI Engineer',
+    bio: 'Full-stack engineering specialist building end-to-end intelligent applications, LLM orchestration pipelines, and robust production backends.',
+    image: '/images/team/nadeem.jpg',
+    specialty: 'Full Stack AI Engineering',
   },
   {
-    name: 'Marcus Vance',
-    role: 'Principal Full-Stack Engineer',
-    bio: 'Ex-fintech backend specialist focused on high-throughput PostgreSQL schemas, Redis caching layers, and microservices.',
-    image: '/images/team-marcus.jpg',
-    specialty: 'Distributed Backends & DevOps',
+    name: 'Abdullah',
+    role: 'AI Automation Specialist',
+    bio: 'Specialist in autonomous agent workflows, operational pipelines, webhook integrations, and automated multi-system business processes.',
+    image: '/images/team/abdullah.jpg',
+    specialty: 'AI Automations & Agents',
   },
   {
-    name: 'Elena Rostova',
-    role: 'Lead Product & Interaction Designer',
-    bio: 'Award-winning product designer creating fluid 60fps micro-interactions, conversion-tested design tokens, and luxury aesthetics.',
-    image: '/images/team-elena.jpg',
-    specialty: 'UI/UX & Design Systems',
+    name: 'Saad Rabbani',
+    role: 'Meta Ads Specialist',
+    bio: 'Performance marketing strategist driving high-ROAS paid acquisition campaigns, conversion tracking infrastructure, and rapid client scaling.',
+    image: '/images/team/saad-rabbani.jpg',
+    specialty: 'Meta Ads & Growth',
   },
 ];
 
@@ -109,7 +109,7 @@ export const TeamSection: React.FC = () => {
                   src={member.image}
                   alt={member.name}
                   fill
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700 ease-out group-hover:scale-105"
+                  className="object-cover object-top contrast-[1.05] group-hover:contrast-100 transition-all duration-700 ease-out group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 
