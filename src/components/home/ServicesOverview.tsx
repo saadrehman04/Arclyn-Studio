@@ -23,7 +23,7 @@ const SERVICE_CARDS = [
     title: 'AI-Accelerated Product Development',
     desc: 'We combine advanced AI tools with expert engineering to take your concept from idea to MVP in record time — without sacrificing quality.',
     icon: Sparkles,
-    bgImage: '/images/bento-keyboard.jpg',
+    bgImage: '/images/services/ai-product.jpg',
   },
   {
     id: 'custom-software',
@@ -148,7 +148,7 @@ export const ServicesOverview: React.FC = () => {
                       alt=""
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover object-center scale-100 group-hover:scale-105 transition-all duration-700 ease-out opacity-25 group-hover:opacity-40 filter blur-[0.8px] group-hover:blur-[0.3px]"
+                      className="object-cover object-center scale-100 group-hover:scale-105 transition-all duration-700 ease-out opacity-30 group-hover:opacity-45 filter blur-[0.8px] group-hover:blur-[0.2px]"
                     />
                     {/* Deep multi-stop gradient overlay ensuring text remains 100% crystal-clear */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080b14] via-[#090d19]/90 to-[#050711]/85" />
