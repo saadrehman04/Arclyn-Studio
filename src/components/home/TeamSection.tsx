@@ -7,14 +7,15 @@ import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 
+const FOUNDER = {
+  name: 'Saad Rehman',
+  role: 'Founder & CEO • Full Stack Developer',
+  bio: 'Systems architect with 3+ years experience building high-scale Next.js apps, autonomous AI pipelines, and 50+ shipped production solutions.',
+  image: '/images/team/saad-rehman.jpg',
+  specialty: 'System Architecture & AI',
+};
+
 const TEAM_MEMBERS = [
-  {
-    name: 'Saad Rehman',
-    role: 'Founder & CEO • Full Stack Developer',
-    bio: 'Systems architect with 3+ years experience building high-scale Next.js apps, autonomous AI pipelines, and 50+ shipped production solutions.',
-    image: '/images/team/saad-rehman.jpg',
-    specialty: 'System Architecture & AI',
-  },
   {
     name: 'Nadeem',
     role: 'Full Stack AI Engineer',
@@ -58,7 +59,7 @@ export const TeamSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header matching reference */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -92,8 +93,57 @@ export const TeamSection: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* 4-Column Portrait Cards matching reference */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+        {/* 1. Founder & CEO Showcase - Prominent Center & Enlarged */}
+        <div className="flex justify-center mb-10 sm:mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative rounded-3xl overflow-hidden bg-[#090d1a] border-2 border-cyan-400/40 hover:border-cyan-400/80 transition-all duration-500 flex flex-col justify-between shadow-[0_0_50px_rgba(6,182,212,0.2)] hover:shadow-[0_0_70px_rgba(6,182,212,0.35)] hover:-translate-y-2 w-full max-w-sm sm:max-w-md"
+          >
+            {/* Enlarged Portrait Image Container */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-950">
+              <Image
+                src={FOUNDER.image}
+                alt={FOUNDER.name}
+                fill
+                className="object-cover object-top contrast-[1.05] group-hover:contrast-100 transition-all duration-700 ease-out group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, 440px"
+                priority
+              />
+              
+              {/* Vignette overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#090d1a] via-transparent to-black/20 opacity-80" />
+
+              {/* Badges */}
+              <div className="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2">
+                <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-500 text-white shadow-lg shadow-purple-500/30">
+                  Founder &amp; CEO
+                </span>
+                <span className="px-3 py-1 rounded-full text-[11px] font-mono bg-[#050711]/90 text-cyan-300 border border-cyan-400/30 backdrop-blur-md">
+                  {FOUNDER.specialty}
+                </span>
+              </div>
+            </div>
+
+            {/* Text Info Block */}
+            <div className="p-7">
+              <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                {FOUNDER.name}
+              </h3>
+              <div className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-300 mb-3">
+                {FOUNDER.role}
+              </div>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                {FOUNDER.bio}
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* 2. Specialists Squad - 3 Cards Balanced Beside Each Other */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 max-w-5xl mx-auto">
           {TEAM_MEMBERS.map((member, idx) => (
             <motion.div
               key={member.name}
@@ -110,7 +160,7 @@ export const TeamSection: React.FC = () => {
                   alt={member.name}
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:contrast-100 transition-all duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 
                 {/* Vignette overlay */}

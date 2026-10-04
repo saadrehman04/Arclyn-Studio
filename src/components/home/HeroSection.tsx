@@ -9,6 +9,7 @@ import { MagneticButton } from '../shared/MagneticButton';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { SpotlightTab } from '@/components/ui/spotlight-tab';
 import { MoltenMetal } from '@/components/ui/MoltenMetal';
+import { LogoIcon } from '@/components/shared/Logo';
 
 const SHOWCASE_TABS = [
   {
@@ -191,6 +192,28 @@ export const HeroSection: React.FC = () => {
         <ContainerScroll
           titleComponent={
             <div className="flex flex-col items-center">
+              {/* Arclyn Studio Official Logo & Brand Centerpiece */}
+              <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 group">
+                <div className="relative mb-2.5 sm:mb-3">
+                  {/* Luminous Ambient Glow */}
+                  <div className="absolute -inset-2.5 bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+                  
+                  {/* Luxury Glass Emblem */}
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#090D22]/90 border border-white/20 flex items-center justify-center p-2.5 sm:p-3 shadow-2xl backdrop-blur-xl group-hover:scale-105 transition-transform duration-300">
+                    <LogoIcon size={52} className="w-11 h-11 sm:w-14 sm:h-14 drop-shadow-[0_0_16px_rgba(147,51,234,0.7)]" />
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-display text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+                    Arclyn <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400">Studio</span>
+                  </span>
+                </div>
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-cyan-300/80 mt-1">
+                  Autonomous AI &amp; Full-Stack Web Studio
+                </span>
+              </div>
+
               {/* 1. Eyebrow Badge with Live Pulse Radar */}
               <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-3.5 sm:mb-4.5 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)] group hover:border-amber-400/50 transition-colors">
                 <span className="relative flex h-2 w-2">
