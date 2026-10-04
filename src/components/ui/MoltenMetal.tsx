@@ -25,6 +25,7 @@ export interface MoltenMetalProps {
   opacity?: number;
   backgroundColor?: string;
   lightMode?: boolean;
+  maxDpr?: number;
   className?: string;
 }
 
@@ -168,6 +169,7 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
   opacity = 1.0,
   backgroundColor = '#FFFFFF',
   lightMode = false,
+  maxDpr = 2,
   className = ''
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -184,7 +186,7 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
         alpha: true,
         premultipliedAlpha: true,
         antialias: false,
-        dpr: Math.min(window.devicePixelRatio || 1, 2)
+        dpr: Math.min(window.devicePixelRatio || 1, maxDpr)
       });
       gl = renderer.gl;
     } catch {

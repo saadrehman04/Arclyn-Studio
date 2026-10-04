@@ -8,6 +8,7 @@ import { ArrowRight, Star, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { SpotlightTab } from '@/components/ui/spotlight-tab';
+import { MoltenMetal } from '@/components/ui/MoltenMetal';
 
 const SHOWCASE_TABS = [
   {
@@ -75,7 +76,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section 
       onMouseMove={handleMouseMove}
-      className="relative pt-8 sm:pt-12 pb-6 overflow-hidden bg-cosmic-grid"
+      className="relative pt-28 sm:pt-32 pb-6 overflow-hidden bg-cosmic-grid"
     >
       {/* 1. Live Interactive Mouse Ambient Spotlight */}
       <motion.div
@@ -83,6 +84,37 @@ export const HeroSection: React.FC = () => {
         style={{ background: spotlightBg }}
         aria-hidden="true"
       />
+
+      {/* 1b. Live Molten Metal WebGL Caustics (left side, blends with the ribbon design) */}
+      <div
+        className="pointer-events-none absolute top-0 left-0 w-full lg:w-[62%] h-[780px] z-0 opacity-60 mix-blend-screen"
+        style={{
+          maskImage: 'radial-gradient(ellipse at 22% 38%, black 22%, transparent 72%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at 22% 38%, black 22%, transparent 72%)',
+        }}
+        aria-hidden="true"
+      >
+        <MoltenMetal
+          color1="#4338CA"
+          color2="#8B5CF6"
+          color3="#06B6D4"
+          speed={0.3}
+          scale={3.4}
+          detail={3}
+          glow={1.7}
+          coreSize={0.09}
+          swirl={1.1}
+          fold={-0.22}
+          blackPoint={0.08}
+          brightness={1.3}
+          colorMode="molten"
+          grain={true}
+          grainIntensity={0.04}
+          mouseInteraction={false}
+          opacity={0.75}
+          maxDpr={1}
+        />
+      </div>
 
       {/* 2. Live Floating 3D Liquid Chrome Ribbons */}
       <motion.div
@@ -96,6 +128,7 @@ export const HeroSection: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'transform' }}
         className="liquid-chrome-hero"
       />
 
@@ -110,18 +143,19 @@ export const HeroSection: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'transform' }}
         className="liquid-chrome-hero-left"
       />
 
       {/* 3. Ambient Light Strands & Glowing Nebulae */}
       <div className="light-ribbon-top" />
       <motion.div 
-        animate={{ opacity: [0.12, 0.22, 0.12], scale: [1, 1.08, 1] }}
+        animate={{ opacity: [0.12, 0.22, 0.12] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none" 
       />
       <motion.div 
-        animate={{ opacity: [0.15, 0.28, 0.15], scale: [1, 1.1, 1] }}
+        animate={{ opacity: [0.15, 0.28, 0.15] }}
         transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none" 
       />
