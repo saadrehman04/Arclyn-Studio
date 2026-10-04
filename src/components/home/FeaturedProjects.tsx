@@ -14,7 +14,7 @@ export const FeaturedProjects: React.FC = () => {
   const featured = PROJECTS.filter((p) => p.featured).slice(0, 4);
 
   return (
-    <section id="work" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
+    <section id="work" className="relative pt-10 sm:pt-14 pb-24 sm:pb-32 bg-[#050711] overflow-hidden">
       {/* Animated SideRays light beams — sweeping over the case studies */}
       <div 
         className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-85 mix-blend-screen"
