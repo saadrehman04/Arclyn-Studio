@@ -31,7 +31,7 @@ export const IndustriesStrip: React.FC = () => {
   const [selectedIndustry, setSelectedIndustry] = useState(INDUSTRIES[0]);
 
   return (
-    <section className="relative py-24 sm:py-32 border-t border-white/10 bg-[#060915] overflow-hidden">
+    <section className="relative pt-20 sm:pt-28 pb-10 sm:pb-14 border-t border-white/10 bg-[#060915] overflow-hidden">
       {/* Dynamic Core & Network Nodes Background */}
       <NeonSectionBackground variant="core-nodes" position="full" opacity={0.32} />
 

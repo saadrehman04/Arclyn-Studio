@@ -9,7 +9,7 @@ import { MoltenMetal } from '@/components/ui/MoltenMetal';
 
 export const FinalCta: React.FC = () => {
   return (
-    <section className="relative py-32 sm:py-44 bg-[#050711] overflow-hidden">
+    <section className="relative pt-10 sm:pt-14 pb-24 sm:pb-36 bg-[#050711] overflow-hidden">
       {/* Interactive Molten Metal WebGL Caustics */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-65 mix-blend-screen" aria-hidden="true">
         <MoltenMetal
