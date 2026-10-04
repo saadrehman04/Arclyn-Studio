@@ -17,32 +17,32 @@ export const FeaturedProjects: React.FC = () => {
     <section id="work" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
       {/* Interactive Molten Metal WebGL Caustics background */}
       <div 
-        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-65 mix-blend-screen"
+        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-90 mix-blend-screen"
         style={{
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%)',
         }}
         aria-hidden="true"
       >
         <MoltenMetal
-          color1="#4338CA"
-          color2="#8B5CF6"
+          color1="#5227FF"
+          color2="#A855F7"
           color3="#06B6D4"
-          speed={0.3}
-          scale={3.5}
+          speed={0.32}
+          scale={3.2}
           detail={3}
-          glow={1.6}
-          coreSize={0.09}
-          swirl={1.1}
-          fold={-0.22}
-          blackPoint={0.08}
-          brightness={1.3}
+          glow={2.2}
+          coreSize={0.15}
+          swirl={1.2}
+          fold={-0.25}
+          blackPoint={0.02}
+          brightness={1.65}
           colorMode="molten"
           grain={true}
           grainIntensity={0.04}
           mouseInteraction={true}
-          mouseStrength={0.3}
-          opacity={0.65}
+          mouseStrength={0.35}
+          opacity={0.95}
         />
       </div>
 
