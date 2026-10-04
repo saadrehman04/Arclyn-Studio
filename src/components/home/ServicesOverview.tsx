@@ -23,6 +23,7 @@ const SERVICE_CARDS = [
     title: 'AI-Accelerated Product Development',
     desc: 'We combine advanced AI tools with expert engineering to take your concept from idea to MVP in record time — without sacrificing quality.',
     icon: Sparkles,
+    bgImage: '/images/bento-keyboard.jpg',
   },
   {
     id: 'custom-software',
@@ -30,6 +31,7 @@ const SERVICE_CARDS = [
     title: 'Custom Software & App Development',
     desc: 'From mobile apps to web platforms, we build scalable, high-performance solutions tailored to your market and business needs.',
     icon: Layers,
+    bgImage: '/images/services/custom-software.jpg',
   },
   {
     id: 'prototyping-ux',
@@ -37,6 +39,7 @@ const SERVICE_CARDS = [
     title: 'Prototyping & UX Design',
     desc: 'Rapidly test ideas with interactive AI-generated prototypes and data-backed design decisions that put users first.',
     icon: Box,
+    bgImage: '/images/services/prototyping-ux.jpg',
   },
   {
     id: 'ai-automation',
@@ -44,6 +47,7 @@ const SERVICE_CARDS = [
     title: 'AI Integration & Automation',
     desc: 'Enhance your product with AI features — from predictive analytics to smart chatbots — to improve efficiency and user engagement.',
     icon: Rocket,
+    bgImage: '/images/services/ai-automation.jpg',
   },
   {
     id: 'cloud-devops',
@@ -51,6 +55,7 @@ const SERVICE_CARDS = [
     title: 'Cloud Architecture & DevOps',
     desc: 'Deploy with confidence. We design secure, scalable, and cost-efficient cloud infrastructure, with automated testing and CI/CD pipelines.',
     icon: Cloud,
+    bgImage: '/images/services/cloud-devops.jpg',
   },
   {
     id: 'growth-consulting',
@@ -58,6 +63,7 @@ const SERVICE_CARDS = [
     title: 'Startup Growth Consulting',
     desc: "We're more than a dev shop — we help you refine your business model, optimize workflows, and prepare for funding rounds.",
     icon: Flame,
+    bgImage: '/images/services/startup-growth.jpg',
   },
 ];
 
@@ -132,42 +138,47 @@ export const ServicesOverview: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative rounded-3xl p-8 sm:p-9 bg-[#0c0f17] border border-white/[0.08] hover:border-cyan-400/40 transition-all duration-400 flex flex-col justify-between overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1.5"
+                className="group relative rounded-3xl p-8 sm:p-9 bg-[#0b0e18] border border-white/[0.08] hover:border-cyan-400/50 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_12px_45px_rgba(6,182,212,0.18)] hover:-translate-y-1.5"
               >
-                {/* Subtle corner liquid ribbon reflection matching Image 3 */}
-                <div className="absolute -bottom-6 -right-6 w-36 h-36 opacity-30 group-hover:opacity-65 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-br-3xl">
-                  <Image
-                    src="/images/neon-ribbon-strands.jpg"
-                    alt=""
-                    fill
-                    className="object-cover object-left-top mix-blend-screen"
-                    sizes="150px"
-                  />
-                </div>
+                {/* Full Card Photographic Background (Blurred & Darkened for Maximum Text Legibility) */}
+                {service.bgImage && (
+                  <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden rounded-3xl z-0">
+                    <Image
+                      src={service.bgImage}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-center scale-100 group-hover:scale-105 transition-all duration-700 ease-out opacity-25 group-hover:opacity-40 filter blur-[0.8px] group-hover:blur-[0.3px]"
+                    />
+                    {/* Deep multi-stop gradient overlay ensuring text remains 100% crystal-clear */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080b14] via-[#090d19]/90 to-[#050711]/85" />
+                    <div className="absolute inset-0 bg-[#050711]/30 mix-blend-multiply" />
+                  </div>
+                )}
 
                 <div className="relative z-10">
                   {/* Shaded Circular Icon Container matching Image 3 */}
-                  <div className="w-14 h-14 rounded-full bg-[#1b1e2a] border border-white/[0.1] shadow-[inset_0_2px_4px_rgba(255,255,255,0.12),0_4px_14px_rgba(0,0,0,0.6)] flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-14 h-14 rounded-full bg-[#1b1e2a]/90 backdrop-blur-md border border-white/[0.15] shadow-[inset_0_2px_4px_rgba(255,255,255,0.12),0_4px_14px_rgba(0,0,0,0.6)] flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
                     <Icon className="w-6 h-6 text-[#F3F5B4] drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]" />
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="font-display text-2xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors tracking-tight leading-snug">
+                  {/* Title & Description with enhanced contrast */}
+                  <h3 className="font-display text-2xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors tracking-tight leading-snug drop-shadow-md">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6 font-light">
+                  <p className="text-sm text-slate-200 leading-relaxed mb-6 font-normal drop-shadow-sm">
                     {service.desc}
                   </p>
                 </div>
 
                 {/* Bottom CTA Link */}
-                <div className="pt-4 border-t border-white/[0.06] relative z-10">
+                <div className="pt-4 border-t border-white/[0.08] relative z-10">
                   <Link
                     href={`/services/${service.slug}`}
                     className="inline-flex items-center justify-between w-full text-xs font-semibold text-slate-300 group-hover:text-cyan-300 transition-colors"
                   >
                     <span>View Architecture Blueprint</span>
-                    <div className="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-cyan-400/20 flex items-center justify-center group-hover:text-cyan-300 transition-all">
+                    <div className="w-7 h-7 rounded-full bg-white/[0.06] group-hover:bg-cyan-400/20 flex items-center justify-center group-hover:text-cyan-300 transition-all">
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </div>
                   </Link>
