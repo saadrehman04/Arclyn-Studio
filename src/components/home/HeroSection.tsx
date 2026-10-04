@@ -9,7 +9,6 @@ import { MagneticButton } from '../shared/MagneticButton';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { SpotlightTab } from '@/components/ui/spotlight-tab';
 import { MoltenMetal } from '@/components/ui/MoltenMetal';
-import { LightPillar } from '@/components/ui/LightPillar';
 
 const SHOWCASE_TABS = [
   {
@@ -115,31 +114,6 @@ export const HeroSection: React.FC = () => {
           mouseInteraction={false}
           opacity={0.75}
           maxDpr={1}
-        />
-      </div>
-
-      {/* 1c. Live Light Pillar (Central vertical celestial beam with undulating caustics) */}
-      <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1300px] h-[920px] z-0 opacity-55 mix-blend-screen overflow-hidden"
-        style={{
-          maskImage: 'radial-gradient(ellipse at 50% 32%, black 25%, transparent 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 50% 32%, black 25%, transparent 75%)',
-        }}
-        aria-hidden="true"
-      >
-        <LightPillar
-          topColor="#7C3AED"
-          bottomColor="#06B6D4"
-          intensity={0.95}
-          rotationSpeed={0.25}
-          glowAmount={0.0055}
-          pillarWidth={2.8}
-          pillarHeight={0.36}
-          noiseIntensity={0.35}
-          pillarRotation={0}
-          interactive={false}
-          mixBlendMode="screen"
-          quality="high"
         />
       </div>
 
