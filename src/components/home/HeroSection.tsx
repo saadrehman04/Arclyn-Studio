@@ -72,7 +72,7 @@ export const HeroSection: React.FC = () => {
     mouseY.set(e.clientY - rect.top);
   };
 
-  const spotlightBg = useMotionTemplate`radial-gradient(750px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(147, 51, 234, 0.28), rgba(6, 182, 212, 0.16) 40%, transparent 72%)`;
+  const spotlightBg = useMotionTemplate`radial-gradient(650px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(139, 92, 246, 0.16), rgba(6, 182, 212, 0.08) 35%, transparent 70%)`;
 
   return (
     <section 
@@ -82,40 +82,39 @@ export const HeroSection: React.FC = () => {
     >
       {/* 1. Live Interactive Mouse Ambient Spotlight */}
       <motion.div
-        className="pointer-events-none absolute inset-0 z-0 opacity-85 transition-opacity"
+        className="pointer-events-none absolute inset-0 z-0 opacity-75 transition-opacity"
         style={{ background: spotlightBg }}
         aria-hidden="true"
       />
 
-      {/* 1b. Live Molten Metal WebGL Caustics (Expanded width, high glow & brightness) */}
+      {/* 1b. Live Molten Metal WebGL Caustics (left side, blends with the ribbon design) */}
       <div
-        className="pointer-events-none absolute top-0 left-0 w-full lg:w-[85%] h-[880px] z-0 opacity-90 mix-blend-screen"
+        className="pointer-events-none absolute top-0 left-0 w-full lg:w-[62%] h-[780px] z-0 opacity-60 mix-blend-screen"
         style={{
-          maskImage: 'radial-gradient(ellipse at 30% 36%, black 45%, transparent 85%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 30% 36%, black 45%, transparent 85%)',
+          maskImage: 'radial-gradient(ellipse at 22% 38%, black 22%, transparent 72%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at 22% 38%, black 22%, transparent 72%)',
         }}
         aria-hidden="true"
       >
         <MoltenMetal
-          color1="#4F46E5"
-          color2="#A855F7"
+          color1="#4338CA"
+          color2="#8B5CF6"
           color3="#06B6D4"
-          speed={0.35}
-          scale={3.2}
+          speed={0.3}
+          scale={3.4}
           detail={3}
-          glow={2.2}
-          coreSize={0.12}
-          swirl={1.2}
-          fold={-0.2}
-          blackPoint={0.04}
-          brightness={1.6}
+          glow={1.7}
+          coreSize={0.09}
+          swirl={1.1}
+          fold={-0.22}
+          blackPoint={0.08}
+          brightness={1.3}
           colorMode="molten"
           grain={true}
-          grainIntensity={0.05}
-          mouseInteraction={true}
-          mouseStrength={0.25}
-          opacity={0.95}
-          maxDpr={1.5}
+          grainIntensity={0.04}
+          mouseInteraction={false}
+          opacity={0.75}
+          maxDpr={1}
         />
       </div>
 
@@ -153,14 +152,14 @@ export const HeroSection: React.FC = () => {
       {/* 3. Ambient Light Strands & Glowing Nebulae */}
       <div className="light-ribbon-top" />
       <motion.div 
-        animate={{ opacity: [0.22, 0.38, 0.22] }}
+        animate={{ opacity: [0.12, 0.22, 0.12] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-cyan-500/25 rounded-full blur-[130px] pointer-events-none" 
+        className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none" 
       />
       <motion.div 
-        animate={{ opacity: [0.25, 0.42, 0.25] }}
+        animate={{ opacity: [0.15, 0.28, 0.15] }}
         transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        className="absolute top-1/4 left-0 w-[550px] h-[550px] bg-purple-600/30 rounded-full blur-[130px] pointer-events-none" 
+        className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none" 
       />
 
       {/* 4. Live Drifting Micro-Luminescent Particles */}
@@ -170,7 +169,7 @@ export const HeroSection: React.FC = () => {
             key={i}
             animate={{
               y: [0, -40, 0],
-              opacity: [0.35, 0.95, 0.35],
+              opacity: [0.2, 0.85, 0.2],
             }}
             transition={{
               duration: p.duration,
@@ -184,7 +183,7 @@ export const HeroSection: React.FC = () => {
               width: `${p.size}px`,
               height: `${p.size}px`,
             }}
-            className="absolute rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.9)]"
+            className="absolute rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(6,182,212,0.8)]"
           />
         ))}
       </div>
