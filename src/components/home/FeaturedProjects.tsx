@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@/data/projects';
 import { ArrowUpRight, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { SideRays } from '@/components/ui/SideRays';
+import { LightPillar } from '@/components/ui/LightPillar';
 
 export const FeaturedProjects: React.FC = () => {
   // Top 4 flagship verified case studies
@@ -15,28 +15,28 @@ export const FeaturedProjects: React.FC = () => {
 
   return (
     <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Animated SideRays light beams — spotlight sweeping over the case studies */}
+      {/* Live Light Pillar background — vertical volumetric column of light over the shipped products */}
       <div
-        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-70 mix-blend-screen"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1300px] h-[1000px] z-0 opacity-60 mix-blend-screen overflow-hidden"
         style={{
-          maskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 85%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 85%)',
+          maskImage: 'radial-gradient(ellipse at 50% 30%, black 25%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at 50% 30%, black 25%, transparent 75%)',
         }}
         aria-hidden="true"
       >
-        <SideRays
-          speed={1.6}
-          rayColor1="#8B5CF6"
-          rayColor2="#22D3EE"
-          intensity={1.4}
-          spread={2}
-          origin="top-right"
-          tilt={0}
-          saturation={1.4}
-          blend={0.6}
-          falloff={1.7}
-          opacity={0.85}
-          maxDpr={1}
+        <LightPillar
+          topColor="#7C3AED"
+          bottomColor="#06B6D4"
+          intensity={0.9}
+          rotationSpeed={0.25}
+          glowAmount={0.0055}
+          pillarWidth={2.8}
+          pillarHeight={0.36}
+          noiseIntensity={0.35}
+          pillarRotation={0}
+          interactive={false}
+          mixBlendMode="screen"
+          quality="high"
         />
       </div>
 
