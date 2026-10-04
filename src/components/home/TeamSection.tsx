@@ -76,7 +76,7 @@ export const TeamSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex flex-col items-center w-full max-w-[210px] sm:max-w-[230px] md:max-w-[245px] group"
+              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] group"
             >
               <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
@@ -84,7 +84,7 @@ export const TeamSection: React.FC = () => {
                   alt="Saad Rabbani"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 245px"
+                  sizes="(max-width: 640px) 100vw, 265px"
                 />
               </div>
               <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
@@ -97,13 +97,41 @@ export const TeamSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* 2. Nadeem */}
+            {/* 2. Saad Rehman (Founder & CEO) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col items-center w-full max-w-[210px] sm:max-w-[230px] md:max-w-[245px] group"
+              className="flex flex-col items-center w-full max-w-[235px] sm:max-w-[255px] md:max-w-[275px] z-10 group"
+            >
+              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
+                <Image
+                  src="/images/team/saad-rehman.jpg"
+                  alt="Saad Rehman"
+                  fill
+                  className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
+                  sizes="(max-width: 640px) 100vw, 275px"
+                  priority
+                />
+              </div>
+              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  Saad Rehman
+                </h3>
+                <div className="text-xs font-semibold text-slate-300 mt-0.5">
+                  Founder &amp; CEO • Full Stack Developer
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 3. Nadeem */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] group"
             >
               <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
@@ -111,7 +139,7 @@ export const TeamSection: React.FC = () => {
                   alt="Nadeem"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 245px"
+                  sizes="(max-width: 640px) 100vw, 265px"
                 />
               </div>
               <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
@@ -124,43 +152,13 @@ export const TeamSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* 3. CENTER & ENLARGED: Saad Rehman (Founder & CEO) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col items-center w-full max-w-[320px] sm:max-w-[370px] md:max-w-[420px] z-20 group"
-            >
-              {/* Significantly larger portrait grounded on same baseline */}
-              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
-                <Image
-                  src="/images/team/saad-rehman-zoomed.jpg"
-                  alt="Saad Rehman"
-                  fill
-                  className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 420px"
-                  priority
-                />
-              </div>
-
-              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                  Saad Rehman
-                </h3>
-                <div className="text-xs sm:text-sm font-semibold text-slate-300 mt-0.5">
-                  Founder &amp; CEO • Full Stack Developer
-                </div>
-              </div>
-            </motion.div>
-
             {/* 4. Abdullah */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center w-full max-w-[210px] sm:max-w-[230px] md:max-w-[245px] group"
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] group"
             >
               <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
@@ -168,7 +166,7 @@ export const TeamSection: React.FC = () => {
                   alt="Abdullah"
                   fill
                   className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 245px"
+                  sizes="(max-width: 640px) 100vw, 265px"
                 />
               </div>
               <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
