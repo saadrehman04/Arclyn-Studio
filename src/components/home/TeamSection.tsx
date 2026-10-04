@@ -40,7 +40,7 @@ const TEAM_MEMBERS = [
 
 export const TeamSection: React.FC = () => {
   return (
-    <section id="leadership" className="relative pt-6 sm:pt-10 pb-20 sm:pb-28 bg-[#050711] overflow-hidden">
+    <section id="leadership" className="relative pt-6 sm:pt-10 pb-10 sm:pb-14 bg-[#050711] overflow-hidden">
       {/* Luxury 3D Dark Metallic Fluid Wave Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <Image
@@ -146,7 +146,7 @@ export const TeamSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 flex justify-center"
+          className="mt-10 sm:mt-12 flex justify-center"
         >
           <MagneticButton>
             <Link

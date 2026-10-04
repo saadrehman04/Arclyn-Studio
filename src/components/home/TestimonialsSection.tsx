@@ -175,7 +175,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   );
 
   return (
-    <section className={`relative ${hideHeader ? 'py-6' : 'py-24 sm:py-32'} bg-[#050711] overflow-hidden ${hideHeader ? '' : 'border-t border-white/5'} ${className}`}>
+    <section className={`relative ${hideHeader ? 'py-6' : 'pt-10 sm:pt-14 pb-20 sm:pb-28'} bg-[#050711] overflow-hidden ${hideHeader ? '' : 'border-t border-white/5'} ${className}`}>
       {/* Luxury 3D Liquid Glass Waves Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <Image
