@@ -17,9 +17,9 @@ import {
 import { PartnerForm } from '@/components/partner/PartnerForm';
 
 export const metadata: Metadata = {
-  title: 'Partner & Referral Program — Earn Up to 40% Commission',
+  title: 'Partner & Referral Program — Earn Flat 30% Commission',
   description:
-    'Join the Arclyn Studio partner network. Refer clients or partner with our engineering team to earn 30% to 40% commissions on web development, SaaS, and AI automation projects.',
+    'Join the Arclyn Studio partner network. Refer clients or partner with our engineering team to earn 30% direct commissions on web development, SaaS, and AI automation projects.',
 };
 
 const FIVE_STEPS = [
@@ -46,7 +46,7 @@ const FIVE_STEPS = [
   {
     step: '05',
     title: 'Prompt Milestone Payout',
-    desc: 'Receive your 30% to 40% commission directly into your bank account as soon as the client clears each project milestone.',
+    desc: 'Receive your 30% commission directly into your bank account as soon as the client clears each project milestone.',
   },
 ];
 
@@ -94,7 +94,7 @@ export default function PartnerProgramPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Earn Up to 40% Commission. <br />
+            Earn Flat 30% Commission. <br />
             <span className="text-gradient">We Handle the Engineering.</span>
           </h1>
 
@@ -174,7 +174,7 @@ export default function PartnerProgramPage() {
                 Strategic Agency Partner
               </h2>
               <div className="text-3xl font-extrabold text-white mb-4">
-                Up to 40% Revenue Share
+                30% Recurring Retainers
               </div>
 
               <p className="text-sm text-slate-300 leading-relaxed mb-6">
@@ -184,11 +184,11 @@ export default function PartnerProgramPage() {
               <div className="space-y-3 mb-8">
                 <div className="flex items-start gap-2.5 text-xs text-slate-300">
                   <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Dedicated Slack channel with Arclyn engineering leads</span>
+                  <span>Dedicated Slack &amp; WhatsApp channel with Arclyn engineering leads</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs text-slate-300">
                   <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Tiered commission scaling up to 40% on ongoing retainers</span>
+                  <span>Flat 30% commission on upfront builds + 30% monthly on ongoing retainers</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs text-slate-300">
                   <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
@@ -295,11 +295,19 @@ export default function PartnerProgramPage() {
 
           <PartnerForm />
 
-          <div className="mt-6 text-center text-xs text-slate-400">
-            Prefer direct email? Contact us directly at{' '}
-            <a href="mailto:partners@arclynstudio.com" className="text-cyan-400 underline">
-              partners@arclynstudio.com
-            </a>
+          <div className="mt-6 text-center text-xs text-slate-400 space-y-1">
+            <div>
+              Prefer direct email? Contact us at{' '}
+              <a href="mailto:saadrehman034@gmail.com" className="text-cyan-400 underline">
+                saadrehman034@gmail.com
+              </a>
+            </div>
+            <div>
+              WhatsApp Lead Line:{' '}
+              <a href="https://wa.me/923196762317" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">
+                +92 3196762317
+              </a>
+            </div>
           </div>
         </div>
 

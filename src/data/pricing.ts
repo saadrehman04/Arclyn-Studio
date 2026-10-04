@@ -214,9 +214,9 @@ export const PROJECT_TERMS_POLICIES = {
   },
   partnerCommission: {
     title: 'Partner Commission Structure',
-    description: '30% fixed commission per client. Increases to 40% for all subsequent deals after your 3rd successful referral.',
+    description: '30% flat revenue share on all web development, custom software, and AI automation deals from deal #1 onwards.',
     standardRate: '30%',
-    vipRate: '40%',
+    recurringRate: '30%',
   },
   clientHandlingWorkflow: {
     title: 'Client Handling Workflow',

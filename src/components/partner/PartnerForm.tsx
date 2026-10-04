@@ -72,7 +72,7 @@ export const PartnerForm: React.FC = () => {
             className="w-full px-4 py-3 rounded-xl bg-[#0C122C] border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
           >
             <option value="referral">Refer a Client (30% Commission)</option>
-            <option value="agency">Become a Strategic Partner (Up to 40%)</option>
+            <option value="agency">Become a Strategic Partner (30% Retainers)</option>
             <option value="both">Both / General Discussion</option>
           </select>
         </div>

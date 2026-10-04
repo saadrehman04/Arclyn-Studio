@@ -170,13 +170,13 @@ export const Navbar: React.FC = () => {
               <Logo size="md" />
             </div>
 
-            {/* 2. Sleek Glassmorphic Floating Pill Bar with Purple Liquid Glow (Matching Reference Image 4) */}
-            <nav className="hidden lg:flex items-center relative rounded-full px-6 py-2.5 backdrop-blur-2xl bg-gradient-to-r from-purple-900/40 via-[#0A0E21]/90 to-[#0A0E21]/95 border border-purple-500/30 hover:border-purple-400/50 shadow-[0_0_35px_rgba(168,85,247,0.3),0_12px_40px_rgba(0,0,0,0.6)] transition-all duration-300 group/nav overflow-hidden">
+            {/* 2. Sleek Glassmorphic Floating Pill Bar with Purple Liquid Glow & Hover Enlargement */}
+            <nav className="hidden lg:flex items-center relative rounded-full px-5 py-2 backdrop-blur-2xl bg-gradient-to-r from-purple-900/40 via-[#0A0E21]/90 to-[#0A0E21]/95 border border-purple-500/30 hover:border-purple-400/70 shadow-[0_0_35px_rgba(168,85,247,0.3),0_12px_40px_rgba(0,0,0,0.6)] hover:shadow-[0_0_55px_rgba(168,85,247,0.48),0_14px_45px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-all duration-300 ease-out group/nav overflow-hidden">
               {/* Internal Liquid Magenta/Purple Sheen on Left */}
-              <div className="absolute -left-4 -top-8 w-44 h-24 bg-gradient-to-r from-fuchsia-500/35 via-purple-600/30 to-transparent blur-xl pointer-events-none" />
+              <div className="absolute -left-4 -top-8 w-44 h-24 bg-gradient-to-r from-fuchsia-500/35 via-purple-600/30 to-transparent blur-xl pointer-events-none group-hover/nav:scale-125 group-hover/nav:opacity-100 transition-all duration-500" />
               <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-purple-300/60 via-cyan-300/30 to-transparent pointer-events-none" />
 
-              <div className="flex items-center gap-6 text-sm font-medium relative z-10">
+              <div className="flex items-center gap-2 text-sm font-medium relative z-10">
                 
                 {/* Home Dropdown */}
                 <div
@@ -186,13 +186,13 @@ export const Navbar: React.FC = () => {
                 >
                   <Link
                     href="/"
-                    className={`flex items-center gap-1.5 py-1 text-slate-200 hover:text-white transition-colors group ${
-                      pathname === '/' ? 'text-white font-semibold' : ''
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
+                      pathname === '/' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
                     }`}
                   >
                     <span>Home</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform duration-200 ${
+                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all duration-200 ${
                         homeDropdownOpen ? 'rotate-180 text-cyan-400' : ''
                       }`}
                     />
@@ -231,13 +231,13 @@ export const Navbar: React.FC = () => {
                 >
                   <Link
                     href="/services"
-                    className={`flex items-center gap-1.5 py-1 text-slate-200 hover:text-white transition-colors group ${
-                      pathname.startsWith('/services') ? 'text-white font-semibold' : ''
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
+                      pathname.startsWith('/services') ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
                     }`}
                   >
                     <span>Services</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform duration-200 ${
+                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all duration-200 ${
                         servicesDropdownOpen ? 'rotate-180 text-cyan-400' : ''
                       }`}
                     />
@@ -293,8 +293,8 @@ export const Navbar: React.FC = () => {
                 {/* Pricing (Direct Link) */}
                 <Link
                   href="/pricing"
-                  className={`py-1 text-slate-200 hover:text-white transition-colors ${
-                    pathname === '/pricing' ? 'text-white font-semibold' : ''
+                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${
+                    pathname === '/pricing' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
                   }`}
                 >
                   Pricing
@@ -307,15 +307,15 @@ export const Navbar: React.FC = () => {
                   onMouseLeave={() => setPagesDropdownOpen(false)}
                 >
                   <button
-                    className={`flex items-center gap-1.5 py-1 text-slate-200 hover:text-white transition-colors group ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
                       ['/work', '/industries', '/partner-program', '/about'].includes(pathname)
-                        ? 'text-white font-semibold'
+                        ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]'
                         : ''
                     }`}
                   >
                     <span>Pages</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform duration-200 ${
+                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all duration-200 ${
                         pagesDropdownOpen ? 'rotate-180 text-cyan-400' : ''
                       }`}
                     />
@@ -357,8 +357,8 @@ export const Navbar: React.FC = () => {
                 {/* Contacts (Direct Link) */}
                 <Link
                   href="/contact"
-                  className={`py-1 text-slate-200 hover:text-white transition-colors ${
-                    pathname === '/contact' ? 'text-white font-semibold' : ''
+                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${
+                    pathname === '/contact' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
                   }`}
                 >
                   Contacts
@@ -367,7 +367,7 @@ export const Navbar: React.FC = () => {
                 {/* Search Icon Trigger */}
                 <button
                   onClick={() => setSearchOpen(true)}
-                  className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+                  className="p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 ease-out hover:scale-125 active:scale-90 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0"
                   aria-label="Search Studio"
                   title="Search services & projects (⌘K)"
                 >
@@ -381,7 +381,7 @@ export const Navbar: React.FC = () => {
             <div className="hidden sm:flex items-center gap-3">
               <Link
                 href="/contact"
-                className="px-6 py-2.5 rounded-full text-sm font-bold text-white btn-pill-primary inline-flex items-center gap-2 group"
+                className="px-6 py-2.5 rounded-full text-sm font-bold text-white btn-pill-primary inline-flex items-center gap-2 group hover:scale-105 active:scale-95 transition-all duration-200 shadow-[0_0_25px_rgba(147,51,234,0.4)] hover:shadow-[0_0_35px_rgba(147,51,234,0.7)]"
               >
                 <span>Start Your Project</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

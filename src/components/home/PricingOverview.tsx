@@ -280,7 +280,7 @@ export const PricingOverview: React.FC = () => {
                 <span>Partner Commission</span>
               </div>
               <p className="text-slate-400 leading-relaxed">
-                30% fixed commission per referral. Increases to 40% after your 3rd closed deal.
+                Flat 30% direct revenue share per referral from deal #1 onwards.
               </p>
             </div>
           </div>

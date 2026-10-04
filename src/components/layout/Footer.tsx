@@ -8,7 +8,8 @@ import {
   Sparkles, 
   ShieldCheck, 
   Clock, 
-  Users 
+  Users,
+  MessageCircle
 } from 'lucide-react';
 import { InstagramIcon } from '../shared/SocialIcons';
 
@@ -44,22 +45,31 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Direct Contact links */}
-            <div className="flex flex-col space-y-2 pt-2 text-sm text-slate-300">
+            <div className="flex flex-col space-y-2.5 pt-2 text-sm text-slate-300">
               <a
-                href="mailto:hello@arclynstudio.com"
+                href="mailto:saadrehman034@gmail.com"
                 className="inline-flex items-center gap-2 hover:text-cyan-300 transition-colors"
               >
                 <Mail className="w-4 h-4 text-purple-400" />
-                <span>hello@arclynstudio.com</span>
+                <span>saadrehman034@gmail.com</span>
               </a>
               <a
-                href="https://instagram.com/arclynstudio"
+                href="https://wa.me/923196762317"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 hover:text-purple-300 transition-colors"
+                className="inline-flex items-center gap-2 hover:text-emerald-300 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <span>+92 3196762317 (WhatsApp)</span>
+              </a>
+              <a
+                href="https://instagram.com/arclyn_studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:text-pink-300 transition-colors"
               >
                 <InstagramIcon className="w-4 h-4 text-pink-400" />
-                <span>@arclynstudio on Instagram</span>
+                <span>@arclyn_studio on Instagram</span>
               </a>
             </div>
           </div>
@@ -111,12 +121,12 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/partner-program" className="text-slate-400 hover:text-white transition-colors">
-                  Partner & Referral Program (Up to 40%)
+                  Partner &amp; Referral Program (30% Share)
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-slate-400 hover:text-white transition-colors">
-                  About Us & Engineering Philosophy
+                  About Us &amp; Engineering Philosophy
                 </Link>
               </li>
               <li>
@@ -135,10 +145,10 @@ export const Footer: React.FC = () => {
             <div className="glass-panel p-5 rounded-2xl relative overflow-hidden group">
               <div className="flex items-center gap-2 text-xs font-semibold text-purple-400 mb-2">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Earn up to 40%</span>
+                <span>Earn Flat 30% Share</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                Know a company that needs high-performance web apps or AI automation? Refer them and earn generous recurring commissions.
+                Know a company that needs high-performance web apps or AI automation? Refer them and earn 30% commission upon milestone payment.
               </p>
               <Link
                 href="/partner-program"

@@ -22,7 +22,7 @@ export const PartnerTeaser: React.FC = () => {
 
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
                 Know a business that needs this? <br />
-                <span className="text-gradient">Earn up to 40% commission.</span>
+                <span className="text-gradient">Earn a flat 30% commission.</span>
               </h2>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
@@ -35,19 +35,19 @@ export const PartnerTeaser: React.FC = () => {
                   <div className="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center flex-shrink-0">
                     <DollarSign className="w-3.5 h-3.5" />
                   </div>
-                  <span>30% Client Referral Fee</span>
+                  <span>Flat 30% Revenue Share</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-slate-300">
                   <div className="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center flex-shrink-0">
                     <Handshake className="w-3.5 h-3.5" />
                   </div>
-                  <span>Up to 40% Strategic Partner</span>
+                  <span>Instant Milestone Payouts</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-slate-300">
                   <div className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
                     <Users2 className="w-3.5 h-3.5" />
                   </div>
-                  <span>Direct Milestone Payouts</span>
+                  <span>Zero Technical Overhead</span>
                 </div>
               </div>
             </div>

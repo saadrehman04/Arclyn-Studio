@@ -8,6 +8,7 @@ import {
   Clock, 
   ShieldCheck, 
   MessageSquare,
+  MessageCircle,
   ArrowRight,
   ExternalLink
 } from 'lucide-react';
@@ -76,36 +77,56 @@ export default async function ContactPage({ searchParams }: Props) {
               </div>
             </div>
 
-            {/* Direct Email Card */}
+            {/* Direct Email, WhatsApp & Instagram Card */}
             <div className="p-6 rounded-2xl glass-panel border border-white/10 space-y-4">
+              {/* Direct Email */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-xs text-slate-400">Direct Inquiries</div>
                   <a
-                    href="mailto:hello@arclynstudio.com"
+                    href="mailto:saadrehman034@gmail.com"
                     className="text-sm font-bold text-white hover:text-cyan-300 transition-colors"
                   >
-                    hello@arclynstudio.com
+                    saadrehman034@gmail.com
                   </a>
                 </div>
               </div>
 
+              {/* WhatsApp Direct */}
               <div className="pt-3 border-t border-white/5 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                  <MessageCircle className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-400">WhatsApp Instant Chat</div>
+                  <a
+                    href="https://wa.me/923196762317"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-bold text-white hover:text-emerald-300 transition-colors"
+                  >
+                    +92 3196762317
+                  </a>
+                </div>
+              </div>
+
+              {/* Instagram Direct */}
+              <div className="pt-3 border-t border-white/5 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center shrink-0">
                   <InstagramIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-xs text-slate-400">Instagram Direct</div>
                   <a
-                    href="https://instagram.com/arclynstudio"
+                    href="https://instagram.com/arclyn_studio"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm font-bold text-white hover:text-pink-300 transition-colors"
                   >
-                    @arclynstudio
+                    @arclyn_studio
                   </a>
                 </div>
               </div>

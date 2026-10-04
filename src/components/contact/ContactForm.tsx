@@ -12,14 +12,6 @@ const PROJECT_TYPES = [
   'Cloud Architecture & DevOps',
 ];
 
-const BUDGET_RANGES = [
-  '$750 – $1,500 (Starter)',
-  '$1,500 – $3,500 (Business / Store)',
-  '$3,500 – $7,500 (Custom SaaS)',
-  '$7,500+ (Enterprise / Retainer)',
-  'PKR Equivalent (Pakistani Rupees)',
-];
-
 export const ContactForm: React.FC<{ initialTier?: string; initialService?: string }> = ({
   initialTier,
   initialService,
@@ -30,8 +22,6 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
     email: '',
     company: '',
     projectType: initialService || PROJECT_TYPES[0],
-    budget: BUDGET_RANGES[1],
-    timeline: 'Within 2–4 weeks',
     message: initialTier ? `Interested in tier: ${initialTier}` : '',
   });
 
@@ -128,40 +118,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Anticipated Budget Range
-          </label>
-          <select
-            value={formData.budget}
-            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-            className="w-full px-4 py-3 rounded-xl bg-[#090E26] border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-          >
-            {BUDGET_RANGES.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-        </div>
 
-        <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Desired Launch Timeline
-          </label>
-          <select
-            value={formData.timeline}
-            onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-            className="w-full px-4 py-3 rounded-xl bg-[#090E26] border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-          >
-            <option value="ASAP (within 2 weeks)">ASAP (within 2 weeks)</option>
-            <option value="Within 2–4 weeks">Within 2–4 weeks</option>
-            <option value="Within 1–2 months">Within 1–2 months</option>
-            <option value="Flexible / Exploring Architecture">Flexible / Exploring Architecture</option>
-          </select>
-        </div>
-      </div>
 
       <div>
         <label className="block text-xs font-semibold text-slate-300 mb-1.5">
