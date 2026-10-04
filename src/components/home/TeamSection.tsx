@@ -103,15 +103,15 @@ export const TeamSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col items-center w-full max-w-[235px] sm:max-w-[255px] md:max-w-[275px] z-10 group"
+              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] z-10 group"
             >
               <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
                 <Image
-                  src="/images/team/saad-rehman.jpg"
+                  src="/images/team/saad-rehman-zoomed.jpg"
                   alt="Saad Rehman"
                   fill
-                  className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 275px"
+                  className="object-cover object-top contrast-[1.05] scale-[1.12] origin-[50%_25%] group-hover:scale-[1.18] transition-all duration-700 ease-out"
+                  sizes="(max-width: 640px) 100vw, 265px"
                   priority
                 />
               </div>
