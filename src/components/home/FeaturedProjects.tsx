@@ -7,36 +7,42 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@/data/projects';
 import { ArrowUpRight, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { LightPillar } from '@/components/ui/LightPillar';
+import { MoltenMetal } from '@/components/ui/MoltenMetal';
 
 export const FeaturedProjects: React.FC = () => {
   // Top 4 flagship verified case studies
   const featured = PROJECTS.filter((p) => p.featured).slice(0, 4);
 
   return (
-    <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Live Light Pillar background — vertical volumetric column of light over the shipped products */}
-      <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1300px] h-[1000px] z-0 opacity-60 mix-blend-screen overflow-hidden"
+    <section id="work" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
+      {/* Interactive Molten Metal WebGL Caustics background */}
+      <div 
+        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-65 mix-blend-screen"
         style={{
-          maskImage: 'radial-gradient(ellipse at 50% 30%, black 25%, transparent 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 50% 30%, black 25%, transparent 75%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 80%, transparent 100%)',
         }}
         aria-hidden="true"
       >
-        <LightPillar
-          topColor="#7C3AED"
-          bottomColor="#06B6D4"
-          intensity={0.9}
-          rotationSpeed={0.25}
-          glowAmount={0.0055}
-          pillarWidth={2.8}
-          pillarHeight={0.36}
-          noiseIntensity={0.35}
-          pillarRotation={0}
-          interactive={false}
-          mixBlendMode="screen"
-          quality="high"
+        <MoltenMetal
+          color1="#4338CA"
+          color2="#8B5CF6"
+          color3="#06B6D4"
+          speed={0.3}
+          scale={3.5}
+          detail={3}
+          glow={1.6}
+          coreSize={0.09}
+          swirl={1.1}
+          fold={-0.22}
+          blackPoint={0.08}
+          brightness={1.3}
+          colorMode="molten"
+          grain={true}
+          grainIntensity={0.04}
+          mouseInteraction={true}
+          mouseStrength={0.3}
+          opacity={0.65}
         />
       </div>
 
