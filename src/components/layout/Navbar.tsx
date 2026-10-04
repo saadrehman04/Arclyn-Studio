@@ -64,9 +64,10 @@ const SERVICE_LINKS = [
 ];
 
 const HOME_SECTIONS = [
-  { title: 'Hero & Showcase', href: '/#showcase', desc: 'Interactive live production websites' },
+  { title: 'Hero (Start of Site)', href: '/#hero', desc: 'Interactive live production showcase' },
   { title: 'Capabilities & 3D Torus', href: '/#capabilities', desc: 'AI-accelerated development & testing' },
   { title: 'Bento Grid System', href: '/#bento', desc: 'Where AI meets human engineering' },
+  { title: 'Smart Solutions (Services)', href: '/#services', desc: 'Custom architectures built to dominate' },
   { title: 'Verified Case Studies', href: '/#work', desc: 'Audited production architectures' },
   { title: 'Milestone Pricing', href: '/pricing', desc: 'Transparent sprint-based investment' },
 ];
@@ -118,6 +119,41 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Home link: if clicked in menu, leads to the start of the site from hero
+  const handleHomeClick = (e?: React.MouseEvent) => {
+    setHomeDropdownOpen(false);
+    setMobileMenuOpen(false);
+    if (pathname === '/') {
+      if (e) e.preventDefault();
+      const hero = document.getElementById('hero');
+      const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number | HTMLElement, o?: { duration?: number }) => void } }).__lenis;
+      if (lenis) {
+        lenis.scrollTo(hero || 0, { duration: 1.2 });
+      } else if (hero) {
+        hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      if (window.location.hash) {
+        window.history.replaceState(null, '', '/');
+      }
+    } else {
+      if (e) e.preventDefault();
+      router.push('/');
+      setTimeout(() => {
+        const hero = document.getElementById('hero');
+        const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number | HTMLElement, o?: { duration?: number }) => void } }).__lenis;
+        if (lenis) {
+          lenis.scrollTo(hero || 0, { duration: 1.0 });
+        } else if (hero) {
+          hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  };
+
   // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -166,7 +202,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-between gap-4">
             
             {/* 1. Brand Logo on Left */}
-            <div className="shrink-0">
+            <div className="shrink-0 cursor-pointer" onClick={handleHomeClick}>
               <Logo size="md" />
             </div>
 
@@ -186,6 +222,7 @@ export const Navbar: React.FC = () => {
                 >
                   <Link
                     href="/"
+                    onClick={handleHomeClick}
                     className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
                       pathname === '/' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
                     }`}
@@ -208,6 +245,27 @@ export const Navbar: React.FC = () => {
                           <Link
                             key={sec.href}
                             href={sec.href}
+                            onClick={(e) => {
+                              if (sec.href === '/#hero' || sec.href === '/') {
+                                handleHomeClick(e);
+                              } else if (sec.href.startsWith('/#') && pathname === '/') {
+                                setHomeDropdownOpen(false);
+                                const hash = sec.href.replace('/', '');
+                                const el = document.querySelector(hash) as HTMLElement | null;
+                                if (el) {
+                                  e.preventDefault();
+                                  const lenis = (window as unknown as { __lenis?: { scrollTo: (t: HTMLElement, o?: { duration?: number }) => void } }).__lenis;
+                                  if (lenis) {
+                                    lenis.scrollTo(el, { duration: 1.0 });
+                                  } else {
+                                    el.scrollIntoView({ behavior: 'smooth' });
+                                  }
+                                  window.history.replaceState(null, '', sec.href);
+                                }
+                              } else {
+                                setHomeDropdownOpen(false);
+                              }
+                            }}
                             className="block p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
                           >
                             <div className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
@@ -416,6 +474,7 @@ export const Navbar: React.FC = () => {
             <div className="flex flex-col space-y-1">
               <Link
                 href="/"
+                onClick={handleHomeClick}
                 className={`px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between ${
                   pathname === '/' ? 'text-white bg-white/10' : 'text-slate-300 hover:text-white'
                 }`}

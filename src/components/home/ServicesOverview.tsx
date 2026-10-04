@@ -14,7 +14,7 @@ import {
   ArrowRight 
 } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { Grainient } from '@/components/ui/Grainient';
+import { GradientWaves } from '@/components/ui/GradientWaves';
 
 const SERVICE_CARDS = [
   {
@@ -69,23 +69,37 @@ const SERVICE_CARDS = [
 
 export const ServicesOverview: React.FC = () => {
   return (
-    <section className="relative pt-6 sm:pt-10 pb-28 sm:pb-36 bg-[#050711] overflow-hidden">
-      {/* Dynamic Animated Grainient Background (Cyan, Purple & Deep Cosmic Obsidian) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-40 mix-blend-screen" aria-hidden="true">
-        <Grainient
-          color1="#06B6D4"
-          color2="#8B5CF6"
-          color3="#050711"
-          timeSpeed={0.22}
-          warpStrength={0.85}
-          warpFrequency={4.5}
-          warpSpeed={1.6}
-          warpAmplitude={45.0}
-          grainAmount={0.06}
-          grainScale={2.0}
-          contrast={1.45}
-          saturation={1.2}
-          zoom={0.9}
+    <section id="services" className="relative pt-6 sm:pt-10 pb-28 sm:pb-36 bg-[#050711] overflow-hidden">
+      {/* Dynamic Animated GradientWaves (React Bits) background with undulating wave plasma */}
+      <div 
+        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-60 mix-blend-screen"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      >
+        <GradientWaves
+          horizonColor="#4338CA"
+          waveColor="#8B5CF6"
+          crestColor="#06B6D4"
+          speed={0.32}
+          amplitude={2.6}
+          waveScale={0.55}
+          waveRatio={0.9}
+          swell={32}
+          turbulence={18}
+          tilt={1.12}
+          zoom={1.05}
+          height={5.2}
+          fogDepth={18}
+          detail="medium"
+          brightness={1.05}
+          opacity={0.7}
+          mouseInteraction={true}
+          parallaxStrength={0.4}
+          grain={true}
+          grainIntensity={0.04}
         />
       </div>
 
