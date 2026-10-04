@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@/data/projects';
 import { ArrowUpRight, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { MoltenMetal } from '@/components/ui/MoltenMetal';
+import { SideRays } from '@/components/ui/SideRays';
 
 export const FeaturedProjects: React.FC = () => {
   // Top 4 flagship verified case studies
@@ -15,34 +15,27 @@ export const FeaturedProjects: React.FC = () => {
 
   return (
     <section id="work" className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
-      {/* Interactive Molten Metal WebGL Caustics background */}
+      {/* Animated SideRays light beams — sweeping over the case studies */}
       <div 
-        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-90 mix-blend-screen"
+        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-85 mix-blend-screen"
         style={{
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 95%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 95%)',
         }}
         aria-hidden="true"
       >
-        <MoltenMetal
-          color1="#5227FF"
-          color2="#A855F7"
-          color3="#06B6D4"
-          speed={0.32}
-          scale={3.2}
-          detail={3}
-          glow={2.2}
-          coreSize={0.15}
-          swirl={1.2}
-          fold={-0.25}
-          blackPoint={0.02}
-          brightness={1.65}
-          colorMode="molten"
-          grain={true}
-          grainIntensity={0.04}
-          mouseInteraction={true}
-          mouseStrength={0.35}
-          opacity={0.95}
+        <SideRays
+          speed={2.2}
+          rayColor1="#8B5CF6"
+          rayColor2="#22D3EE"
+          intensity={2.2}
+          spread={2}
+          origin="top-right"
+          tilt={0}
+          saturation={1.5}
+          blend={0.75}
+          falloff={1.6}
+          opacity={1.0}
         />
       </div>
 
