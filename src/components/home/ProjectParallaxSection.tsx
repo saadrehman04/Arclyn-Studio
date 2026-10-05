@@ -79,8 +79,8 @@ export const ProjectParallaxSection: React.FC = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Smooth springs for high-framerate physical motion
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 26 });
+  // Snappy spring physics synchronized with Lenis (zero input lag)
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 450, damping: 45, mass: 0.5 });
 
   // 1. Background Nebulae Parallax (Slow depth: 0.15x speed)
   const yBg = useTransform(smoothProgress, [0, 1], [-60, 60]);

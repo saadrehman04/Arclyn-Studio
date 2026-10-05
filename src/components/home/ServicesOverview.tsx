@@ -7,7 +7,6 @@ import {
   motion, 
   useScroll, 
   useTransform, 
-  useSpring, 
   MotionValue 
 } from 'framer-motion';
 import { 
@@ -23,7 +22,6 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { GradientWaves } from '@/components/ui/GradientWaves';
 
 export interface ServiceCardData {
   id: string;
@@ -107,8 +105,10 @@ export const SERVICE_CARDS: ServiceCardData[] = [
 ];
 
 /**
- * Individual horizontal service card with alternating wave physics
- * (Matches the undulating vertical parallax from horizontal.learnframer.site)
+ * High-performance horizontal service card
+ * - Pure translate3d on compositor thread (zero CPU re-rasterization)
+ * - Solid high-contrast obsidian background (zero backdrop-filter blur overhead)
+ * - Crystal clear photographic image without filters
  */
 interface ServiceCardProps {
   service: ServiceCardData;
@@ -120,55 +120,55 @@ const ServiceHorizontalCard: React.FC<ServiceCardProps> = ({ service, index, pro
   const Icon = service.icon;
   const isEven = index % 2 === 0;
 
-  // Undulating wave vertical motion: alternating cards travel in opposing directions
-  const y = useTransform(progress, [0, 1], isEven ? [-75, 75] : [75, -75]);
-  const rotate = useTransform(progress, [0, 1], isEven ? [-1.5, 1.5] : [1.5, -1.5]);
+  // Pure vertical translation for alternating wave motion (GPU accelerated)
+  const y = useTransform(progress, [0, 1], isEven ? [-65, 65] : [65, -65]);
 
   return (
     <motion.div
-      style={{ y, rotate }}
+      style={{ y }}
       className={`
         shrink-0 relative rounded-[28px] sm:rounded-[32px] p-7 sm:p-9 
-        bg-[#090C1A]/90 border border-white/15 hover:border-cyan-400/60
-        shadow-[0_25px_60px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_50px_rgba(6,182,212,0.25)]
-        backdrop-blur-2xl flex flex-col justify-between overflow-hidden 
-        transition-colors duration-500 group select-none
+        bg-[#0A0E22]/95 border border-white/15 hover:border-cyan-400/60
+        shadow-[0_20px_50px_rgba(0,0,0,0.8)] hover:shadow-[0_20px_50px_rgba(6,182,212,0.25)]
+        flex flex-col justify-between overflow-hidden 
+        transition-colors duration-300 group select-none will-change-transform transform-gpu
         ${isEven 
-          ? 'w-[330px] sm:w-[410px] lg:w-[430px] h-[480px] sm:h-[530px] lg:h-[550px]' 
-          : 'w-[300px] sm:w-[370px] lg:w-[390px] h-[430px] sm:h-[470px] lg:h-[490px]'
+          ? 'w-[320px] sm:w-[400px] lg:w-[420px] h-[470px] sm:h-[520px] lg:h-[540px]' 
+          : 'w-[290px] sm:w-[360px] lg:w-[380px] h-[420px] sm:h-[460px] lg:h-[480px]'
         }
       `}
     >
-      {/* Photographic Background with Subtle Parallax Scale */}
+      {/* Photographic Background with Smooth GPU Scale */}
       {service.bgImage && (
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden rounded-[28px] sm:rounded-[32px] z-0">
           <Image
             src={service.bgImage}
             alt={service.title}
             fill
-            sizes="(max-width: 768px) 330px, 430px"
-            className="object-cover object-center scale-100 group-hover:scale-108 transition-transform duration-700 ease-out opacity-65 group-hover:opacity-85 filter blur-[0.2px] group-hover:blur-none"
+            sizes="(max-width: 768px) 320px, 420px"
+            className="object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-500 ease-out opacity-65 group-hover:opacity-85"
+            priority={index < 2}
           />
           {/* Deep Contrast Vignette Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#060814] via-[#070b18]/70 to-[#050712]/40" />
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
       )}
 
       {/* Top ambient highlight line */}
-      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
       {/* Card Header Content */}
       <div className="relative z-10">
         <div className="flex items-center justify-between gap-3 mb-6">
           {/* Shaded Circular Icon Container */}
-          <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#161a2c]/90 backdrop-blur-md border border-white/20 shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),0_4px_16px_rgba(0,0,0,0.7)] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+          <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#15192c] border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.6)] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
             <Icon className="w-6 h-6 text-[#F3F5B4] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" />
           </div>
 
           {/* Number & Category Pill */}
           <div className="flex items-center gap-2">
-            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-cyan-300 border border-white/15 backdrop-blur-md">
+            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-wider px-2.5 py-1 rounded-full bg-white/10 text-cyan-300 border border-white/15">
               {service.number} // 06
             </span>
           </div>
@@ -180,7 +180,7 @@ const ServiceHorizontalCard: React.FC<ServiceCardProps> = ({ service, index, pro
         </div>
 
         {/* Title */}
-        <h3 className="font-display text-xl sm:text-2xl lg:text-[26px] font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+        <h3 className="font-display text-xl sm:text-2xl lg:text-[25px] font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
           {service.title}
         </h3>
 
@@ -194,7 +194,7 @@ const ServiceHorizontalCard: React.FC<ServiceCardProps> = ({ service, index, pro
           {service.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/10 text-slate-300"
+              className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/[0.08] border border-white/10 text-slate-300"
             >
               {tag}
             </span>
@@ -209,7 +209,7 @@ const ServiceHorizontalCard: React.FC<ServiceCardProps> = ({ service, index, pro
           className="inline-flex items-center justify-between w-full text-xs font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]"
         >
           <span>View Architecture Blueprint</span>
-          <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 group-hover:bg-cyan-500/30 group-hover:border-cyan-400/50 flex items-center justify-center text-white group-hover:text-cyan-200 transition-all duration-300 shadow-lg">
+          <div className="w-8 h-8 rounded-full bg-white/10 border border-white/15 group-hover:bg-cyan-500/30 group-hover:border-cyan-400/50 flex items-center justify-center text-white group-hover:text-cyan-200 transition-all duration-300 shadow-lg">
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </Link>
@@ -222,21 +222,17 @@ export const ServicesOverview: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Direct DOM refs to avoid any React re-render thrashing during scroll
+  const activeNumberRef = useRef<HTMLSpanElement>(null);
+  const activeNumberRightRef = useRef<HTMLSpanElement>(null);
+
   // Track horizontal overflow distance to translate
   const [scrollDistance, setScrollDistance] = useState(0);
-  const [activeNumber, setActiveNumber] = useState('01');
 
-  // Track vertical scroll across the tall section (350vh for smooth luxurious scroll)
+  // Track vertical scroll across the tall section
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
-  });
-
-  // High-framerate spring physics matching Framer reference
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 180,
-    damping: 28,
-    restDelta: 0.001,
   });
 
   // Calculate track overflow width on mount and on window resize
@@ -246,85 +242,64 @@ export const ServicesOverview: React.FC = () => {
         const totalTrackWidth = trackRef.current.scrollWidth;
         const viewportWidth = window.innerWidth;
         // Total horizontal distance to travel so all cards and concluding CTA are visible
-        const overflow = Math.max(0, totalTrackWidth - viewportWidth + 120);
+        const overflow = Math.max(0, totalTrackWidth - viewportWidth + 80);
         setScrollDistance(overflow);
       }
     };
 
     updateDimensions();
-    // Short delay to ensure custom fonts and images have measured accurately
-    const timer = setTimeout(updateDimensions, 400);
+    const timer1 = setTimeout(updateDimensions, 150);
+    const timer2 = setTimeout(updateDimensions, 600);
 
-    window.addEventListener('resize', updateDimensions);
+    window.addEventListener('resize', updateDimensions, { passive: true });
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
       window.removeEventListener('resize', updateDimensions);
     };
   }, []);
 
-  // Update active card number indicator based on scroll progress
+  // Update active card number indicator directly on DOM nodes (0 React re-renders!)
   useEffect(() => {
-    const unsubscribe = smoothProgress.on('change', (latest) => {
+    return scrollYProgress.on('change', (latest) => {
       const idx = Math.min(
         SERVICE_CARDS.length,
         Math.max(1, Math.round(latest * (SERVICE_CARDS.length - 1)) + 1)
       );
-      setActiveNumber(`0${idx}`);
+      const text = `0${idx}`;
+      if (activeNumberRef.current && activeNumberRef.current.textContent !== text) {
+        activeNumberRef.current.textContent = text;
+      }
+      if (activeNumberRightRef.current && activeNumberRightRef.current.textContent !== text) {
+        activeNumberRightRef.current.textContent = text;
+      }
     });
-    return () => unsubscribe();
-  }, [smoothProgress]);
+  }, [scrollYProgress]);
 
   // Translate track along the X axis from 0 to -scrollDistance
-  const x = useTransform(smoothProgress, [0, 1], [0, -scrollDistance]);
+  // Synchronized directly with Lenis smooth scroll at 60/120 FPS
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
 
   return (
     <section 
       ref={containerRef}
       id="services" 
-      className="relative h-[360vh] bg-[#050711] select-none"
+      className="relative h-[300vh] bg-[#050711] select-none"
     >
       {/* ─────────────────────────────────────────────────────────────
-          STICKY FULL-SCREEN VIEWPORT PIN
+          STICKY FULL-SCREEN VIEWPORT PIN (60/120 FPS Composited)
           ───────────────────────────────────────────────────────────── */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
 
-        {/* Dynamic Animated GradientWaves (React Bits) Background */}
-        <div 
-          className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-55 mix-blend-screen"
-          style={{
-            maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-          }}
-          aria-hidden="true"
-        >
-          <GradientWaves
-            horizonColor="#4338CA"
-            waveColor="#8B5CF6"
-            crestColor="#06B6D4"
-            speed={0.32}
-            amplitude={2.6}
-            waveScale={0.55}
-            waveRatio={0.9}
-            swell={32}
-            turbulence={18}
-            tilt={1.12}
-            zoom={1.05}
-            height={5.2}
-            fogDepth={18}
-            detail="medium"
-            brightness={1.05}
-            opacity={0.7}
-            mouseInteraction={false}
-            parallaxStrength={0.4}
-            grain={true}
-            grainIntensity={0.04}
-          />
-        </div>
-
-        {/* Subtle Ambient Nebulae */}
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-          <div className="absolute top-1/4 left-1/3 w-[800px] h-[500px] bg-purple-900/15 rounded-full blur-[160px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[400px] bg-cyan-600/10 rounded-full blur-[140px]" />
+        {/* High-Performance Pure CSS Cosmic Nebula Glows (Zero GPU Shader Overhead) */}
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden transform-gpu" aria-hidden="true">
+          {/* Subtle Cybernetic Grid */}
+          <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:36px_36px] opacity-40" />
+          
+          {/* Ambient Nebulae */}
+          <div className="absolute top-1/4 left-1/4 w-[750px] h-[500px] bg-purple-900/18 rounded-full blur-[140px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[650px] h-[450px] bg-cyan-600/14 rounded-full blur-[140px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[350px] bg-indigo-900/10 rounded-full blur-[160px]" />
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
@@ -334,14 +309,14 @@ export const ServicesOverview: React.FC = () => {
           <motion.div
             ref={trackRef}
             style={{ x }}
-            className="flex items-center gap-7 sm:gap-10 lg:gap-14 will-change-transform pl-6 sm:pl-12 lg:pl-20 pr-12 sm:pr-20 lg:pr-32"
+            className="flex items-center gap-7 sm:gap-10 lg:gap-14 will-change-transform transform-gpu pl-6 sm:pl-12 lg:pl-20 pr-12 sm:pr-20 lg:pr-32"
           >
             {/* ─────────────────────────────────────────────────────────
                 TRACK ELEMENT 1: Introductory Header Block
                 ───────────────────────────────────────────────────────── */}
-            <div className="w-[310px] sm:w-[440px] lg:w-[480px] shrink-0 flex flex-col justify-center select-none pr-4 sm:pr-8">
+            <div className="w-[300px] sm:w-[420px] lg:w-[460px] shrink-0 flex flex-col justify-center select-none pr-4 sm:pr-8">
               {/* Eyebrow Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-5 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)] self-start">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-5 shadow-[0_0_20px_rgba(245,158,11,0.15)] self-start">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
@@ -362,7 +337,7 @@ export const ServicesOverview: React.FC = () => {
               </p>
 
               {/* Scroll Helper Hint Pill */}
-              <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-white/[0.05] border border-white/15 text-xs text-slate-300 font-mono self-start backdrop-blur-md">
+              <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-white/[0.05] border border-white/15 text-xs text-slate-300 font-mono self-start">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                 <span>SCROLL DOWN TO EXPLORE</span>
                 <MoveRight className="w-4 h-4 text-cyan-400 animate-pulse" />
@@ -377,7 +352,7 @@ export const ServicesOverview: React.FC = () => {
                 key={service.id}
                 service={service}
                 index={index}
-                progress={smoothProgress}
+                progress={scrollYProgress}
               />
             ))}
 
@@ -386,9 +361,9 @@ export const ServicesOverview: React.FC = () => {
                 ───────────────────────────────────────────────────────── */}
             <motion.div
               style={{
-                y: useTransform(smoothProgress, [0, 1], [-40, 40]),
+                y: useTransform(scrollYProgress, [0, 1], [-35, 35]),
               }}
-              className="w-[320px] sm:w-[390px] lg:w-[410px] h-[460px] sm:h-[500px] shrink-0 rounded-[28px] sm:rounded-[32px] p-8 sm:p-9 bg-gradient-to-b from-[#101428]/95 to-[#070A18]/95 border border-purple-500/40 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl flex flex-col justify-between select-none relative overflow-hidden group"
+              className="w-[310px] sm:w-[380px] lg:w-[400px] h-[450px] sm:h-[490px] shrink-0 rounded-[28px] sm:rounded-[32px] p-8 sm:p-9 bg-gradient-to-b from-[#101428]/95 to-[#070A18]/95 border border-purple-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col justify-between select-none relative overflow-hidden group will-change-transform transform-gpu"
             >
               {/* Radial Glow */}
               <div className="absolute -top-24 -right-24 w-60 h-60 bg-purple-600/25 rounded-full blur-[80px] pointer-events-none" />
@@ -448,17 +423,18 @@ export const ServicesOverview: React.FC = () => {
         <div className="absolute bottom-5 sm:bottom-7 left-0 right-0 z-20 pointer-events-none">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             {/* Left Status Beacon */}
-            <div className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl text-xs text-slate-300 font-mono">
+            <div className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/70 border border-white/10 text-xs text-slate-300 font-mono">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span>ACTIVE PRACTICE // {activeNumber}</span>
+              <span>ACTIVE PRACTICE // </span>
+              <span ref={activeNumberRef} className="text-cyan-300 font-bold">01</span>
             </div>
 
             {/* Right Scroll Progress Track */}
-            <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl ml-auto md:ml-0">
-              <span className="text-[11px] font-mono text-cyan-300 font-bold">{activeNumber}</span>
+            <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/70 border border-white/10 ml-auto md:ml-0">
+              <span ref={activeNumberRightRef} className="text-[11px] font-mono text-cyan-300 font-bold">01</span>
               <div className="w-24 sm:w-36 h-1 rounded-full bg-white/15 overflow-hidden relative">
                 <motion.div 
-                  style={{ scaleX: smoothProgress, transformOrigin: 'left' }}
+                  style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
                   className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-500"
                 />
               </div>
