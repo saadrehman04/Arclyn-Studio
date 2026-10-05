@@ -73,10 +73,11 @@ export const ServicesEditorialShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pinWrapperRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const activeIndexRef = useRef<number>(0);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -84,7 +85,7 @@ export const ServicesEditorialShowcase: React.FC = () => {
       setIsDesktop(window.innerWidth >= 1024);
     };
     checkDesktop();
-    window.addEventListener('resize', checkDesktop);
+    window.addEventListener('resize', checkDesktop, { passive: true });
     return () => window.removeEventListener('resize', checkDesktop);
   }, []);
 
@@ -100,8 +101,6 @@ export const ServicesEditorialShowcase: React.FC = () => {
       lenis.on('scroll', lenisUpdate);
     }
 
-    gsap.ticker.lagSmoothing(0);
-
     const ctx = gsap.context(() => {
       const container = containerRef.current;
       const pinWrapper = pinWrapperRef.current;
@@ -115,62 +114,46 @@ export const ServicesEditorialShowcase: React.FC = () => {
         return Math.max(0, trackWidth - availableWidth + 80);
       };
 
-      const horizontalTween = gsap.to(track, {
+      // Ultra-smooth, performant horizontal scroll
+      // - Uses scrub: 0.3 (eliminates the 1.0s dragging lag)
+      // - Direct DOM updates for progress bar (0 React re-renders during scroll)
+      // - Removed expensive per-card containerAnimation ScrollTriggers
+      gsap.to(track, {
         x: () => -calculateScrollDistance(),
         ease: 'none',
         scrollTrigger: {
           trigger: container,
           start: 'top top',
-          end: () => `+=${calculateScrollDistance() + 600}`,
+          end: () => `+=${calculateScrollDistance() + 450}`,
           pin: pinWrapper,
-          scrub: 1,
+          scrub: 0.3, // Silky-smooth, instant responsiveness
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          fastScrollEnd: true,
           onUpdate: (self) => {
-            setProgress(self.progress);
+            // Direct DOM update for progress bar without triggering React re-renders
+            if (progressBarRef.current) {
+              const pct = Math.max(12, Math.min(100, self.progress * 100));
+              progressBarRef.current.style.width = `${pct}%`;
+            }
+
             const idx = Math.min(
               SERVICES_GALLERY.length - 1,
               Math.floor(self.progress * SERVICES_GALLERY.length)
             );
-            setActiveIndex(idx);
+
+            // Only update React state when the card index actually transitions
+            if (idx !== activeIndexRef.current) {
+              activeIndexRef.current = idx;
+              setActiveIndex(idx);
+              if (counterRef.current) {
+                counterRef.current.textContent = `0${idx + 1} / 05`;
+              }
+            }
           },
         },
       });
 
-      // Subtle depth scale on pinWrapper as horizontal scroll completes, setting up parallax transition
-      gsap.to(pinWrapper, {
-        scale: 0.96,
-        opacity: 0.92,
-        ease: 'power1.out',
-        scrollTrigger: {
-          trigger: container,
-          start: () => `+=${calculateScrollDistance() + 200}`,
-          end: () => `+=${calculateScrollDistance() + 600}`,
-          scrub: true,
-        },
-      });
-
-      // Subtle entrance scaling & opacity transitions for individual cards
-      cardRefs.current.forEach((card) => {
-        if (!card) return;
-        gsap.fromTo(
-          card,
-          { scale: 0.96, opacity: 0.8 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power1.out',
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: horizontalTween,
-              start: 'left right-=12%',
-              end: 'center center',
-              scrub: true,
-            },
-          }
-        );
-      });
     }, containerRef);
 
     return () => {
@@ -194,7 +177,7 @@ export const ServicesEditorialShowcase: React.FC = () => {
       <div className="hidden lg:block w-full">
         <div 
           ref={pinWrapperRef}
-          className="w-full h-screen relative flex flex-row overflow-hidden bg-[#E8E8E8]"
+          className="w-full h-screen relative flex flex-row overflow-hidden bg-[#E8E8E8] will-change-transform transform-gpu"
         >
           {/* ─────────────────────────────────────────────────────────
               LEFT: PINNED EDITORIAL INTRODUCTION PANEL
@@ -225,15 +208,16 @@ export const ServicesEditorialShowcase: React.FC = () => {
             {/* Bottom Area: Active Counter & Scroll Progress */}
             <div className="pt-8 border-t border-[#1A1A1A]/10 flex flex-col gap-3">
               <div className="flex items-center justify-between text-xs font-mono font-bold text-[#1A1A1A]">
-                <span>0{activeIndex + 1} / 05</span>
+                <span ref={counterRef}>0{activeIndex + 1} / 05</span>
                 <span className="tracking-widest uppercase text-[10px] text-[#1A1A1A]/50">SCROLL TO EXPLORE ↓</span>
               </div>
               
-              {/* Progress Bar */}
+              {/* Progress Bar (Hardware accelerated via direct ref style update) */}
               <div className="w-full h-[2px] bg-[#1A1A1A]/10 rounded-full overflow-hidden relative">
                 <div 
-                  className="absolute top-0 bottom-0 left-0 bg-[#1A1A1A] rounded-full transition-all duration-150"
-                  style={{ width: `${Math.max(12, progress * 100)}%` }}
+                  ref={progressBarRef}
+                  className="absolute top-0 bottom-0 left-0 bg-[#1A1A1A] rounded-full will-change-[width]"
+                  style={{ width: '12%' }}
                 />
               </div>
             </div>
@@ -247,23 +231,27 @@ export const ServicesEditorialShowcase: React.FC = () => {
             <div 
               ref={trackRef}
               className="flex flex-row items-center gap-8 xl:gap-12 pr-28 will-change-transform transform-gpu"
+              style={{
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
+              }}
             >
               {SERVICES_GALLERY.map((service, index) => (
                 <div
                   key={service.id}
-                  ref={(el) => { cardRefs.current[index] = el; }}
                   className="w-[380px] lg:w-[420px] xl:w-[460px] shrink-0 flex flex-col group will-change-transform"
                 >
                   <Link 
                     href={service.route}
-                    className="block overflow-hidden rounded-2xl mb-5 bg-black/5 aspect-[16/10] relative shadow-[0_12px_32px_rgba(0,0,0,0.06)] border border-[#1A1A1A]/10 group-hover:border-[#1A1A1A]/30 transition-all duration-500"
+                    className="block overflow-hidden rounded-2xl mb-5 bg-black/5 aspect-[16/10] relative shadow-[0_12px_32px_rgba(0,0,0,0.06)] border border-[#1A1A1A]/10 group-hover:border-[#1A1A1A]/30 transition-all duration-300"
                   >
                     <Image 
                       src={service.image} 
                       alt={service.title}
                       fill
+                      priority={index < 3}
                       sizes="(max-width: 1280px) 420px, 460px"
-                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
                     />
                   </Link>
 
