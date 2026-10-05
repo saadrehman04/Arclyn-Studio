@@ -111,20 +111,27 @@ export const HeroParallaxScrollScene: React.FC = () => {
       lenis.on('scroll', lenisUpdate);
     }
 
+    gsap.ticker.lagSmoothing(0);
+
     const ctx = gsap.context(() => {
       if (!containerRef.current || !pinSceneRef.current || !greenSectionRef.current) return;
 
       const isMobile = window.innerWidth < 768;
 
       // ─────────────────────────────────────────────────────────────
-      // CHOREOGRAPHED MASTER TIMELINE (0% to 100%)
+      // CHOREOGRAPHED MASTER TIMELINE (3.0 Total Units)
+      // - 0.0 -> 0.9: Hero moves up, green section ascends to yPercent: 0
+      // - 0.9 -> 2.6: GREEN SECTION IS 100% VISIBLE & PINNED
+      //   Stays completely resting and stationary for 1.7 scroll units
+      //   (Next section CANNOT open while user is viewing this!)
+      // - 2.6 -> 3.0: Graceful unpin handoff to following section
       // ─────────────────────────────────────────────────────────────
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: isMobile ? '+=120%' : '+=200%', // 180vh–220vh scroll scene
-          scrub: 0.8, // Smooth physical scrub
+          end: isMobile ? '+=180%' : '+=250%',
+          scrub: true, // 1:1 direct sync with Lenis (eliminates double-smoothing lag!)
           pin: pinSceneRef.current,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -132,56 +139,61 @@ export const HeroParallaxScrollScene: React.FC = () => {
       });
 
       // 1. Initial State
-      gsap.set(greenSectionRef.current, { yPercent: 100 });
+      gsap.set(greenSectionRef.current, { yPercent: 100, force3D: true });
       if (greenContentRef.current) {
-        gsap.set(greenContentRef.current, { y: isMobile ? 60 : 130 });
+        gsap.set(greenContentRef.current, { y: isMobile ? 40 : 80, force3D: true });
       }
 
-      // 2. Timeline Choreography:
-      // - 0% to 20%: Hero at rest, then begins upward drift
-      // - 20% to 60%: Typography moves upward smoothly while following panel rises
-      // - 60% to 80%: Following panel occupies viewport, content begins settling
-      // - 80% to 100%: Following panel fills viewport, content reaches rest position
-
-      // A. HERO TYPOGRAPHY: Smooth upward parallax (0.15 -> 0.75)
+      // A. HERO TYPOGRAPHY: Smooth upward drift & fade out
       if (heroTypoRef.current) {
         tl.to(
           heroTypoRef.current,
           {
-            y: isMobile ? -140 : -260,
+            y: isMobile ? -90 : -160,
+            opacity: 0,
             scale: 0.96,
-            ease: 'power1.inOut',
+            duration: 0.7,
+            ease: 'power2.out',
           },
-          0.15
+          0
         );
       }
 
-      // B. FOLLOWING GREEN SECTION: Travels upward from below viewport (0.15 -> 1.0)
-      // - At 20%: starts entering viewport (yPercent: ~95)
-      // - At 40%: reaches lower portion of viewport (yPercent: ~65)
-      // - At 60%: occupies most of viewport (yPercent: ~35)
-      // - At 80%: dominant visual (yPercent: ~12)
-      // - At 100%: fills viewport (yPercent: 0)
+      // B. FOLLOWING GREEN SECTION: Travels upward from below viewport (reaches 0% by 0.9)
       tl.to(
         greenSectionRef.current,
         {
           yPercent: 0,
-          ease: 'none',
+          duration: 0.9,
+          ease: 'power2.out',
         },
-        0.15
+        0
       );
 
-      // D. GREEN SECTION CONTENT: Moves slower relative to green background for parallax depth
+      // C. GREEN SECTION CONTENT: Settles cleanly into position
       if (greenContentRef.current) {
         tl.to(
           greenContentRef.current,
           {
             y: 0,
+            duration: 0.7,
             ease: 'power2.out',
           },
-          0.45
+          0.2
         );
       }
+
+      // D. DEDICATED RESTING PIN DURATION: Holds green section stationary at yPercent: 0!
+      // This guarantees the section is 100% displayed and the next section cannot open prematurely
+      tl.to(
+        greenSectionRef.current,
+        {
+          yPercent: 0,
+          duration: 1.7,
+          ease: 'none',
+        },
+        0.9
+      );
     }, containerRef);
 
     return () => {
@@ -196,7 +208,7 @@ export const HeroParallaxScrollScene: React.FC = () => {
     <div 
       ref={containerRef} 
       id="hero-scene"
-      className="relative w-full h-[200vh] sm:h-[220vh] bg-black select-none"
+      className="relative w-full h-[280vh] sm:h-[320vh] bg-black select-none"
     >
       {/* ─────────────────────────────────────────────────────────────
           PINNED SCENE WRAPPER (Stays pinned for 180vh–220vh of scroll)
@@ -308,60 +320,59 @@ export const HeroParallaxScrollScene: React.FC = () => {
             ========================================================= */}
         <div
           ref={greenSectionRef}
-          className="absolute inset-0 z-20 w-full h-full rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[60px] border-t border-emerald-400/40 shadow-[0_-30px_100px_rgba(0,0,0,0.95),0_0_60px_rgba(16,185,129,0.18)] bg-gradient-to-b from-[#062419] via-[#041a12] to-[#020e0a] overflow-hidden flex flex-col justify-center will-change-transform transform-gpu pointer-events-auto"
+          className="absolute inset-0 z-20 w-full h-full rounded-t-[32px] sm:rounded-t-[44px] lg:rounded-t-[54px] border-t border-emerald-400/40 shadow-[0_-20px_60px_rgba(0,0,0,0.95)] bg-[#03130d] overflow-hidden flex flex-col justify-center will-change-transform transform-gpu pointer-events-auto"
         >
-          {/* Internal Emerald Atmosphere Lighting */}
+          {/* Lightweight Ambient Atmospheric Lighting (Zero GPU Gaussian Blur Overhead) */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[350px] bg-emerald-500/15 rounded-full blur-[140px]" />
-            <div className="absolute bottom-0 right-10 w-[500px] h-[300px] bg-teal-600/10 rounded-full blur-[130px]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[320px] bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.18)_0%,transparent_70%)]" />
+            <div className="absolute bottom-0 right-0 w-80 h-80 bg-[radial-gradient(ellipse_at_bottom_right,rgba(20,184,166,0.1)_0%,transparent_70%)]" />
           </div>
 
           {/* =========================================================
-              LAYER 5: GREEN SECTION CONTENT (Internal Parallax Depth)
-              Moves into resting position slower than the green background
+              LAYER 5: GREEN SECTION CONTENT (Fitted 100% in Viewport)
               ========================================================= */}
           <div 
             ref={greenContentRef}
-            className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col justify-center will-change-transform transform-gpu"
+            className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-4 sm:pb-6 flex flex-col justify-center items-center h-full max-h-screen will-change-transform transform-gpu"
           >
-            {/* Section Header */}
-            <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-8">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-2.5 backdrop-blur-xl shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-                <span className="relative flex h-2 w-2">
+            {/* Section Header with Safe Clearance below Floating Navbar */}
+            <div className="text-center max-w-2xl mx-auto mb-2.5 sm:mb-3.5 shrink-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                 </span>
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>VERIFIED PRODUCTION PLATFORMS</span>
               </div>
 
-              <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.1]">
-                Audited Systems. <br className="hidden sm:block" />
+              <h2 className="font-display text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                Audited Systems.{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
                   Verifiable Scale.
                 </span>
               </h2>
 
-              <p className="text-xs sm:text-sm text-emerald-100/80 font-normal mt-1.5 max-w-xl mx-auto">
+              <p className="text-[11px] sm:text-xs text-emerald-100/70 font-normal mt-0.5 max-w-lg mx-auto line-clamp-1 sm:line-clamp-none">
                 Live architectures deployed on edge infrastructure with sub-second latency and zero technical debt.
               </p>
             </div>
 
-            {/* The Main Project Container Window */}
-            <div className="w-full max-w-5xl mx-auto rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-[#061811]/90 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl flex flex-col overflow-hidden relative group">
+            {/* The Main Project Container Window (Optimized for 100% Fit & Instant Tab Switching) */}
+            <div className="w-full max-w-4xl mx-auto rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-[#061811] shadow-[0_15px_45px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden relative group shrink">
               
               {/* Browser Navigation Top Bar */}
-              <div className="shrink-0 px-3 sm:px-5 py-2.5 sm:py-3 border-b border-emerald-500/20 bg-[#03130d] flex flex-col md:flex-row md:items-center justify-between gap-2.5">
+              <div className="shrink-0 px-3 sm:px-4 py-2 border-b border-emerald-500/20 bg-[#03130d] flex items-center justify-between gap-2">
                 {/* Window Dots & Live Title */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   <div className="flex items-center gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
                     <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                     <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
 
-                  <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-emerald-200">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="hidden md:flex items-center gap-2 text-xs font-mono text-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span className="font-semibold text-white">{activeProject.title}</span>
                     <span className="text-emerald-500">•</span>
                     <span className="text-emerald-300">{activeProject.badge}</span>
@@ -369,14 +380,14 @@ export const HeroParallaxScrollScene: React.FC = () => {
                 </div>
 
                 {/* Project Switcher Tabs */}
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
                   {SHOWCASE_PROJECTS.map((project) => (
                     <SpotlightTab
                       key={project.id}
                       active={activeProject.id === project.id}
                       onClick={() => setActiveProject(project)}
                       glowColor="brand"
-                      className="px-2.5 sm:px-3 py-1 text-xs font-semibold shrink-0 cursor-pointer"
+                      className="px-2.5 py-1 text-[11px] font-semibold shrink-0 cursor-pointer"
                     >
                       <span>{project.title}</span>
                     </SpotlightTab>
@@ -384,45 +395,54 @@ export const HeroParallaxScrollScene: React.FC = () => {
                 </div>
               </div>
 
-              {/* Viewport Display Frame */}
-              <div className="relative h-[280px] sm:h-[380px] lg:h-[450px] w-full bg-slate-950 overflow-hidden">
-                <div className="relative w-full h-full overflow-hidden">
-                  <Image
-                    src={activeProject.image}
-                    alt={activeProject.title}
-                    fill
-                    priority
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#020e0a] via-transparent to-black/30 opacity-75 pointer-events-none" />
-                </div>
+              {/* Viewport Display Frame (Proportional Height with Preloaded Image Stack) */}
+              <div className="relative h-[200px] sm:h-[260px] md:h-[300px] lg:h-[340px] max-h-[44vh] w-full bg-slate-950 overflow-hidden">
+                {/* Preload all 4 project images to ensure 0ms lag when switching tabs */}
+                {SHOWCASE_PROJECTS.map((project) => (
+                  <div
+                    key={project.id}
+                    className={`absolute inset-0 transition-opacity duration-300 ${
+                      activeProject.id === project.id ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                    }`}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 896px"
+                      className="object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020e0a] via-transparent to-black/20 opacity-75 pointer-events-none" />
+                  </div>
+                ))}
 
                 {/* Central Launch Button */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                   <a
                     href={activeProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pointer-events-auto w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-emerald-500/20 hover:bg-emerald-500 border border-emerald-400/50 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_35px_rgba(16,185,129,0.5)] transition-all hover:scale-110 group/btn"
+                    className="pointer-events-auto w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-emerald-500/25 hover:bg-emerald-500 border border-emerald-400/50 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all hover:scale-110 group/btn"
                     title={`Open ${activeProject.title}`}
                   >
-                    <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 group-hover/btn:rotate-12 transition-transform" />
+                    <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:rotate-12 transition-transform" />
                   </a>
                 </div>
 
-                {/* Bottom HUD Bar */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 z-10 p-2.5 sm:p-3.5 rounded-xl bg-[#03130d]/95 border border-emerald-500/30 backdrop-blur-xl flex flex-col md:flex-row md:items-center justify-between gap-2.5 shadow-2xl">
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
+                {/* Bottom HUD Bar (Compact & Fully Visible) */}
+                <div className="absolute bottom-2 left-2 right-2 sm:bottom-2.5 sm:left-2.5 sm:right-2.5 z-20 p-2 sm:p-2.5 rounded-xl bg-[#03130d] border border-emerald-500/30 flex items-center justify-between gap-2 shadow-2xl">
+                  <div className="min-w-0 pr-2">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-xs sm:text-sm font-bold text-white tracking-tight truncate">
                         {activeProject.title}
                       </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
                         {activeProject.badge}
                       </span>
                     </div>
 
-                    <p className="text-[11px] sm:text-xs text-emerald-100/70 font-normal mt-0.5 line-clamp-1">
+                    <p className="text-[10px] sm:text-[11px] text-emerald-100/70 font-normal truncate mt-0.5">
                       {activeProject.metric}
                     </p>
                   </div>
@@ -431,10 +451,10 @@ export const HeroParallaxScrollScene: React.FC = () => {
                     href={activeProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 text-xs font-semibold inline-flex items-center gap-1.5 transition-all hover:scale-105 self-start md:self-center shrink-0 cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.25)]"
+                    className="px-3 py-1.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 text-[11px] font-semibold inline-flex items-center gap-1 transition-all hover:scale-105 shrink-0 cursor-pointer shadow-[0_0_12px_rgba(16,185,129,0.25)]"
                   >
-                    <span>Launch Platform</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <span>Launch</span>
+                    <ArrowUpRight className="w-3 h-3" />
                   </a>
                 </div>
               </div>
