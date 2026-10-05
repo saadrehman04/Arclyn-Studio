@@ -1,62 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Star, Sparkles, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Star, Sparkles, ChevronDown } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { SpotlightTab } from '@/components/ui/spotlight-tab';
 import { ShinyText } from '@/components/ui/ShinyText';
 
 const VIDEO_URL =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_105406_16f4600d-7a92-4292-b96e-b19156c7830a.mp4';
 
-const SHOWCASE_TABS = [
-  {
-    id: 'cheesecake-factory',
-    title: 'Cheesecake Factory',
-    badge: 'Dining & Hospitality',
-    image: '/projects/cheesecake-factory.png',
-    url: 'https://www.thecheesecakefactory.com/',
-    metric: 'Interactive digital menu, sensory photography & online ordering',
-  },
-  {
-    id: 'prestige',
-    title: 'Prestige Estates',
-    badge: 'Luxury Real Estate',
-    image: '/projects/real-estate.png',
-    url: 'https://real-estate-website-topaz-mu.vercel.app/',
-    metric: 'Sub-second transitions across $10M+ architectural estates',
-  },
-  {
-    id: 'fitusion',
-    title: 'Fitusion',
-    badge: 'Fitness & Athletics',
-    image: '/projects/fitusion.png',
-    url: 'https://website-fitusion.vercel.app/',
-    metric: 'Sculpt your body, elevate your spirit — 12k+ active members',
-  },
-  {
-    id: 'mark-murphy-dds',
-    title: 'Mark Murphy DDS',
-    badge: 'Healthcare & Dental',
-    image: '/projects/mark-murphy-dds.png',
-    url: 'https://www.markmurphydds.com/',
-    metric: 'Gentle, high-tech dentistry with real-time patient booking',
-  },
-];
-
 export const HeroSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState(SHOWCASE_TABS[0]);
-
   return (
     <section 
       id="hero"
-      className="relative pt-24 sm:pt-28 pb-8 overflow-hidden bg-black"
+      className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16 overflow-hidden bg-black"
     >
-      {/* 1. Full-screen Looping Video Background (Pure Video Design) */}
+      {/* 1. Full-screen Looping Video Background */}
       <video
         autoPlay
         loop
@@ -78,167 +38,100 @@ export const HeroSection: React.FC = () => {
         aria-hidden="true" 
       />
 
-      {/* 2. Scroll Animation Projects Tab inside 3D ContainerScroll */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <ContainerScroll
-          titleComponent={
-            <div className="flex flex-col items-center">
-              {/* Eyebrow Badge with Live Pulse Radar */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-amber-400/35 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4 sm:mb-5 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] group hover:border-amber-400/60 transition-colors">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
-                </span>
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>FEATURED CLIENT PRODUCTS &amp; LIVE PLATFORMS</span>
-              </div>
-
-              {/* Massive Headline with ShinyText Animation */}
-              <div className="max-w-5xl mx-auto mb-3.5 sm:mb-4">
-                <h1 className="font-display text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.02]">
-                  Build Smarter. <br />
-                  <span>Launch </span>
-                  <ShinyText 
-                    text="Faster." 
-                    speed={3} 
-                    baseColor="#64CEFB" 
-                    shineColor="#ffffff" 
-                  />
-                </h1>
-              </div>
-
-              {/* Social Proof & Star Rating */}
-              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-5 sm:mb-7 text-xs sm:text-sm text-slate-300">
-                <div className="flex items-center text-amber-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <span className="font-semibold text-white">5.0 Star Rating</span>
-                <span className="text-slate-600">•</span>
-                <span>50+ Projects Shipped</span>
-                <span className="text-slate-600">•</span>
-                <span>150k+ Community</span>
-              </div>
-
-              {/* Dual Pill CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 sm:mb-8">
-                <MagneticButton>
-                  <Link
-                    href="/contact"
-                    className="px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 group shadow-lg shadow-purple-600/30"
-                  >
-                    <span>Start Your Project</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </MagneticButton>
-
-                <MagneticButton>
-                  <Link
-                    href="/work"
-                    className="px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 btn-pill-secondary inline-flex items-center gap-2 group hover:text-white"
-                  >
-                    <span>Explore Verified Work</span>
-                    <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                  </Link>
-                </MagneticButton>
-              </div>
-            </div>
-          }
+      {/* Hero Content Stack */}
+      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center my-auto">
+        {/* Eyebrow Badge with Live Pulse Radar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-amber-400/35 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-5 sm:mb-6 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] group hover:border-amber-400/60 transition-colors"
         >
-          {/* Showcase Header Controls & Tabs */}
-          <div className="shrink-0 p-3 sm:p-4 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#090E24]">
-            {/* Window Dots & Active Label */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-              </div>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-slate-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Production Live Showcase</span>
-              </div>
-            </div>
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+          </span>
+          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <span>FEATURED CLIENT PRODUCTS &amp; LIVE PLATFORMS</span>
+        </motion.div>
 
-            {/* Interactive Tabs with Dynamic Cursor Spotlight Shine */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              {SHOWCASE_TABS.map((tab) => (
-                <SpotlightTab
-                  key={tab.id}
-                  active={activeTab.id === tab.id}
-                  onClick={() => setActiveTab(tab)}
-                  glowColor="brand"
-                  className="px-3.5 py-1.5 text-xs font-semibold"
-                >
-                  {tab.title}
-                </SpotlightTab>
-              ))}
-            </div>
+        {/* Massive Headline with ShinyText Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="max-w-4xl mx-auto mb-4 sm:mb-5"
+        >
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight text-white leading-[1.02]">
+            Build Smarter. <br />
+            <span>Launch </span>
+            <ShinyText 
+              text="Faster." 
+              speed={3} 
+              baseColor="#64CEFB" 
+              shineColor="#ffffff" 
+            />
+          </h1>
+        </motion.div>
+
+        {/* Social Proof & Star Rating */}
+        <motion.div 
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center justify-center gap-2 sm:gap-3 mb-7 sm:mb-9 text-xs sm:text-sm text-slate-300"
+        >
+          <div className="flex items-center text-amber-400">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
+            ))}
           </div>
+          <span className="font-semibold text-white">5.0 Star Rating</span>
+          <span className="text-slate-600">•</span>
+          <span>50+ Projects Shipped</span>
+          <span className="text-slate-600">•</span>
+          <span>150k+ Community</span>
+        </motion.div>
 
-          {/* Showcase Media Display Container */}
-          <div className="relative flex-1 w-full bg-slate-950 overflow-hidden group">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab.id}
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="relative w-full h-full"
-              >
-                <Image
-                  src={activeTab.image}
-                  alt={activeTab.title}
-                  fill
-                  priority
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-black/20 opacity-60" />
-              </motion.div>
-            </AnimatePresence>
+        {/* Dual Pill CTA Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 sm:mb-12"
+        >
+          <MagneticButton>
+            <Link
+              href="/contact"
+              className="px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 group shadow-lg shadow-purple-600/30"
+            >
+              <span>Start Your Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </MagneticButton>
 
-            {/* Central Glowing Interactive Play / Demo Badge */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <a
-                href={activeTab.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="pointer-events-auto w-14 h-14 sm:w-18 sm:h-18 rounded-full bg-white/10 hover:bg-purple-600/90 border border-white/30 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_40px_rgba(139,92,246,0.6)] transition-all hover:scale-110 group/btn"
-                title="Open Live Production Website"
-              >
-                <ExternalLink className="w-5 h-5 sm:w-7 sm:h-7 group-hover/btn:rotate-12 transition-transform" />
-              </a>
-            </div>
-
-            {/* Bottom Telemetry Overlay */}
-            <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 sm:p-3.5 rounded-xl bg-[#060913]/90 border border-white/10 backdrop-blur-md">
-              <div>
-                <div className="text-xs font-bold text-white flex items-center gap-2">
-                  <span>{activeTab.title}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">
-                    {activeTab.badge}
-                  </span>
-                </div>
-                <div className="text-xs text-emerald-400 font-medium mt-0.5">
-                  {activeTab.metric}
-                </div>
-              </div>
-
-              <a
-                href={activeTab.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 self-start sm:self-auto"
-              >
-                <span>Visit Production URL</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </ContainerScroll>
+          <MagneticButton>
+            <Link
+              href="/work"
+              className="px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 btn-pill-secondary inline-flex items-center gap-2 group hover:text-white"
+            >
+              <span>Explore Verified Work</span>
+              <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+            </Link>
+          </MagneticButton>
+        </motion.div>
       </div>
+
+      {/* Downward Scroll Exploration Prompt */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="relative z-10 mt-auto flex flex-col items-center gap-1.5 text-xs font-mono text-slate-400 select-none"
+      >
+        <span className="tracking-wider uppercase text-[11px] text-slate-300">Scroll to explore live work</span>
+        <ChevronDown className="w-4 h-4 text-cyan-400 animate-bounce" />
+      </motion.div>
     </section>
   );
 };
