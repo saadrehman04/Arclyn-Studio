@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface TapeCardItem {
   id: string;
@@ -95,8 +101,13 @@ const TAPE_ITEMS: TapeCardItem[] = [
 ];
 
 export const ProjectsTapeSection: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const laserRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const bottomCtaRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | null>(null);
 
   // Position and interaction state
@@ -119,13 +130,12 @@ export const ProjectsTapeSection: React.FC = () => {
   const updateTapePositions = useCallback(() => {
     if (!trackRef.current || !containerRef.current) return;
 
-    // Apply auto movement or momentum drag (faster speed requested by user)
+    // Apply auto movement or momentum drag
     if (!isDraggingRef.current) {
       if (Math.abs(dragVelocityRef.current) > 0.05) {
         offsetRef.current += dragVelocityRef.current;
         dragVelocityRef.current *= 0.95; // smooth friction
       } else {
-        // Fast, smooth tape speed with hover deceleration
         const targetSpeed = isHoveredRef.current ? 0.65 : 2.35;
         offsetRef.current += targetSpeed;
       }
@@ -149,15 +159,11 @@ export const ProjectsTapeSection: React.FC = () => {
       const cardCenter = cardBaseLeft + CARD_WIDTH / 2;
       const distFromCenter = cardCenter - centerX;
       
-      // Normalized distance from center (-1.5 to 1.5 range across viewport)
+      // Normalized distance from center (-1.8 to 1.8 range across viewport)
       const normDist = distFromCenter / (containerWidth * 0.46);
       const clampedNorm = Math.max(-1.8, Math.min(1.8, normDist));
 
-      // 3D Cylindrical Geometry matching user reference screenshots:
-      // - Left cards angle inward (positive Y rotation, curved back in Z)
-      // - Center cards face straight forward (0 deg Y rotation, closest to viewer)
-      // - Right cards angle inward (negative Y rotation, curved back in Z)
-      // - Parabolic Y droop creates the subtle arched horizon curve seen in the reference
+      // 3D Cylindrical Geometry matching user reference screenshots
       const rotateY = clampedNorm * -28; // degrees
       const translateZ = -Math.pow(clampedNorm, 2) * 115; // px depth curve
       const translateY = Math.pow(clampedNorm, 2) * 16; // subtle arch curve
@@ -177,6 +183,152 @@ export const ProjectsTapeSection: React.FC = () => {
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
   }, [updateTapePositions]);
+
+  // =========================================================
+  // PARALLAX SCROLL ENTRANCE ANIMATION (Requested by user)
+  // Provides a luxurious curtain elevation and layered depth
+  // when scrolling from the case studies section into this tape
+  // =========================================================
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const lenis = (window as unknown as { __lenis?: { on: (event: string, cb: () => void) => void; off: (event: string, cb: () => void) => void } }).__lenis;
+    const lenisUpdate = () => ScrollTrigger.update();
+    if (lenis) {
+      lenis.on('scroll', lenisUpdate);
+    }
+
+    const ctx = gsap.context(() => {
+      // 1. Monolithic Curtain Elevation: section glides up smoothly with subtle corner curvature expansion
+      gsap.fromTo(
+        section,
+        { 
+          y: 90,
+          borderTopLeftRadius: 64,
+          borderTopRightRadius: 64,
+        },
+        {
+          y: 0,
+          borderTopLeftRadius: 40,
+          borderTopRightRadius: 40,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'top 20%',
+            scrub: 0.5,
+          },
+        }
+      );
+
+      // 2. Parallax Floating Header: text floats upward into view with soft opacity reveal
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current,
+          { y: 70, opacity: 0.15 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 90%',
+              end: 'top 40%',
+              scrub: 0.5,
+            },
+          }
+        );
+      }
+
+      // 3. 3D Tape Container Parallax Rise & Scaling
+      if (containerRef.current) {
+        gsap.fromTo(
+          containerRef.current,
+          { y: 110, scale: 0.94, opacity: 0.4 },
+          {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              end: 'top 30%',
+              scrub: 0.55,
+            },
+          }
+        );
+      }
+
+      // 4. Central Radiant Laser Ignition
+      if (laserRef.current) {
+        gsap.fromTo(
+          laserRef.current,
+          { scaleY: 0.2, opacity: 0 },
+          {
+            scaleY: 1,
+            opacity: 1,
+            ease: 'power1.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 70%',
+              end: 'top 25%',
+              scrub: 0.4,
+            },
+          }
+        );
+      }
+
+      // 5. Differential Ambient Glow Drift
+      if (glowRef.current) {
+        gsap.fromTo(
+          glowRef.current,
+          { yPercent: 30, scale: 0.8 },
+          {
+            yPercent: -20,
+            scale: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // 6. Bottom CTA Parallax Reveal
+      if (bottomCtaRef.current) {
+        gsap.fromTo(
+          bottomCtaRef.current,
+          { y: 40, opacity: 0.3 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: bottomCtaRef.current,
+              start: 'top 95%',
+              end: 'top 75%',
+              scrub: 0.5,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => {
+      if (lenis) {
+        lenis.off('scroll', lenisUpdate);
+      }
+      ctx.revert();
+    };
+  }, []);
 
   // Pointer Dragging Listeners
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -200,7 +352,8 @@ export const ProjectsTapeSection: React.FC = () => {
   return (
     <section 
       id="products-tape"
-      className="relative w-full -mt-10 sm:-mt-14 lg:-mt-20 pt-24 sm:pt-32 pb-24 sm:pb-36 bg-[#040406] text-white rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_70px_rgba(0,0,0,0.65)] overflow-hidden select-none z-30"
+      ref={sectionRef}
+      className="relative w-full -mt-10 sm:-mt-14 lg:-mt-20 pt-24 sm:pt-32 pb-24 sm:pb-36 bg-[#040406] text-white rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_70px_rgba(0,0,0,0.7)] overflow-hidden select-none z-30 will-change-transform transform-gpu"
     >
       {/* =========================================================
           BACKGROUND AMBIENT ATMOSPHERE & SCANNER GLOW
@@ -209,8 +362,11 @@ export const ProjectsTapeSection: React.FC = () => {
         {/* Subtle top transition vignette */}
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#040406] via-[#040406]/85 to-transparent z-10" />
 
-        {/* Central ambient cyan-blue radial spotlight behind the cylinder */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.22)_0%,rgba(14,165,233,0.08)_45%,transparent_75%)] blur-2xl" />
+        {/* Central ambient cyan-blue radial spotlight with parallax depth drift */}
+        <div 
+          ref={glowRef}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.22)_0%,rgba(14,165,233,0.08)_45%,transparent_75%)] blur-2xl will-change-transform transform-gpu" 
+        />
         
         {/* Soft bottom vignette */}
         <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#040406] to-transparent z-10" />
@@ -220,8 +376,12 @@ export const ProjectsTapeSection: React.FC = () => {
         
         {/* =========================================================
             HEADER (Clean, reduced text exactly as requested by user)
+            Animated with parallax reveal as you enter section
             ========================================================= */}
-        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+        <div 
+          ref={headerRef}
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 will-change-transform transform-gpu"
+        >
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] mb-4">
             Complete Project Portfolio
           </h2>
@@ -230,7 +390,7 @@ export const ProjectsTapeSection: React.FC = () => {
             View all our Recent Works
           </p>
 
-          {/* Subtitle Action Pill (Matches &quot;Get started &rarr;&quot; pill in sample screenshot) */}
+          {/* Subtitle Action Pill (Matches "Get started →" pill in sample screenshot) */}
           <Link
             href="/work"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 hover:border-white/40 text-xs sm:text-sm font-medium text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_25px_rgba(255,255,255,0.18)] group"
@@ -244,10 +404,11 @@ export const ProjectsTapeSection: React.FC = () => {
 
       {/* =========================================================
           THE 3D CURVED TAPE / CYLINDRICAL CAROUSEL (The star of the show)
+          Animated with parallax elevation and depth scaling
           ========================================================= */}
       <div 
         ref={containerRef}
-        className="relative w-full h-[410px] sm:h-[480px] lg:h-[520px] overflow-hidden cursor-grab active:cursor-grabbing perspective-[1400px]"
+        className="relative w-full h-[410px] sm:h-[480px] lg:h-[520px] overflow-hidden cursor-grab active:cursor-grabbing perspective-[1400px] will-change-transform transform-gpu"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -263,9 +424,11 @@ export const ProjectsTapeSection: React.FC = () => {
 
         {/* =========================================================
             CENTRAL NEON SCANNER SPLIT & HOLOGRAPHIC LIGHT BEAM
-            (Matches the illuminated center slit in the user's reference)
             ========================================================= */}
-        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center">
+        <div 
+          ref={laserRef}
+          className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center will-change-transform origin-center"
+        >
           {/* Intense ambient radial glow behind the laser slit */}
           <div className="absolute w-[450px] sm:w-[620px] h-[360px] sm:h-[480px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.42)_0%,rgba(14,165,233,0.18)_42%,transparent_75%)] blur-2xl" />
 
@@ -324,7 +487,10 @@ export const ProjectsTapeSection: React.FC = () => {
       {/* =========================================================
           BOTTOM CTA: "VIEW ALL PRODUCTS"
           ========================================================= */}
-      <div className="mt-14 sm:mt-20 text-center relative z-20">
+      <div 
+        ref={bottomCtaRef}
+        className="mt-14 sm:mt-20 text-center relative z-20 will-change-transform transform-gpu"
+      >
         <div className="max-w-xl mx-auto px-4 flex flex-col items-center gap-4">
           <Link
             href="/work"

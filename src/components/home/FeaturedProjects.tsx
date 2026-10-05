@@ -381,7 +381,17 @@ export const FeaturedProjects: React.FC = () => {
           <MagneticButton>
             <a
               href="#products-tape"
-              className="trionn-btn-outline"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('products-tape');
+                const lenis = (window as unknown as { __lenis?: { scrollTo: (t: HTMLElement, o?: { duration?: number }) => void } }).__lenis;
+                if (lenis && el) {
+                  lenis.scrollTo(el, { duration: 1.2 });
+                } else if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="trionn-btn-outline cursor-pointer"
             >
               <span>Explore All Products Tape</span>
               <ArrowDown className="w-3.5 h-3.5" />
