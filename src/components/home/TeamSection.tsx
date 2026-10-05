@@ -10,6 +10,7 @@ import { MagneticButton } from '../shared/MagneticButton';
 interface TeamMember {
   name: string;
   role: string;
+  secondaryRole?: string;
   image: string;
   isLead?: boolean;
   leadBadge?: string;
@@ -18,7 +19,8 @@ interface TeamMember {
 const TEAM_MEMBERS: TeamMember[] = [
   {
     name: 'Saad Rehman',
-    role: 'Founder & CEO • Direct Senior Architect',
+    role: 'Founder & CEO',
+    secondaryRole: 'Senior Developer',
     image: '/images/team/saad-rehman-zoomed.jpg',
     isLead: true,
     leadBadge: 'Leadership',
@@ -132,11 +134,18 @@ export const TeamSection: React.FC = () => {
                     {member.name}
                   </h3>
                   
-                  <div className="mt-2">
+                  <div className="mt-2 flex flex-col items-center justify-center">
                     {member.isLead ? (
-                      <span className="text-xs sm:text-[13px] font-semibold text-[#1A1A1A] bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 px-3 py-1 rounded-full inline-block">
-                        {member.role}
-                      </span>
+                      <>
+                        <span className="text-xs sm:text-[13px] font-semibold text-[#1A1A1A] bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 px-3 py-0.5 rounded-full inline-block">
+                          {member.role}
+                        </span>
+                        {member.secondaryRole && (
+                          <span className="text-xs sm:text-[13px] font-medium text-[#5E5E5E] mt-1.5 leading-snug">
+                            {member.secondaryRole}
+                          </span>
+                        )}
+                      </>
                     ) : (
                       <span className="text-xs sm:text-[13px] font-medium text-[#5E5E5E] leading-snug">
                         {member.role}
