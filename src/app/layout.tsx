@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Syne, Plus_Jakarta_Sans, JetBrains_Mono, Inter } from 'next/font/google';
+import { Outfit, JetBrains_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -7,23 +7,16 @@ import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { CustomCursor } from '@/components/shared/CustomCursor';
 import { LiquidChromeBackdrop } from '@/components/shared/LiquidChromeBackdrop';
 
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+});
+
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
-  display: 'swap',
-});
-
-const syne = Syne({
-  variable: '--font-syne',
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  display: 'swap',
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: '--font-sans',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
@@ -110,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${syne.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} dark`}
+      className={`${outfit.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
     >
       <body className="min-h-screen flex flex-col bg-[#050711] text-slate-100 font-sans antialiased selection:bg-purple-600/30 selection:text-white bg-noise">
         <SmoothScroll>
