@@ -97,15 +97,28 @@ export const TeamSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* 2. Saad Rehman (Founder & CEO) */}
+            {/* 2. Saad Rehman (Founder & CEO - Highlighted Lead) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] z-10 group"
+              className="relative flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] md:-translate-y-2.5 z-20 group"
             >
-              <div className="relative w-full aspect-[3/4] overflow-hidden [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]">
+              {/* Leadership Aura & Ambient Backlight Glow */}
+              <div 
+                className="absolute -inset-x-4 -top-6 bottom-12 bg-gradient-to-t from-cyan-500/25 via-purple-600/20 to-transparent rounded-3xl blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10" 
+                aria-hidden="true"
+              />
+
+              {/* Leadership Badge */}
+              <div className="mb-2 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-cyan-500/15 via-purple-500/15 to-blue-500/15 border border-cyan-400/40 backdrop-blur-md shadow-[0_0_12px_rgba(6,182,212,0.3)] inline-flex items-center gap-1.5 select-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">Leadership</span>
+              </div>
+
+              {/* Portrait Container with Luminous Ring Highlight */}
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden ring-1 ring-cyan-400/35 shadow-[0_0_30px_rgba(6,182,212,0.22)] group-hover:ring-cyan-400/60 transition-all duration-500 [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]">
                 <Image
                   src="/images/team/saad-rehman-zoomed.jpg"
                   alt="Saad Rehman"
@@ -114,13 +127,28 @@ export const TeamSection: React.FC = () => {
                   sizes="(max-width: 640px) 100vw, 265px"
                   priority
                 />
+                
+                {/* Ambient Shimmer Overlay on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </div>
-              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
-                <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+
+              {/* Under-portrait glowing stage accent */}
+              <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-2 shadow-[0_0_10px_rgba(6,182,212,0.9)] opacity-90" />
+
+              <div className="mt-2.5 text-center min-h-[56px] flex flex-col items-center justify-start">
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
                   Saad Rehman
                 </h3>
-                <div className="text-xs font-semibold text-slate-300 mt-0.5">
-                  Founder &amp; CEO • Full Stack Developer
+                
+                {/* 1. Below name: Founder and CEO */}
+                <div className="text-xs sm:text-[13px] font-bold uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-indigo-300 mt-0.5">
+                  Founder and CEO
+                </div>
+
+                {/* 2. Adjusted: AI Engineer */}
+                <div className="text-[11px] font-medium text-slate-300/90 mt-0.5 flex items-center justify-center gap-1.5">
+                  <span className="w-1 h-1 rounded-full bg-cyan-400" />
+                  <span>AI Engineer</span>
                 </div>
               </div>
             </motion.div>
