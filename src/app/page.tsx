@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/home/HeroSection';
-import { ProjectScrollSection } from '@/components/home/ProjectScrollSection';
+import { LaptopShowcaseSection } from '@/components/home/LaptopShowcaseSection';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
@@ -39,8 +39,8 @@ export default function HomePage() {
       {/* 1. Hero Section with Video Background, Eyebrow, Headline & Dual CTAs */}
       <HeroSection />
 
-      {/* 2. Full Section Scroll Animation for Container Data */}
-      <ProjectScrollSection />
+      {/* 2. Premium Scroll-Driven Laptop Showcase with GSAP & ScrollTrigger */}
+      <LaptopShowcaseSection />
 
       {/* 3. Signature Dual Crossing Ticker */}
       <DualCrossingTicker />
