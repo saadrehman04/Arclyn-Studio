@@ -196,4 +196,32 @@ export const SERVICES: Service[] = [
     caseStudyId: 'querymind-ai-analyst',
     benefits: ['Zero-downtime deployment pipelines', '30-40% cloud cost reduction', 'Automated security & backups', 'Instant disaster recovery protocols'],
   },
+  {
+    id: 'ui-ux-design',
+    slug: 'ui-ux-design',
+    title: 'UI/UX Design',
+    badge: 'Design Systems',
+    shortDesc: 'Interfaces designed to make complex products feel simple.',
+    longDesc: 'We craft bespoke design systems, high-converting product interfaces, and interactive motion prototypes that elevate brand perception and make complex workflows feel completely intuitive.',
+    iconName: 'Layers',
+    deliverables: [
+      { title: 'Interactive High-Fidelity Prototypes', desc: 'Clickable Figma prototypes modeling micro-interactions, responsive states, and edge-case journeys.' },
+      { title: 'Scalable Component Design System', desc: 'Production-ready Figma token libraries matching Tailwind CSS and React component architectures.' },
+      { title: 'User Journey & Information Architecture', desc: 'Sitemap structuring, wireframing, and usability heuristics that minimize cognitive load.' },
+      { title: 'Motion & Micro-Interaction Specs', desc: 'Choreographed spring animations and transition specs ready for engineering handoff.' },
+    ],
+    process: [
+      { step: '01', title: 'User Research & Heuristic Audit', desc: 'Analyze user mental models, competitive landscape, and UX friction points.' },
+      { step: '02', title: 'Wireframing & Core Flows', desc: 'Rapid low-fidelity layout exploration to establish visual hierarchy and flow.' },
+      { step: '03', title: 'High-Fidelity Visual Design', desc: 'Apply brand typography, colors, dark mode tokens, and bespoke iconography.' },
+      { step: '04', title: 'Interactive Prototype & Dev Handoff', desc: 'Clickable prototype validation and pixel-perfect design token handoff.' },
+    ],
+    technologies: ['Figma', 'Framer', 'Design Systems', 'Tailwind CSS', 'Framer Motion', 'Tokens Studio'],
+    faqs: [
+      { question: 'What deliverables do we receive at the end of the design phase?', answer: 'You receive a complete, organized Figma project containing the verified user flows, responsive layouts for desktop and mobile, and a tokenized design system ready for engineering.' },
+      { question: 'Do you also implement the design into frontend code?', answer: 'Yes! Our studio is uniquely full-stack — the same team that designs your UI also engineers it with pixel-perfect accuracy in Next.js and Tailwind CSS.' },
+    ],
+    caseStudyId: 'vinzlu',
+    benefits: ['Reduced user churn', 'Faster engineering velocity', 'Unified multi-platform consistency', 'Award-winning aesthetics'],
+  },
 ];

@@ -22,15 +22,27 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const SLUG_ALIASES: Record<string, string> = {
+  'web-development': 'website-ecommerce-development',
+  'app-development': 'mobile-app-development',
+  'ai-automation': 'ai-agent-development',
+  'ui-ux-design': 'ui-ux-design',
+  'saas-development': 'custom-software-saas-development',
+  'custom-software': 'cloud-architecture-devops',
+};
+
 export async function generateStaticParams() {
-  return SERVICES.map((service) => ({
+  const base = SERVICES.map((service) => ({
     slug: service.slug,
   }));
+  const custom = Object.keys(SLUG_ALIASES).map((slug) => ({ slug }));
+  return [...base, ...custom];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const service = SERVICES.find((s) => s.slug === slug);
+  const resolvedSlug = SLUG_ALIASES[slug] || slug;
+  const service = SERVICES.find((s) => s.slug === resolvedSlug) || SERVICES.find((s) => s.slug === slug);
 
   if (!service) {
     return {
@@ -52,7 +64,8 @@ import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
 
 export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params;
-  const service = SERVICES.find((s) => s.slug === slug);
+  const resolvedSlug = SLUG_ALIASES[slug] || slug;
+  const service = SERVICES.find((s) => s.slug === resolvedSlug) || SERVICES.find((s) => s.slug === slug);
 
   if (!service) {
     notFound();
