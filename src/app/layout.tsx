@@ -1,11 +1,17 @@
 import type { Metadata } from 'next';
-import { Syne, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Syne, Plus_Jakarta_Sans, JetBrains_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { CustomCursor } from '@/components/shared/CustomCursor';
 import { LiquidChromeBackdrop } from '@/components/shared/LiquidChromeBackdrop';
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const syne = Syne({
   variable: '--font-syne',
@@ -104,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} dark`}
+      className={`${inter.variable} ${syne.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} dark`}
     >
       <body className="min-h-screen flex flex-col bg-[#050711] text-slate-100 font-sans antialiased selection:bg-purple-600/30 selection:text-white bg-noise">
         <SmoothScroll>

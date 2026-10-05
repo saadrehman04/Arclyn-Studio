@@ -193,6 +193,8 @@ export const Navbar: React.FC = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          pathname === '/' && !scrolled ? 'opacity-0 pointer-events-none -translate-y-3' : 'opacity-100 translate-y-0'
+        } ${
           scrolled
             ? 'bg-[#050711]/90 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl shadow-black/50'
             : 'bg-transparent py-4 sm:py-5'
