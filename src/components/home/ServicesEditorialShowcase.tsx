@@ -25,7 +25,7 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
   {
     id: 'web-development',
     number: '01',
-    displayNumber: '01 / 06',
+    displayNumber: '01 / 05',
     title: 'WEB DEVELOPMENT',
     desc: 'Websites and digital experiences built to convert.',
     route: '/services/web-development',
@@ -34,7 +34,7 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
   {
     id: 'app-development',
     number: '02',
-    displayNumber: '02 / 06',
+    displayNumber: '02 / 05',
     title: 'APP DEVELOPMENT',
     desc: 'Scalable mobile applications built around your users.',
     route: '/services/app-development',
@@ -43,25 +43,16 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
   {
     id: 'ai-automation',
     number: '03',
-    displayNumber: '03 / 06',
+    displayNumber: '03 / 05',
     title: 'AI & AUTOMATION',
     desc: 'AI-powered systems that automate and accelerate business.',
     route: '/services/ai-automation',
     image: '/images/services/ai-automation.jpg',
   },
   {
-    id: 'ui-ux-design',
-    number: '04',
-    displayNumber: '04 / 06',
-    title: 'UI/UX DESIGN',
-    desc: 'Interfaces designed to make complex products feel simple.',
-    route: '/services/ui-ux-design',
-    image: '/images/services/ui-ux-design.jpg',
-  },
-  {
     id: 'saas-development',
-    number: '05',
-    displayNumber: '05 / 06',
+    number: '04',
+    displayNumber: '04 / 05',
     title: 'SAAS DEVELOPMENT',
     desc: 'From product idea to scalable SaaS platform.',
     route: '/services/saas-development',
@@ -69,8 +60,8 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
   },
   {
     id: 'custom-software',
-    number: '06',
-    displayNumber: '06 / 06',
+    number: '05',
+    displayNumber: '05 / 05',
     title: 'CUSTOM SOFTWARE',
     desc: 'Purpose-built software for unique business requirements.',
     route: '/services/custom-software',
@@ -226,7 +217,7 @@ export const ServicesEditorialShowcase: React.FC = () => {
             {/* Bottom Area: Services Count & Scroll Hint */}
             <div className="pt-8 border-t border-white/[0.08] flex flex-col gap-3">
               <span className="font-mono text-xs font-bold text-slate-300 tracking-wider">
-                06 SERVICES
+                05 SERVICES
               </span>
               
               <div className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400">
@@ -322,14 +313,14 @@ export const ServicesEditorialShowcase: React.FC = () => {
               </div>
 
               <span className="text-slate-500 font-semibold text-xs">
-                06
+                05
               </span>
             </div>
 
             <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-slate-500">
               <span>AGENCY SERVICES</span>
               <span className="text-slate-700">•</span>
-              <span className="text-cyan-400/80">06 DISCIPLINES</span>
+              <span className="text-cyan-400/80">05 DISCIPLINES</span>
             </div>
           </div>
 
@@ -362,7 +353,7 @@ export const ServicesEditorialShowcase: React.FC = () => {
             </p>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono font-semibold text-slate-300">
-              <span>06 SERVICES</span>
+              <span>05 SERVICES</span>
               <span className="text-slate-600">•</span>
               <span className="text-cyan-400">DISCIPLINES</span>
             </div>
