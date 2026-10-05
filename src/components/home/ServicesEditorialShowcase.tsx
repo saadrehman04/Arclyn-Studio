@@ -29,7 +29,7 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
     title: 'WEB DEVELOPMENT',
     desc: 'Websites and digital experiences built to convert.',
     route: '/services/web-development',
-    image: '/images/services/startup-growth.jpg',
+    image: '/images/services/web-development.jpg',
   },
   {
     id: 'app-development',
@@ -38,7 +38,7 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
     title: 'APP DEVELOPMENT',
     desc: 'Scalable mobile applications built around your users.',
     route: '/services/app-development',
-    image: '/images/services/ai-product.jpg',
+    image: '/images/services/app-development.jpg',
   },
   {
     id: 'ai-automation',
@@ -56,7 +56,7 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
     title: 'UI/UX DESIGN',
     desc: 'Interfaces designed to make complex products feel simple.',
     route: '/services/ui-ux-design',
-    image: '/images/services/prototyping-ux.jpg',
+    image: '/images/services/ui-ux-design.jpg',
   },
   {
     id: 'saas-development',
@@ -65,7 +65,7 @@ const SERVICES_GALLERY: ServiceGalleryItem[] = [
     title: 'SAAS DEVELOPMENT',
     desc: 'From product idea to scalable SaaS platform.',
     route: '/services/saas-development',
-    image: '/images/services/cloud-devops.jpg',
+    image: '/images/services/saas-development.jpg',
   },
   {
     id: 'custom-software',

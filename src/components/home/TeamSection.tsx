@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 
 interface TeamMember {
@@ -44,40 +44,39 @@ export const TeamSection: React.FC = () => {
   return (
     <section 
       id="team" 
-      className="relative pt-20 sm:pt-28 pb-16 sm:pb-24 bg-black overflow-hidden border-t border-white/10 select-none"
+      className="relative pt-20 sm:pt-28 pb-24 sm:pb-32 bg-[#E6E6E6] overflow-hidden border-y border-[#1A1A1A]/10 select-none font-trionn"
     >
-      {/* Pure Obsidian Black Background with Subtle Vignette */}
-      <div className="absolute inset-0 bg-black pointer-events-none z-0" />
+      {/* Subtle Architectural Matte Ambient Lighting */}
       <div 
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.035),transparent_70%)] pointer-events-none z-0" 
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[350px] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.7)_0%,transparent_70%)]" 
         aria-hidden="true" 
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header Matching Reference Image */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          {/* Eyebrow Pill: Meet the Team */}
+        {/* Section Header Matching TRIONN Swiss Neo-Grotesque Aesthetic */}
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          {/* Eyebrow Pill */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#121212] border border-white/15 text-white text-xs sm:text-sm font-medium tracking-normal mb-5 sm:mb-6 shadow-sm select-none"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-widest mb-5 shadow-sm select-none"
           >
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>Meet the Team</span>
           </motion.div>
 
-          {/* Large Editorial Headline: The Minds Behind the Machines */}
+          {/* Large Editorial Headline */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#FBFCDB] leading-[1.08] mb-5 sm:mb-6"
+            className="trionn-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-[#1E1E1E] tracking-tight leading-[1.04] mb-4"
           >
-            The Minds Behind the <br className="hidden sm:inline" />
-            Machines
+            The minds behind the machines
           </motion.h2>
 
           {/* Subtitle Matching Reference Image */}
@@ -86,13 +85,13 @@ export const TeamSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-neutral-400 font-normal leading-relaxed max-w-2xl mx-auto"
+            className="trionn-subheading text-sm sm:text-base text-[#5E5E5E] max-w-xl mx-auto leading-relaxed font-normal"
           >
-            Our team blends creativity, technical skill, and strategic thinking with AI innovation — so your product gets the best of both worlds.
+            Our team blends engineering rigor, technical depth, and strategic thinking with autonomous AI innovation.
           </motion.p>
         </div>
 
-        {/* Team Cards Grid on Black Background */}
+        {/* Team Cards Grid on TRIONN White Theme */}
         <div className="relative max-w-6xl mx-auto pt-2 pb-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
             {TEAM_MEMBERS.map((member, idx) => (
@@ -102,76 +101,79 @@ export const TeamSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: 0.1 + idx * 0.08 }}
-                className={`relative flex flex-col rounded-2xl sm:rounded-3xl bg-[#0b0b0b] border ${
-                  member.isLead 
-                    ? 'border-emerald-500/40 shadow-[0_15px_45px_rgba(16,185,129,0.15)] hover:border-emerald-400/60' 
-                    : 'border-white/10 hover:border-white/25 shadow-xl'
-                } overflow-hidden transition-all duration-500 group`}
+                className="group relative rounded-3xl overflow-hidden bg-white border border-[#1A1A1A]/10 hover:border-[#1A1A1A]/40 transition-all duration-300 flex flex-col justify-between shadow-[0_12px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] hover:-translate-y-1.5"
               >
                 {/* Lead Badge for Saad Rehman */}
                 {member.isLead && (
-                  <div className="absolute top-3 right-3 z-20 px-2.5 py-0.5 rounded-full bg-black/80 border border-emerald-400/40 backdrop-blur-md text-[10px] font-bold text-emerald-300 uppercase tracking-wider inline-flex items-center gap-1.5 shadow-md">
+                  <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-[#1A1A1A] text-white text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>Founder</span>
                   </div>
                 )}
 
-                {/* Portrait Container with Monochrome Reference Styling */}
-                <div className="relative w-full aspect-[3/4] overflow-hidden bg-neutral-900">
+                {/* Portrait Container */}
+                <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#ECECEC] border-b border-[#1A1A1A]/10">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-top grayscale contrast-[1.08] brightness-[0.98] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="object-cover object-top grayscale contrast-[1.06] brightness-[0.98] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                     priority={member.isLead}
                   />
                   
-                  {/* Subtle Gradient Shadow along the bottom of the photo */}
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0b0b0b] to-transparent opacity-80 pointer-events-none" />
+                  {/* Subtle Natural Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity pointer-events-none" />
                 </div>
 
                 {/* Card Text Content */}
-                <div className="p-4 sm:p-5 text-center flex flex-col justify-center grow">
-                  <h3 className="font-display text-lg sm:text-xl font-medium text-white group-hover:text-[#FBFCDB] transition-colors tracking-tight">
+                <div className="p-5 sm:p-6 text-center flex flex-col justify-center grow bg-white">
+                  <h3 className="trionn-heading text-xl sm:text-2xl font-bold text-[#1E1E1E] group-hover:text-black transition-colors tracking-tight">
                     {member.name}
                   </h3>
                   
-                  <div className="text-xs sm:text-[13px] text-neutral-400 font-normal mt-1 leading-snug">
+                  <div className="mt-2">
                     {member.isLead ? (
-                      <span className="text-emerald-300/90 font-medium">
+                      <span className="text-xs sm:text-[13px] font-semibold text-[#1A1A1A] bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 px-3 py-1 rounded-full inline-block">
                         {member.role}
                       </span>
                     ) : (
-                      member.role
+                      <span className="text-xs sm:text-[13px] font-medium text-[#5E5E5E] leading-snug">
+                        {member.role}
+                      </span>
                     )}
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          {/* Shared Stage Subtle Floor Line */}
-          <div className="relative mt-14 sm:mt-16 flex items-center justify-center">
-            <div className="h-px w-full max-w-4xl bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-          </div>
         </div>
 
-        {/* Bottom CTA Button */}
+        {/* Bottom CTA Button Pair (TRIONN Signature Dark & Outline Pills) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 sm:mt-12 flex justify-center"
+          className="mt-16 sm:mt-20 flex flex-wrap items-center justify-center gap-4"
         >
           <MagneticButton>
             <Link
               href="/about"
-              className="px-8 py-3.5 rounded-full text-sm font-medium text-white bg-[#121212] hover:bg-[#1a1a1a] border border-white/15 hover:border-white/30 shadow-xl transition-all duration-300 inline-flex items-center gap-2 group"
+              className="trionn-btn-dark"
             >
-              <span>Learn More About Arclyn Studio</span>
-              <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
+              <span>Learn More About Arclyn</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </MagneticButton>
+
+          <MagneticButton>
+            <Link
+              href="/contact"
+              className="trionn-btn-outline"
+            >
+              <span>Work With Us</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </MagneticButton>
         </motion.div>

@@ -9,6 +9,7 @@ import {
   CheckCircle2, 
   Sparkles, 
   ArrowRight, 
+  ArrowUpRight,
   ShieldCheck,
   ChevronLeft,
   ChevronRight,
@@ -16,6 +17,7 @@ import {
   Play
 } from 'lucide-react';
 import Link from 'next/link';
+import { MagneticButton } from '../shared/MagneticButton';
 
 interface Testimonial {
   id: string;
@@ -175,65 +177,89 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   );
 
   return (
-    <section className={`relative ${hideHeader ? 'py-6' : 'pt-10 sm:pt-14 pb-20 sm:pb-28'} bg-[#050711] overflow-hidden ${hideHeader ? '' : 'border-t border-white/5'} ${className}`}>
-      {/* Luxury 3D Liquid Glass Waves Background */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <Image
-          src="/images/testimonials-soundwave.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-40 mix-blend-screen"
+    <section 
+      id="testimonials"
+      className={`relative ${
+        hideHeader 
+          ? 'py-6' 
+          : 'pt-20 sm:pt-28 pb-24 sm:pb-32 bg-[#E6E6E6] border-y border-[#1A1A1A]/10 font-trionn'
+      } overflow-hidden select-none ${className}`}
+    >
+      {/* Subtle Architectural Matte Ambient Lighting */}
+      {!hideHeader && (
+        <div 
+          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[350px] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.7)_0%,transparent_70%)]" 
+          aria-hidden="true" 
         />
-        {/* Seamless edge blending into deep obsidian space */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050711] via-transparent to-[#050711] opacity-75" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#050711_90%)] opacity-60" />
-      </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
+        {/* Section Header Matching TRIONN Swiss Neo-Grotesque Aesthetic */}
         {!hideHeader && (
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-5">
+          <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-widest mb-5 shadow-sm"
+            >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               <span>Real Client Voices</span>
-            </div>
+            </motion.div>
 
-            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-5">
-              What Founders Say <br />
-              <span className="text-gradient-hero">After Shipping With Us</span>
-            </h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="trionn-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-[#1E1E1E] tracking-tight leading-[1.04] mb-4"
+            >
+              What founders say
+            </motion.h2>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="trionn-subheading text-sm sm:text-base text-[#5E5E5E] max-w-xl mx-auto leading-relaxed font-normal"
+            >
               Honest feedback from founders, product leaders, and operators who traded agency bureaucracy for direct senior engineering and autonomous AI execution.
-            </p>
+            </motion.p>
 
-            {/* Social Proof Trust Bar */}
-            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-5 py-2.5 rounded-2xl bg-white/[0.03] border border-white/10 text-xs text-slate-300 backdrop-blur-md">
-              <div className="flex items-center gap-1.5 text-amber-400 font-semibold">
+            {/* Social Proof Trust Bar Matching TRIONN Architectural Light Theme */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="mt-8 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-6 py-2.5 rounded-full bg-white border border-[#1A1A1A]/10 text-xs text-[#2B2B2B] shadow-sm"
+            >
+              <div className="flex items-center gap-1.5 font-semibold text-[#1E1E1E]">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                   ))}
                 </div>
                 <span>4.98 / 5.0</span>
               </div>
-              <span className="hidden sm:inline text-white/20">•</span>
-              <div className="flex items-center gap-1.5 text-emerald-400 font-medium">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span className="hidden sm:inline text-[#1A1A1A]/20">•</span>
+              <div className="flex items-center gap-1.5 text-[#1A1A1A] font-medium">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>100% On-Time Milestones</span>
               </div>
-              <span className="hidden sm:inline text-white/20">•</span>
-              <div className="text-slate-300">
-                <span className="font-semibold text-white">30+</span> Production Launches
+              <span className="hidden sm:inline text-[#1A1A1A]/20">•</span>
+              <div className="text-[#5E5E5E]">
+                <span className="font-bold text-[#1E1E1E]">30+</span> Production Launches
               </div>
-            </div>
+            </motion.div>
           </div>
         )}
 
         {/* Category Tabs & Slider Navigation Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-4 border-b border-white/[0.06]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-4 border-b border-[#1A1A1A]/10">
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
             {CATEGORIES.map((cat) => {
@@ -248,16 +274,16 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                   key={cat}
                   type="button"
                   onClick={() => setActiveCategory(cat)}
-                  className={`flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  className={`flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? 'bg-gradient-to-r from-purple-600 to-cyan-500 text-white shadow-lg shadow-purple-600/30 scale-105'
-                      : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10'
+                      ? 'bg-[#1A1A1A] text-white font-semibold shadow-sm'
+                      : 'bg-white/80 hover:bg-white text-[#5E5E5E] hover:text-[#1A1A1A] border border-[#1A1A1A]/10 font-medium'
                   }`}
                 >
                   <span>{cat}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                      isSelected ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-400'
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
+                      isSelected ? 'bg-white/20 text-white' : 'bg-[#1A1A1A]/5 text-[#5E5E5E]'
                     }`}
                   >
                     {count}
@@ -273,7 +299,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               <button
                 type="button"
                 onClick={() => setIsPaused((prev) => !prev)}
-                className="w-8 h-8 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors text-xs"
+                className="w-8 h-8 rounded-full bg-white hover:bg-neutral-100 border border-[#1A1A1A]/15 text-[#1A1A1A] flex items-center justify-center transition-colors text-xs shadow-sm cursor-pointer"
                 title={isPaused ? "Resume Autoplay" : "Pause Autoplay"}
               >
                 {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
@@ -282,7 +308,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               <button
                 type="button"
                 onClick={() => paginate(-1)}
-                className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-lg"
+                className="w-9 h-9 rounded-xl bg-white hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white border border-[#1A1A1A]/15 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
                 aria-label="Previous testimonials"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -300,8 +326,8 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     }}
                     className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                       idx === currentPage
-                        ? 'w-7 bg-gradient-to-r from-cyan-400 to-purple-500'
-                        : 'w-2 bg-white/20 hover:bg-white/40'
+                        ? 'w-7 bg-[#1A1A1A]'
+                        : 'w-2 bg-[#1A1A1A]/20 hover:bg-[#1A1A1A]/40'
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -311,7 +337,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               <button
                 type="button"
                 onClick={() => paginate(1)}
-                className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-lg"
+                className="w-9 h-9 rounded-xl bg-white hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white border border-[#1A1A1A]/15 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
                 aria-label="Next testimonials"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -364,10 +390,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               {currentTestimonials.map((t) => (
                 <div
                   key={t.id}
-                  className="rounded-3xl p-7 sm:p-8 bg-[#090d1a]/90 backdrop-blur-xl border border-white/[0.08] hover:border-cyan-400/50 transition-all duration-300 flex flex-col justify-between group shadow-[0_4px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.15)] hover:-translate-y-1.5 relative overflow-hidden"
+                  className="group relative rounded-3xl p-7 sm:p-8 bg-white border border-[#1A1A1A]/10 hover:border-[#1A1A1A]/40 transition-all duration-300 flex flex-col justify-between shadow-[0_12px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] hover:-translate-y-1.5 overflow-hidden"
                 >
                   {/* Decorative Quote Icon Background */}
-                  <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none text-cyan-400">
+                  <div className="absolute top-6 right-6 text-[#1A1A1A]/5 group-hover:text-[#1A1A1A]/10 transition-colors pointer-events-none">
                     <Quote className="w-16 h-16 rotate-180" />
                   </div>
 
@@ -376,30 +402,31 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-1">
                         {[...Array(t.stars)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                          <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
                         ))}
                       </div>
-                      <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                      <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1A1A1A] px-2.5 py-1 rounded-full bg-[#1A1A1A]/5 border border-[#1A1A1A]/10">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                         <span>Verified Client</span>
                       </div>
                     </div>
 
                     {/* Human-Friendly Quote Body */}
-                    <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-light mb-6">
+                    <p className="trionn-subheading text-sm sm:text-base text-[#2B2B2B] leading-relaxed font-normal mb-6">
                       &ldquo;{t.quote}&rdquo;
                     </p>
                   </div>
 
-                  <div className="relative z-10 pt-5 border-t border-white/[0.06]">
+                  <div className="relative z-10 pt-5 border-t border-[#1A1A1A]/10">
                     {/* Measurable Result Badge */}
-                    <div className="mb-4 text-xs font-semibold text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-lg w-fit">
-                      {t.result}
+                    <div className="mb-4 text-xs font-semibold text-[#1A1A1A] bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 px-3 py-1 rounded-full w-fit inline-flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                      <span>{t.result}</span>
                     </div>
 
                     {/* Author Credentials */}
                     <div className="flex items-center gap-3.5">
-                      <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-purple-500/40 flex-shrink-0">
+                      <div className="relative w-11 h-11 rounded-full overflow-hidden border border-[#1A1A1A]/15 bg-[#ECECEC] flex-shrink-0">
                         <Image
                           src={t.avatar}
                           alt={t.name}
@@ -409,11 +436,11 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                         />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-white group-hover:text-cyan-200 transition-colors">
+                        <div className="trionn-heading text-sm sm:text-base font-bold text-[#1E1E1E] group-hover:text-black transition-colors">
                           {t.name}
                         </div>
-                        <div className="text-xs text-slate-400">
-                          {t.role} • <span className="text-slate-300">{t.company}</span>
+                        <div className="text-xs text-[#5E5E5E] mt-0.5">
+                          {t.role} • <span className="text-[#2B2B2B] font-medium">{t.company}</span>
                         </div>
                       </div>
                     </div>
@@ -424,29 +451,45 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
           </AnimatePresence>
         </div>
 
-        {/* Bottom CTA Banner */}
-        <div className="mt-14 sm:mt-16 text-center">
-          <p className="text-sm text-slate-400 mb-5">
-            Ready to experience engineering speed and clarity for yourself?
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl text-sm font-semibold text-white btn-primary-gradient shadow-lg shadow-purple-600/25"
-            >
-              <span>Start Your Project</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/work"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
-            >
-              <span>Explore Verified Work</span>
-            </Link>
-          </div>
-        </div>
+        {/* Bottom CTA Banner (TRIONN Signature Dark & Outline Pills) */}
+        {!hideHeader && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 sm:mt-20 text-center"
+          >
+            <p className="trionn-subheading text-sm sm:text-base text-[#5E5E5E] mb-6">
+              Ready to experience engineering speed and clarity for yourself?
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <MagneticButton>
+                <Link
+                  href="/contact"
+                  className="trionn-btn-dark"
+                >
+                  <span>Start Your Project</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </MagneticButton>
+
+              <MagneticButton>
+                <Link
+                  href="/work"
+                  className="trionn-btn-outline"
+                >
+                  <span>Explore Verified Work</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </MagneticButton>
+            </div>
+          </motion.div>
+        )}
 
       </div>
     </section>
   );
 };
+
+export default TestimonialsSection;
