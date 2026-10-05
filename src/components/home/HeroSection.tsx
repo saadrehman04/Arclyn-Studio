@@ -3,12 +3,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Star, Sparkles, ExternalLink } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { SpotlightTab } from '@/components/ui/spotlight-tab';
-import { MoltenMetal } from '@/components/ui/MoltenMetal';
 import { LogoIcon } from '@/components/shared/Logo';
 import { ShinyText } from '@/components/ui/ShinyText';
 
@@ -50,171 +49,37 @@ const SHOWCASE_TABS = [
   },
 ];
 
-// Decorative floating micro-particles
-const PARTICLES = [
-  { top: '15%', left: '12%', size: 3, duration: 6, delay: 0 },
-  { top: '25%', left: '85%', size: 4, duration: 7, delay: 1 },
-  { top: '40%', left: '8%', size: 2.5, duration: 8, delay: 0.5 },
-  { top: '30%', left: '92%', size: 3.5, duration: 6.5, delay: 1.5 },
-  { top: '55%', left: '15%', size: 3, duration: 7.5, delay: 2 },
-  { top: '65%', left: '88%', size: 2.5, duration: 8.5, delay: 1 },
-  { top: '20%', left: '50%', size: 3, duration: 9, delay: 0.2 },
-];
-
 export const HeroSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState(SHOWCASE_TABS[0]);
-
-  // Live mouse spotlight tracking
-  const mouseX = useMotionValue(600);
-  const mouseY = useMotionValue(300);
-  const smoothMouseX = useSpring(mouseX, { stiffness: 90, damping: 24 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 90, damping: 24 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  };
-
-  const spotlightBg = useMotionTemplate`radial-gradient(650px circle at ${smoothMouseX}px ${smoothMouseY}px, rgba(139, 92, 246, 0.18), rgba(6, 182, 212, 0.1) 35%, transparent 70%)`;
 
   return (
     <section 
       id="hero"
-      onMouseMove={handleMouseMove}
       className="relative pt-24 sm:pt-28 pb-8 overflow-hidden bg-black"
     >
-      {/* 1. Full-screen Looping Video Background */}
+      {/* 1. Full-screen Looping Video Background (Pure Video Design) */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-45 mix-blend-screen"
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
         <source src={VIDEO_URL} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      {/* Cinematic dark ambient overlays for crystal-clear contrast */}
+      {/* Cinematic dark ambient overlay for high-contrast legibility */}
       <div 
-        className="absolute inset-0 bg-black/60 z-[1] pointer-events-none" 
+        className="absolute inset-0 bg-black/40 z-[1] pointer-events-none" 
         aria-hidden="true" 
       />
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-[#050711] z-[1] pointer-events-none" 
+        className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#050711] z-[1] pointer-events-none" 
         aria-hidden="true" 
       />
 
-      {/* 2. Live Interactive Mouse Ambient Spotlight */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-[2] opacity-80 transition-opacity"
-        style={{ background: spotlightBg }}
-        aria-hidden="true"
-      />
-
-      {/* 3. Live Molten Metal WebGL Caustics */}
-      <div
-        className="pointer-events-none absolute top-0 left-0 w-full lg:w-[62%] h-[780px] z-[2] opacity-50 mix-blend-screen"
-        style={{
-          maskImage: 'radial-gradient(ellipse at 22% 38%, black 22%, transparent 72%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 22% 38%, black 22%, transparent 72%)',
-        }}
-        aria-hidden="true"
-      >
-        <MoltenMetal
-          color1="#4338CA"
-          color2="#8B5CF6"
-          color3="#06B6D4"
-          speed={0.3}
-          scale={3.4}
-          detail={3}
-          glow={1.7}
-          coreSize={0.09}
-          swirl={1.1}
-          fold={-0.22}
-          blackPoint={0.08}
-          brightness={1.3}
-          colorMode="molten"
-          grain={true}
-          grainIntensity={0.04}
-          mouseInteraction={false}
-          opacity={0.75}
-          maxDpr={1}
-        />
-      </div>
-
-      {/* 4. Live Floating 3D Liquid Chrome Ribbons */}
-      <motion.div
-        animate={{
-          y: [0, -18, 0],
-          rotate: [0, 1.4, 0],
-          scale: [1, 1.025, 1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        style={{ willChange: 'transform' }}
-        className="liquid-chrome-hero z-[2]"
-      />
-
-      <motion.div
-        animate={{
-          y: [0, 16, 0],
-          rotate: [0, -1.2, 0],
-          scale: [1, 1.02, 1],
-        }}
-        transition={{
-          duration: 9.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        style={{ willChange: 'transform' }}
-        className="liquid-chrome-hero-left z-[2]"
-      />
-
-      {/* 5. Ambient Glow Nebulae */}
-      <div className="light-ribbon-top z-[2]" />
-      <motion.div 
-        animate={{ opacity: [0.12, 0.22, 0.12] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none z-[2]" 
-      />
-      <motion.div 
-        animate={{ opacity: [0.15, 0.28, 0.15] }}
-        transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none z-[2]" 
-      />
-
-      {/* 6. Drifting Micro-Luminescent Particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[2]" aria-hidden="true">
-        {PARTICLES.map((p, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              y: [0, -40, 0],
-              opacity: [0.2, 0.85, 0.2],
-            }}
-            transition={{
-              duration: p.duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: p.delay,
-            }}
-            style={{
-              top: p.top,
-              left: p.left,
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-            }}
-            className="absolute rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(6,182,212,0.8)]"
-          />
-        ))}
-      </div>
-
-      {/* 7. Scroll Animation Projects Tab inside 3D ContainerScroll */}
+      {/* 2. Scroll Animation Projects Tab inside 3D ContainerScroll */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ContainerScroll
           titleComponent={
