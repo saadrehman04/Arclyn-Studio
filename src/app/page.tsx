@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { HeroSection } from '@/components/home/HeroSection';
-import { ProjectParallaxSection } from '@/components/home/ProjectParallaxSection';
+import { HeroParallaxScrollScene } from '@/components/home/HeroParallaxScrollScene';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
@@ -36,11 +35,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#050711]">
-      {/* 1. Hero Section with Video Background, Eyebrow, Headline & Dual CTAs */}
-      <HeroSection />
-
-      {/* 2. Framer-Style Scroll Parallax Project Showcase */}
-      <ProjectParallaxSection />
+      {/* 1. Choreographed GSAP Parallax Scene: Hero transforming into Following Green Section */}
+      <HeroParallaxScrollScene />
 
       {/* 3. Signature Dual Crossing Ticker */}
       <DualCrossingTicker />
