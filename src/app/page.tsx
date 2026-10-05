@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/home/HeroSection';
+import { ProductFeaturedSection } from '@/components/home/ProductFeaturedSection';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
 import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
@@ -35,10 +36,13 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#050711]">
-      {/* 1. Hero Section (Cheesecake Factory active first, 3D ContainerScroll) */}
+      {/* 1. Hero Section (DesignPro Full-Screen Video Hero) */}
       <HeroSection />
 
-      {/* 2. Signature Dual Crossing Ticker */}
+      {/* 2. Previous Product Featured Tab in 3D ContainerScroll Animation */}
+      <ProductFeaturedSection />
+
+      {/* 3. Signature Dual Crossing Ticker */}
       <DualCrossingTicker />
 
       {/* 3. 3D Iridescent Torus & Asymmetric 2x2 Capabilities */}
