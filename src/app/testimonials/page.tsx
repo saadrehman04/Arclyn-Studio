@@ -20,32 +20,8 @@ export default function TestimonialsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Page Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/25 w-fit mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-purple-300">
-              Verified Client Feedback
-            </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Client Stories That <br />
-            <span className="text-gradient">Speak For Themselves</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed">
-            Every quote below comes from a direct relationship with founders, operators, and engineering leads who trusted Arclyn Studio to turn ambitious visions into production code.
-          </p>
-
-          <div className="mt-5 inline-flex items-center gap-2 text-xs font-medium text-emerald-400">
-            <ShieldCheck className="w-4 h-4" />
-            <span>100% Genuine Project Reviews • Guaranteed Milestone Delivery</span>
-          </div>
-        </div>
-
-        {/* Testimonials Grid Section */}
-        <TestimonialsSection hideHeader={true} />
+        {/* Testimonials Showcase Section */}
+        <TestimonialsSection hideHeader={false} />
 
         {/* Bottom Project Inquiry Banner */}
         <div className="mt-20 rounded-3xl glass-panel p-8 sm:p-12 text-center max-w-4xl mx-auto border border-white/10">

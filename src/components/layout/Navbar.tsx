@@ -206,11 +206,10 @@ export const Navbar: React.FC = () => {
               <Logo size="md" />
             </div>
 
-            {/* 2. Sleek Glassmorphic Floating Pill Bar with Purple Liquid Glow & Hover Enlargement */}
-            <nav className="hidden lg:flex items-center relative rounded-full px-5 py-2 backdrop-blur-2xl bg-gradient-to-r from-purple-900/40 via-[#0A0E21]/90 to-[#0A0E21]/95 border border-purple-500/30 hover:border-purple-400/70 shadow-[0_0_35px_rgba(168,85,247,0.3),0_12px_40px_rgba(0,0,0,0.6)] hover:shadow-[0_0_55px_rgba(168,85,247,0.48),0_14px_45px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-all duration-300 ease-out group/nav overflow-hidden">
-              {/* Internal Liquid Magenta/Purple Sheen on Left */}
-              <div className="absolute -left-4 -top-8 w-44 h-24 bg-gradient-to-r from-fuchsia-500/35 via-purple-600/30 to-transparent blur-xl pointer-events-none group-hover/nav:scale-125 group-hover/nav:opacity-100 transition-all duration-500" />
-              <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-purple-300/60 via-cyan-300/30 to-transparent pointer-events-none" />
+            <nav className="hidden lg:flex items-center relative rounded-full px-5 py-2 backdrop-blur-2xl bg-[#050505]/80 border border-white/10 hover:border-white/20 shadow-[0_0_35px_rgba(255,255,255,0.05),0_12px_40px_rgba(0,0,0,0.6)] hover:shadow-[0_0_55px_rgba(255,255,255,0.1),0_14px_45px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-all duration-300 ease-out group/nav overflow-hidden">
+              {/* Internal Sheen */}
+              <div className="absolute -left-4 -top-8 w-44 h-24 bg-gradient-to-r from-white/10 via-white/5 to-transparent blur-xl pointer-events-none group-hover/nav:scale-125 group-hover/nav:opacity-100 transition-all duration-500" />
+              <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-white/10 via-white/40 to-transparent pointer-events-none" />
 
               <div className="flex items-center gap-2 text-sm font-medium relative z-10">
                 
@@ -223,22 +222,22 @@ export const Navbar: React.FC = () => {
                   <Link
                     href="/"
                     onClick={handleHomeClick}
-                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
-                      pathname === '/' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
+                      pathname === '/' ? 'text-white font-semibold bg-white/[0.08] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]' : ''
                     }`}
                   >
                     <span>Home</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all duration-200 ${
-                        homeDropdownOpen ? 'rotate-180 text-cyan-400' : ''
+                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white group-hover:translate-y-0.5 transition-all duration-200 ${
+                        homeDropdownOpen ? 'rotate-180 text-white' : ''
                       }`}
                     />
                   </Link>
 
                   {homeDropdownOpen && (
                     <div className="absolute top-full left-0 w-72 pt-3 z-50">
-                      <div className="bg-[#090E26] border border-white/12 rounded-2xl p-2 shadow-2xl shadow-purple-950/40 backdrop-blur-2xl">
-                        <div className="px-3 py-1.5 border-b border-white/5 mb-1 text-[11px] font-semibold text-purple-400 uppercase tracking-wider">
+                      <div className="bg-[#0a0a0a] border border-white/12 rounded-2xl p-2 shadow-2xl shadow-black/50 backdrop-blur-2xl">
+                        <div className="px-3 py-1.5 border-b border-white/5 mb-1 text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                           Quick Jump
                         </div>
                         {HOME_SECTIONS.map((sec) => (
@@ -268,7 +267,7 @@ export const Navbar: React.FC = () => {
                             }}
                             className="block p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
                           >
-                            <div className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                            <div className="text-xs font-semibold text-white group-hover:text-white transition-colors">
                               {sec.title}
                             </div>
                             <div className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
@@ -289,23 +288,23 @@ export const Navbar: React.FC = () => {
                 >
                   <Link
                     href="/services"
-                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
-                      pathname.startsWith('/services') ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
+                      pathname.startsWith('/services') ? 'text-white font-semibold bg-white/[0.08] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]' : ''
                     }`}
                   >
                     <span>Services</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all duration-200 ${
-                        servicesDropdownOpen ? 'rotate-180 text-cyan-400' : ''
+                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white group-hover:translate-y-0.5 transition-all duration-200 ${
+                        servicesDropdownOpen ? 'rotate-180 text-white' : ''
                       }`}
                     />
                   </Link>
 
                   {servicesDropdownOpen && (
                     <div className="absolute top-full -left-20 w-84 pt-3 z-50">
-                      <div className="bg-[#090E26] border border-white/12 rounded-2xl p-2.5 shadow-2xl shadow-purple-950/50 backdrop-blur-2xl">
+                      <div className="bg-[#0a0a0a] border border-white/12 rounded-2xl p-2.5 shadow-2xl shadow-black/50 backdrop-blur-2xl">
                         <div className="px-3 py-1.5 border-b border-white/5 mb-1 flex items-center justify-between">
-                          <span className="text-[11px] font-semibold text-purple-400 uppercase tracking-wider">
+                          <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                             Core Capabilities
                           </span>
                           <span className="text-[10px] text-slate-400">6 Specializations</span>
@@ -319,11 +318,11 @@ export const Navbar: React.FC = () => {
                                 href={sub.href}
                                 className="flex items-start gap-3 p-2 rounded-xl hover:bg-white/5 group transition-colors"
                               >
-                                <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 group-hover:border-purple-500/40 transition-colors shrink-0">
-                                  <IconComponent className="w-3.5 h-3.5 text-purple-400 group-hover:text-cyan-400 transition-colors" />
+                                <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-colors shrink-0">
+                                  <IconComponent className="w-3.5 h-3.5 text-slate-300 group-hover:text-white transition-colors" />
                                 </div>
                                 <div>
-                                  <div className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                                  <div className="text-xs font-semibold text-white group-hover:text-white transition-colors">
                                     {sub.title}
                                   </div>
                                   <div className="text-[11px] text-slate-400 leading-tight mt-0.5 line-clamp-1">
@@ -337,7 +336,7 @@ export const Navbar: React.FC = () => {
                         <div className="mt-2 pt-2 border-t border-white/5 px-2">
                           <Link
                             href="/services"
-                            className="flex items-center justify-between text-xs font-medium text-purple-400 hover:text-cyan-300 py-1 transition-colors"
+                            className="flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white py-1 transition-colors"
                           >
                             <span>Explore All 6 Services</span>
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -351,8 +350,8 @@ export const Navbar: React.FC = () => {
                 {/* Pricing (Direct Link) */}
                 <Link
                   href="/pricing"
-                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${
-                    pathname === '/pricing' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
+                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${
+                    pathname === '/pricing' ? 'text-white font-semibold bg-white/[0.08] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]' : ''
                   }`}
                 >
                   Pricing
@@ -365,24 +364,24 @@ export const Navbar: React.FC = () => {
                   onMouseLeave={() => setPagesDropdownOpen(false)}
                 >
                   <button
-                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 group ${
                       ['/work', '/industries', '/partner-program', '/about'].includes(pathname)
-                        ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]'
+                        ? 'text-white font-semibold bg-white/[0.08] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]'
                         : ''
                     }`}
                   >
                     <span>Pages</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all duration-200 ${
-                        pagesDropdownOpen ? 'rotate-180 text-cyan-400' : ''
+                      className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white group-hover:translate-y-0.5 transition-all duration-200 ${
+                        pagesDropdownOpen ? 'rotate-180 text-white' : ''
                       }`}
                     />
                   </button>
 
                   {pagesDropdownOpen && (
                     <div className="absolute top-full -left-12 w-76 pt-3 z-50">
-                      <div className="bg-[#090E26] border border-white/12 rounded-2xl p-2 shadow-2xl shadow-purple-950/40 backdrop-blur-2xl">
-                        <div className="px-3 py-1.5 border-b border-white/5 mb-1 text-[11px] font-semibold text-purple-400 uppercase tracking-wider">
+                      <div className="bg-[#0a0a0a] border border-white/12 rounded-2xl p-2 shadow-2xl shadow-black/50 backdrop-blur-2xl">
+                        <div className="px-3 py-1.5 border-b border-white/5 mb-1 text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                           Ecosystem Pages
                         </div>
                         {PAGES_LINKS.map((page) => {
@@ -393,11 +392,11 @@ export const Navbar: React.FC = () => {
                               href={page.href}
                               className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
                             >
-                              <div className="p-1.5 rounded-lg bg-white/5 text-purple-400 group-hover:text-cyan-400">
+                              <div className="p-1.5 rounded-lg bg-white/5 text-slate-300 group-hover:text-white">
                                 <IconComp className="w-3.5 h-3.5" />
                               </div>
                               <div>
-                                <div className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                                <div className="text-xs font-semibold text-white group-hover:text-white transition-colors">
                                   {page.title}
                                 </div>
                                 <div className="text-[11px] text-slate-400 line-clamp-1">
@@ -415,8 +414,8 @@ export const Navbar: React.FC = () => {
                 {/* Contacts (Direct Link) */}
                 <Link
                   href="/contact"
-                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${
-                    pathname === '/contact' ? 'text-white font-semibold bg-white/[0.08] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]' : ''
+                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-slate-200 hover:text-white transition-all duration-200 ease-out hover:scale-110 active:scale-95 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 ${
+                    pathname === '/contact' ? 'text-white font-semibold bg-white/[0.08] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]' : ''
                   }`}
                 >
                   Contacts
@@ -439,7 +438,7 @@ export const Navbar: React.FC = () => {
             <div className="hidden sm:flex items-center gap-3">
               <Link
                 href="/contact"
-                className="px-6 py-2.5 rounded-full text-sm font-bold text-white btn-pill-primary inline-flex items-center gap-2 group hover:scale-105 active:scale-95 transition-all duration-200 shadow-[0_0_25px_rgba(147,51,234,0.4)] hover:shadow-[0_0_35px_rgba(147,51,234,0.7)]"
+                className="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-black hover:bg-gray-100 inline-flex items-center gap-2 group hover:scale-105 active:scale-95 transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
               >
                 <span>Start Your Project</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -549,7 +548,7 @@ export const Navbar: React.FC = () => {
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full text-sm font-bold text-white btn-pill-primary group"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full text-sm font-bold bg-white text-black hover:bg-gray-100 group"
               >
                 <span>Start Your Project</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -566,12 +565,12 @@ export const Navbar: React.FC = () => {
           onClick={() => setSearchOpen(false)}
         >
           <div
-            className="w-full max-w-xl bg-[#090D22] border border-white/15 rounded-3xl p-4 shadow-2xl shadow-purple-950/60 overflow-hidden"
+            className="w-full max-w-xl bg-[#090D22] border border-white/15 rounded-3xl p-4 shadow-2xl shadow-black/50 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Search Input Bar */}
             <div className="flex items-center gap-3 px-3 py-2 border-b border-white/10">
-              <Search className="w-5 h-5 text-cyan-400 shrink-0" />
+              <Search className="w-5 h-5 text-white shrink-0" />
               <input
                 ref={searchInputRef}
                 type="text"
@@ -601,14 +600,14 @@ export const Navbar: React.FC = () => {
                     className="w-full text-left p-3 rounded-2xl hover:bg-white/5 flex items-center justify-between group transition-colors"
                   >
                     <div>
-                      <div className="text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                      <div className="text-sm font-semibold text-white group-hover:text-white transition-colors">
                         {item.title}
                       </div>
                       <div className="text-xs text-slate-400 mt-0.5">
                         {item.subtitle}
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-slate-200">
                       {item.category}
                     </span>
                   </button>
