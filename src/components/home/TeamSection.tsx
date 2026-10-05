@@ -4,205 +4,156 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
+
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+  isLead?: boolean;
+  leadBadge?: string;
+}
+
+const TEAM_MEMBERS: TeamMember[] = [
+  {
+    name: 'Saad Rehman',
+    role: 'Founder & CEO • Direct Senior Architect',
+    image: '/images/team/saad-rehman-zoomed.jpg',
+    isLead: true,
+    leadBadge: 'Leadership',
+  },
+  {
+    name: 'Saad Rabbani',
+    role: 'Meta Ads Specialist',
+    image: '/images/team/saad-rabbani-zoomed.jpg',
+  },
+  {
+    name: 'Nadeem',
+    role: 'Full Stack AI Engineer',
+    image: '/images/team/nadeem.jpg',
+  },
+  {
+    name: 'Abdullah',
+    role: 'AI Automation Specialist',
+    image: '/images/team/abdullah.jpg',
+  },
+];
 
 export const TeamSection: React.FC = () => {
   return (
-    <section id="leadership" className="relative pt-16 sm:pt-24 pb-14 sm:pb-20 bg-white overflow-hidden border-t border-slate-200/80">
-      {/* High-Key Studio Light Gradient Atmosphere */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50 pointer-events-none" />
+    <section 
+      id="team" 
+      className="relative pt-20 sm:pt-28 pb-16 sm:pb-24 bg-black overflow-hidden border-t border-white/10 select-none"
+    >
+      {/* Pure Obsidian Black Background with Subtle Vignette */}
+      <div className="absolute inset-0 bg-black pointer-events-none z-0" />
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] bg-gradient-to-r from-purple-100/50 via-cyan-100/40 to-indigo-100/50 rounded-full blur-[130px] pointer-events-none" 
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.035),transparent_70%)] pointer-events-none z-0" 
         aria-hidden="true" 
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+        {/* Section Header Matching Reference Image */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          {/* Eyebrow Pill: Meet the Team */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-xs font-semibold uppercase tracking-wider mb-5 shadow-sm"
+            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#121212] border border-white/15 text-white text-xs sm:text-sm font-medium tracking-normal mb-5 sm:mb-6 shadow-sm select-none"
           >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
-            <span>Senior Leadership</span>
+            <span>Meet the Team</span>
           </motion.div>
 
+          {/* Large Editorial Headline: The Minds Behind the Machines */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.1] mb-5"
+            className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#FBFCDB] leading-[1.08] mb-5 sm:mb-6"
           >
-            The Architects <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-600">
-              Behind the Code
-            </span>
+            The Minds Behind the <br className="hidden sm:inline" />
+            Machines
           </motion.h2>
 
+          {/* Subtitle Matching Reference Image */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal"
+            className="text-base sm:text-lg text-neutral-400 font-normal leading-relaxed max-w-2xl mx-auto"
           >
-            A dedicated collective of senior engineers, AI researchers, and design strategists who build systems designed to win.
+            Our team blends creativity, technical skill, and strategic thinking with AI innovation — so your product gets the best of both worlds.
           </motion.p>
         </div>
 
-        {/* Real Standing Squad Lineup on Light Studio Stage */}
-        <div className="relative max-w-6xl mx-auto pt-4 pb-2">
-          <div className="relative z-10 flex flex-col md:flex-row items-center md:items-end justify-center gap-10 md:gap-6 lg:gap-8">
-            
-            {/* 1. Saad Rabbani */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] group"
-            >
-              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-md border border-slate-200/90 bg-slate-950">
-                <Image
-                  src="/images/team/saad-rabbani-zoomed.jpg"
-                  alt="Saad Rabbani"
-                  fill
-                  className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 265px"
-                />
-              </div>
-              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
-                <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 group-hover:text-cyan-600 transition-colors">
-                  Saad Rabbani
-                </h3>
-                <div className="text-xs font-semibold text-slate-500 mt-0.5">
-                  Meta Ads Specialist
-                </div>
-              </div>
-            </motion.div>
+        {/* Team Cards Grid on Black Background */}
+        <div className="relative max-w-6xl mx-auto pt-2 pb-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+            {TEAM_MEMBERS.map((member, idx) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: 0.1 + idx * 0.08 }}
+                className={`relative flex flex-col rounded-2xl sm:rounded-3xl bg-[#0b0b0b] border ${
+                  member.isLead 
+                    ? 'border-emerald-500/40 shadow-[0_15px_45px_rgba(16,185,129,0.15)] hover:border-emerald-400/60' 
+                    : 'border-white/10 hover:border-white/25 shadow-xl'
+                } overflow-hidden transition-all duration-500 group`}
+              >
+                {/* Lead Badge for Saad Rehman */}
+                {member.isLead && (
+                  <div className="absolute top-3 right-3 z-20 px-2.5 py-0.5 rounded-full bg-black/80 border border-emerald-400/40 backdrop-blur-md text-[10px] font-bold text-emerald-300 uppercase tracking-wider inline-flex items-center gap-1.5 shadow-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Founder</span>
+                  </div>
+                )}
 
-            {/* 2. Saad Rehman (Founder & CEO - Highlighted Lead) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="relative flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] md:-translate-y-3 z-20 group"
-            >
-              {/* Leadership Aura & Ambient Backlight Glow */}
-              <div 
-                className="absolute -inset-x-4 -top-6 bottom-12 bg-gradient-to-t from-cyan-400/25 via-purple-500/20 to-transparent rounded-3xl blur-2xl opacity-90 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10" 
-                aria-hidden="true"
-              />
-
-              {/* Leadership Badge */}
-              <div className="mb-2 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-cyan-50 to-purple-50 border border-cyan-300 text-cyan-800 text-[10px] font-bold uppercase tracking-wider shadow-sm inline-flex items-center gap-1.5 select-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-                <span>Leadership</span>
-              </div>
-
-              {/* Portrait Container with Luminous Ring Highlight */}
-              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden ring-2 ring-cyan-500/80 shadow-[0_15px_40px_rgba(6,182,212,0.25)] border border-cyan-400/50 bg-slate-950 transition-all duration-500">
-                <Image
-                  src="/images/team/saad-rehman-zoomed.jpg"
-                  alt="Saad Rehman"
-                  fill
-                  className="object-cover object-top contrast-[1.05] scale-[1.12] origin-[50%_25%] group-hover:scale-[1.18] transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 265px"
-                  priority
-                />
-                
-                {/* Ambient Shimmer Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              </div>
-
-              {/* Under-portrait glowing stage accent */}
-              <div className="w-28 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-2 shadow-[0_0_12px_rgba(6,182,212,0.7)] opacity-90" />
-
-              <div className="mt-2.5 text-center min-h-[56px] flex flex-col items-center justify-start">
-                <h3 className="font-display text-lg sm:text-xl font-extrabold text-slate-950 group-hover:text-cyan-600 transition-colors">
-                  Saad Rehman
-                </h3>
-                
-                {/* 1. Below name: Founder and CEO */}
-                <div className="text-xs sm:text-[13px] font-bold uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-indigo-600 to-purple-600 mt-0.5">
-                  Founder and CEO
+                {/* Portrait Container with Monochrome Reference Styling */}
+                <div className="relative w-full aspect-[3/4] overflow-hidden bg-neutral-900">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover object-top grayscale contrast-[1.08] brightness-[0.98] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    priority={member.isLead}
+                  />
+                  
+                  {/* Subtle Gradient Shadow along the bottom of the photo */}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0b0b0b] to-transparent opacity-80 pointer-events-none" />
                 </div>
 
-                {/* 2. Adjusted: AI Engineer */}
-                <div className="text-[11px] font-semibold text-slate-600 mt-0.5 flex items-center justify-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-                  <span>AI Engineer</span>
+                {/* Card Text Content */}
+                <div className="p-4 sm:p-5 text-center flex flex-col justify-center grow">
+                  <h3 className="font-display text-lg sm:text-xl font-medium text-white group-hover:text-[#FBFCDB] transition-colors tracking-tight">
+                    {member.name}
+                  </h3>
+                  
+                  <div className="text-xs sm:text-[13px] text-neutral-400 font-normal mt-1 leading-snug">
+                    {member.isLead ? (
+                      <span className="text-emerald-300/90 font-medium">
+                        {member.role}
+                      </span>
+                    ) : (
+                      member.role
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* 3. Nadeem */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] group"
-            >
-              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-md border border-slate-200/90 bg-slate-950">
-                <Image
-                  src="/images/team/nadeem.jpg"
-                  alt="Nadeem"
-                  fill
-                  className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 265px"
-                />
-              </div>
-              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
-                <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 group-hover:text-cyan-600 transition-colors">
-                  Nadeem
-                </h3>
-                <div className="text-xs font-semibold text-slate-500 mt-0.5">
-                  Full Stack AI Engineer
-                </div>
-              </div>
-            </motion.div>
-
-            {/* 4. Abdullah */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-col items-center w-full max-w-[230px] sm:max-w-[250px] md:max-w-[265px] group"
-            >
-              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-md border border-slate-200/90 bg-slate-950">
-                <Image
-                  src="/images/team/abdullah.jpg"
-                  alt="Abdullah"
-                  fill
-                  className="object-cover object-top contrast-[1.05] group-hover:scale-105 transition-all duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, 265px"
-                />
-              </div>
-              <div className="mt-3 text-center min-h-[48px] flex flex-col justify-start">
-                <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 group-hover:text-cyan-600 transition-colors">
-                  Abdullah
-                </h3>
-                <div className="text-xs font-semibold text-slate-500 mt-0.5">
-                  AI Automation Specialist
-                </div>
-              </div>
-            </motion.div>
-
+              </motion.div>
+            ))}
           </div>
 
-          {/* Shared Stage Floor Line */}
-          <div className="relative mt-10 sm:mt-12 flex items-center justify-center">
-            <div className="h-px w-full max-w-4xl bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-            <div className="absolute w-32 h-1 bg-cyan-500/25 blur-sm rounded-full" />
+          {/* Shared Stage Subtle Floor Line */}
+          <div className="relative mt-14 sm:mt-16 flex items-center justify-center">
+            <div className="h-px w-full max-w-4xl bg-gradient-to-r from-transparent via-white/15 to-transparent" />
           </div>
         </div>
 
@@ -217,10 +168,10 @@ export const TeamSection: React.FC = () => {
           <MagneticButton>
             <Link
               href="/about"
-              className="px-8 py-3.5 rounded-full text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 border border-slate-900 shadow-md hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2 group"
+              className="px-8 py-3.5 rounded-full text-sm font-medium text-white bg-[#121212] hover:bg-[#1a1a1a] border border-white/15 hover:border-white/30 shadow-xl transition-all duration-300 inline-flex items-center gap-2 group"
             >
               <span>Learn More About Arclyn Studio</span>
-              <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
             </Link>
           </MagneticButton>
         </motion.div>

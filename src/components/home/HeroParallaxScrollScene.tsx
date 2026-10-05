@@ -9,7 +9,6 @@ import {
   ArrowRight, 
   Star, 
   Sparkles, 
-  ChevronDown, 
   ExternalLink, 
   ArrowUpRight, 
   Zap, 
@@ -94,7 +93,6 @@ export const HeroParallaxScrollScene: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pinSceneRef = useRef<HTMLDivElement>(null);
   const heroTypoRef = useRef<HTMLDivElement>(null);
-  const founderRef = useRef<HTMLDivElement>(null);
   const greenSectionRef = useRef<HTMLDivElement>(null);
   const greenContentRef = useRef<HTMLDivElement>(null);
 
@@ -141,12 +139,11 @@ export const HeroParallaxScrollScene: React.FC = () => {
 
       // 2. Timeline Choreography:
       // - 0% to 20%: Hero at rest, then begins upward drift
-      // - 20% to 40%: Typography moves slow, founder moves faster, green panel enters
-      // - 40% to 60%: Green panel covers hero, founder slips behind, typography leaves
-      // - 60% to 80%: Green panel occupies viewport, content begins settling
-      // - 80% to 100%: Green panel fills viewport, content reaches rest position
+      // - 20% to 60%: Typography moves upward smoothly while following panel rises
+      // - 60% to 80%: Following panel occupies viewport, content begins settling
+      // - 80% to 100%: Following panel fills viewport, content reaches rest position
 
-      // A. HERO TYPOGRAPHY: Slow upward movement (0.15 -> 0.75)
+      // A. HERO TYPOGRAPHY: Smooth upward parallax (0.15 -> 0.75)
       if (heroTypoRef.current) {
         tl.to(
           heroTypoRef.current,
@@ -159,20 +156,7 @@ export const HeroParallaxScrollScene: React.FC = () => {
         );
       }
 
-      // B. FOUNDER IMAGE: Medium/faster upward movement (0.12 -> 0.55)
-      // Disappears naturally behind the rising green panel
-      if (founderRef.current) {
-        tl.to(
-          founderRef.current,
-          {
-            y: isMobile ? -220 : -390,
-            ease: 'power1.in',
-          },
-          0.12
-        );
-      }
-
-      // C. FOLLOWING GREEN SECTION: Travels upward from below viewport (0.15 -> 1.0)
+      // B. FOLLOWING GREEN SECTION: Travels upward from below viewport (0.15 -> 1.0)
       // - At 20%: starts entering viewport (yPercent: ~95)
       // - At 40%: reaches lower portion of viewport (yPercent: ~65)
       // - At 60%: occupies most of viewport (yPercent: ~35)
@@ -246,9 +230,9 @@ export const HeroParallaxScrollScene: React.FC = () => {
         </div>
 
         {/* =========================================================
-            LAYER 2: HERO TYPOGRAPHY & FOUNDER STACK
+            LAYER 2: HERO TYPOGRAPHY & CTAS
             ========================================================= */}
-        <div className="relative z-10 w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between pt-24 sm:pt-28 pb-12 sm:pb-16 pointer-events-auto">
+        <div className="relative z-10 w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center pt-20 sm:pt-24 pb-12 sm:pb-16 pointer-events-auto">
           
           {/* Main Hero Typography & CTAs (Slow Upward Parallax) */}
           <div 
@@ -316,44 +300,6 @@ export const HeroParallaxScrollScene: React.FC = () => {
               </MagneticButton>
             </div>
           </div>
-
-          {/* =========================================================
-              LAYER 3: FOUNDER IMAGE CARD (Medium/Faster Upward Parallax)
-              Leaves naturally behind the rising green section
-              ========================================================= */}
-          <div 
-            ref={founderRef}
-            className="flex flex-col items-center justify-center will-change-transform transform-gpu z-10 self-center"
-          >
-            <div className="flex items-center gap-3 sm:gap-4 p-2 sm:p-2.5 pr-4 sm:pr-5 rounded-2xl sm:rounded-full bg-[#080d1e]/85 border border-emerald-400/40 shadow-[0_12px_35px_rgba(0,0,0,0.85),0_0_25px_rgba(16,185,129,0.2)] backdrop-blur-xl group">
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-full overflow-hidden border border-emerald-400/60 shadow-md shrink-0">
-                <Image
-                  src="/images/team/saad-rehman-zoomed.jpg"
-                  alt="Saad Rehman"
-                  fill
-                  sizes="48px"
-                  className="object-cover object-top scale-110"
-                />
-              </div>
-
-              <div className="text-left">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs sm:text-sm font-bold text-white tracking-tight">Saad Rehman</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                </div>
-                <div className="text-[10px] sm:text-xs font-mono text-emerald-300 font-medium">
-                  Founder &amp; CEO • Direct Senior Architect
-                </div>
-              </div>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="mt-3 flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-slate-400">
-              <span>Scroll to explore</span>
-              <ChevronDown className="w-3.5 h-3.5 text-emerald-400 animate-bounce" />
-            </div>
-          </div>
-
         </div>
 
         {/* =========================================================
