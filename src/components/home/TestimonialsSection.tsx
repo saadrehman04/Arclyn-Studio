@@ -185,13 +185,22 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
           : 'pt-20 sm:pt-28 pb-24 sm:pb-32 bg-[#E6E6E6] border-y border-[#1A1A1A]/10 font-trionn'
       } overflow-hidden select-none ${className}`}
     >
-      {/* Subtle Architectural Matte Ambient Lighting */}
-      {!hideHeader && (
-        <div 
-          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[350px] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.7)_0%,transparent_70%)]" 
-          aria-hidden="true" 
+      {/* Generated Architectural Sculptural Ribbon Background */}
+      <div 
+        className="pointer-events-none absolute inset-0 w-full h-full overflow-hidden z-0" 
+        aria-hidden="true"
+      >
+        <Image
+          src="/images/testimonials-architectural-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-35 mix-blend-multiply"
         />
-      )}
+        {/* Soft edge gradients blending seamlessly into #E6E6E6 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#E6E6E6] via-transparent to-[#E6E6E6] opacity-75" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,#E6E6E6_85%)] opacity-60" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
