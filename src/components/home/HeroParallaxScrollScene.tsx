@@ -7,14 +7,10 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   ArrowRight, 
-  Star, 
-  Sparkles, 
   ExternalLink, 
   ArrowUpRight, 
   ShieldCheck 
 } from 'lucide-react';
-import { MagneticButton } from '../shared/MagneticButton';
-import { ShinyText } from '@/components/ui/ShinyText';
 import { SpotlightTab } from '@/components/ui/spotlight-tab';
 
 if (typeof window !== 'undefined') {
@@ -22,7 +18,7 @@ if (typeof window !== 'undefined') {
 }
 
 const VIDEO_URL =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_105406_16f4600d-7a92-4292-b96e-b19156c7830a.mp4';
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260820_010308_b1636845-4c15-4ab6-b0c9-9a29bfb0c6e3.mp4';
 
 export const SHOWCASE_PROJECTS = [
   {
@@ -213,18 +209,18 @@ export const HeroParallaxScrollScene: React.FC = () => {
     <div 
       ref={containerRef} 
       id="hero-scene"
-      className="relative w-full bg-black select-none"
+      className="relative w-full bg-[#faf8f5] select-none"
     >
       <div 
         ref={pinSceneRef} 
-        className="w-full h-screen relative overflow-hidden flex flex-col"
+        className="w-full h-screen min-h-[700px] relative overflow-hidden flex flex-col bg-[#faf8f5]"
       >
         {/* =========================================================
-            LAYER 1: HERO BACKGROUND (Video + Dark Ambient Overlays)
+            LAYER 1: HERO BACKGROUND (Palomar Full-Viewport Video Layer)
             ========================================================= */}
         <div 
           ref={heroBgRef}
-          className="absolute inset-0 z-0 pointer-events-none overflow-hidden will-change-transform transform-gpu"
+          className="absolute inset-0 z-0 pointer-events-none overflow-hidden will-change-transform transform-gpu bg-[#faf8f5]"
         >
           <video
             ref={heroVideoRef}
@@ -232,89 +228,57 @@ export const HeroParallaxScrollScene: React.FC = () => {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover z-0"
+            className="w-full h-full object-cover object-bottom"
           >
             <source src={VIDEO_URL} type="video/mp4" />
           </video>
-
-          <div 
-            className="absolute inset-0 bg-black/45 z-[1]" 
-            aria-hidden="true" 
-          />
-          <div 
-            className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#050711] z-[1]" 
-            aria-hidden="true" 
-          />
         </div>
 
         {/* =========================================================
-            LAYER 2: HERO TYPOGRAPHY & CTAS
+            LAYER 2: PALOMAR HERO CONTENT COLUMN & TRUSTED BY
             ========================================================= */}
-        <div className="relative z-10 w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center pt-20 sm:pt-24 pb-12 sm:pb-16 pointer-events-auto">
-          
-          <div 
-            ref={heroTypoRef}
-            className="flex flex-col items-center text-center my-auto will-change-transform transform-gpu max-w-5xl mx-auto"
+        <div 
+          ref={heroTypoRef}
+          className="relative z-10 w-full h-full max-w-7xl mx-auto pt-28 md:pt-36 px-6 lg:px-8 flex flex-col items-start pointer-events-auto will-change-transform transform-gpu font-helvetica-neue"
+        >
+          {/* Announcement pill */}
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2d3a2e]/15 bg-white/60 backdrop-blur-sm hover:bg-white/80 transition-colors mb-5 md:mb-6 animate-fade-up stagger-3"
           >
-            {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-amber-400/35 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4 sm:mb-5 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+            <span className="text-sm text-[#2d3a2e] font-helvetica-neue font-medium">
+              Live for everyone today! Offering $1MM in credits.
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#2d3a2e]" />
+          </Link>
+
+          {/* Headline */}
+          <h1 className="text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#2d3a2e] leading-[1.05] tracking-tight max-w-4xl font-helvetica-neue font-light animate-fade-up stagger-4">
+            One unified system to build,
+            <br className="hidden sm:block" /> test, ship, and observe LLMs
+          </h1>
+
+          {/* Trusted by (inside Hero, under headline) */}
+          <div className="w-full mt-8 md:mt-10 animate-fade-up stagger-5">
+            <p className="text-left text-xs tracking-[0.25em] uppercase text-[#2d3a2e]/50 mb-6 md:mb-8 font-helvetica-neue font-medium">
+              Backed by
+            </p>
+            <div className="flex flex-wrap items-center justify-start gap-6 md:gap-12 lg:gap-16 animate-fade-up stagger-6">
+              <span className="font-playfair text-lg md:text-xl lg:text-2xl text-[#2d3a2e]/80 whitespace-nowrap font-bold">
+                Meridian
               </span>
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>FEATURED CLIENT PRODUCTS &amp; LIVE PLATFORMS</span>
-            </div>
-
-            {/* Massive Headline */}
-            <div className="max-w-4xl mx-auto mb-3 sm:mb-4">
-              <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight text-white leading-[1.04]">
-                Build Smarter. <br />
-                <span>Launch </span>
-                <ShinyText 
-                  text="Faster." 
-                  speed={3} 
-                  baseColor="#64CEFB" 
-                  shineColor="#ffffff" 
-                />
-              </h1>
-            </div>
-
-            {/* Social Proof & Rating */}
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-7 text-xs sm:text-sm text-slate-300">
-              <div className="flex items-center text-amber-400">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <span className="font-semibold text-white">5.0 Star Rating</span>
-              <span className="text-slate-600">•</span>
-              <span>50+ Projects Shipped</span>
-              <span className="text-slate-600">•</span>
-              <span>150k+ Community</span>
-            </div>
-
-            {/* Dual Pill CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mb-5">
-              <MagneticButton>
-                <Link
-                  href="/contact"
-                  className="px-7 sm:px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 shadow-lg shadow-purple-600/30"
-                >
-                  <span>Start Your Project</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </MagneticButton>
-
-              <MagneticButton>
-                <Link
-                  href="/work"
-                  className="px-7 sm:px-8 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-slate-200 btn-pill-secondary inline-flex items-center gap-2 hover:text-white"
-                >
-                  <span>Explore Verified Work</span>
-                  <ArrowRight className="w-4 h-4 opacity-50" />
-                </Link>
-              </MagneticButton>
+              <span className="font-oswald uppercase text-lg md:text-xl lg:text-2xl text-[#2d3a2e]/80 whitespace-nowrap font-medium">
+                STELLEX
+              </span>
+              <span className="font-montserrat text-lg md:text-xl lg:text-2xl text-[#2d3a2e]/80 whitespace-nowrap font-bold">
+                Luminar
+              </span>
+              <span className="font-roboto-slab uppercase text-lg md:text-xl lg:text-2xl text-[#2d3a2e]/80 whitespace-nowrap font-semibold">
+                OVERLAND
+              </span>
+              <span className="font-raleway text-lg md:text-xl lg:text-2xl text-[#2d3a2e]/80 whitespace-nowrap font-bold">
+                Kinetic
+              </span>
             </div>
           </div>
         </div>
