@@ -2,310 +2,295 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { 
   Users, 
   ArrowRight, 
-  CheckCircle2,
-  Sparkles,
-  ShieldCheck,
-  Zap,
-  Wallet,
-  Clock,
-  MessageCircle,
-  TrendingUp,
-  Layers,
-  ArrowUpRight
+  Sparkles, 
+  ShieldCheck, 
+  Zap, 
+  Wallet, 
+  Clock, 
+  MessageCircle, 
+  TrendingUp, 
+  Layers, 
+  ArrowUpRight 
 } from 'lucide-react';
-import { BorderGlow } from '@/components/ui/BorderGlow';
-import GradientWaves from '@/components/ui/GradientWaves';
 import { MagneticButton } from '../shared/MagneticButton';
 
 export const PartnerProgramSection: React.FC = () => {
   return (
     <section 
       id="partner-program" 
-      className="relative pt-20 sm:pt-28 pb-16 sm:pb-24 bg-[#040406] overflow-hidden border-t border-white/10 select-none"
+      className="relative bg-[#0d0e12] text-white py-14 sm:py-18 md:py-20 overflow-hidden select-none"
     >
-      {/* =========================================================
-          ATMOSPHERIC BACKGROUND & COHESIVE CYBERNETIC AMBIENCE
-          Deep obsidian base matching website with subtle cyan/indigo lighting
-          ========================================================= */}
-      <div 
-        className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0" 
-        style={{
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-        }}
-        aria-hidden="true"
-      >
-        {/* Subtle OGL Fluid Waves with site-matching dark cyan & navy palette */}
-        <GradientWaves
-          horizonColor="#050a18"
-          waveColor="#0a1d36"
-          crestColor="#38bdf8"
-          speed={0.22}
-          amplitude={1.8}
-          waveScale={0.55}
-          waveRatio={0.9}
-          swell={30}
-          turbulence={15}
-          tilt={1.1}
-          zoom={1.0}
-          height={5.0}
-          fogDepth={16}
-          detail="medium"
-          brightness={0.8}
-          opacity={0.4}
-          mouseInteraction={true}
-          parallaxStrength={0.4}
-          grain={true}
-          grainIntensity={0.03}
+      {/* ========================================================================= */}
+      {/* MOTION GRAPHICS: Exact Background Light, Grid & Animated Micro Particles */}
+      {/* Matching Testimonials Section Visual Architecture */}
+      {/* ========================================================================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Subtle grid mesh */}
+        <div 
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
+            backgroundSize: '44px 44px',
+          }}
         />
 
-        {/* Ambient Cosmic Grid */}
-        <div className="absolute inset-0 bg-cosmic-grid opacity-25 pointer-events-none" />
+        {/* Ambient Radial Glowing Aura behind Active Card */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[900px] h-[440px] rounded-full blur-[140px] opacity-25 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.28) 0%, rgba(59,130,246,0.18) 40%, rgba(245,158,11,0.10) 75%, transparent 85%)'
+          }}
+        />
 
-        {/* Central Atmospheric Radial Spotlights */}
-        <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.12)_0%,rgba(14,165,233,0.03)_50%,transparent_75%)] blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[600px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.10)_0%,transparent_70%)] blur-3xl pointer-events-none" />
+        {/* Dynamic Motion Floating Micro Particles */}
+        <div className="absolute inset-0">
+          {[
+            { top: '18%', left: '12%', size: 'w-1.5 h-1.5', delay: '0s', dur: '4.8s' },
+            { top: '28%', left: '86%', size: 'w-1 h-1', delay: '1.2s', dur: '5.2s' },
+            { top: '72%', left: '16%', size: 'w-2 h-2', delay: '2.1s', dur: '6s' },
+            { top: '68%', left: '80%', size: 'w-1.5 h-1.5', delay: '0.6s', dur: '4.2s' },
+            { top: '45%', left: '92%', size: 'w-1 h-1', delay: '1.8s', dur: '5.6s' },
+            { top: '82%', left: '50%', size: 'w-1.5 h-1.5', delay: '2.8s', dur: '4.5s' },
+          ].map((pt, i) => (
+            <motion.div
+              key={i}
+              className={`absolute rounded-full bg-white/40 blur-[0.5px] ${pt.size}`}
+              style={{ top: pt.top, left: pt.left }}
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.2, 0.75, 0.2],
+                scale: [0.9, 1.25, 0.9],
+              }}
+              transition={{
+                duration: parseFloat(pt.dur),
+                repeat: Infinity,
+                delay: parseFloat(pt.delay),
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
 
-        {/* Seamless Edge Vignettes */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#040406] via-[#040406]/85 to-transparent pointer-events-none z-10" />
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#040406] to-transparent pointer-events-none z-10" />
+        {/* Top and Bottom soft edge feather gradients */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#0d0e12] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#0d0e12] to-transparent pointer-events-none" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* =========================================================
-            SECTION HEADER (Matching Arclyn Studio Typography & Hierarchy)
-            ========================================================= */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-5 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-            <Users className="w-3.5 h-3.5 text-cyan-400" />
+        {/* ========================================================================= */}
+        {/* SECTION HEADER (Proportionate scale, matching Testimonials typography) */}
+        {/* ========================================================================= */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+          {/* Eyebrow Pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-3">
+            <Users className="w-3.5 h-3.5 text-amber-400" />
             <span>High-Yield Partner Network</span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mb-5">
-            Earn a Flat 30% <br />
-            <span className="text-gradient-hero">Direct Revenue Share</span>
+          {/* Section Headline */}
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white mb-2.5 leading-[1.12]">
+            Earn Flat 30%
+            <br />
+            Direct Revenue Share
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
-            Partner with Arclyn Studio. You make the client introduction — our senior engineering squad handles technical discovery, proposal scoping, rapid 5–7 day delivery, and client handover.
+          {/* Subtitle */}
+          <p className="text-xs sm:text-sm text-neutral-400 max-w-lg mx-auto leading-relaxed">
+            Partner with Arclyn Studio. You make the client introduction — our senior engineering squad handles technical discovery, proposal scoping, delivery, and client handover.
           </p>
         </div>
 
-        {/* =========================================================
-            CORE 30% OFFER CARD WITH HIGH-TECH BORDER GLOW
-            Harmonized cybernetic cyan & cobalt glow on deep obsidian base
-            ========================================================= */}
-        <div className="max-w-4xl mx-auto mb-14">
-          <BorderGlow
-            edgeSensitivity={30}
-            glowColor="195 90 60"
-            backgroundColor="#080c18"
-            borderRadius={28}
-            glowRadius={44}
-            glowIntensity={1.2}
-            coneSpread={28}
-            colors={['#38bdf8', '#06b6d4', '#6366f1']}
-            fillOpacity={0.4}
-            animated={true}
-            className="w-full"
-          >
-            <div className="relative p-4 sm:p-10 lg:p-12 flex flex-col justify-between h-full group">
-              
-              {/* Floating Header Pill */}
-              <div className="absolute -top-3.5 left-4 sm:left-10 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider bg-[#0f172a] border border-cyan-400/40 text-cyan-300 shadow-[0_4px_20px_rgba(6,182,212,0.25)] flex items-center gap-1.5 sm:gap-2">
-                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400" />
-                <span className="truncate">Strategic Referral Partner</span>
-              </div>
+        {/* ========================================================================= */}
+        {/* THE 30% OFFER CARD (Matching Testimonials Card Style & Proportions) */}
+        {/* ========================================================================= */}
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-10">
+          <div className="relative rounded-2xl sm:rounded-3xl bg-[#15161b] border border-white/[0.12] shadow-[0_24px_70px_-15px_rgba(0,0,0,0.85),0_0_50px_rgba(255,255,255,0.03)] overflow-hidden p-5 sm:p-7 md:p-8 select-none">
+            
+            {/* Motion Graphics: Subtle Animated Border Highlight on Card */}
+            <div className="absolute -inset-[1px] rounded-2xl sm:rounded-3xl bg-gradient-to-r from-amber-500/0 via-amber-400/20 to-violet-500/0 opacity-70 pointer-events-none animate-pulse" />
 
-              <div>
-                {/* 30% Hero Metric Display */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 mt-4 pb-6 sm:pb-8 border-b border-white/10">
-                  <div className="flex items-baseline gap-3 sm:gap-6">
-                    <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400 tracking-tight leading-none filter drop-shadow-[0_0_35px_rgba(56,189,248,0.3)]">
-                      30%
-                    </span>
-                    <div>
-                      <div className="font-mono text-xs uppercase tracking-wider font-bold text-cyan-300 mb-1 flex items-center gap-1.5">
-                        <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Fixed Revenue Share</span>
-                      </div>
-                      <div className="text-xs sm:text-sm text-slate-400">
-                        Paid immediately on client milestone sign-off
-                      </div>
+            {/* Faded Watermark Icon */}
+            <div className="absolute top-5 right-5 sm:top-7 sm:right-7 text-white/[0.03] group-hover:text-white/[0.06] transition-colors pointer-events-none">
+              <TrendingUp className="w-20 h-20 rotate-12" />
+            </div>
+
+            <div className="relative z-10">
+              
+              {/* Top Row: 30% Metric Display & Status Badge */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6 pb-5 sm:pb-6 border-b border-white/[0.08]">
+                <div className="flex items-baseline gap-3 sm:gap-5">
+                  <span className="text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-none drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                    30%
+                  </span>
+                  <div>
+                    <div className="font-mono text-xs uppercase tracking-wider font-semibold text-amber-300 flex items-center gap-1.5 mb-0.5">
+                      <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Fixed Revenue Share</span>
+                    </div>
+                    <div className="text-[11px] sm:text-xs text-neutral-400">
+                      Paid immediately on client milestone sign-off
                     </div>
                   </div>
-                  
-                  <span className="self-start sm:self-auto text-xs font-semibold text-emerald-300 bg-emerald-500/10 px-3.5 py-1.5 sm:py-2 rounded-full border border-emerald-500/30 flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Instant Payouts Guaranteed
+                </div>
+
+                <span className="self-start sm:self-auto text-[11px] font-semibold text-emerald-300 bg-white/[0.04] border border-emerald-500/30 px-3 py-1 rounded-full flex items-center gap-2 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Instant Milestone Payouts
+                </span>
+              </div>
+
+              {/* Offer Headline & Description */}
+              <div className="mt-5 mb-5">
+                <h3 className="text-lg sm:text-xl font-semibold text-white tracking-tight leading-snug mb-1.5">
+                  Direct Gross Commission on Every Web &amp; AI Contract
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed max-w-2xl">
+                  You make the initial introduction — we handle technical discovery, architectural scoping, rapid turnaround, and handover. No tiers or minimum quotas: receive a flat 30% gross commission on all closed projects.
+                </p>
+              </div>
+
+              {/* Milestone Payout Tranches (Transparent Flow) */}
+              <div className="mb-5">
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <Clock className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="font-mono text-[11px] text-neutral-400 uppercase tracking-wider font-medium">
+                    Milestone Payout Tranches (Synchronized with Deliverables)
                   </span>
                 </div>
 
-                {/* Offer Headline & Description */}
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">
-                  Direct Gross Commission on Every Web &amp; AI Contract
-                </h3>
-                <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-8 max-w-3xl">
-                  You make the initial introduction — we handle technical discovery, architectural scoping, rapid 5–7 day turnaround, and client handover. No waiting for thresholds or tiers: you receive a flat 30% gross commission on all closed projects.
-                </p>
-
-                {/* =========================================================
-                    MILESTONE PAYOUT TRANCHES (Transparent Payment Flow)
-                    ========================================================= */}
-                <div className="mb-8">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Clock className="w-4 h-4 text-cyan-400" />
-                    <span className="font-mono text-xs text-slate-400 uppercase tracking-wider font-semibold">
-                      Milestone Payout Tranches (Synchronized with Deliverables)
-                    </span>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {/* Tranche 01 */}
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-amber-400/30 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-mono text-[10px] text-amber-400 font-semibold uppercase">Tranche 01</span>
+                      <span className="px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">30% Payout</span>
+                    </div>
+                    <h4 className="text-xs sm:text-sm font-semibold text-white mb-0.5">Proposal Sign-off</h4>
+                    <p className="text-[11px] text-neutral-400">Immediate release upon kickoff deposit.</p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    {/* Tranche 01 */}
-                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-cyan-500/40 transition-colors">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="font-mono text-[11px] text-cyan-400 font-semibold uppercase">Tranche 01</span>
-                        <span className="px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 font-mono text-[11px] font-bold">30% Payout</span>
-                      </div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5">Proposal Sign-off</h4>
-                      <p className="text-[11px] text-slate-400">Immediate release upon client project kickoff deposit.</p>
+                  {/* Tranche 02 */}
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-violet-400/30 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-mono text-[10px] text-violet-400 font-semibold uppercase">Tranche 02</span>
+                      <span className="px-2 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 font-mono text-[10px] font-bold">20% Payout</span>
                     </div>
-
-                    {/* Tranche 02 */}
-                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-sky-500/40 transition-colors">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="font-mono text-[11px] text-sky-400 font-semibold uppercase">Tranche 02</span>
-                        <span className="px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 font-mono text-[11px] font-bold">20% Payout</span>
-                      </div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5">Staging Demo &amp; Review</h4>
-                      <p className="text-[11px] text-slate-400">Released upon client milestone preview &amp; scope lock.</p>
-                    </div>
-
-                    {/* Tranche 03 */}
-                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 transition-colors">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="font-mono text-[11px] text-emerald-400 font-semibold uppercase">Tranche 03</span>
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-[11px] font-bold">50% Payout</span>
-                      </div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5">Production Handover</h4>
-                      <p className="text-[11px] text-slate-400">Final tranche cleared as the project goes live.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* =========================================================
-                    DETAILED EARNING POTENTIAL GRID (4 Clean Glass Panels)
-                    ========================================================= */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs sm:text-sm text-slate-300">
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/30 transition-all flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Layers className="w-4 h-4 text-cyan-400" />
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <strong className="text-white font-semibold">Website Packages</strong>
-                        <span className="font-mono text-cyan-300 text-xs font-bold">PKR 12k – 21k+</span>
-                      </div>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        Earn 30% per closed brand landing page, portfolio, or e-commerce store.
-                      </p>
-                    </div>
+                    <h4 className="text-xs sm:text-sm font-semibold text-white mb-0.5">Staging Demo &amp; Review</h4>
+                    <p className="text-[11px] text-neutral-400">Released upon preview &amp; scope lock.</p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-indigo-400/30 transition-all flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Zap className="w-4 h-4 text-indigo-400" />
+                  {/* Tranche 03 */}
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-emerald-400/30 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-mono text-[10px] text-emerald-400 font-semibold uppercase">Tranche 03</span>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">50% Payout</span>
                     </div>
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <strong className="text-white font-semibold">Custom Software &amp; SaaS</strong>
-                        <span className="font-mono text-indigo-300 text-xs font-bold">PKR 30k – 60k+</span>
-                      </div>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        Full-stack React, Next.js, and Node.js applications and portals.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-emerald-400/30 transition-all flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Sparkles className="w-4 h-4 text-emerald-400" />
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <strong className="text-white font-semibold">AI Agents &amp; Automations</strong>
-                        <span className="font-mono text-emerald-300 text-xs font-bold">PKR 10k – 16.5k+</span>
-                      </div>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        Autonomous LLM agents, automated sales pipelines, and workflow bots.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/30 transition-all flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Wallet className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <strong className="text-white font-semibold">Recurring Retainers</strong>
-                        <span className="font-mono text-amber-300 text-xs font-bold">30% Monthly</span>
-                      </div>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        Recurring monthly payout on ongoing maintenance &amp; cloud hosting.
-                      </p>
-                    </div>
+                    <h4 className="text-xs sm:text-sm font-semibold text-white mb-0.5">Production Handover</h4>
+                    <p className="text-[11px] text-neutral-400">Final tranche cleared as project goes live.</p>
                   </div>
                 </div>
               </div>
 
-              {/* =========================================================
-                  BOTTOM TRANSPARENCY & PAYOUT METHODS STRIP
-                  ========================================================= */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-slate-500 font-mono text-[11px] uppercase">Payout Channels:</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-slate-300 font-medium">Bank Transfer (PKR)</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-slate-300 font-medium">Wise</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-slate-300 font-medium">Payoneer</span>
-                  <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-slate-300 font-medium">USDT</span>
+              {/* Commission Packages Grid (4 Clean Glass Panels) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5 text-xs text-neutral-300">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/20 transition-all flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Layers className="w-3.5 h-3.5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-0.5">
+                      <strong className="text-white font-semibold text-xs sm:text-sm">Website Packages</strong>
+                      <span className="font-mono text-amber-300 text-[11px] font-bold">PKR 12k – 21k+</span>
+                    </div>
+                    <p className="text-[11px] text-neutral-400 leading-relaxed">
+                      30% per closed brand landing page, portfolio, or e-commerce store.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/20 transition-all flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-0.5">
+                      <strong className="text-white font-semibold text-xs sm:text-sm">Custom Software &amp; SaaS</strong>
+                      <span className="font-mono text-cyan-300 text-[11px] font-bold">PKR 30k – 60k+</span>
+                    </div>
+                    <p className="text-[11px] text-neutral-400 leading-relaxed">
+                      Full-stack Next.js web applications, client portals, and SaaS MVPs.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/20 transition-all flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-0.5">
+                      <strong className="text-white font-semibold text-xs sm:text-sm">AI Agents &amp; Automations</strong>
+                      <span className="font-mono text-violet-300 text-[11px] font-bold">PKR 10k – 16.5k+</span>
+                    </div>
+                    <p className="text-[11px] text-neutral-400 leading-relaxed">
+                      Autonomous LLM agent workflows, automated bots, and AI pipelines.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/20 transition-all flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Wallet className="w-3.5 h-3.5 text-emerald-400" />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-0.5">
+                      <strong className="text-white font-semibold text-xs sm:text-sm">Recurring Retainers</strong>
+                      <span className="font-mono text-emerald-300 text-[11px] font-bold">30% Monthly</span>
+                    </div>
+                    <p className="text-[11px] text-neutral-400 leading-relaxed">
+                      Recurring monthly payout on ongoing maintenance &amp; retainer contracts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Transparency & Payout Channels */}
+              <div className="pt-3.5 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-neutral-400">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-neutral-500 font-mono text-[10px] uppercase">Payout Channels:</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-neutral-300 font-medium">Bank Transfer (PKR)</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-neutral-300 font-medium">Wise</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-neutral-300 font-medium">Payoneer</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-neutral-300 font-medium">USDT</span>
                 </div>
                 
-                <div className="flex items-center gap-2 text-cyan-300 font-medium">
-                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                  <span>Zero Earning Cap • No Minimum Deal Threshold</span>
+                <div className="flex items-center gap-1.5 text-amber-300 font-medium">
+                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Zero Earning Cap • No Deal Threshold</span>
                 </div>
               </div>
 
             </div>
-          </BorderGlow>
+          </div>
         </div>
 
-        {/* =========================================================
-            CALL TO ACTION BUTTONS (Harmonized Pill Buttons)
-            ========================================================= */}
+        {/* ========================================================= */}
+        {/* CALL TO ACTION BUTTONS (Matching Testimonials Interactive Buttons) */}
+        {/* ========================================================= */}
         <div className="text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
             <MagneticButton strength={0.25}>
               <Link
                 href="/partner-program"
-                className="btn-pill-primary px-8 py-3.5 rounded-full text-sm font-semibold inline-flex items-center gap-2"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] rounded-full bg-white text-black font-semibold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-[0.98]"
               >
                 <span>Apply for Partner Program</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </MagneticButton>
-
-            <MagneticButton strength={0.2}>
-              <Link
-                href="/pricing"
-                className="btn-pill-secondary px-7 py-3.5 rounded-full text-sm font-medium text-slate-300 hover:text-white inline-flex items-center gap-2"
-              >
-                <span>Explore Client Packages (PKR)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </MagneticButton>
 
@@ -314,11 +299,21 @@ export const PartnerProgramSection: React.FC = () => {
                 href="https://wa.me/923196762317?text=Hi%20Saad,%20I%20want%20to%20learn%20more%20about%20the%20Arclyn%20Studio%2030%%20partner%20program."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-full text-sm font-medium text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/15 border border-emerald-500/30 transition-all inline-flex items-center gap-2"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-full bg-emerald-500/10 hover:bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-semibold text-xs uppercase tracking-wider transition-all active:scale-[0.98]"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-3.5 h-3.5" />
                 <span>Chat on WhatsApp</span>
               </a>
+            </MagneticButton>
+
+            <MagneticButton strength={0.2}>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-neutral-300 hover:text-white font-medium text-xs uppercase tracking-wider transition-all active:scale-[0.98]"
+              >
+                <span>Explore Packages (PKR)</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+              </Link>
             </MagneticButton>
           </div>
         </div>

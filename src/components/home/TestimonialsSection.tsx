@@ -228,11 +228,11 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) {
-        setCardWidth(Math.min(width - 32, 400));
+        setCardWidth(Math.min(width - 32, 380));
       } else if (width < 1024) {
-        setCardWidth(Math.min(width - 64, 680));
+        setCardWidth(Math.min(width - 64, 580));
       } else {
-        setCardWidth(840);
+        setCardWidth(720);
       }
     };
     handleResize();
@@ -286,7 +286,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   return (
     <section
       id="testimonials"
-      className={`relative bg-[#0d0e12] text-white py-20 sm:py-28 md:py-32 overflow-hidden select-none ${className}`}
+      className={`relative bg-[#0d0e12] text-white py-14 sm:py-18 md:py-20 overflow-hidden select-none ${className}`}
     >
       {/* ========================================================================= */}
       {/* MOTION GRAPHICS: Ambient Background Light, Grid & Animated Energy Particles */}
@@ -345,19 +345,19 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================================= */}
-        {/* SECTION HEADER (EXACTLY MATCHING USER SCREENSHOT) */}
+        {/* SECTION HEADER (PROPORTIONATE SCALE MATCHING SCREENSHOT) */}
         {/* ========================================================================= */}
         {!hideHeader && (
-          <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
             {/* Header Title */}
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white mb-4 leading-[1.12]">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white mb-2.5 leading-[1.12]">
               Hear from Brands
               <br />
               That Trust Us
             </h2>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-neutral-400 max-w-xl mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-neutral-400 max-w-lg mx-auto leading-relaxed">
               Our clients&apos; success stories showcase the value we bring to every project.
               <br className="hidden sm:inline" />
               {' '}Here&apos;s what they have to say about working with us.
@@ -368,8 +368,8 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         {/* ========================================================================= */}
         {/* THREE-CARD DISPLAY STAGE (LEFT PEEK, CENTER ACTIVE, RIGHT PEEK) */}
         {/* ========================================================================= */}
-        <div className="relative w-full overflow-hidden py-4">
-          <div className="relative flex items-center justify-center min-h-[560px] xs:min-h-[500px] sm:min-h-[440px] md:min-h-[390px]">
+        <div className="relative w-full overflow-hidden py-3">
+          <div className="relative flex items-center justify-center min-h-[500px] xs:min-h-[450px] sm:min-h-[380px] md:min-h-[330px]">
             {visibleOffsets.map((offset) => {
               const itemIndex = (activeIndex + offset + total) % total;
               const t = TESTIMONIALS_DATA[itemIndex];
@@ -378,8 +378,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               const isRight = offset === 1;
 
               // Compute X offset in pixels relative to center
-              // On desktop: cardWidth = 840, gap = 32
-              const translateX = offset * (cardWidth + 32);
+              const translateX = offset * (cardWidth + 28);
 
               return (
                 <div
@@ -392,7 +391,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     width: `${cardWidth}px`,
                     transform: `translate3d(${translateX}px, 0, 0) scale(${isCenter ? 1 : 0.92})`,
                   }}
-                  className={`absolute rounded-3xl transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] overflow-hidden p-6 sm:p-8 md:p-10 select-none ${
+                  className={`absolute rounded-2xl sm:rounded-3xl transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] overflow-hidden p-5 sm:p-7 md:p-8 select-none ${
                     isCenter
                       ? 'bg-[#15161b] border border-white/[0.12] shadow-[0_24px_70px_-15px_rgba(0,0,0,0.85),0_0_50px_rgba(255,255,255,0.03)] opacity-100 z-20 cursor-default'
                       : 'bg-[#121317] border border-white/[0.05] shadow-xl opacity-35 hover:opacity-60 z-10 cursor-pointer hidden md:block'
@@ -400,37 +399,37 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                 >
                   {/* Motion Graphics: Subtle Animated Border Highlight on Active Card */}
                   {isCenter && (
-                    <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-amber-500/0 via-amber-400/20 to-violet-500/0 opacity-70 pointer-events-none animate-pulse" />
+                    <div className="absolute -inset-[1px] rounded-2xl sm:rounded-3xl bg-gradient-to-r from-amber-500/0 via-amber-400/20 to-violet-500/0 opacity-70 pointer-events-none animate-pulse" />
                   )}
 
                   {/* Faded Quote Watermark */}
-                  <div className="absolute top-6 right-6 sm:top-8 sm:right-8 text-white/[0.03] group-hover:text-white/[0.06] transition-colors pointer-events-none">
-                    <Quote className="w-24 h-24 rotate-180" />
+                  <div className="absolute top-5 right-5 sm:top-7 sm:right-7 text-white/[0.03] group-hover:text-white/[0.06] transition-colors pointer-events-none">
+                    <Quote className="w-16 h-16 rotate-180" />
                   </div>
 
                   {/* Card Interior Grid: Text on Left, Client Portrait on Right */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-7 items-center relative z-10">
                     {/* LEFT COLUMN: Brand, Stars, Headline, Quote, Author */}
-                    <div className="md:col-span-7 flex flex-col justify-between h-full space-y-4 sm:space-y-6">
+                    <div className="md:col-span-7 flex flex-col justify-between h-full space-y-3.5 sm:space-y-5">
                       {/* Top Row: Brand & Rating */}
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         {/* Brand Icon + Name */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center p-1.5 shadow-inner">
-                            <BrandIcon type={t.brandIcon} className="w-5 h-5" />
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-7 h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center p-1.5 shadow-inner">
+                            <BrandIcon type={t.brandIcon} className="w-4 h-4" />
                           </div>
-                          <span className="text-white text-base sm:text-lg font-semibold tracking-tight">
+                          <span className="text-white text-sm sm:text-base font-semibold tracking-tight">
                             {t.brand}
                           </span>
                         </div>
 
                         {/* Star Rating Badge (5 and 4 stars) */}
-                        <div className="flex items-center gap-2 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-full shadow-sm">
+                        <div className="flex items-center gap-1.5 bg-white/[0.04] border border-white/10 px-2.5 py-0.5 rounded-full shadow-sm">
                           <div className="flex items-center gap-0.5">
                             {[1, 2, 3, 4, 5].map((s) => (
                               <Star
                                 key={s}
-                                className={`w-3.5 h-3.5 ${
+                                className={`w-3 h-3 ${
                                   s <= t.rating
                                     ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]'
                                     : 'fill-neutral-700 text-neutral-700'
@@ -438,29 +437,29 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                               />
                             ))}
                           </div>
-                          <span className="text-[11px] font-semibold text-white/90 font-mono">
+                          <span className="text-[10px] font-semibold text-white/90 font-mono">
                             {t.ratingValue}
                           </span>
                         </div>
                       </div>
 
                       {/* Review Title & Body Quote */}
-                      <div className="space-y-2.5">
-                        <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                      <div className="space-y-2">
+                        <h3 className="text-lg sm:text-xl font-semibold text-white tracking-tight leading-snug">
                           {t.title}
                         </h3>
-                        <p className="text-neutral-300 text-sm sm:text-base leading-relaxed font-normal">
+                        <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-normal">
                           &ldquo;{t.quote}&rdquo;
                         </p>
                       </div>
 
                       {/* Author Credentials & Tag */}
-                      <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+                      <div className="pt-2.5 border-t border-white/[0.08] flex items-center justify-between">
                         <div>
-                          <div className="text-white text-sm sm:text-base font-semibold tracking-tight">
+                          <div className="text-white text-xs sm:text-sm font-semibold tracking-tight">
                             {t.author}, {t.role}
                           </div>
-                          <div className="text-neutral-400 text-xs mt-0.5 flex items-center gap-1.5">
+                          <div className="text-neutral-400 text-[11px] mt-0.5 flex items-center gap-1.5">
                             <span className="text-white/70">{t.brand}</span>
                             <span>•</span>
                             <span className="text-emerald-400 flex items-center gap-1">
@@ -471,7 +470,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                         </div>
 
                         {t.highlightTag && (
-                          <div className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-amber-300/90 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full">
+                          <div className="hidden sm:inline-flex items-center gap-1 text-[10px] font-medium text-amber-300/90 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
                             <Sparkles className="w-3 h-3 text-amber-400" />
                             <span>{t.highlightTag}</span>
                           </div>
@@ -480,12 +479,12 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     </div>
 
                     {/* RIGHT COLUMN: Monochrome Client Portrait (Exact Match with Reference) */}
-                    <div className="md:col-span-5 relative w-full h-[190px] sm:h-[240px] md:h-[310px] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 shadow-lg">
+                    <div className="md:col-span-5 relative w-full h-[170px] sm:h-[210px] md:h-[250px] rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 shadow-lg">
                       <Image
                         src={t.image}
                         alt={`${t.author} - ${t.brand}`}
                         fill
-                        sizes="(max-width: 768px) 100vw, 420px"
+                        sizes="(max-width: 768px) 100vw, 360px"
                         className="object-cover object-center grayscale contrast-105 brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
                       {/* Studio edge gradients */}
@@ -493,7 +492,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                       <div className="absolute inset-0 bg-gradient-to-r from-[#15161b]/35 via-transparent to-transparent pointer-events-none" />
 
                       {/* Author pill on mobile */}
-                      <div className="absolute bottom-3 left-3 md:hidden z-10 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[11px] text-white">
+                      <div className="absolute bottom-2.5 left-2.5 md:hidden z-10 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] text-white">
                         {t.author} • {t.role}
                       </div>
                     </div>
