@@ -1,15 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Send, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 export const PartnerForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [track, setTrack] = useState('referral');
-  const [website, setWebsite] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,97 +16,69 @@ export const PartnerForm: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="p-8 rounded-2xl bg-emerald-950/30 border border-emerald-500/40 text-center space-y-3">
-        <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+      <div className="space-y-3 border-t border-white/10 py-6 text-center">
+        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-[#ff1010]/35 bg-[#ff1010]/10 text-[#ff1010]">
           <CheckCircle2 className="w-6 h-6" />
         </div>
-        <h3 className="text-xl font-bold text-white">Application Received!</h3>
-        <p className="text-xs sm:text-sm text-slate-300">
-          Thank you, <strong className="text-white">{name}</strong>. Our partnership team will review your application and send onboarding materials to <span className="text-cyan-300">{email}</span> within 12 hours.
+        <h3 className="text-lg font-medium text-white">Application received</h3>
+        <p className="text-sm leading-relaxed text-[#8a8a8a]">
+          Thank you, <strong className="font-medium text-white">{name}</strong>. We&apos;ll follow up at <span className="text-white">{email}</span> within 12 hours.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Your Full Name *
+          <label className="mb-1.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-[#8a8a8a]">
+            Name
           </label>
           <input
             type="text"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Alex Morgan"
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+            placeholder="Your name"
+            className="w-full rounded-[10px] border border-white/10 bg-[#111111] px-3.5 py-2.5 text-sm text-white placeholder:text-[#6e6e6e] transition-colors focus:border-[#ff1010] focus:outline-none"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Work Email Address *
+          <label className="mb-1.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-[#8a8a8a]">
+            Email
           </label>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="alex@yourdomain.com"
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Partnership Track *
-          </label>
-          <select
-            value={track}
-            onChange={(e) => setTrack(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#0C122C] border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-          >
-            <option value="referral">Refer a Client (30% Commission)</option>
-            <option value="agency">Become a Strategic Partner (30% Retainers)</option>
-            <option value="both">Both / General Discussion</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            Your Primary Website or Portfolio
-          </label>
-          <input
-            type="url"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            placeholder="https://yourbrand.com"
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+            placeholder="you@company.com"
+            className="w-full rounded-[10px] border border-white/10 bg-[#111111] px-3.5 py-2.5 text-sm text-white placeholder:text-[#6e6e6e] transition-colors focus:border-[#ff1010] focus:outline-none"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-          Tell Us About Your Network or Upcoming Client Needs
+        <label className="mb-1.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-[#8a8a8a]">
+          Partnership type
         </label>
-        <textarea
-          rows={3}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Share a bit about the types of businesses you work with or any active leads you'd like to discuss..."
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-        />
+        <select
+          value={track}
+          onChange={(e) => setTrack(e.target.value)}
+          className="w-full rounded-[10px] border border-white/10 bg-[#111111] px-3.5 py-2.5 text-sm text-white transition-colors focus:border-[#ff1010] focus:outline-none"
+        >
+          <option value="referral">Refer a client</option>
+          <option value="agency">Agency partnership</option>
+          <option value="both">Let&apos;s discuss</option>
+        </select>
       </div>
 
       <button
         type="submit"
-        className="w-full py-4 rounded-xl text-sm font-bold text-white btn-primary-gradient flex items-center justify-center gap-2 mt-4"
+        className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff1010] px-5 text-sm font-medium uppercase tracking-[0.12em] text-white transition-all duration-200 hover:bg-[#ff2b2b]"
       >
-        <Send className="w-4 h-4" />
-        <span>Submit Partner Application</span>
+        Send application
       </button>
     </form>
   );

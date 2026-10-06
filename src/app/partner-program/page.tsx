@@ -1,317 +1,207 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  DollarSign, 
-  Handshake, 
-  CheckCircle2, 
-  Users, 
-  ShieldCheck, 
-  Zap,
-  Building,
-  Palette,
-  Briefcase
-} from 'lucide-react';
 import { PartnerForm } from '@/components/partner/PartnerForm';
 
 export const metadata: Metadata = {
-  title: 'Partner & Referral Program — Earn Flat 30% Commission',
+  title: 'Partner Program — 30% Commission',
   description:
-    'Join the Arclyn Studio partner network. Refer clients or partner with our engineering team to earn 30% direct commissions on web development, SaaS, and AI automation projects.',
+    'Refer a client or partner with Arclyn Studio. Earn 30% commission on qualifying web, software, and AI projects.',
 };
 
-const FIVE_STEPS = [
-  {
-    step: '01',
-    title: 'Quick Application & Alignment',
-    desc: 'Fill out our brief partner questionnaire below or send a quick email. We review your profile within 12 hours.',
-  },
-  {
-    step: '02',
-    title: 'Partner Agreement & Direct Channel',
-    desc: 'We execute a simple 1-page mutual agreement and set up a direct WhatsApp / Slack line with our engineering leads.',
-  },
-  {
-    step: '03',
-    title: 'Introduce the Client',
-    desc: 'Introduce the prospect via email intro, shared Slack, or your unique tracking link. No sales pitching required on your part.',
-  },
-  {
-    step: '04',
-    title: 'Arclyn Closes & Builds',
-    desc: 'We handle technical discovery, architectural scoping, closing the contract, and shipping the production-grade deliverables.',
-  },
-  {
-    step: '05',
-    title: 'Prompt Milestone Payout',
-    desc: 'Receive your 30% commission directly into your bank account as soon as the client clears each project milestone.',
-  },
+const PARTNERSHIP_STEPS = [
+  { number: '01', title: 'Introduce', detail: 'Connect us with a client who needs digital product work.' },
+  { number: '02', title: 'We deliver', detail: 'Our team scopes, builds, and supports the project.' },
+  { number: '03', title: 'You earn', detail: 'Receive 30% as the client clears project milestones.' },
 ];
 
-const WHO_ITS_FOR = [
-  {
-    icon: Palette,
-    title: 'UI/UX & Brand Designers',
-    desc: 'You create stunning brand visuals and Figma prototypes. Hand the complex full-stack engineering over to us and earn substantial payouts.',
-  },
-  {
-    icon: Building,
-    title: 'Marketing & SEO Agencies',
-    desc: 'Your clients demand custom landing pages, headless e-commerce, or AI automation that your internal team lacks bandwidth to code.',
-  },
-  {
-    icon: Briefcase,
-    title: 'Freelancers & Fractional CTOs',
-    desc: 'Monetize qualified inbound leads that don’t fit your current personal capacity or hourly rates.',
-  },
-  {
-    icon: Users,
-    title: 'Tech Creators & Community Leaders',
-    desc: 'Leverage your audience trust. Recommend an agency that builds real products with 100% verified case studies.',
-  },
+const SERVICE_CARDS = [
+  { name: 'Website packages', amount: '12k+', detail: 'Landing pages, portfolios, and ecommerce stores.' },
+  { name: 'SaaS & software', amount: '30k+', detail: 'Client portals, product builds, and internal tools.' },
+  { name: 'AI automation', amount: '10k+', detail: 'Agents, bots, and workflow automation.' },
+  { name: 'Retainers', amount: '30%', detail: 'Monthly revenue share on retainers.' },
 ];
-
-import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
 
 export default function PartnerProgramPage() {
   return (
-    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
-      {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon variant="strands" opacity={0.7} />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
+    <main className="relative min-h-screen overflow-x-hidden bg-[#090909] pb-16 pt-24 text-[#f5f5f5] sm:pb-24 sm:pt-28">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+          maskImage: 'radial-gradient(circle at center, black 45%, transparent 100%)',
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/25 w-fit mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-purple-300">
-              High-Ticket Partnership Network
-            </span>
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
+        <section className="border-b border-white/10 pb-10 sm:pb-12 lg:pb-14">
+          <div className="mb-8 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#ff1010] sm:mb-10">
+            <span className="inline-block h-px w-8 bg-[#ff1010]" />
+            <span>Partner Program</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Earn Flat 30% Commission. <br />
-            <span className="text-gradient">We Handle the Engineering.</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed">
-            Partner with Arclyn Studio. You introduce clients who need websites, web apps, or AI automations — our team executes with world-class polish, and you receive generous payouts on every closed milestone.
-          </p>
-        </div>
-
-        {/* 2 Partnership Tracks Comparison */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24 max-w-5xl mx-auto items-stretch">
-          
-          {/* Track 1 */}
-          <div className="rounded-3xl glass-panel p-8 sm:p-10 border border-white/10 flex flex-col justify-between">
+          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-6">
-                <DollarSign className="w-6 h-6" />
-              </div>
+              <h1 className="max-w-4xl text-[2.8rem] font-black leading-[0.88] tracking-[-0.065em] text-white sm:text-[4.2rem] lg:text-[6.5rem]">
+                <span className="block">EARN</span>
+                <span className="block text-[#ff1010]">30%</span>
+                <span className="block">ON EVERY</span>
+                <span className="block">REFERRAL</span>
+              </h1>
+            </div>
 
-              <span className="text-xs font-bold uppercase tracking-wider text-purple-400">
-                Track 01
-              </span>
-              <h2 className="text-2xl font-extrabold text-white mt-1 mb-2">
-                Client Referral Partner
-              </h2>
-              <div className="text-3xl font-extrabold text-white mb-4">
-                30% Commission
-              </div>
-
-              <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                Ideal for individuals, freelance designers, and creators who occasionally come across founders or businesses in need of top-tier full-stack or AI execution.
+            <div className="max-w-xl lg:justify-self-end">
+              <p className="text-base leading-relaxed text-[#8a8a8a] sm:text-lg">
+                You make the introduction. We handle the delivery, scope, and client handoff.
               </p>
+              <a
+                href="#apply"
+                className="mt-6 inline-flex items-center gap-3 border-b border-white/25 pb-1 text-sm font-medium uppercase tracking-[0.12em] text-[#f5f5f5] transition-colors hover:border-[#ff1010] hover:text-[#ff1010]"
+              >
+                Apply to partner <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </section>
 
-              <div className="space-y-3 mb-8">
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Simple 3-way email or Slack introduction</span>
+        <section className="border-b border-white/10 py-8 sm:py-10 lg:py-12">
+          <div className="rounded-[18px] border border-white/10 bg-[#0d0d0d] p-4 sm:p-6 lg:p-8">
+            <div className="flex flex-col gap-5 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+              <div className="flex items-baseline gap-4">
+                <span className="text-5xl font-black tracking-[-0.08em] text-white sm:text-6xl lg:text-7xl">30%</span>
+                <div>
+                  <div className="mb-1 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-[#ff1010]">
+                    <span className="inline-block h-px w-6 bg-[#ff1010]" />
+                    <span>Revenue share</span>
+                  </div>
+                  <p className="text-sm text-[#8a8a8a]">Paid on milestone sign-off</p>
                 </div>
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Arclyn handles all discovery, scoping, and demos</span>
-                </div>
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Immediate payout as each client milestone clears</span>
-                </div>
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Average payout: $225 to $1,000+ per deal</span>
-                </div>
+              </div>
+
+              <span className="inline-flex items-center gap-2 self-start rounded-full border border-[#ff1010]/35 bg-[#ff1010]/10 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-[#ff9a9a] sm:self-auto">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ff1010]" />
+                Instant payouts
+              </span>
+            </div>
+
+            <div className="pt-5">
+              <h2 className="max-w-3xl text-xl font-semibold tracking-[-0.04em] text-white sm:text-2xl">
+                Direct commission on every web and AI project
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#8a8a8a] sm:text-base">
+                You introduce the client. We handle discovery, scoping, delivery, and handoff. No tiers, no minimum quota.
+              </p>
+            </div>
+
+            <div className="mt-6">
+              <div className="mb-3 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-[#ff1010]">
+                <span className="inline-block h-px w-6 bg-[#ff1010]" />
+                <span>Milestone payouts</span>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                {[
+                  { label: 'TRANCHE 01', value: '30%', title: 'Proposal sign-off', detail: 'Released on kickoff.' },
+                  { label: 'TRANCHE 02', value: '20%', title: 'Staging demo', detail: 'Released on review.' },
+                  { label: 'TRANCHE 03', value: '50%', title: 'Production handoff', detail: 'Released on launch.' },
+                ].map((item) => (
+                  <div key={item.label} className="rounded-[14px] border border-white/10 bg-[#111111] p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1010]/50">
+                    <div className="mb-3 flex items-center justify-between gap-2">
+                      <span className="text-[9px] font-medium uppercase tracking-[0.17em] text-[#ff1010]">{item.label}</span>
+                      <span className="rounded-full border border-[#ff1010]/30 bg-[#ff1010]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[#ffb0b0]">{item.value}</span>
+                    </div>
+                    <h3 className="text-base font-medium text-white">{item.title}</h3>
+                    <p className="mt-1 text-xs text-[#8a8a8a]">{item.detail}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <Link
-              href="#apply"
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-semibold text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
-            >
-              <span>Apply for Referral Track</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {SERVICE_CARDS.map((item) => (
+                <div
+                  key={item.name}
+                  className="flex items-start justify-between gap-4 rounded-[14px] border border-white/10 bg-[#111111] p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1010]/40 hover:bg-[#121212]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-lg font-medium text-white">{item.name}</h3>
+                      <span className="font-mono text-sm font-bold uppercase tracking-[0.08em] text-[#ff1010]">{item.amount}</span>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-[#8a8a8a]">{item.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-8 sm:py-10 lg:py-12">
+          <div className="mb-7 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#ff1010]">
+            <span className="inline-block h-px w-8 bg-[#ff1010]" />
+            <span>How it works</span>
           </div>
 
-          {/* Track 2 */}
-          <div className="rounded-3xl p-8 sm:p-10 bg-[#0E1538] border-2 border-purple-500/60 shadow-2xl shadow-purple-950/50 flex flex-col justify-between relative">
-            <div className="absolute -top-3.5 left-8 px-4 py-1 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-[11px] font-bold uppercase tracking-wider">
-              High-Volume Agreemeent
-            </div>
-
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-6">
-                <Handshake className="w-6 h-6" />
-              </div>
-
-              <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-                Track 02
-              </span>
-              <h2 className="text-2xl font-extrabold text-white mt-1 mb-2">
-                Strategic Agency Partner
-              </h2>
-              <div className="text-3xl font-extrabold text-white mb-4">
-                30% Recurring Retainers
-              </div>
-
-              <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                Designed for marketing agencies, design studios, and software boutiques that require a reliable technical arm for recurring client engagements or white-label builds.
-              </p>
-
-              <div className="space-y-3 mb-8">
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Dedicated Slack &amp; WhatsApp channel with Arclyn engineering leads</span>
-                </div>
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Flat 30% commission on upfront builds + 30% monthly on ongoing retainers</span>
-                </div>
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Co-branded or seamless white-label delivery options</span>
-                </div>
-                <div className="flex items-start gap-2.5 text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span>Priority sprint reservation for your client deadlines</span>
-                </div>
-              </div>
-            </div>
-
-            <Link
-              href="#apply"
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-semibold text-white btn-primary-gradient"
-            >
-              <span>Apply for Strategic Agency Partnership</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-        </div>
-
-        {/* 5-Step Process Section */}
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 mb-24">
-          <div className="max-w-2xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-purple-400">
-              How It Works
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-              The 5-Step Partnership Lifecycle
+          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <h2 className="max-w-4xl text-[2.3rem] font-black leading-[0.9] tracking-[-0.07em] text-white sm:text-[3.2rem] lg:text-[5rem]">
+              SIMPLE, TRANSPARENT <span className="text-[#ff1010]">PROCESS</span>
             </h2>
-            <p className="text-sm text-slate-300 mt-2">
-              Transparent, streamlined, and engineered to eliminate friction from introduction to payout.
+            <p className="max-w-md text-sm leading-relaxed text-[#8a8a8a] md:text-right">
+              From booking to completion — we keep you informed every step of the way.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {FIVE_STEPS.map((s) => (
+          <div className="space-y-4">
+            {PARTNERSHIP_STEPS.map((step) => (
               <div
-                key={s.step}
-                className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 relative group hover:border-white/15 transition-all"
+                key={step.number}
+                className="grid gap-4 border-t border-white/10 py-6 md:grid-cols-[200px_1fr_180px] md:items-center"
               >
-                <div className="text-3xl font-extrabold font-mono text-gradient mb-3">
-                  {s.step}
+                <div className="flex items-center gap-4">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ff1010] text-sm font-bold text-white shadow-[0_0_24px_rgba(255,16,16,0.35)]">
+                    {step.number}
+                  </span>
+                  <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#ff1010]">Step {step.number}</span>
                 </div>
-                <h3 className="text-sm font-bold text-white mb-2">
-                  {s.title}
-                </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  {s.desc}
-                </p>
+
+                <div>
+                  <h3 className="text-[1.4rem] font-black uppercase tracking-[-0.06em] text-white sm:text-[1.8rem]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#8a8a8a]">{step.detail}</p>
+                </div>
+
+                <div className="text-right text-[2.8rem] font-black leading-none tracking-[-0.08em] text-white/20 md:text-[4rem]">
+                  {step.number}
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Who It's For Grid */}
-        <div className="mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-              Ideal Fit
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-              Who Is This Program Designed For?
+        <section id="apply" className="grid gap-8 border-t border-white/10 pt-10 sm:pt-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <div>
+            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#ff1010]">Get started</p>
+            <h2 className="text-[2.2rem] font-black leading-[0.92] tracking-[-0.065em] text-white sm:text-[2.8rem]">
+              Let&apos;s work together.
             </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WHO_ITS_FOR.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="p-6 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-base font-bold text-white mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Partner Application Form Block */}
-        <div id="apply" className="rounded-3xl bg-[#090E26] border border-white/15 p-8 sm:p-12 max-w-3xl mx-auto relative overflow-hidden">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              Apply to the Partner Network
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2">
-              Fill out this quick form. We will reach out within 12 hours with your agreement and onboarding details.
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#8a8a8a]">
+              Share a few details and we&apos;ll follow up about the right partnership track.
             </p>
+            <a
+              href="mailto:saadrehman034@gmail.com"
+              className="mt-5 inline-block text-sm text-[#f5f5f5] underline decoration-[#ff1010]/50 underline-offset-4 transition-colors hover:text-[#ff1010]"
+            >
+              saadrehman034@gmail.com
+            </a>
           </div>
 
-          <PartnerForm />
-
-          <div className="mt-6 text-center text-xs text-slate-400 space-y-1">
-            <div>
-              Prefer direct email? Contact us at{' '}
-              <a href="mailto:saadrehman034@gmail.com" className="text-cyan-400 underline">
-                saadrehman034@gmail.com
-              </a>
-            </div>
-            <div>
-              WhatsApp Lead Line:{' '}
-              <a href="https://wa.me/923196762317" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">
-                +92 3196762317
-              </a>
-            </div>
+          <div className="rounded-[18px] border border-white/10 bg-[#0d0d0d] p-4 sm:p-6">
+            <PartnerForm />
           </div>
-        </div>
-
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

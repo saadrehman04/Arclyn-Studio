@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 // Exact SVG Vector Icons from Demo Website with Pale Champagne Color (#F3F5B4)
 const SparkleIcon = () => (
@@ -81,8 +81,11 @@ const CAPABILITY_ITEMS = [
 ];
 
 export const Capability3DSection: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: '120px' });
+
   return (
-    <section id="capabilities" className="relative pt-4 pb-4 sm:pb-6 overflow-hidden bg-[#050711]">
+    <section ref={sectionRef} id="capabilities" className="relative pt-4 pb-4 sm:pb-6 overflow-hidden bg-[#050711]">
       {/* Subtle deep ambient glow behind the elements */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-600/10 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[180px] pointer-events-none" />
@@ -95,23 +98,22 @@ export const Capability3DSection: React.FC = () => {
           {/* Left Column: Free-Floating Animated 3D Torus */}
           <div className="lg:col-span-5 xl:col-span-6 flex justify-center items-center relative">
             <motion.div
-              animate={{
+              animate={isInView ? {
                 y: [-12, 12, -12],
                 rotate: [-2, 2, -2],
                 scale: [1, 1.02, 1],
-              }}
-              transition={{
+              } : { y: 0, rotate: 0, scale: 1 }}
+              transition={isInView ? {
                 duration: 7,
                 repeat: Infinity,
                 ease: 'easeInOut',
-              }}
+              } : { duration: 0.2 }}
               className="relative w-full max-w-[320px] sm:max-w-[460px] lg:max-w-[540px] xl:max-w-[580px] aspect-square flex items-center justify-center select-none"
             >
               <Image
                 src="/images/iridescent-torus-clean.png"
                 alt="Arclyn Studio 3D Iridescent Fluid Core"
                 fill
-                priority
                 className="object-contain drop-shadow-[0_0_100px_rgba(34,211,238,0.35)] filter contrast-110"
                 sizes="(max-width: 1024px) 100vw, 580px"
               />

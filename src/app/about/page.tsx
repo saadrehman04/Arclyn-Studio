@@ -56,7 +56,7 @@ import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
 
 export default function AboutPage() {
   return (
-    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
+    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
       {/* 3D Liquid Chrome Ribbon Background */}
       <PageHeroRibbon variant="flow" opacity={0.7} />
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
@@ -195,8 +195,8 @@ export default function AboutPage() {
         </div>
 
         {/* Tech Stack Matrix */}
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 mb-24">
-          <div className="max-w-2xl mb-10">
+        <div className="mb-12 rounded-2xl glass-panel border border-white/10 p-4 sm:mb-24 sm:rounded-3xl sm:p-12">
+          <div className="mb-6 max-w-2xl sm:mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
               Our Technical Stack
             </span>
@@ -208,13 +208,13 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
             {TECH_ARSENAL.map((group) => (
-              <div key={group.category} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-purple-400 mb-4">
+              <div key={group.category} className="rounded-xl border border-white/5 bg-white/[0.02] p-3 sm:rounded-2xl sm:p-6">
+                <h3 className="mb-2 text-[10px] font-bold uppercase tracking-wider text-purple-400 sm:mb-4 sm:text-xs">
                   {group.category}
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   {group.items.map((item) => (
                     <div key={item} className="flex items-center gap-2 text-xs text-slate-300 font-mono">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />

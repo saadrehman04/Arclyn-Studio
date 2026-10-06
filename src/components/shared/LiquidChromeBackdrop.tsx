@@ -4,13 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-interface LiquidChromeBackdropProps {
-  variant?: 'global' | 'hero' | 'minimal';
-}
-
-export const LiquidChromeBackdrop: React.FC<LiquidChromeBackdropProps> = ({
-  variant = 'global',
-}) => {
+export const LiquidChromeBackdrop: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* 1. Primary Top-Right Floating Fluid Chrome Ribbon */}
@@ -38,9 +32,9 @@ export const LiquidChromeBackdrop: React.FC<LiquidChromeBackdropProps> = ({
           src="/images/liquid-chrome-bg.jpg"
           alt=""
           fill
-          priority
           className="object-cover mix-blend-screen"
-          sizes="1200px"
+          quality={75}
+          sizes="(max-width: 640px) 100vw, 1200px"
         />
       </motion.div>
 
@@ -68,13 +62,14 @@ export const LiquidChromeBackdrop: React.FC<LiquidChromeBackdropProps> = ({
           alt=""
           fill
           className="object-cover mix-blend-screen"
-          sizes="1050px"
+          quality={75}
+          sizes="(max-width: 640px) 100vw, 1050px"
         />
       </motion.div>
 
       {/* 3. Deep Obsidian Vignette & Ambient Radial Glows */}
-      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px]" />
-      <div className="absolute bottom-1/3 left-1/4 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[150px]" />
+      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[80px] sm:blur-[160px]" />
+      <div className="absolute bottom-1/3 left-1/4 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[75px] sm:blur-[150px]" />
 
       {/* 4. Film Grain Noise Texture */}
       <div className="absolute inset-0 bg-noise opacity-40" />

@@ -72,14 +72,14 @@ export const PricingOverview: React.FC = () => {
 
         {/* TAB 1: Website Packages (PKR) */}
         {activeTab === 'websites' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
+          <div className="mb-10 grid grid-cols-1 items-stretch gap-4 sm:gap-6 lg:mb-16 lg:grid-cols-3 lg:gap-8">
             {PRICING_TIERS.map((tier) => {
               const isPopular = tier.popular;
 
               return (
                 <div
                   key={tier.id}
-                  className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
+                  className={`relative flex flex-col justify-between rounded-2xl p-5 transition-all duration-300 sm:rounded-3xl sm:p-8 ${
                     isPopular
                       ? 'bg-[#0b0f24] border-2 border-purple-500/80 shadow-[0_0_50px_rgba(168,85,247,0.25)] lg:-translate-y-2'
                       : 'bg-[#090d1a] border border-white/[0.08] hover:border-white/[0.2] shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
@@ -158,11 +158,11 @@ export const PricingOverview: React.FC = () => {
         {/* TAB 2: AI Automation Services */}
         {activeTab === 'ai' && (
           <div className="space-y-6 mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
               {AI_AUTOMATION_SERVICES.map((service) => (
                 <div
                   key={service.id}
-                  className="rounded-3xl p-6 sm:p-7 bg-[#090d1a] border border-white/[0.08] hover:border-cyan-400/40 transition-all duration-300 flex flex-col justify-between group shadow-xl"
+                  className="group flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#090d1a] p-4 shadow-xl transition-all duration-300 hover:border-cyan-400/40 sm:rounded-3xl sm:p-7"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3 mb-3">
@@ -206,7 +206,7 @@ export const PricingOverview: React.FC = () => {
             </div>
 
             {/* AI Package Perks Banner */}
-            <div className="rounded-2xl p-6 bg-purple-950/20 border border-purple-500/20 text-xs sm:text-sm text-slate-300">
+            <div className="rounded-xl border border-purple-500/20 bg-purple-950/20 p-4 text-xs text-slate-300 sm:rounded-2xl sm:p-6 sm:text-sm">
               <span className="font-bold text-purple-300 uppercase tracking-wider block mb-3">
                 Standard in Every AI Automation Package:
               </span>
@@ -237,14 +237,14 @@ export const PricingOverview: React.FC = () => {
         )}
 
         {/* Project Terms & Policies Strip */}
-        <div className="rounded-3xl p-8 bg-[#090d1a] border border-white/[0.08] max-w-5xl mx-auto">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-white/[0.08] bg-[#090d1a] p-4 sm:rounded-3xl sm:p-8">
           <div className="text-center mb-6">
             <h4 className="text-lg font-bold text-white">Project Terms &amp; Transparent Policies</h4>
             <p className="text-xs text-slate-400 mt-1">Clear standards that protect your investment from start to finish</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-slate-300">
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div className="grid grid-cols-2 gap-3 text-[10px] text-slate-300 sm:gap-6 sm:text-xs lg:grid-cols-4">
+            <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3 sm:rounded-xl sm:p-4">
               <div className="flex items-center gap-2 text-cyan-400 font-bold mb-1.5">
                 <Clock className="w-4 h-4" />
                 <span>5–7 Working Days</span>
@@ -254,17 +254,17 @@ export const PricingOverview: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+            <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3 sm:rounded-xl sm:p-4">
               <div className="flex items-center gap-2 text-emerald-400 font-bold mb-1.5">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Free 1-Year Hosting</span>
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Free hosting &amp; maintenance for 1 year. 100% domain ownership in client's name.
+                Free hosting &amp; maintenance for 1 year. 100% domain ownership in client&apos;s name.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+            <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3 sm:rounded-xl sm:p-4">
               <div className="flex items-center gap-2 text-purple-400 font-bold mb-1.5">
                 <DollarSign className="w-4 h-4" />
                 <span>30% | 20% | 50%</span>
@@ -274,7 +274,7 @@ export const PricingOverview: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+            <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3 sm:rounded-xl sm:p-4">
               <div className="flex items-center gap-2 text-amber-400 font-bold mb-1.5">
                 <RefreshCw className="w-4 h-4" />
                 <span>Partner Commission</span>

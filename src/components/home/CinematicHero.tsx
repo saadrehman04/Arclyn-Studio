@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
 
 export const CinematicHero: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,6 +25,50 @@ export const CinematicHero: React.FC = () => {
       window.removeEventListener('keydown', handleEsc);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !('IntersectionObserver' in window)) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let isInView = false;
+    let playbackTimer: number | null = null;
+    const syncPlayback = () => {
+      if (isInView && !document.hidden && !reducedMotion.matches) {
+        if (video.paused && playbackTimer === null) {
+          const delay = window.matchMedia('(max-width: 767px)').matches ? 500 : 0;
+          playbackTimer = window.setTimeout(() => {
+            playbackTimer = null;
+            if (isInView && !document.hidden && !reducedMotion.matches) {
+              void video.play().catch(() => {});
+            }
+          }, delay);
+        }
+      } else {
+        if (playbackTimer !== null) {
+          window.clearTimeout(playbackTimer);
+          playbackTimer = null;
+        }
+        video.pause();
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      syncPlayback();
+    }, { threshold: 0.05 });
+    observer.observe(video.closest('.cinematic-plate') ?? video);
+    document.addEventListener('visibilitychange', syncPlayback);
+    reducedMotion.addEventListener('change', syncPlayback);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', syncPlayback);
+      reducedMotion.removeEventListener('change', syncPlayback);
+      if (playbackTimer !== null) window.clearTimeout(playbackTimer);
+      video.pause();
+    };
+  }, []);
 
   return (
     <>
@@ -662,12 +706,12 @@ export const CinematicHero: React.FC = () => {
         <div className="cinematic-plate">
           {/* Crisp primary video: Doorway portal, walking silhouette, and foreground rocky terrain */}
           <video 
+            ref={videoRef}
             className="cinematic-plate-video" 
-            autoPlay 
             muted 
             loop 
             playsInline 
-            preload="auto" 
+            preload="none"
             aria-hidden="true"
           >
             <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260808_112712_da9d53df-6d27-4b12-bdf6-aa9dc2622bdf.mp4" type="video/mp4" />

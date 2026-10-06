@@ -7,14 +7,14 @@ import { Zap, ShieldCheck, Sparkles, Terminal, Award, Clock } from 'lucide-react
 
 export const WhyChooseUs: React.FC = () => {
   return (
-    <section className="relative py-28 sm:py-36 bg-[#050711] overflow-hidden">
+    <section className="relative overflow-hidden bg-[#050711] py-16 sm:py-28 lg:py-36">
       {/* Background ambient glow */}
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[180px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-16 lg:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export const WhyChooseUs: React.FC = () => {
         </div>
 
         {/* 6-Card Broken Asymmetric Rhythm matching reference */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3 lg:gap-8 [&>div]:rounded-xl [&>div]:p-3 sm:[&>div]:rounded-3xl sm:[&>div]:p-6 lg:[&>div]:p-8">
           
           {/* 1. Feature Card: Speed */}
           <motion.div

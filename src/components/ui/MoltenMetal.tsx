@@ -146,7 +146,13 @@ void main() {
 }
 `;
 
-const ctxMap = new WeakMap<HTMLElement, any>();
+interface MoltenContext {
+  renderer: InstanceType<typeof Renderer>;
+  program: InstanceType<typeof Program>;
+  mesh: InstanceType<typeof Mesh>;
+}
+
+const ctxMap = new WeakMap<HTMLElement, MoltenContext>();
 
 export const MoltenMetal: React.FC<MoltenMetalProps> = ({
   color1 = '#5227FF',
@@ -178,15 +184,18 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
-    let renderer: any;
-    let gl: any;
+    let renderer: InstanceType<typeof Renderer>;
+    let gl: InstanceType<typeof Renderer>['gl'];
     try {
+      const mobileDprCap = window.matchMedia('(max-width: 767px)').matches
+        ? Math.min(maxDpr, 1.25)
+        : maxDpr;
       renderer = new Renderer({
         webgl: 2,
         alpha: true,
         premultipliedAlpha: true,
         antialias: false,
-        dpr: Math.min(window.devicePixelRatio || 1, maxDpr)
+        dpr: Math.min(window.devicePixelRatio || 1, mobileDprCap)
       });
       gl = renderer.gl;
     } catch {
@@ -194,7 +203,7 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
     }
 
     gl.clearColor(0, 0, 0, 0);
-    const canvas = gl.canvas;
+    const canvas = gl.canvas as HTMLCanvasElement;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
@@ -293,7 +302,8 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
     const io = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
-        isVisible ? tryStart() : tryStop();
+        if (isVisible) tryStart();
+        else tryStop();
       },
       { threshold: 0 }
     );
@@ -301,7 +311,8 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
 
     const onVisibility = () => {
       isPageVisible = !document.hidden;
-      isPageVisible ? tryStart() : tryStop();
+      if (isPageVisible) tryStart();
+      else tryStop();
     };
     document.addEventListener('visibilitychange', onVisibility);
 
@@ -318,7 +329,7 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
       if (canvas.parentNode === container) container.removeChild(canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
-  }, []);
+  }, [maxDpr]);
 
   useEffect(() => {
     const container = containerRef.current;

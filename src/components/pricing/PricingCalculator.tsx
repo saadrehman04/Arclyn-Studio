@@ -28,9 +28,9 @@ export const PricingCalculator: React.FC = () => {
   const currentTier = PRICING_TIERS.find((t) => t.id === selectedTierId) || PRICING_TIERS[1];
 
   return (
-    <div className="space-y-24">
+    <div className="space-y-14 sm:space-y-24">
       {/* 4 Core Tiers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
+      <div className="grid grid-cols-1 items-stretch gap-4 sm:gap-8 lg:grid-cols-4">
         {PRICING_TIERS.map((tier) => {
           const isPopular = tier.popular;
           const isSelected = selectedTierId === tier.id;
@@ -39,7 +39,7 @@ export const PricingCalculator: React.FC = () => {
             <div
               key={tier.id}
               onClick={() => setSelectedTierId(tier.id)}
-              className={`relative rounded-3xl p-7 flex flex-col justify-between cursor-pointer transition-all duration-300 ${
+              className={`relative flex flex-col justify-between rounded-2xl p-4 cursor-pointer transition-all duration-300 sm:rounded-3xl sm:p-7 ${
                 isPopular
                   ? 'bg-[#0E1535] border-2 border-purple-500/80 shadow-2xl shadow-purple-950/60 lg:-translate-y-2'
                   : 'glass-panel hover:border-white/20'
@@ -114,8 +114,8 @@ export const PricingCalculator: React.FC = () => {
       </div>
 
       {/* Add-Ons Menu Section */}
-      <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10">
-        <div className="max-w-3xl mb-10">
+      <div className="rounded-2xl glass-panel border border-white/10 p-4 sm:rounded-3xl sm:p-12">
+        <div className="mb-6 max-w-3xl sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-semibold text-cyan-300 mb-3">
             <Plus className="w-3.5 h-3.5" />
             <span>Modular Enhancements</span>
@@ -131,7 +131,7 @@ export const PricingCalculator: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {ADD_ONS.map((addon) => {
             const isSelected = selectedAddOns.includes(addon.id);
 
@@ -139,7 +139,7 @@ export const PricingCalculator: React.FC = () => {
               <div
                 key={addon.id}
                 onClick={() => toggleAddOn(addon.id)}
-                className={`p-6 rounded-2xl border cursor-pointer transition-all duration-200 flex flex-col justify-between ${
+                className={`flex flex-col justify-between rounded-xl border p-4 cursor-pointer transition-all duration-200 sm:rounded-2xl sm:p-6 ${
                   isSelected
                     ? 'bg-purple-950/30 border-purple-500/60 shadow-lg shadow-purple-950/40'
                     : 'bg-white/[0.02] border-white/10 hover:border-white/20'
@@ -181,7 +181,7 @@ export const PricingCalculator: React.FC = () => {
         </div>
 
         {/* Selected Config Summary */}
-        <div className="mt-10 p-6 rounded-2xl bg-[#090E26] border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="mt-7 flex flex-col justify-between gap-4 rounded-xl border border-white/10 bg-[#090E26] p-4 sm:mt-10 sm:gap-6 sm:rounded-2xl sm:p-6 md:flex-row md:items-center">
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Your Custom Scope Preview
@@ -205,8 +205,8 @@ export const PricingCalculator: React.FC = () => {
       </div>
 
       {/* Payment Structure Breakdown */}
-      <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+      <div className="rounded-2xl glass-panel border border-white/10 p-4 sm:rounded-3xl sm:p-12">
+        <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-semibold text-emerald-300 mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Fair &amp; Aligned Milestone Schedule</span>
@@ -219,11 +219,11 @@ export const PricingCalculator: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           {PAYMENT_STRUCTURE.milestones.map((m, idx) => (
             <div
               key={m.percentage}
-              className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 relative"
+              className="relative rounded-xl border border-white/5 bg-white/[0.02] p-4 sm:rounded-2xl sm:p-6"
             >
               <div className="text-4xl font-extrabold font-mono text-gradient mb-2">
                 {m.percentage}
@@ -254,7 +254,7 @@ export const PricingCalculator: React.FC = () => {
           </h2>
         </div>
 
-        <div className="p-6 rounded-2xl glass-panel border border-white/10 space-y-2">
+        <div className="space-y-2 rounded-xl glass-panel border border-white/10 p-4 sm:rounded-2xl sm:p-6">
           <h3 className="text-base font-bold text-white">
             Are there any monthly maintenance or hidden hosting fees?
           </h3>
@@ -263,7 +263,7 @@ export const PricingCalculator: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl glass-panel border border-white/10 space-y-2">
+        <div className="space-y-2 rounded-xl glass-panel border border-white/10 p-4 sm:rounded-2xl sm:p-6">
           <h3 className="text-base font-bold text-white">
             Can we pay in Pakistani Rupees (PKR) or USD?
           </h3>
@@ -272,7 +272,7 @@ export const PricingCalculator: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl glass-panel border border-white/10 space-y-2">
+        <div className="space-y-2 rounded-xl glass-panel border border-white/10 p-4 sm:rounded-2xl sm:p-6">
           <h3 className="text-base font-bold text-white">
             What happens if we need revisions during the project?
           </h3>

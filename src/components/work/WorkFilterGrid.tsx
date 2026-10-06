@@ -7,12 +7,8 @@ import { Project, PROJECTS } from '@/data/projects';
 import { 
   ArrowUpRight, 
   ExternalLink, 
-  Sparkles, 
   CheckCircle2, 
   X, 
-  Layers, 
-  Calendar,
-  Layers3
 } from 'lucide-react';
 import { SpotlightTab } from '@/components/ui/spotlight-tab';
 
@@ -40,7 +36,7 @@ export const WorkFilterGrid: React.FC = () => {
   return (
     <div>
       {/* Category Tabs with Interactive Shine on Hover */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+      <div className="mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:mb-12 sm:gap-3">
         {CATEGORIES.map((cat) => {
           const isSelected = activeCategory === cat;
           const count = cat === 'All'
@@ -53,7 +49,7 @@ export const WorkFilterGrid: React.FC = () => {
               active={isSelected}
               onClick={() => setActiveCategory(cat)}
               glowColor="brand"
-              className={`flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 ${
+              className={`flex items-center gap-1.5 px-2.5 py-2 text-[10px] font-semibold transition-all duration-200 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm ${
                 isSelected ? 'scale-105' : ''
               }`}
               badge={
@@ -69,11 +65,11 @@ export const WorkFilterGrid: React.FC = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-8">
         {filteredProjects.map((project) => (
           <div
             key={project.id}
-            className="group relative rounded-3xl overflow-hidden glass-panel flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-purple-950/40"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-xl glass-panel cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-purple-950/40 sm:rounded-3xl"
             onClick={() => setSelectedProject(project)}
           >
             {/* Card Image */}
@@ -88,21 +84,21 @@ export const WorkFilterGrid: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-black/20 opacity-60 group-hover:opacity-30 transition-opacity" />
 
               {/* Category Pill */}
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#060913]/90 text-purple-300 border border-white/15 backdrop-blur-md">
+              <div className="absolute left-2 top-2 z-10 sm:left-4 sm:top-4">
+                <span className="max-w-28 truncate rounded-full border border-white/15 bg-[#060913]/90 px-2 py-1 text-[9px] font-semibold text-purple-300 sm:px-3 sm:text-xs sm:backdrop-blur-md">
                   {project.category}
                 </span>
               </div>
 
               {/* Live Link Button if available */}
               {project.liveUrl && (
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute right-2 top-2 z-10 sm:right-4 sm:top-4">
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="w-9 h-9 rounded-full bg-[#060913]/85 hover:bg-purple-600 text-white flex items-center justify-center border border-white/15 backdrop-blur-md transition-all hover:scale-110 shadow-lg"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#060913]/85 text-white shadow-lg transition-all hover:scale-110 hover:bg-purple-600 sm:h-11 sm:w-11 sm:backdrop-blur-md"
                     title="Visit Live Deployment"
                   >
                     <ArrowUpRight className="w-4 h-4" />
@@ -112,30 +108,30 @@ export const WorkFilterGrid: React.FC = () => {
             </div>
 
             {/* Card Content */}
-            <div className="p-6 flex flex-col flex-1 justify-between">
+            <div className="flex flex-1 flex-col justify-between p-2.5 sm:p-6">
               <div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                <h3 className="mb-1 line-clamp-2 text-sm font-bold leading-tight text-white transition-colors group-hover:text-cyan-300 sm:mb-2 sm:text-xl">
                   {project.name}
                 </h3>
 
                 {/* Key Result Stat */}
-                <div className="text-xs font-semibold text-emerald-400 mb-3 flex items-center gap-1.5">
+                <div className="mb-2 flex items-start gap-1 text-[9px] font-semibold leading-tight text-emerald-400 sm:mb-3 sm:items-center sm:gap-1.5 sm:text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   <span>{project.stat}</span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 line-clamp-3">
+                <p className="mb-3 line-clamp-3 text-[10px] leading-snug text-slate-300 sm:mb-6 sm:text-sm sm:leading-relaxed">
                   {project.shortDesc}
                 </p>
               </div>
 
               <div>
                 {/* Tech tags */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="mb-3 flex flex-wrap gap-1 sm:mb-5 sm:gap-1.5">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2 py-0.5 rounded-md text-[10px] font-mono font-medium bg-white/5 border border-white/10 text-slate-300"
+                      className="rounded-sm border border-white/10 bg-white/5 px-1.5 py-0.5 text-[8px] font-mono font-medium text-slate-300 sm:rounded-md sm:px-2 sm:text-[10px]"
                     >
                       {t}
                     </span>
@@ -143,8 +139,9 @@ export const WorkFilterGrid: React.FC = () => {
                 </div>
 
                 {/* Footer action */}
-                <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-purple-400 group-hover:text-cyan-300 transition-colors">
-                  <span>View Full Case Study</span>
+                <div className="flex items-center justify-between border-t border-white/5 pt-2 text-[9px] font-semibold text-purple-400 transition-colors group-hover:text-cyan-300 sm:pt-4 sm:text-xs">
+                  <span className="sm:hidden">View case study</span>
+                  <span className="hidden sm:inline">View Full Case Study</span>
                   <div className="w-6 h-6 rounded-full bg-white/5 group-hover:bg-cyan-500/20 flex items-center justify-center transition-all">
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 
 interface CounterProps {
@@ -18,17 +18,23 @@ export const AnimatedCounter: React.FC<CounterProps> = ({
   duration = 2.2,
   className = '',
 }) => {
-  const [displayValue, setDisplayValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
+  const valueRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   useEffect(() => {
     if (!isInView) return;
 
-    let start = 0;
+    const start = 0;
     const end = value;
     const startTime = performance.now();
     const durationMs = duration * 1000;
+    let frameId = 0;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (valueRef.current) valueRef.current.textContent = String(end);
+      return;
+    }
 
     const updateCounter = (currentTime: number) => {
       const elapsed = currentTime - startTime;
@@ -38,22 +44,23 @@ export const AnimatedCounter: React.FC<CounterProps> = ({
       const easeOut = 1 - Math.pow(1 - progress, 4);
       const current = Math.floor(easeOut * (end - start) + start);
       
-      setDisplayValue(current);
+      if (valueRef.current) valueRef.current.textContent = String(current);
 
       if (progress < 1) {
-        requestAnimationFrame(updateCounter);
+        frameId = requestAnimationFrame(updateCounter);
       } else {
-        setDisplayValue(end);
+        if (valueRef.current) valueRef.current.textContent = String(end);
       }
     };
 
-    requestAnimationFrame(updateCounter);
+    frameId = requestAnimationFrame(updateCounter);
+    return () => cancelAnimationFrame(frameId);
   }, [isInView, value, duration]);
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {displayValue}
+      <span ref={valueRef}>0</span>
       {suffix}
     </span>
   );

@@ -95,7 +95,7 @@ export const TeamSection: React.FC = () => {
 
         {/* Team Cards Grid on TRIONN White Theme */}
         <div className="relative max-w-6xl mx-auto pt-2 pb-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+          <div className="grid grid-cols-2 items-stretch gap-3 sm:gap-6 lg:grid-cols-4 lg:gap-7">
             {TEAM_MEMBERS.map((member, idx) => (
               <motion.div
                 key={member.name}
@@ -103,7 +103,7 @@ export const TeamSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: 0.1 + idx * 0.08 }}
-                className="group relative rounded-3xl overflow-hidden bg-white border border-[#1A1A1A]/10 hover:border-[#1A1A1A]/40 transition-all duration-300 flex flex-col justify-between shadow-[0_12px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] hover:-translate-y-1.5"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#1A1A1A]/10 bg-white shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1A1A1A]/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] sm:rounded-3xl"
               >
                 {/* Lead Badge for Saad Rehman */}
                 {member.isLead && (
@@ -114,7 +114,7 @@ export const TeamSection: React.FC = () => {
                 )}
 
                 {/* Portrait Container */}
-                <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#ECECEC] border-b border-[#1A1A1A]/10">
+                <div className="relative w-full aspect-[4/5] overflow-hidden border-b border-[#1A1A1A]/10 bg-[#ECECEC] sm:aspect-[3/4]">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -129,8 +129,8 @@ export const TeamSection: React.FC = () => {
                 </div>
 
                 {/* Card Text Content */}
-                <div className="p-5 sm:p-6 text-center flex flex-col justify-center grow bg-white">
-                  <h3 className="trionn-heading text-xl sm:text-2xl font-bold text-[#1E1E1E] group-hover:text-black transition-colors tracking-tight">
+                <div className="flex grow flex-col justify-center bg-white p-3 text-center sm:p-6">
+                  <h3 className="trionn-heading text-sm font-bold tracking-tight text-[#1E1E1E] transition-colors group-hover:text-black sm:text-2xl">
                     {member.name}
                   </h3>
                   

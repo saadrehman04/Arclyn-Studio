@@ -32,46 +32,51 @@ const ICON_MAP: Record<string, React.ElementType> = {
   'medical-clinics': Stethoscope,
 };
 
-import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
-
 export default function IndustriesPage() {
   return (
-    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
-      {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon variant="strands" opacity={0.7} />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
+    <div className="relative min-h-screen overflow-hidden bg-[#090909] pb-16 pt-24 text-[#f5f5f5] sm:pb-24 sm:pt-32">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+          maskImage: 'linear-gradient(to bottom, black, transparent 92%)',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Page Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 w-fit mb-4">
-            <Layers className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-cyan-300">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-16">
+          <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#ff1010]/30 bg-[#ff1010]/10 px-3.5 py-1.5">
+            <Layers className="h-3.5 w-3.5 text-[#ff1010]" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#ff1010]">
               Vertical Blueprints
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-[#f5f5f5] sm:text-5xl lg:text-6xl">
             Industries We Serve <br />
-            <span className="text-gradient">&amp; Concept Architectures</span>
+            <span className="text-[#ff1010]">&amp; Concept Architectures</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed text-[#8a8a8a] sm:text-lg">
             Every business category demands its own visual language, psychological triggers, and conversion funnel. Below is a showcase of the type of tailored websites and platforms Arclyn Studio designs and engineers.
           </p>
 
           {/* Explicit disclaimer banner as requested */}
-          <div className="mt-6 p-4 rounded-2xl bg-white/[0.03] border border-white/10 max-w-2xl mx-auto flex items-start gap-3 text-left">
-            <ShieldAlert className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-            <p className="text-xs text-slate-300 leading-relaxed">
+          <div className="mx-auto mt-6 flex max-w-2xl items-start gap-3 rounded-xl border border-white/10 bg-[#0d0d0d] p-4 text-left sm:rounded-2xl">
+            <ShieldAlert className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#ff1010]" />
+            <p className="text-xs leading-relaxed text-[#8a8a8a]">
               <strong className="text-white">Editorial Notice:</strong> The concept prototypes below represent original design blueprints and aesthetic explorations created by Arclyn Studio to demonstrate vertical expertise. They are not presented as past client endorsements, nor do they duplicate proprietary brand assets.
             </p>
           </div>
         </div>
 
         {/* 6 Industry Full Showcases */}
-        <div className="space-y-16">
+          <div className="space-y-10 sm:space-y-16">
           {INDUSTRIES.map((ind, index) => {
             const Icon = ICON_MAP[ind.id] || Building2;
             const isEven = index % 2 === 1;
@@ -80,45 +85,45 @@ export default function IndustriesPage() {
               <div
                 key={ind.id}
                 id={ind.id}
-                className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 relative overflow-hidden"
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d] p-4 sm:rounded-3xl sm:p-8 lg:p-12"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                   
                   {/* Left: Strategy, Conversion focus, & Real project link */}
                   <div className={`lg:col-span-6 space-y-6 ${isEven ? 'lg:order-2' : ''}`}>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 text-cyan-400 flex items-center justify-center">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-[#111111] text-[#ff1010] sm:h-12 sm:w-12 sm:rounded-2xl">
                         <Icon className="w-6 h-6" />
                       </div>
                       <div>
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
                           {ind.name}
                         </h2>
-                        <span className="text-xs text-cyan-300 font-semibold">
+                        <span className="text-xs font-semibold text-[#ff1010]">
                           {ind.tagline}
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-sm text-slate-300 leading-relaxed">
+                    <p className="text-sm leading-relaxed text-[#b0b0b0]">
                       {ind.description}
                     </p>
 
                     {/* Style Inspiration */}
-                    <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 text-xs text-slate-400 leading-relaxed">
-                      <strong className="text-slate-300">Aesthetic Moodboard Direction:</strong>{' '}
+                    <div className="rounded-xl border border-white/10 bg-[#111111] p-3 text-xs leading-relaxed text-[#8a8a8a] sm:rounded-2xl sm:p-4">
+                      <strong className="text-white">Aesthetic Moodboard Direction:</strong>{' '}
                       {ind.styleInspiration}
                     </div>
 
                     {/* Conversion Focus Checklist */}
                     <div className="space-y-2.5">
-                      <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                      <div className="text-xs font-bold uppercase tracking-wider text-[#ff1010]">
                         High-Converting Capabilities:
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {ind.conversionFocus.map((c) => (
-                          <div key={c} className="flex items-start gap-2 text-xs text-slate-300">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                          <div key={c} className="flex items-start gap-2 text-xs text-[#b0b0b0]">
+                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[#ff1010]" />
                             <span>{c}</span>
                           </div>
                         ))}
@@ -127,13 +132,13 @@ export default function IndustriesPage() {
 
                     {/* Verified Arclyn Production Example if available */}
                     {ind.arclynExample && (
-                      <div className="p-4 rounded-2xl bg-purple-950/20 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex flex-col justify-between gap-3 rounded-xl border border-[#ff1010]/20 bg-[#111111] p-3 sm:flex-row sm:items-center sm:rounded-2xl sm:p-4">
                         <div>
-                          <div className="text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-[#ff1010]">
                             <Sparkles className="w-3.5 h-3.5" />
                             <span>Verified Production Project:</span>
                           </div>
-                          <div className="text-xs text-slate-300 mt-0.5">
+                          <div className="mt-0.5 text-xs text-[#b0b0b0]">
                             {ind.arclynExample.name} — {ind.arclynExample.note}
                           </div>
                         </div>
@@ -142,7 +147,7 @@ export default function IndustriesPage() {
                             href={ind.arclynExample.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-semibold whitespace-nowrap transition-colors"
+                            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-[#ff1010]/30 px-3 py-1.5 text-xs font-semibold text-[#ff1010] transition-colors hover:bg-[#ff1010] hover:text-white"
                           >
                             <span>Live Site</span>
                             <ExternalLink className="w-3 h-3" />
@@ -155,7 +160,7 @@ export default function IndustriesPage() {
                     <div className="pt-2">
                       <Link
                         href={`/contact?industry=${ind.id}`}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-white btn-primary-gradient"
+                        className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#ff1010] px-5 py-3 text-xs font-semibold text-white transition-colors hover:bg-[#e00000] sm:rounded-xl sm:px-6 sm:text-sm"
                       >
                         <span>Build for {ind.name.split('&')[0].trim()}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -165,7 +170,7 @@ export default function IndustriesPage() {
 
                   {/* Right: Original Concept Mockup Preview */}
                   <div className={`lg:col-span-6 ${isEven ? 'lg:order-1' : ''}`}>
-                    <div className={`rounded-2xl border border-white/15 p-6 sm:p-8 bg-gradient-to-br ${ind.mockupTheme.bgStyle} shadow-2xl backdrop-blur-xl relative overflow-hidden`}>
+                    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#111111] p-4 sm:rounded-2xl sm:p-8">
                       
                       {/* Browser header */}
                       <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
@@ -189,7 +194,7 @@ export default function IndustriesPage() {
                           {ind.mockupTheme.demoHeadline}
                         </h3>
 
-                        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        <p className="text-xs leading-relaxed text-[#8a8a8a] sm:text-sm">
                           {ind.mockupTheme.demoSub}
                         </p>
 
@@ -197,7 +202,7 @@ export default function IndustriesPage() {
                           {ind.mockupTheme.demoTags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2.5 py-1 rounded-md text-[10px] font-semibold bg-white/10 text-white border border-white/15"
+                              className="rounded-md border border-white/10 bg-[#090909] px-2.5 py-1 text-[10px] font-semibold text-[#d5d5d5]"
                             >
                               {tag}
                             </span>
@@ -207,12 +212,11 @@ export default function IndustriesPage() {
                         <div className="pt-4 flex items-center gap-3">
                           <button
                             type="button"
-                            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white shadow-lg transition-transform hover:scale-105"
-                            style={{ backgroundColor: ind.mockupTheme.accentColor }}
+                            className="rounded-lg bg-[#ff1010] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#e00000] sm:rounded-xl sm:px-5"
                           >
                             {ind.mockupTheme.demoCta}
                           </button>
-                          <span className="text-[11px] text-slate-400">
+                          <span className="text-[11px] text-[#8a8a8a]">
                             Mobile-first responsive flow
                           </span>
                         </div>
@@ -228,16 +232,16 @@ export default function IndustriesPage() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-20 rounded-3xl glass-panel p-8 sm:p-12 text-center max-w-3xl mx-auto border border-white/10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+        <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-white/10 bg-[#0d0d0d] p-5 text-center sm:mt-20 sm:rounded-3xl sm:p-12">
+          <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl">
             Operating in a Different Vertical?
           </h2>
-          <p className="text-sm text-slate-300 mb-8 max-w-lg mx-auto">
+          <p className="mx-auto mb-8 max-w-lg text-sm text-[#8a8a8a]">
             Our architectural process adapts to any high-intent commercial niche — B2B fintech, legal practices, educational academies, and industrial logistics.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold text-white btn-primary-gradient"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#ff1010] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#e00000] sm:rounded-xl sm:px-8"
           >
             <span>Discuss Your Industry Requirements</span>
             <ArrowRight className="w-4 h-4" />

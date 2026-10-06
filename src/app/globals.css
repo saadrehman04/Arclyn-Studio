@@ -365,6 +365,10 @@ p, blockquote, li {
   font-family: "Raleway", sans-serif !important;
 }
 
+@keyframes testimonial-progress {
+  to { transform: scaleX(1); }
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }

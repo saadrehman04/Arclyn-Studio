@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Sparkles, MoveHorizontal } from 'lucide-react';
+import { subscribeScrollTriggerUpdate } from '@/lib/scroll-trigger-bridge';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -181,6 +182,8 @@ export const ProjectsTapeSection: React.FC = () => {
   const spotlightRef = useRef<HTMLDivElement>(null);
   const bottomCtaRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
+  const lastFrameTimeRef = useRef(0);
+  const isTapeVisibleRef = useRef(false);
 
   // Dynamic responsive cylindrical geometry (compact size & height)
   const [geometry, setGeometry] = useState({
@@ -214,22 +217,35 @@ export const ProjectsTapeSection: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    updateGeometry();
+    const initialUpdate = window.requestAnimationFrame(updateGeometry);
     window.addEventListener('resize', updateGeometry);
-    return () => window.removeEventListener('resize', updateGeometry);
+    return () => {
+      window.cancelAnimationFrame(initialUpdate);
+      window.removeEventListener('resize', updateGeometry);
+    };
   }, [updateGeometry]);
 
   // Silky 60-120fps hardware-accelerated continuous rotation loop
   useEffect(() => {
-    const loop = () => {
+    const loop = (timestamp: number) => {
+      if (!isTapeVisibleRef.current || document.hidden) {
+        animFrameRef.current = null;
+        lastFrameTimeRef.current = 0;
+        return;
+      }
+
+      const frameScale = lastFrameTimeRef.current === 0
+        ? 1
+        : Math.min((timestamp - lastFrameTimeRef.current) / (1000 / 60), 2);
+      lastFrameTimeRef.current = timestamp;
+
       if (!isDraggingRef.current) {
         if (Math.abs(velocityRef.current) > 0.04) {
-          angleRef.current += velocityRef.current;
-          velocityRef.current *= 0.94; // smooth friction decay
+          angleRef.current += velocityRef.current * frameScale;
+          velocityRef.current *= Math.pow(0.94, frameScale);
         } else {
-          // Fast continuous tape auto-rotation (~9s per full 360° rotation)
-          const baseSpeed = isHoveredRef.current ? 0.22 : 0.65;
-          angleRef.current += baseSpeed;
+          const degreesPerFrame = isHoveredRef.current ? 0.32 : 0.78;
+          angleRef.current += degreesPerFrame * frameScale;
         }
       }
 
@@ -245,9 +261,45 @@ export const ProjectsTapeSection: React.FC = () => {
       animFrameRef.current = requestAnimationFrame(loop);
     };
 
-    animFrameRef.current = requestAnimationFrame(loop);
+    const startLoop = () => {
+      if (animFrameRef.current === null && !document.hidden) {
+        animFrameRef.current = requestAnimationFrame(loop);
+      }
+    };
+
+    const stopLoop = () => {
+      if (animFrameRef.current !== null) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+      }
+      lastFrameTimeRef.current = 0;
+    };
+
+    const section = sectionRef.current;
+    const observer = section && 'IntersectionObserver' in window
+      ? new IntersectionObserver(([entry]) => {
+          isTapeVisibleRef.current = entry.isIntersecting;
+          if (entry.isIntersecting) startLoop();
+          else stopLoop();
+        }, { rootMargin: '160px 0px' })
+      : null;
+
+    if (section && observer) observer.observe(section);
+    else {
+      isTapeVisibleRef.current = true;
+      startLoop();
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) stopLoop();
+      else if (isTapeVisibleRef.current) startLoop();
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     return () => {
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+      observer?.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      stopLoop();
     };
   }, []);
 
@@ -260,33 +312,29 @@ export const ProjectsTapeSection: React.FC = () => {
     if (prefersReducedMotion) return;
 
     const lenis = (window as unknown as { __lenis?: { on: (event: string, cb: () => void) => void; off: (event: string, cb: () => void) => void } }).__lenis;
-    const lenisUpdate = () => ScrollTrigger.update();
-    if (lenis) lenis.on('scroll', lenisUpdate);
+    const unsubscribeScrollUpdate = lenis
+      ? subscribeScrollTriggerUpdate(lenis, () => ScrollTrigger.update())
+      : undefined;
 
     const ctx = gsap.context(() => {
       // 1. Elevated 3D Curtain Sheet Rise over the preceding Projects Section
       gsap.fromTo(
         section,
-        { 
-          y: 150,
-          scale: 0.95,
-          rotateX: 4,
-          transformPerspective: 1200,
-          borderTopLeftRadius: 72,
-          borderTopRightRadius: 72,
+        {
+          y: 48,
+          borderTopLeftRadius: 52,
+          borderTopRightRadius: 52,
         },
         {
           y: 0,
-          scale: 1,
-          rotateX: 0,
-          borderTopLeftRadius: 40,
-          borderTopRightRadius: 40,
+          borderTopLeftRadius: 36,
+          borderTopRightRadius: 36,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
             start: 'top bottom',
-            end: 'top 20%',
-            scrub: 0.8,
+            end: 'top 30%',
+            scrub: 1,
           },
         }
       );
@@ -295,17 +343,16 @@ export const ProjectsTapeSection: React.FC = () => {
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current,
-          { y: 80, opacity: 0.1, scale: 0.96 },
+          { y: 36, opacity: 0.45 },
           {
             y: 0,
             opacity: 1,
-            scale: 1,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
               start: 'top 95%',
               end: 'top 40%',
-              scrub: 0.6,
+              scrub: 1,
             },
           }
         );
@@ -334,24 +381,16 @@ export const ProjectsTapeSection: React.FC = () => {
       if (containerRef.current) {
         gsap.fromTo(
           containerRef.current,
-          { 
-            y: 110, 
-            rotateX: 8, 
-            scale: 0.92, 
-            opacity: 0.4,
-            transformPerspective: 1000 
-          },
+          { y: 48, opacity: 0.65 },
           {
             y: 0,
-            rotateX: 0,
-            scale: 1,
             opacity: 1,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
               start: 'top 85%',
               end: 'top 25%',
-              scrub: 0.7,
+              scrub: 1,
             },
           }
         );
@@ -361,16 +400,16 @@ export const ProjectsTapeSection: React.FC = () => {
       if (spotlightRef.current) {
         gsap.fromTo(
           spotlightRef.current,
-          { scale: 0.65, opacity: 0.2 },
+          { scale: 0.9, opacity: 0.35 },
           {
-            scale: 1.15,
+            scale: 1.05,
             opacity: 1,
             ease: 'power1.out',
             scrollTrigger: {
               trigger: section,
               start: 'top bottom',
-              end: 'top 20%',
-              scrub: 0.8,
+              end: 'top 30%',
+              scrub: 1,
             },
           }
         );
@@ -397,7 +436,7 @@ export const ProjectsTapeSection: React.FC = () => {
     }, sectionRef);
 
     return () => {
-      if (lenis) lenis.off('scroll', lenisUpdate);
+      unsubscribeScrollUpdate?.();
       ctx.revert();
     };
   }, []);
@@ -451,8 +490,7 @@ export const ProjectsTapeSection: React.FC = () => {
             src={card.image}
             alt={card.name}
             fill
-            unoptimized
-            sizes="(max-width: 640px) 175px, (max-width: 1024px) 220px, 260px"
+            sizes="(max-width: 420px) 135px, (max-width: 640px) 155px, (max-width: 1024px) 185px, 215px"
             className="object-cover object-center w-full h-full select-none pointer-events-none"
           />
 
@@ -522,8 +560,7 @@ export const ProjectsTapeSection: React.FC = () => {
             src={card.image}
             alt={card.name}
             fill
-            unoptimized
-            sizes="(max-width: 640px) 175px, (max-width: 1024px) 220px, 260px"
+            sizes="(max-width: 420px) 135px, (max-width: 640px) 155px, (max-width: 1024px) 185px, 215px"
             className="object-cover object-center w-full h-full select-none pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105"
           />
 
@@ -623,7 +660,7 @@ export const ProjectsTapeSection: React.FC = () => {
         ref={containerRef}
         className="relative w-full h-[320px] sm:h-[370px] lg:h-[410px] overflow-hidden cursor-grab active:cursor-grabbing will-change-transform transform-gpu"
         style={{
-          perspective: '1100px',
+          perspective: '1600px',
           perspectiveOrigin: '50% 50%',
           touchAction: 'pan-y',
         }}

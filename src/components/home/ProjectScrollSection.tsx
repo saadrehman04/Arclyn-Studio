@@ -4,8 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, ArrowUpRight, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
+import { subscribeScrollTriggerUpdate } from '@/lib/scroll-trigger-bridge';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -81,14 +82,25 @@ export const SHOWCASE_PROJECTS = [
 export const ProjectScrollSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const unmaskCardRef = useRef<HTMLDivElement>(null);
-  const laserBeamRef = useRef<HTMLDivElement>(null);
 
   const activeProject = SHOWCASE_PROJECTS[activeIndex] || SHOWCASE_PROJECTS[0];
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { rootMargin: '120px 0px' });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const handleTabClick = (idx: number) => {
     setActiveIndex(idx);
@@ -104,7 +116,7 @@ export const ProjectScrollSection: React.FC = () => {
 
   // Auto-cycle through projects every 6 seconds when not hovered
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isVisible) return;
 
     autoPlayTimerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % SHOWCASE_PROJECTS.length);
@@ -113,7 +125,7 @@ export const ProjectScrollSection: React.FC = () => {
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
     };
-  }, [isPaused]);
+  }, [isPaused, isVisible]);
 
   // =========================================================
   // CINEMATIC UNMASK & PARALLAX SCROLL ANIMATION (FROM HERO)
@@ -124,17 +136,15 @@ export const ProjectScrollSection: React.FC = () => {
     const section = sectionRef.current;
     const header = headerRef.current;
     const unmaskCard = unmaskCardRef.current;
-    const laserBeam = laserBeamRef.current;
     if (!section) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const lenis = (window as unknown as { __lenis?: { on: (event: string, cb: () => void) => void; off: (event: string, cb: () => void) => void } }).__lenis;
-    const lenisUpdate = () => ScrollTrigger.update();
-    if (lenis) {
-      lenis.on('scroll', lenisUpdate);
-    }
+    const unsubscribeScrollUpdate = lenis
+      ? subscribeScrollTriggerUpdate(lenis, () => ScrollTrigger.update())
+      : undefined;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -142,7 +152,7 @@ export const ProjectScrollSection: React.FC = () => {
           trigger: section,
           start: 'top 95%',  // Starts unmasking as section enters viewport from hero
           end: 'top 25%',    // Fully revealed as section settles into view
-          scrub: 1.0,
+          scrub: 0.2,
           invalidateOnRefresh: true,
         },
       });
@@ -165,34 +175,21 @@ export const ProjectScrollSection: React.FC = () => {
             y: 85,
             scale: 0.92,
             opacity: 0.25,
-            clipPath: 'inset(8% 3% 0% 3% round 32px)',
           },
           {
             y: 0,
             scale: 1,
             opacity: 1,
-            clipPath: 'inset(0% 0% 0% 0% round 24px)',
             ease: 'power2.out',
           },
           0.05
         );
       }
 
-      // 3. Sweeping Unmask Laser Glow Beam across the top border of the card
-      if (laserBeam) {
-        tl.fromTo(
-          laserBeam,
-          { left: '-25%', opacity: 0 },
-          { left: '125%', opacity: 1, ease: 'power1.inOut' },
-          0.1
-        );
-      }
     }, section);
 
     return () => {
-      if (lenis) {
-        lenis.off('scroll', lenisUpdate);
-      }
+      unsubscribeScrollUpdate?.();
       ctx.revert();
     };
   }, []);
@@ -201,78 +198,46 @@ export const ProjectScrollSection: React.FC = () => {
     <section 
       ref={sectionRef}
       id="production-showcase"
-      className="relative w-full -mt-16 sm:-mt-24 lg:-mt-32 pt-10 sm:pt-16 pb-12 sm:pb-16 bg-[#050505] rounded-t-[36px] sm:rounded-t-[54px] lg:rounded-t-[72px] border-t border-white/15 shadow-[0_-35px_90px_rgba(0,0,0,0.98)] select-none overflow-hidden z-20 will-change-transform"
+      className="font-helvetica-neue relative z-20 -mt-16 w-full select-none overflow-hidden border-t border-[#1A1A1A]/10 bg-[#E8E8E8] pt-10 text-[#1A1A1A] shadow-[0_-18px_55px_rgba(0,0,0,0.18)] sm:-mt-24 sm:pt-16 lg:-mt-32 lg:pt-20"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Top Luminous Horizon Laser Line */}
-      <div 
-        className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent shadow-[0_0_20px_#22d3ee] pointer-events-none z-10" 
-        aria-hidden="true" 
-      />
-
-      {/* Background Matrix Grid */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-full opacity-30"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)',
-          backgroundSize: '56px 56px',
-          maskImage: 'radial-gradient(ellipse at center, #000 30%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at center, #000 30%, transparent 80%)',
-        }}
-      />
-
-      {/* Subtle Ambient Radial Lighting */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.06)_0%,transparent_70%)] pointer-events-none -z-10" 
-        aria-hidden="true" 
-      />
-
       {/* Unmask Parallax Container */}
       <div ref={unmaskCardRef} className="w-full relative will-change-transform">
-        
-        {/* Sweeping Laser Scan Horizon Beam */}
-        <div 
-          ref={laserBeamRef}
-          className="absolute top-2 -translate-y-1/2 w-48 sm:w-72 h-[3px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-[1px] shadow-[0_0_25px_#22d3ee] pointer-events-none z-30 opacity-0"
-          aria-hidden="true"
-        />
 
         {/* 3D Container Scroll Animation Wrapper */}
         <ContainerScroll
-          className="py-1 sm:py-2 md:py-3 px-2 sm:px-4"
-          cardClassName="relative max-w-[940px] mx-auto h-[460px] sm:h-[540px] md:h-[580px] border-2 sm:border-[3px] border-white/15 p-1.5 sm:p-2.5 bg-[#0a0a0c]/95 rounded-[22px] sm:rounded-[28px] shadow-[0_25px_80px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
-          cardInnerClassName="bg-[#050507] rounded-[16px] sm:rounded-[20px] overflow-hidden flex flex-col relative"
+          className="px-2 py-1 sm:px-4 sm:py-2 md:py-3"
+          cardClassName="relative mx-auto h-[460px] max-w-[940px] rounded-2xl border border-[#1A1A1A]/15 bg-[#F4F4F2] p-1.5 shadow-[0_24px_70px_rgba(0,0,0,0.16)] sm:h-[540px] sm:rounded-[22px] sm:p-2.5 md:h-[580px]"
+          cardInnerClassName="relative flex flex-col overflow-hidden rounded-xl bg-[#F4F4F2] sm:rounded-2xl"
           titleComponent={
-            <div ref={headerRef} className="flex flex-col items-center text-center px-4 mb-2 sm:mb-4 will-change-transform">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/15 text-neutral-300 text-[10px] sm:text-xs font-mono uppercase tracking-wider backdrop-blur-md mb-2.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+            <div ref={headerRef} className="mb-3 flex flex-col items-start px-4 text-left will-change-transform sm:mb-5">
+              <div className="mb-2.5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1A1A1A]/55 sm:text-xs">
+                <ShieldCheck className="h-3.5 w-3.5 text-[#1A1A1A]/60" />
                 <span>Verified Production Platforms</span>
               </div>
 
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="font-helvetica-neue text-3xl font-light leading-[1.02] tracking-tight text-[#1A1A1A] sm:text-5xl lg:text-6xl">
                 Engineered for Measurable Scale
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-400 max-w-lg mt-1.5">
+              <p className="mt-2 max-w-lg text-xs leading-relaxed text-[#1A1A1A]/65 sm:text-sm">
                 Explore four flagship systems architected for sub-second speed, conversion lift, and scale.
               </p>
             </div>
           }
         >
           {/* Compact Browser Frame with Controls & Project Selector Tabs */}
-          <div className="shrink-0 px-2.5 sm:px-4 py-2 border-b border-white/10 bg-[#08080a] flex items-center justify-between gap-1.5 sm:gap-2 relative">
+          <div className="relative flex shrink-0 items-center justify-between gap-1.5 border-b border-[#1A1A1A]/10 bg-[#F4F4F2] px-2.5 py-2 sm:gap-2 sm:px-4">
             
             {/* Traffic Lights & Active URL */}
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5 shrink-0">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                <div className="h-2 w-2 rounded-full bg-[#1A1A1A]/20" />
+                <div className="h-2 w-2 rounded-full bg-[#1A1A1A]/20" />
+                <div className="h-2 w-2 rounded-full bg-[#1A1A1A]/20" />
               </div>
-              <div className="hidden md:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 border border-white/10 text-[10px] font-mono text-neutral-300 truncate max-w-[200px]">
-                <span className="text-neutral-500 text-[9px]">🔒</span>
+              <div className="hidden max-w-[200px] items-center gap-1.5 truncate rounded-full border border-[#1A1A1A]/10 bg-white/55 px-2.5 py-0.5 font-mono text-[10px] text-[#1A1A1A]/60 md:flex">
+                <span className="text-[9px] text-[#1A1A1A]/40">https://</span>
                 <span className="truncate">https://{activeProject.displayUrl}</span>
               </div>
             </div>
@@ -286,13 +251,13 @@ export const ProjectScrollSection: React.FC = () => {
                     key={project.id}
                     onClick={() => handleTabClick(idx)}
                     type="button"
-                    className={`px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-tight transition-all duration-300 shrink-0 cursor-pointer flex items-center gap-1.5 border min-h-[34px] ${
+                    className={`flex min-h-[34px] shrink-0 cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[11px] font-medium tracking-tight transition-all duration-300 sm:px-3 ${
                       isActive
-                        ? 'bg-white text-black font-bold border-white shadow-sm'
-                        : 'bg-white/[0.04] hover:bg-white/[0.08] border-white/10 text-neutral-400 hover:text-white'
+                        ? 'border-[#1A1A1A] bg-[#1A1A1A] font-semibold text-white'
+                        : 'border-[#1A1A1A]/15 bg-transparent text-[#1A1A1A]/55 hover:border-[#1A1A1A]/45 hover:text-[#1A1A1A]'
                     }`}
                   >
-                    <span className="text-[9px] font-mono opacity-60">{project.step}</span>
+                    <span className="font-mono text-[9px] opacity-60">{project.step}</span>
                     <span className="whitespace-nowrap hidden md:inline">{project.title.split(' ')[0]}</span>
                   </button>
                 );
@@ -300,13 +265,13 @@ export const ProjectScrollSection: React.FC = () => {
             </div>
 
             {/* Counter Badge */}
-            <div className="shrink-0 font-mono text-[10px] text-neutral-400 px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10">
+            <div className="shrink-0 rounded-full border border-[#1A1A1A]/10 bg-white/55 px-2 py-0.5 font-mono text-[10px] text-[#1A1A1A]/55">
               0{activeIndex + 1} / 0{SHOWCASE_PROJECTS.length}
             </div>
           </div>
 
           {/* Media Display Container with Smooth Crossfade */}
-          <div className="relative flex-1 w-full bg-[#050505] overflow-hidden">
+          <div className="relative w-full flex-1 overflow-hidden bg-[#D8D8D6]">
             {SHOWCASE_PROJECTS.map((project) => {
               const isSelected = activeProject.id === project.id;
               return (
@@ -335,7 +300,7 @@ export const ProjectScrollSection: React.FC = () => {
               <button
                 onClick={handlePrev}
                 type="button"
-                className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all duration-200 pointer-events-auto shadow-lg backdrop-blur-md hover:scale-105 active:scale-95 min-w-[38px] min-h-[38px]"
+                  className="pointer-events-auto flex min-h-[38px] min-w-[38px] items-center justify-center rounded-full border border-white/30 bg-black/55 text-white shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-black/80 active:scale-95 sm:h-8 sm:w-8"
                 aria-label="Previous Project"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -343,7 +308,7 @@ export const ProjectScrollSection: React.FC = () => {
               <button
                 onClick={handleNext}
                 type="button"
-                className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all duration-200 pointer-events-auto shadow-lg backdrop-blur-md hover:scale-105 active:scale-95 min-w-[38px] min-h-[38px]"
+                  className="pointer-events-auto flex min-h-[38px] min-w-[38px] items-center justify-center rounded-full border border-white/30 bg-black/55 text-white shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-black/80 active:scale-95 sm:h-8 sm:w-8"
                 aria-label="Next Project"
               >
                 <ChevronRight className="w-4 h-4" />

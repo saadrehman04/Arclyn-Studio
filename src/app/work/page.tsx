@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
+    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
       {/* Full Background Neon Design Image in Hero Section matching reference */}
       <PageHeroRibbon variant="chrome" fullHero opacity={0.85} />
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
@@ -21,7 +21,7 @@ export default function WorkPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Page Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/25 w-fit mb-4">
             <Sparkles className="w-3.5 h-3.5 text-purple-400" />
             <span className="text-xs font-semibold uppercase tracking-wider text-purple-300">
@@ -29,7 +29,7 @@ export default function WorkPage() {
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             Work That Delivers <br />
             <span className="text-gradient">Real Business Impact</span>
           </h1>
@@ -48,7 +48,7 @@ export default function WorkPage() {
         <WorkFilterGrid />
 
         {/* Bottom Project Inquiry Banner */}
-        <div className="mt-24 rounded-3xl glass-panel p-8 sm:p-12 text-center max-w-4xl mx-auto border border-white/10">
+        <div className="mx-auto mt-12 max-w-4xl rounded-2xl glass-panel border border-white/10 p-4 text-center sm:mt-24 sm:rounded-3xl sm:p-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Have a project in mind with similar requirements?
           </h2>

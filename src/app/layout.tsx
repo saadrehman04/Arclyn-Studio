@@ -107,7 +107,6 @@ export default function RootLayout({
     >
       <head>
         <link href="https://db.onlinewebfonts.com/c/0e6de1ec911a2e267ff136bbdd384a44?family=Helvetica+Neue+Light" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Oswald:wght@500&family=Montserrat:wght@700&family=Roboto+Slab:wght@600&family=Raleway:wght@700&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen flex flex-col bg-[#050711] text-slate-100 font-sans antialiased selection:bg-purple-600/30 selection:text-white bg-noise">
         <SmoothScroll>

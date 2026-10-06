@@ -36,7 +36,7 @@ import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
 
 export default function ServicesPage() {
   return (
-    <div className="pt-32 pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
+    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
       {/* 3D Liquid Chrome Ribbon Background */}
       <PageHeroRibbon variant="strands" opacity={0.65} />
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />

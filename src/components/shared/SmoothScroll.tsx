@@ -13,7 +13,7 @@ export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children
     if (isTouch) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.75,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1,
@@ -23,15 +23,16 @@ export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children
     // Expose instance so navigation (e.g. the Home menu link) can scroll via Lenis
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
+    let rafId: number | null = null;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    const rafId = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId !== null) cancelAnimationFrame(rafId);
       delete (window as unknown as { __lenis?: Lenis }).__lenis;
       lenis.destroy();
     };

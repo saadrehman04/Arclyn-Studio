@@ -34,23 +34,23 @@ const CAPABILITIES = [
 
 export const CapabilityStrip: React.FC = () => {
   return (
-    <section className="relative py-12 border-y border-white/10 bg-[#070B1B]/80 backdrop-blur-md">
+    <section className="relative border-y border-white/10 bg-[#070B1B]/80 py-8 backdrop-blur-md sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {CAPABILITIES.map((cap, index) => {
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+          {CAPABILITIES.map((cap) => {
             const Icon = cap.icon;
             return (
               <div
                 key={cap.title}
-                className="relative group p-6 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-white/15 transition-all duration-300"
+                className="group relative rounded-xl border border-white/5 bg-white/[0.02] p-3 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.05] sm:rounded-2xl sm:p-6"
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center border mb-5 transition-transform duration-300 group-hover:scale-110 ${cap.bg}`}>
-                  <Icon className={`w-6 h-6 ${cap.accent}`} />
+                <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-lg border transition-transform duration-300 group-hover:scale-110 sm:mb-5 sm:h-12 sm:w-12 sm:rounded-xl ${cap.bg}`}>
+                  <Icon className={`h-4 w-4 sm:h-6 sm:w-6 ${cap.accent}`} />
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                <h3 className="mb-1 text-xs font-bold text-white transition-colors group-hover:text-cyan-300 sm:mb-2 sm:text-base">
                   {cap.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                <p className="text-[10px] leading-snug text-slate-400 sm:text-sm sm:leading-relaxed">
                   {cap.desc}
                 </p>
                 {/* Subtle bottom accent line on hover */}

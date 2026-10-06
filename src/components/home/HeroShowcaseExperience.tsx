@@ -77,22 +77,20 @@ export const HeroShowcaseExperience: React.FC = () => {
         return;
       }
 
-      const isMobile = window.innerWidth < 768;
-
       // Harmonized scroll runway matching timeline duration perfectly
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 1.2,
+          scrub: 0.2,
           pin: stageRef.current,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
 
-      // 1. Phase 1 (0.0 -> 0.6): Hero initial copy & logos gently fade out on initial scroll
+      // Keep the main cinematic hero as the primary layer; do not reveal the extra post-scroll hero state.
       if (heroCopy) {
         tl.to(heroCopy, { opacity: 0, y: -40, ease: 'power1.out', duration: 0.6 }, 0);
       }
@@ -100,59 +98,26 @@ export const HeroShowcaseExperience: React.FC = () => {
         tl.to(heroLogos, { opacity: 0, y: 30, ease: 'power1.out', duration: 0.6 }, 0);
       }
 
-      // HERO VIDEO REMAINS 100% BRIGHT, CRISP, AND UNBLURRED (NO DARKENING OR BLUR)
       if (heroPlate) {
         tl.to(heroPlate, { scale: 1.04, ease: 'none', duration: 3.0 }, 0);
-        // Video stays fully visible and sharp throughout the entire scroll!
       }
 
-      // 2. Phase 2 (0.4 -> 2.4): Transition Graphic & Studio Telemetry Reveal & Hold
+      // Keep the secondary motion layer hidden so the scroll transitions directly into the product showcase.
       if (motionGraphicRef.current) {
-        tl.fromTo(
-          motionGraphicRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.6, ease: 'power2.out' },
-          0.4
-        );
-
-        // Concentric HUD ring rotations around the doorway
-        if (ringOuterRef.current) {
-          tl.to(ringOuterRef.current, { rotation: 160, transformOrigin: '250px 250px', ease: 'none', duration: 2.4 }, 0.4);
-        }
-        if (ringMidRef.current) {
-          tl.to(ringMidRef.current, { rotation: -200, transformOrigin: '250px 250px', ease: 'none', duration: 2.4 }, 0.4);
-        }
-        if (ringInnerRef.current) {
-          tl.to(ringInnerRef.current, { rotation: 120, transformOrigin: '250px 250px', ease: 'none', duration: 2.4 }, 0.4);
-        }
-
-        // Sweeping Laser Horizon Scan Beam
-        if (scanBeamRef.current) {
-          tl.fromTo(scanBeamRef.current, { top: '0%' }, { top: '100%', ease: 'none', duration: 2.0 }, 0.4);
-        }
-
-        // Horizon perspective grid
-        if (gridHorizonRef.current) {
-          tl.fromTo(gridHorizonRef.current, { opacity: 0, y: 20 }, { opacity: 0.6, y: 0, ease: 'power2.out', duration: 0.8 }, 0.45);
-        }
-
-        // Left-Aligned Adjusted Typography & Telemetry Entrance
-        if (hudTextRef.current) {
-          tl.fromTo(
-            hudTextRef.current,
-            { opacity: 0, x: -30 },
-            { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-            0.45
-          );
-        }
-
-        // 3. Phase 3 (2.4 -> 3.0): Smooth, gentle dissolve into next section only at the very end
-        tl.to(
-          motionGraphicRef.current,
-          { opacity: 0, y: -20, duration: 0.6, ease: 'power1.in' },
-          2.4
-        );
+        gsap.set(motionGraphicRef.current, { opacity: 0, pointerEvents: 'none' });
       }
+      if (hudTextRef.current) {
+        gsap.set(hudTextRef.current, { opacity: 0, x: 0 });
+      }
+      if (gridHorizonRef.current) {
+        gsap.set(gridHorizonRef.current, { opacity: 0, y: 0 });
+      }
+      if (scanBeamRef.current) {
+        gsap.set(scanBeamRef.current, { top: '0%', opacity: 0 });
+      }
+      if (ringOuterRef.current) gsap.set(ringOuterRef.current, { rotation: 0 });
+      if (ringMidRef.current) gsap.set(ringMidRef.current, { rotation: 0 });
+      if (ringInnerRef.current) gsap.set(ringInnerRef.current, { rotation: 0 });
     }, containerRef);
 
     return () => {
@@ -164,7 +129,7 @@ export const HeroShowcaseExperience: React.FC = () => {
     <div 
       ref={containerRef} 
       id="hero-showcase-experience"
-      className="relative w-full h-[180vh] sm:h-[210vh] lg:h-[230vh] bg-[#050505]"
+      className="relative w-full h-[108dvh] sm:h-[110dvh] lg:h-[112dvh] bg-[#050505]"
     >
       {/* Pinned Full-Viewport Stage */}
       <div 

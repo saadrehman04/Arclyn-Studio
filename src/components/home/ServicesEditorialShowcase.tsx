@@ -114,19 +114,16 @@ export const ServicesEditorialShowcase: React.FC = () => {
         return Math.max(0, trackWidth - availableWidth + 80);
       };
 
-      // Ultra-smooth, performant horizontal scroll
-      // - Uses scrub: 0.3 (eliminates the 1.0s dragging lag)
-      // - Direct DOM updates for progress bar (0 React re-renders during scroll)
-      // - Removed expensive per-card containerAnimation ScrollTriggers
+      // Faster, smoother horizontal scroll: lower scrub equals quicker visual response without feeling laggy.
       gsap.to(track, {
         x: () => -calculateScrollDistance(),
         ease: 'none',
         scrollTrigger: {
           trigger: container,
           start: 'top top',
-          end: () => `+=${calculateScrollDistance() + 450}`,
+          end: () => `+=${calculateScrollDistance() + 220}`,
           pin: pinWrapper,
-          scrub: 0.3, // Silky-smooth, instant responsiveness
+          scrub: 0.14,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           fastScrollEnd: true,
