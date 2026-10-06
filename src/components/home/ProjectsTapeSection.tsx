@@ -1,194 +1,254 @@
 'use client';
 
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles, MoveHorizontal } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface TapeCardItem {
+interface PortfolioCard {
   id: string;
-  title: string;
+  name: string;
+  subtitle: string;
   category: string;
   image: string;
   link: string;
+  stat: string;
+  tagBefore: string;
+  tagAfter: string;
 }
 
-// 11 Ultra-HD tactile industrial design and architectural showcase cards matching user sample
-const TAPE_ITEMS: TapeCardItem[] = [
+// 12 High-Definition Real Client Projects from Arclyn Studio
+const PORTFOLIO_CARDS: PortfolioCard[] = [
   {
-    id: 'tape-1',
-    title: 'OPUS-7 Precision Synthesizer',
-    category: 'Industrial Design',
-    image: '/tape/card-1-synth.jpg',
+    id: 'cheesecake-factory',
+    name: 'The Cheesecake Factory',
+    subtitle: 'Culinary Flagship Experience',
+    category: 'Restaurants & Dining',
+    image: '/projects/cheesecake-factory.png',
     link: '/work',
+    stat: 'National Dining Flagship',
+    tagBefore: 'ARCHITECTURAL SCHEMATIC',
+    tagAfter: 'LIVE PLATFORM',
   },
   {
-    id: 'tape-2',
-    title: 'Monolithic Fluted Colonnade',
-    category: 'Brutalist Architecture',
-    image: '/tape/card-2-brutalist.jpg',
+    id: 'prestige-estates',
+    name: 'Prestige Estates',
+    subtitle: 'Ultra-Luxury Beverly Hills Portal',
+    category: 'Luxury Real Estate',
+    image: '/projects/real-estate.png',
     link: '/work',
+    stat: 'Multi-Million Dollar Listings',
+    tagBefore: 'SPATIAL SCHEMATIC',
+    tagAfter: 'LIVE PORTAL',
   },
   {
-    id: 'tape-3',
-    title: 'Minimalist Microcement Loft',
-    category: 'Spatial Design',
-    image: '/tape/card-3-interior.jpg',
+    id: 'fitusion',
+    name: 'Fitusion Athletics',
+    subtitle: 'High-Performance Wellness',
+    category: 'Gyms & Athletics',
+    image: '/projects/fitusion.png',
     link: '/work',
+    stat: '12k+ Active Members',
+    tagBefore: 'SYSTEM BLUEPRINT',
+    tagAfter: 'LIVE WORKOUT UI',
   },
   {
-    id: 'tape-4',
-    title: 'Studio Workspace Environment',
-    category: 'Creative Tech',
-    image: '/tape/card-4-desk.jpg',
+    id: 'pinza-pizza',
+    name: 'Pinza! Artisanal Crust',
+    subtitle: 'Modern Crust Pizza Engine',
+    category: 'Restaurants & Dining',
+    image: '/projects/pinza-showcase.png',
     link: '/work',
+    stat: 'Sub-Minute Fast Ordering',
+    tagBefore: 'COMMERCE PROTOTYPE',
+    tagAfter: 'LIVE STOREFRONT',
   },
   {
-    id: 'tape-5',
-    title: 'Rhythm:Unit 404 Digital Matrix',
-    category: 'Hardware UI / UX',
-    image: '/tape/card-5-bpm-display.jpg',
+    id: 'mark-murphy-dds',
+    name: 'Mark Murphy DDS',
+    subtitle: 'High-Tech Healthcare Practice',
+    category: 'Medical & Dental',
+    image: '/projects/mark-murphy-dds.png',
     link: '/work',
+    stat: 'HIPAA-Compliant Patient Portal',
+    tagBefore: 'CLINICAL SCHEMA',
+    tagAfter: 'PATIENT PORTAL',
   },
   {
-    id: 'tape-6',
-    title: 'Aura-Precision Tactile Dial',
-    category: 'Physical Computing',
-    image: '/tape/card-6-tactile-dial.jpg',
+    id: 'vinzlu-pantry',
+    name: 'Vinzlu Pantry',
+    subtitle: 'Artisan Gourmet E-Commerce',
+    category: 'E-Commerce',
+    image: '/projects/vinzlu.png',
     link: '/work',
+    stat: 'D2C Culinary Storefront',
+    tagBefore: 'CATALOG WIREFRAME',
+    tagAfter: 'LIVE STOREFRONT',
   },
   {
-    id: 'tape-7',
-    title: 'Dual Mixer CNC Sounddeck',
-    category: 'Acoustic Engineering',
-    image: '/tape/card-7-audio-interface.jpg',
+    id: 'curely-health',
+    name: 'Curely Telemedicine',
+    subtitle: 'AI Health & Virtual Triage',
+    category: 'Healthcare & AI',
+    image: '/projects/curely.png',
     link: '/work',
+    stat: '<5 Min Doctor Connection',
+    tagBefore: 'TELEHEALTH FLOW',
+    tagAfter: 'AI VIRTUAL CLINIC',
   },
   {
-    id: 'tape-8',
-    title: 'Audiophile Translucent Turntable',
-    category: 'Consumer Electronics',
-    image: '/tape/card-8-orange-turntable.jpg',
+    id: 'zoku-home',
+    name: 'Zoku Home',
+    subtitle: 'Modern Cookware Innovation',
+    category: 'E-Commerce',
+    image: '/projects/zokuhome.png',
     link: '/work',
+    stat: 'Global D2C Direct Store',
+    tagBefore: '3D PRODUCT MODEL',
+    tagAfter: 'GLOBAL D2C',
   },
   {
-    id: 'tape-9',
-    title: 'Twilight Brutalist Pavilion Villa',
-    category: 'Modern Architecture',
-    image: '/tape/card-9-dusk-villa.jpg',
+    id: 'sweet-jesus',
+    name: 'Sweet Jesus',
+    subtitle: 'Outrageous Soft Serve Brand',
+    category: 'Restaurants & Dining',
+    image: '/projects/sweetjesus.png',
     link: '/work',
+    stat: '350k+ Social Impressions',
+    tagBefore: 'BRAND STORYBOARD',
+    tagAfter: 'VIRAL FLAGSHIP',
   },
   {
-    id: 'tape-10',
-    title: 'Monolith Anodized Acoustic Tower',
-    category: 'Industrial Design',
-    image: '/tape/card-10-monolith-speaker.jpg',
+    id: 'lakeview-resort',
+    name: 'Lake View Resort',
+    subtitle: 'Private Luxury Oasis Retreat',
+    category: 'Hospitality & Farmhouses',
+    image: '/projects/lakeview.png',
     link: '/work',
+    stat: '100% Seasonal Occupancy',
+    tagBefore: 'RESORT MASTERPLAN',
+    tagAfter: 'BOOKING PORTAL',
   },
   {
-    id: 'tape-11',
-    title: 'Analog Modular Eurorack Console',
-    category: 'Sound Architecture',
-    image: '/tape/card-11-modular-console.jpg',
+    id: 'joyce-rey',
+    name: 'Joyce Rey Estates',
+    subtitle: 'Beverly Hills Icon Real Estate',
+    category: 'Luxury Real Estate',
+    image: '/projects/joycerey.png',
     link: '/work',
+    stat: '$6B+ Career Sales Volume',
+    tagBefore: 'EDITORIAL MOCKUP',
+    tagAfter: 'VIP ARCHIVE',
+  },
+  {
+    id: 'fixora-repair',
+    name: 'Fixora Instant Repair',
+    subtitle: 'Cinematic On-Demand Booking',
+    category: 'Services & Operations',
+    image: '/projects/instant-repair.png',
+    link: '/work',
+    stat: '5,000+ Verified Clients',
+    tagBefore: 'SERVICE WORKFLOW',
+    tagAfter: 'DISPATCH ENGINE',
   },
 ];
+
+// Left Mask CSS: Reveals 0% -> 50% of viewport (Before / Blueprint)
+const MASK_LEFT_STYLE: React.CSSProperties = {
+  WebkitMaskImage: 'linear-gradient(90deg, #000 0%, #000 50%, transparent 50%, transparent 100%)',
+  maskImage: 'linear-gradient(90deg, #000 0%, #000 50%, transparent 50%, transparent 100%)',
+};
+
+// Right Mask CSS: Reveals 50% -> 100% of viewport (After / Full Color)
+const MASK_RIGHT_STYLE: React.CSSProperties = {
+  WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, transparent 50%, #000 50%, #000 100%)',
+  maskImage: 'linear-gradient(90deg, transparent 0%, transparent 50%, #000 50%, #000 100%)',
+};
 
 export const ProjectsTapeSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const leftCarouselRef = useRef<HTMLDivElement>(null);
+  const rightCarouselRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const laserRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
   const bottomCtaRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number | null>(null);
+  const animFrameRef = useRef<number | null>(null);
 
-  // Position and interaction state
-  const offsetRef = useRef<number>(0);
-  const isHoveredRef = useRef<boolean>(false);
+  // Dynamic responsive cylindrical geometry
+  const [geometry, setGeometry] = useState({
+    radius: 640,
+    cardWidth: 260,
+    cardHeight: 370,
+  });
+
+  // Continuous rotation angle and interaction physics
+  const angleRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
+  const startXRef = useRef<number>(0);
   const lastXRef = useRef<number>(0);
-  const dragVelocityRef = useRef<number>(0);
+  const velocityRef = useRef<number>(0);
+  const isHoveredRef = useRef<boolean>(false);
+  const hasMovedRef = useRef<boolean>(false);
 
-  // Triple items for seamless infinite cylindrical scrolling
-  const displayItems = [...TAPE_ITEMS, ...TAPE_ITEMS, ...TAPE_ITEMS];
-
-  // Card dimensions matching the sample reference
-  const CARD_WIDTH = 268; // px
-  const CARD_GAP = 22; // px
-  const TOTAL_CARD_STRIDE = CARD_WIDTH + CARD_GAP;
-  const LOOP_WIDTH = TAPE_ITEMS.length * TOTAL_CARD_STRIDE;
-
-  // Real-time 3D transformation computation for each card along the cylindrical panoramic arc
-  const updateTapePositions = useCallback(() => {
-    if (!trackRef.current || !containerRef.current) return;
-
-    // Apply auto movement or momentum drag
-    if (!isDraggingRef.current) {
-      if (Math.abs(dragVelocityRef.current) > 0.05) {
-        offsetRef.current += dragVelocityRef.current;
-        dragVelocityRef.current *= 0.95; // smooth friction
-      } else {
-        const targetSpeed = isHoveredRef.current ? 0.65 : 2.35;
-        offsetRef.current += targetSpeed;
-      }
+  // Responsive geometry calculation
+  const updateGeometry = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    const width = window.innerWidth;
+    if (width < 640) {
+      setGeometry({ radius: 360, cardWidth: 175, cardHeight: 250 });
+    } else if (width < 1024) {
+      setGeometry({ radius: 490, cardWidth: 220, cardHeight: 310 });
+    } else {
+      setGeometry({ radius: 640, cardWidth: 260, cardHeight: 370 });
     }
-
-    // Wrap around smoothly for infinite tape
-    if (offsetRef.current >= LOOP_WIDTH) {
-      offsetRef.current -= LOOP_WIDTH;
-    } else if (offsetRef.current < 0) {
-      offsetRef.current += LOOP_WIDTH;
-    }
-
-    const containerWidth = containerRef.current.clientWidth;
-    const centerX = containerWidth / 2;
-    const cards = trackRef.current.children;
-
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i] as HTMLElement;
-      // Calculate card's current visual X relative to container
-      const cardBaseLeft = i * TOTAL_CARD_STRIDE - offsetRef.current;
-      const cardCenter = cardBaseLeft + CARD_WIDTH / 2;
-      const distFromCenter = cardCenter - centerX;
-      
-      // Normalized distance from center (-1.8 to 1.8 range across viewport)
-      const normDist = distFromCenter / (containerWidth * 0.46);
-      const clampedNorm = Math.max(-1.8, Math.min(1.8, normDist));
-
-      // 3D Cylindrical Geometry matching user reference screenshots
-      const rotateY = clampedNorm * -28; // degrees
-      const translateZ = -Math.pow(clampedNorm, 2) * 115; // px depth curve
-      const translateY = Math.pow(clampedNorm, 2) * 16; // subtle arch curve
-      const scale = Math.max(0.76, 1 - Math.pow(Math.abs(clampedNorm), 2) * 0.11);
-      const brightness = Math.max(0.62, 1 - Math.pow(Math.abs(clampedNorm), 2) * 0.25);
-
-      card.style.transform = `translate3d(${cardBaseLeft}px, ${translateY}px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
-      card.style.filter = `brightness(${brightness})`;
-    }
-
-    animationFrameRef.current = requestAnimationFrame(updateTapePositions);
-  }, [LOOP_WIDTH, TOTAL_CARD_STRIDE]);
+  }, []);
 
   useEffect(() => {
-    animationFrameRef.current = requestAnimationFrame(updateTapePositions);
-    return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    };
-  }, [updateTapePositions]);
+    updateGeometry();
+    window.addEventListener('resize', updateGeometry);
+    return () => window.removeEventListener('resize', updateGeometry);
+  }, [updateGeometry]);
 
-  // =========================================================
-  // PARALLAX SCROLL ENTRANCE ANIMATION (Requested by user)
-  // Provides a luxurious curtain elevation and layered depth
-  // when scrolling from the case studies section into this tape
-  // =========================================================
+  // Silky 60-120fps hardware-accelerated continuous rotation loop
+  useEffect(() => {
+    const loop = () => {
+      if (!isDraggingRef.current) {
+        if (Math.abs(velocityRef.current) > 0.04) {
+          angleRef.current += velocityRef.current;
+          velocityRef.current *= 0.94; // smooth friction decay
+        } else {
+          // Smooth auto rotation: ~35s per full 360° rotation
+          const baseSpeed = isHoveredRef.current ? 0.08 : 0.24;
+          angleRef.current += baseSpeed;
+        }
+      }
+
+      // Synchronize both 3D carousels in exact sub-pixel lockstep
+      const rot = `rotateY(${-angleRef.current}deg)`;
+      if (leftCarouselRef.current) {
+        leftCarouselRef.current.style.transform = rot;
+      }
+      if (rightCarouselRef.current) {
+        rightCarouselRef.current.style.transform = rot;
+      }
+
+      animFrameRef.current = requestAnimationFrame(loop);
+    };
+
+    animFrameRef.current = requestAnimationFrame(loop);
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, []);
+
+  // Parallax Scroll Entrance Animation
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -198,16 +258,14 @@ export const ProjectsTapeSection: React.FC = () => {
 
     const lenis = (window as unknown as { __lenis?: { on: (event: string, cb: () => void) => void; off: (event: string, cb: () => void) => void } }).__lenis;
     const lenisUpdate = () => ScrollTrigger.update();
-    if (lenis) {
-      lenis.on('scroll', lenisUpdate);
-    }
+    if (lenis) lenis.on('scroll', lenisUpdate);
 
     const ctx = gsap.context(() => {
-      // 1. Monolithic Curtain Elevation: section glides up smoothly with subtle corner curvature expansion
+      // 1. Section Elevation with smooth corner radius expansion
       gsap.fromTo(
         section,
         { 
-          y: 90,
+          y: 80,
           borderTopLeftRadius: 64,
           borderTopRightRadius: 64,
         },
@@ -225,11 +283,11 @@ export const ProjectsTapeSection: React.FC = () => {
         }
       );
 
-      // 2. Parallax Floating Header: text floats upward into view with soft opacity reveal
+      // 2. Parallax Floating Header
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current,
-          { y: 70, opacity: 0.15 },
+          { y: 60, opacity: 0.2 },
           {
             y: 0,
             opacity: 1,
@@ -244,27 +302,7 @@ export const ProjectsTapeSection: React.FC = () => {
         );
       }
 
-      // 3. 3D Tape Container Parallax Rise & Scaling
-      if (containerRef.current) {
-        gsap.fromTo(
-          containerRef.current,
-          { y: 110, scale: 0.94, opacity: 0.4 },
-          {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 80%',
-              end: 'top 30%',
-              scrub: 0.55,
-            },
-          }
-        );
-      }
-
-      // 4. Central Radiant Laser Ignition
+      // 3. Parallax Laser Light Ignition
       if (laserRef.current) {
         gsap.fromTo(
           laserRef.current,
@@ -275,38 +313,39 @@ export const ProjectsTapeSection: React.FC = () => {
             ease: 'power1.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 70%',
-              end: 'top 25%',
+              start: 'top 75%',
+              end: 'top 30%',
               scrub: 0.4,
             },
           }
         );
       }
 
-      // 5. Differential Ambient Glow Drift
-      if (glowRef.current) {
+      // 4. Parallax 3D Container Rise
+      if (containerRef.current) {
         gsap.fromTo(
-          glowRef.current,
-          { yPercent: 30, scale: 0.8 },
+          containerRef.current,
+          { y: 70, scale: 0.96, opacity: 0.6 },
           {
-            yPercent: -20,
-            scale: 1.2,
-            ease: 'none',
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
+              start: 'top 80%',
+              end: 'top 30%',
+              scrub: 0.5,
             },
           }
         );
       }
 
-      // 6. Bottom CTA Parallax Reveal
+      // 5. Bottom CTA Reveal
       if (bottomCtaRef.current) {
         gsap.fromTo(
           bottomCtaRef.current,
-          { y: 40, opacity: 0.3 },
+          { y: 40, opacity: 0.4 },
           {
             y: 0,
             opacity: 1,
@@ -323,34 +362,173 @@ export const ProjectsTapeSection: React.FC = () => {
     }, sectionRef);
 
     return () => {
-      if (lenis) {
-        lenis.off('scroll', lenisUpdate);
-      }
+      if (lenis) lenis.off('scroll', lenisUpdate);
       ctx.revert();
     };
   }, []);
 
-  // Pointer Dragging Listeners
+  // Pointer Interaction Handlers (Mouse & Touch Dragging)
   const handlePointerDown = (e: React.PointerEvent) => {
     isDraggingRef.current = true;
+    hasMovedRef.current = false;
+    startXRef.current = e.clientX;
     lastXRef.current = e.clientX;
-    dragVelocityRef.current = 0;
+    velocityRef.current = 0;
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDraggingRef.current) return;
     const delta = e.clientX - lastXRef.current;
+    if (Math.abs(e.clientX - startXRef.current) > 5) {
+      hasMovedRef.current = true;
+    }
     lastXRef.current = e.clientX;
-    offsetRef.current -= delta;
-    dragVelocityRef.current = -delta;
+    // Map horizontal pixel motion to cylindrical degrees
+    angleRef.current -= delta * 0.22;
+    velocityRef.current = -delta * 0.22;
   };
 
   const handlePointerUp = () => {
     isDraggingRef.current = false;
   };
 
+  // Render Card Content for the "Before" (Left Mask) state
+  const renderBeforeCard = (card: PortfolioCard, index: number) => {
+    const cardAngle = index * (360 / PORTFOLIO_CARDS.length);
+    return (
+      <div
+        key={`before-${card.id}`}
+        className="absolute overflow-hidden rounded-[20px] bg-[#070c14] border border-cyan-500/25 shadow-[0_20px_45px_rgba(0,0,0,0.85)] cursor-pointer group"
+        style={{
+          width: `${geometry.cardWidth}px`,
+          height: `${geometry.cardHeight}px`,
+          left: `-${geometry.cardWidth / 2}px`,
+          top: `-${geometry.cardHeight / 2}px`,
+          transform: `rotateY(${cardAngle}deg) translateZ(${geometry.radius}px)`,
+          transformStyle: 'preserve-3d',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+        }}
+      >
+        {/* Grayscale Wireframe Filtered Visual */}
+        <div className="relative w-full h-full overflow-hidden filter grayscale contrast-125 brightness-90">
+          <Image
+            src={card.image}
+            alt={card.name}
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 175px, (max-width: 1024px) 220px, 260px"
+            className="object-cover object-center w-full h-full select-none pointer-events-none"
+          />
+
+          {/* Cybernetic Tech Blueprint Grid Overlay */}
+          <div 
+            className="absolute inset-0 pointer-events-none opacity-25"
+            style={{
+              backgroundImage: 'linear-gradient(rgba(56, 189, 248, 0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.25) 1px, transparent 1px)',
+              backgroundSize: '16px 16px',
+            }}
+          />
+
+          {/* Subtle cyan tint scrim */}
+          <div className="absolute inset-0 bg-cyan-950/20 mix-blend-color pointer-events-none" />
+
+          {/* Corner Tech Crosshairs */}
+          <div className="absolute top-2 left-2 text-[9px] font-mono text-cyan-400/80 pointer-events-none">
+            +
+          </div>
+          <div className="absolute top-2 right-2 text-[9px] font-mono text-cyan-400/80 pointer-events-none">
+            +
+          </div>
+
+          {/* Top Badge: Blueprint Schematic */}
+          <div className="absolute top-3 left-3 z-10">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/80 border border-cyan-500/40 text-[9px] sm:text-[10px] font-mono font-medium text-cyan-400 tracking-wider backdrop-blur-md">
+              <span className="w-1 h-1 rounded-full bg-cyan-400" />
+              {card.tagBefore}
+            </span>
+          </div>
+
+          {/* Bottom Info Gradient */}
+          <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black via-black/85 to-transparent flex flex-col justify-end">
+            <p className="text-[10px] font-mono text-cyan-400/90 tracking-widest uppercase mb-0.5">
+              {card.category}
+            </p>
+            <h3 className="text-xs sm:text-sm font-bold text-slate-200 tracking-tight leading-snug line-clamp-1 font-mono">
+              {card.name}
+            </h3>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Render Card Content for the "After" (Right Mask) state
+  const renderAfterCard = (card: PortfolioCard, index: number) => {
+    const cardAngle = index * (360 / PORTFOLIO_CARDS.length);
+    return (
+      <div
+        key={`after-${card.id}`}
+        className="absolute overflow-hidden rounded-[20px] bg-[#0c0d12] border border-white/15 shadow-[0_22px_55px_rgba(0,0,0,0.9)] hover:border-cyan-400/60 hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] transition-colors duration-300 cursor-pointer group"
+        style={{
+          width: `${geometry.cardWidth}px`,
+          height: `${geometry.cardHeight}px`,
+          left: `-${geometry.cardWidth / 2}px`,
+          top: `-${geometry.cardHeight / 2}px`,
+          transform: `rotateY(${cardAngle}deg) translateZ(${geometry.radius}px)`,
+          transformStyle: 'preserve-3d',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+        }}
+      >
+        {/* Full-Color Vibrant Live Production UI */}
+        <div className="relative w-full h-full overflow-hidden filter saturate-[1.3] contrast-105">
+          <Image
+            src={card.image}
+            alt={card.name}
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 175px, (max-width: 1024px) 220px, 260px"
+            className="object-cover object-center w-full h-full select-none pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+
+          {/* Top Badge: Live System */}
+          <div className="absolute top-3 left-3 z-10">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/75 border border-emerald-400/40 text-[9px] sm:text-[10px] font-semibold text-emerald-300 tracking-wide backdrop-blur-md shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              {card.tagAfter}
+            </span>
+          </div>
+
+          {/* Top Right Category Pill */}
+          <div className="absolute top-3 right-3 z-10">
+            <span className="inline-flex px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-[9px] font-medium text-slate-300 backdrop-blur-md">
+              {card.category}
+            </span>
+          </div>
+
+          {/* Bottom Info Scrim */}
+          <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black via-black/80 to-transparent flex flex-col justify-end">
+            <h3 className="text-xs sm:text-sm font-bold text-white tracking-tight leading-snug line-clamp-1 mb-0.5 group-hover:text-cyan-300 transition-colors">
+              {card.name}
+            </h3>
+            <p className="text-[10px] text-slate-300 line-clamp-1 flex items-center justify-between">
+              <span>{card.stat}</span>
+              <span className="text-cyan-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                View →
+              </span>
+            </p>
+          </div>
+
+          {/* Subtle Glass Border Highlight */}
+          <div className="absolute inset-0 rounded-[20px] border border-white/10 group-hover:border-cyan-400/50 pointer-events-none transition-colors duration-300" />
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <section 
+    <section
       id="products-tape"
       ref={sectionRef}
       className="relative w-full -mt-10 sm:-mt-14 lg:-mt-20 pt-24 sm:pt-32 pb-24 sm:pb-36 bg-[#040406] text-white rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_70px_rgba(0,0,0,0.7)] overflow-hidden select-none z-30 will-change-transform transform-gpu"
@@ -362,26 +540,26 @@ export const ProjectsTapeSection: React.FC = () => {
         {/* Subtle top transition vignette */}
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#040406] via-[#040406]/85 to-transparent z-10" />
 
-        {/* Central ambient cyan-blue radial spotlight with parallax depth drift */}
-        <div 
-          ref={glowRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.22)_0%,rgba(14,165,233,0.08)_45%,transparent_75%)] blur-2xl will-change-transform transform-gpu" 
-        />
-        
+        {/* Central ambient cyan-blue radial spotlight */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] sm:w-[1100px] h-[550px] sm:h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.18)_0%,rgba(14,165,233,0.06)_45%,transparent_75%)] blur-3xl will-change-transform transform-gpu" />
+
         {/* Soft bottom vignette */}
         <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#040406] to-transparent z-10" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* =========================================================
-            HEADER (Clean, reduced text exactly as requested by user)
-            Animated with parallax reveal as you enter section
+            HEADER (Clean reduced typography requested by user)
             ========================================================= */}
-        <div 
+        <div
           ref={headerRef}
-          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 will-change-transform transform-gpu"
+          className="text-center max-w-4xl mx-auto mb-10 sm:mb-14 will-change-transform transform-gpu"
         >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-medium mb-4 backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Interactive 3D Before / After Showcase</span>
+          </div>
+
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] mb-4">
             Complete Project Portfolio
           </h2>
@@ -390,25 +568,28 @@ export const ProjectsTapeSection: React.FC = () => {
             View all our Recent Works
           </p>
 
-          {/* Subtitle Action Pill (Matches "Get started →" pill in sample screenshot) */}
+          {/* Subtitle Action Pill (Matches "Get started →" pill in sample) */}
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 hover:border-white/40 text-xs sm:text-sm font-medium text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_25px_rgba(255,255,255,0.18)] group"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/20 hover:border-white/40 text-xs sm:text-sm font-medium text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] group"
           >
             <span>Get started</span>
             <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
-
       </div>
 
       {/* =========================================================
-          THE 3D CURVED TAPE / CYLINDRICAL CAROUSEL (The star of the show)
-          Animated with parallax elevation and depth scaling
+          THE 3D BEFORE / AFTER REVOLVING CYLINDRICAL CAROUSEL
+          Matching Framer University Architecture with Exact Mask Split
           ========================================================= */}
-      <div 
+      <div
         ref={containerRef}
-        className="relative w-full h-[410px] sm:h-[480px] lg:h-[520px] overflow-hidden cursor-grab active:cursor-grabbing perspective-[1400px] will-change-transform transform-gpu"
+        className="relative w-full h-[420px] sm:h-[490px] lg:h-[540px] overflow-hidden cursor-grab active:cursor-grabbing will-change-transform transform-gpu"
+        style={{
+          perspective: '1200px',
+          perspectiveOrigin: '50% 50%',
+        }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -416,78 +597,98 @@ export const ProjectsTapeSection: React.FC = () => {
           handlePointerUp();
           isHoveredRef.current = false;
         }}
-        onMouseEnter={() => { isHoveredRef.current = true; }}
+        onMouseEnter={() => {
+          isHoveredRef.current = true;
+        }}
       >
-        {/* Soft edge fade masks on extreme left and right */}
-        <div className="absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#040406] to-transparent pointer-events-none z-30" />
-        <div className="absolute inset-y-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-[#040406] to-transparent pointer-events-none z-30" />
+        {/* Soft Edge Vignettes on Extreme Left and Right of Viewport */}
+        <div className="absolute inset-y-0 left-0 w-20 sm:w-40 bg-gradient-to-r from-[#040406] to-transparent pointer-events-none z-30" />
+        <div className="absolute inset-y-0 right-0 w-20 sm:w-40 bg-gradient-to-l from-[#040406] to-transparent pointer-events-none z-30" />
 
         {/* =========================================================
-            CENTRAL NEON SCANNER SPLIT & HOLOGRAPHIC LIGHT BEAM
+            LAYER 1: LEFT MASK (BEFORE STATE: WIREFRAME / BLUEPRINT)
+            Masked from 0% to 50% across horizontal screen width
             ========================================================= */}
-        <div 
-          ref={laserRef}
-          className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center will-change-transform origin-center"
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={MASK_LEFT_STYLE}
         >
-          {/* Intense ambient radial glow behind the laser slit */}
-          <div className="absolute w-[450px] sm:w-[620px] h-[360px] sm:h-[480px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.42)_0%,rgba(14,165,233,0.18)_42%,transparent_75%)] blur-2xl" />
+          <div
+            ref={leftCarouselRef}
+            className="absolute top-1/2 left-1/2 w-0 h-0 pointer-events-auto will-change-transform"
+            style={{
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            {PORTFOLIO_CARDS.map((card, idx) => renderBeforeCard(card, idx))}
+          </div>
+        </div>
 
-          {/* Vertical Radiant White/Cyan Laser Light Slit */}
-          <div className="w-[3.5px] sm:w-[4px] h-[350px] sm:h-[440px] bg-gradient-to-b from-transparent via-white 20% via-cyan-300 70% to-transparent shadow-[0_0_20px_#ffffff,0_0_40px_#38bdf8,0_0_80px_#0ea5e9,0_0_130px_#0284c7] opacity-95" />
-          
-          {/* Horizontal Telemetry Scanning Bars radiating across center card */}
+        {/* =========================================================
+            LAYER 2: RIGHT MASK (AFTER STATE: VIBRANT LIVE PRODUCTION)
+            Masked from 50% to 100% across horizontal screen width
+            ========================================================= */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={MASK_RIGHT_STYLE}
+        >
+          <div
+            ref={rightCarouselRef}
+            className="absolute top-1/2 left-1/2 w-0 h-0 pointer-events-auto will-change-transform"
+            style={{
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            {PORTFOLIO_CARDS.map((card, idx) => renderAfterCard(card, idx))}
+          </div>
+        </div>
+
+        {/* =========================================================
+            CENTER SCANNER / OPTICAL LASER SPLIT (AT EXACT 50% DIVIDER)
+            Exact 4-layer optical stack extracted from Framer Reference
+            ========================================================= */}
+        <div
+          ref={laserRef}
+          className="absolute inset-y-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center will-change-transform origin-center"
+        >
+          {/* Layer A: Radial Ambient Aperture Bloom */}
+          <div className="absolute w-[360px] sm:w-[520px] h-[320px] sm:h-[440px] bg-[radial-gradient(ellipse_at_center,rgba(0,234,255,0.42)_0%,rgba(27,183,250,0.18)_42%,transparent_75%)] blur-2xl" />
+
+          {/* Layer B: Center Color Top 2 (Cyan Wide Bloom, blur 8px) */}
+          <div className="absolute w-[31px] h-[300px] sm:h-[400px] rounded-full bg-gradient-to-b from-[#00eaff]/15 via-[#00eaff] to-[#00eaff]/15 blur-[8px] opacity-40" />
+
+          {/* Layer C: Center Color Top 1 (Cyan Core, blur 4px) */}
+          <div className="absolute w-[21px] h-[260px] sm:h-[350px] rounded-full bg-gradient-to-b from-[#1bb7fa]/25 via-[#1bb7fa] to-[#1bb7fa]/25 blur-[4px] opacity-65" />
+
+          {/* Layer D: Center White Top 3 (White Soft Flare, blur 2px) */}
+          <div className="absolute w-[20px] h-[270px] sm:h-[360px] rounded-full bg-gradient-to-b from-transparent via-white 46% to-transparent blur-[2px] opacity-85" />
+
+          {/* Layer E: Center White Top 4 (Razor-Sharp White/Cyan Core Beam) */}
+          <div className="w-[3px] sm:w-[3.5px] h-[360px] sm:h-[450px] rounded-full bg-gradient-to-b from-transparent via-white 25% via-cyan-300 70% to-transparent shadow-[0_0_15px_#ffffff,0_0_35px_#00eaff,0_0_70px_#0284c7] opacity-95" />
+
+          {/* Layer F: Horizontal Telemetry HUD Scanlines radiating across center */}
           <div className="absolute w-56 sm:w-72 h-56 sm:h-72 pointer-events-none flex flex-col justify-between py-5">
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#38bdf8] opacity-80" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_8px_#38bdf8] opacity-65" />
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_10px_#38bdf8] opacity-75" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_8px_#38bdf8] opacity-60" />
             <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_16px_#38bdf8] opacity-95" />
             <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-70" />
             <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_16px_#38bdf8] opacity-95" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-65" />
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_12px_#38bdf8] opacity-80" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-60" />
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_10px_#38bdf8] opacity-75" />
           </div>
-
-          {/* Central lens glow halo */}
-          <div className="absolute w-36 h-36 rounded-full bg-cyan-400/30 blur-2xl pointer-events-none" />
         </div>
 
-        {/* 3D Track Container */}
-        <div 
-          ref={trackRef}
-          className="absolute inset-0 preserve-3d"
-        >
-          {displayItems.map((item, idx) => (
-            <div
-              key={`${item.id}-${idx}`}
-              className="absolute top-4 sm:top-6 left-0 w-[248px] sm:w-[268px] h-[348px] sm:h-[418px] rounded-[24px] sm:rounded-[28px] overflow-hidden bg-[#0c0d12] border border-white/12 shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:border-cyan-400/50 hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] transition-all duration-300 group cursor-pointer will-change-transform"
-              style={{
-                transformStyle: 'preserve-3d',
-                backfaceVisibility: 'hidden',
-              }}
-            >
-              {/* Ultra-HD Pure Visual Card Image (Full bleed, uncompressed, razor sharp, matching sample) */}
-              <div className="relative w-full h-full overflow-hidden bg-slate-950">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  unoptimized
-                  priority={idx < 8}
-                  sizes="(max-width: 768px) 248px, 268px"
-                  className="object-cover object-center w-full h-full select-none pointer-events-none transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                />
-
-                {/* Subtle glass edge highlight */}
-                <div className="absolute inset-0 rounded-[24px] sm:rounded-[28px] border border-white/10 group-hover:border-cyan-400/60 pointer-events-none transition-colors duration-300" />
-              </div>
-            </div>
-          ))}
+        {/* Drag Helper Pill Indicator */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 border border-white/10 text-[10px] text-slate-400 backdrop-blur-md">
+          <MoveHorizontal className="w-3 h-3 text-cyan-400 animate-pulse" />
+          <span>Drag left or right to rotate</span>
         </div>
       </div>
 
       {/* =========================================================
           BOTTOM CTA: "VIEW ALL PRODUCTS"
           ========================================================= */}
-      <div 
+      <div
         ref={bottomCtaRef}
         className="mt-14 sm:mt-20 text-center relative z-20 will-change-transform transform-gpu"
       >
