@@ -224,8 +224,8 @@ export const ProjectsTapeSection: React.FC = () => {
           angleRef.current += velocityRef.current;
           velocityRef.current *= 0.94; // smooth friction decay
         } else {
-          // Smooth auto rotation: ~35s per full 360° rotation
-          const baseSpeed = isHoveredRef.current ? 0.08 : 0.24;
+          // Fast continuous tape auto-rotation (~9s per full 360° rotation)
+          const baseSpeed = isHoveredRef.current ? 0.22 : 0.65;
           angleRef.current += baseSpeed;
         }
       }
