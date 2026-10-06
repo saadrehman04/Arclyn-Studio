@@ -176,6 +176,24 @@ export const FeaturedProjects: React.FC = () => {
           }
         );
       });
+
+      // 6. Reciprocal Exit Parallax Handover to Complete Projects Portfolio (#products-tape)
+      // When the user scrolls towards the Complete Projects Portfolio, this section gently recedes in depth
+      const tapeSection = document.getElementById('products-tape');
+      if (tapeSection) {
+        gsap.to(section, {
+          scale: 0.95,
+          yPercent: -6,
+          opacity: 0.8,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: tapeSection,
+            start: 'top bottom',
+            end: 'top 30%',
+            scrub: 0.8,
+          },
+        });
+      }
     }, sectionRef);
 
     return () => {
@@ -393,7 +411,7 @@ export const FeaturedProjects: React.FC = () => {
               }}
               className="trionn-btn-outline cursor-pointer"
             >
-              <span>Explore All Products Tape</span>
+              <span>Complete Projects Portfolio</span>
               <ArrowDown className="w-3.5 h-3.5" />
             </a>
           </MagneticButton>

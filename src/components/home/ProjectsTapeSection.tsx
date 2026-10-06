@@ -178,6 +178,7 @@ export const ProjectsTapeSection: React.FC = () => {
   const rightCarouselRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const laserRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
   const bottomCtaRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
 
@@ -263,16 +264,21 @@ export const ProjectsTapeSection: React.FC = () => {
     if (lenis) lenis.on('scroll', lenisUpdate);
 
     const ctx = gsap.context(() => {
-      // 1. Section Elevation with smooth corner radius expansion
+      // 1. Elevated 3D Curtain Sheet Rise over the preceding Projects Section
       gsap.fromTo(
         section,
         { 
-          y: 80,
-          borderTopLeftRadius: 64,
-          borderTopRightRadius: 64,
+          y: 150,
+          scale: 0.95,
+          rotateX: 4,
+          transformPerspective: 1200,
+          borderTopLeftRadius: 72,
+          borderTopRightRadius: 72,
         },
         {
           y: 0,
+          scale: 1,
+          rotateX: 0,
           borderTopLeftRadius: 40,
           borderTopRightRadius: 40,
           ease: 'power2.out',
@@ -280,25 +286,26 @@ export const ProjectsTapeSection: React.FC = () => {
             trigger: section,
             start: 'top bottom',
             end: 'top 20%',
-            scrub: 0.5,
+            scrub: 0.8,
           },
         }
       );
 
-      // 2. Parallax Floating Header
+      // 2. Parallax Floating Header (Faster parallax upward drift)
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current,
-          { y: 60, opacity: 0.2 },
+          { y: 80, opacity: 0.1, scale: 0.96 },
           {
             y: 0,
             opacity: 1,
+            scale: 1,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 90%',
+              start: 'top 95%',
               end: 'top 40%',
-              scrub: 0.5,
+              scrub: 0.6,
             },
           }
         );
@@ -308,14 +315,14 @@ export const ProjectsTapeSection: React.FC = () => {
       if (laserRef.current) {
         gsap.fromTo(
           laserRef.current,
-          { scaleY: 0.2, opacity: 0 },
+          { scaleY: 0.05, opacity: 0 },
           {
             scaleY: 1,
             opacity: 1,
             ease: 'power1.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 75%',
+              start: 'top 80%',
               end: 'top 30%',
               scrub: 0.4,
             },
@@ -323,27 +330,53 @@ export const ProjectsTapeSection: React.FC = () => {
         );
       }
 
-      // 4. Parallax 3D Container Rise
+      // 4. Parallax 3D Carousel Stage Rise & Leveling
       if (containerRef.current) {
         gsap.fromTo(
           containerRef.current,
-          { y: 70, scale: 0.96, opacity: 0.6 },
+          { 
+            y: 110, 
+            rotateX: 8, 
+            scale: 0.92, 
+            opacity: 0.4,
+            transformPerspective: 1000 
+          },
           {
             y: 0,
+            rotateX: 0,
             scale: 1,
             opacity: 1,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 80%',
-              end: 'top 30%',
-              scrub: 0.5,
+              start: 'top 85%',
+              end: 'top 25%',
+              scrub: 0.7,
             },
           }
         );
       }
 
-      // 5. Bottom CTA Reveal
+      // 5. Ambient Spotlight Blooming during Entrance
+      if (spotlightRef.current) {
+        gsap.fromTo(
+          spotlightRef.current,
+          { scale: 0.65, opacity: 0.2 },
+          {
+            scale: 1.15,
+            opacity: 1,
+            ease: 'power1.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'top 20%',
+              scrub: 0.8,
+            },
+          }
+        );
+      }
+
+      // 6. Bottom CTA Reveal
       if (bottomCtaRef.current) {
         gsap.fromTo(
           bottomCtaRef.current,
@@ -533,7 +566,7 @@ export const ProjectsTapeSection: React.FC = () => {
     <section
       id="products-tape"
       ref={sectionRef}
-      className="relative w-full -mt-8 sm:-mt-12 pt-14 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#040406] text-white rounded-t-[32px] sm:rounded-t-[44px] lg:rounded-t-[56px] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.7)] overflow-hidden select-none z-30 will-change-transform transform-gpu"
+      className="relative w-full -mt-10 sm:-mt-16 lg:-mt-24 pt-14 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#040406] text-white rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[60px] border-t border-white/15 shadow-[0_-30px_100px_rgba(0,0,0,0.95),0_0_80px_rgba(56,189,248,0.08)] overflow-hidden select-none z-30 will-change-transform transform-gpu"
     >
       {/* =========================================================
           BACKGROUND AMBIENT ATMOSPHERE & SCANNER GLOW
@@ -543,7 +576,7 @@ export const ProjectsTapeSection: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#040406] via-[#040406]/85 to-transparent z-10" />
 
         {/* Central ambient cyan-blue radial spotlight */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[450px] sm:h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.18)_0%,rgba(14,165,233,0.06)_45%,transparent_75%)] blur-3xl will-change-transform transform-gpu" />
+        <div ref={spotlightRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[450px] sm:h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.18)_0%,rgba(14,165,233,0.06)_45%,transparent_75%)] blur-3xl will-change-transform transform-gpu" />
 
         {/* Soft bottom vignette */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#040406] to-transparent z-10" />
