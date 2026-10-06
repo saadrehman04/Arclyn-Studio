@@ -105,7 +105,7 @@ export const Capability3DSection: React.FC = () => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="relative w-full max-w-[460px] sm:max-w-[500px] lg:max-w-[540px] xl:max-w-[580px] aspect-square flex items-center justify-center select-none"
+              className="relative w-full max-w-[320px] sm:max-w-[460px] lg:max-w-[540px] xl:max-w-[580px] aspect-square flex items-center justify-center select-none"
             >
               <Image
                 src="/images/iridescent-torus-clean.png"
@@ -126,7 +126,7 @@ export const Capability3DSection: React.FC = () => {
                 return (
                   <div
                     key={item.title}
-                    className={`p-7 sm:p-8 lg:p-9 xl:p-10 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
+                    className={`p-5 sm:p-8 lg:p-9 xl:p-10 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
                   >
                     {/* Golden Icon - 48px to 56px prominent scale */}
                     <div className="mb-6 text-[#F3F5B4] group-hover:scale-105 transition-transform duration-300 origin-left">

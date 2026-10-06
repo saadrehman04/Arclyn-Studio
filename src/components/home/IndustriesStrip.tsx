@@ -48,14 +48,14 @@ export const IndustriesStrip: React.FC = () => {
         </div>
 
         {/* Sleek, Reduced Horizontal Grid of Compact Industry Chips */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
           {INDUSTRIES_LIST.map((ind) => {
             const Icon = ind.icon;
             return (
               <Link
                 key={ind.id}
                 href="/industries"
-                className="group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.08] hover:border-cyan-400/40 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(56,189,248,0.12)] hover:-translate-y-0.5"
+                className="group relative flex flex-col justify-between p-3 sm:p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.08] hover:border-cyan-400/40 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(56,189,248,0.12)] hover:-translate-y-0.5"
               >
                 <div>
                   <div className="w-8 h-8 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-300 group-hover:text-cyan-400 group-hover:border-cyan-400/40 transition-colors mb-3">

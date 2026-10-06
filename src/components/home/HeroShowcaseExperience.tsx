@@ -164,7 +164,7 @@ export const HeroShowcaseExperience: React.FC = () => {
     <div 
       ref={containerRef} 
       id="hero-showcase-experience"
-      className="relative w-full h-[210vh] sm:h-[230vh] bg-[#050505]"
+      className="relative w-full h-[180vh] sm:h-[210vh] lg:h-[230vh] bg-[#050505]"
     >
       {/* Pinned Full-Viewport Stage */}
       <div 
@@ -248,19 +248,19 @@ export const HeroShowcaseExperience: React.FC = () => {
             </svg>
           </div>
 
-          {/* Left-Aligned Studio Typography & Adjusted Telemetry Cards (Sharp, Crisp & Never Blurred) */}
+          {/* Left-Aligned Studio Typography & Adjusted Telemetry Cards (Sharp, Crisp & Responsive) */}
           <div 
             ref={hudTextRef} 
-            className="absolute inset-y-0 left-0 flex flex-col justify-center z-30 pointer-events-auto pl-[clamp(24px,5.5vw,84px)] pr-6 max-w-[min(720px,94vw)]"
+            className="absolute inset-y-0 left-0 flex flex-col justify-center z-30 pointer-events-auto pl-[clamp(16px,4.5vw,84px)] pr-4 sm:pr-6 max-w-[min(720px,96vw)]"
           >
             {/* Status Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-neutral-200 text-[11px] font-mono tracking-wider uppercase mb-4 shadow-[0_4px_20px_rgba(0,0,0,0.8)] self-start">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />
-              <span>INITIALIZING AUDITED PRODUCTION MESH</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:py-1.5 rounded-full bg-black/60 border border-white/20 text-neutral-200 text-[10px] sm:text-[11px] font-mono tracking-wider uppercase mb-2 sm:mb-4 shadow-[0_4px_20px_rgba(0,0,0,0.8)] self-start">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />
+              <span className="truncate">INITIALIZING AUDITED PRODUCTION MESH</span>
             </div>
 
             {/* Impact Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold tracking-tight text-white leading-[1.08] mb-3 text-left drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
+            <h2 className="text-2xl sm:text-4xl lg:text-[50px] font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.08] mb-2 sm:mb-3 text-left drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
               From Intelligence <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-100 to-neutral-400">
                 To Audited Production.
@@ -268,15 +268,15 @@ export const HeroShowcaseExperience: React.FC = () => {
             </h2>
 
             {/* Studio Copy Description */}
-            <p className="text-xs sm:text-sm lg:text-[15px] text-neutral-300 font-normal leading-relaxed max-w-xl mb-5 text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+            <p className="text-xs sm:text-sm lg:text-[15px] text-neutral-300 font-normal leading-relaxed max-w-xl mb-3 sm:mb-5 text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] line-clamp-2 sm:line-clamp-none">
               Every architecture stress-tested. Every system deployed on edge infrastructure with verifiable scale and zero technical debt.
             </p>
 
             {/* Adjusted Telemetry Cards: Clean Semi-Transparent Glass Without Blur Distortion */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mb-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-w-xl mb-3 sm:mb-5">
               {/* Card 1: Core Architecture */}
-              <div className="flex flex-col gap-1.5 p-3.5 rounded-xl bg-[#08090d]/80 border border-white/15 font-mono text-[11px] text-neutral-200 shadow-[0_10px_35px_rgba(0,0,0,0.85)]">
-                <div className="flex items-center justify-between text-neutral-400 text-[10px] tracking-wider uppercase border-b border-white/10 pb-1.5 mb-0.5">
+              <div className="flex flex-col gap-1 p-2.5 sm:p-3.5 rounded-xl bg-[#08090d]/85 border border-white/15 font-mono text-[10px] sm:text-[11px] text-neutral-200 shadow-[0_10px_35px_rgba(0,0,0,0.85)]">
+                <div className="flex items-center justify-between text-neutral-400 text-[9px] sm:text-[10px] tracking-wider uppercase border-b border-white/10 pb-1 mb-0.5">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>CORE ARCHITECTURE</span>
@@ -298,8 +298,8 @@ export const HeroShowcaseExperience: React.FC = () => {
               </div>
 
               {/* Card 2: Production Benchmark */}
-              <div className="flex flex-col gap-1.5 p-3.5 rounded-xl bg-[#08090d]/80 border border-white/15 font-mono text-[11px] text-neutral-200 shadow-[0_10px_35px_rgba(0,0,0,0.85)]">
-                <div className="flex items-center justify-between text-neutral-400 text-[10px] tracking-wider uppercase border-b border-white/10 pb-1.5 mb-0.5">
+              <div className="flex flex-col gap-1 p-2.5 sm:p-3.5 rounded-xl bg-[#08090d]/85 border border-white/15 font-mono text-[10px] sm:text-[11px] text-neutral-200 shadow-[0_10px_35px_rgba(0,0,0,0.85)]">
+                <div className="flex items-center justify-between text-neutral-400 text-[9px] sm:text-[10px] tracking-wider uppercase border-b border-white/10 pb-1 mb-0.5">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                     <span>PRODUCTION BENCHMARK</span>
@@ -322,7 +322,7 @@ export const HeroShowcaseExperience: React.FC = () => {
             </div>
 
             {/* Scroll Navigation Cue */}
-            <div className="flex items-center gap-2.5 text-[11px] font-mono tracking-wider uppercase text-neutral-400 self-start">
+            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-neutral-400 self-start">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
               <span>Scroll to explore production systems</span>
               <span className="text-white animate-bounce">↓</span>

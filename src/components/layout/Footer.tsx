@@ -4,7 +4,8 @@ import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Mail, MessageCircle, Sparkles, ShieldCheck } from 'lucide-react';
+import { Logo } from '../shared/Logo';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -24,12 +25,11 @@ export const Footer: React.FC = () => {
 
   // =========================================================
   // FRAMER FOOTER SCROLL SEQUENCE (stellar-apartment-381100)
-  // 1. Initial view: Huge White circle with Blue rim fills card (Screenshot 1)
-  // 2. Mid scroll: Concentric circles shrink into dark card (Screenshot 2)
-  // 3. Further: Shrinks over 'anima', revealing top links & wordmark (Screenshot 3)
-  // 4. Resting: Blue vanishes, White lands precisely as the dot of 'i' (Screenshot 4)
+  // ACTIVE ONLY ON DESKTOP (≥ 1024px)
   // =========================================================
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
+
     const track = trackRef.current;
     const svg = svgRef.current;
     const blueCircle = blueCircleRef.current;
@@ -111,10 +111,11 @@ export const Footer: React.FC = () => {
   return (
     <footer id="footer" className="relative w-full bg-black select-none z-20">
       {/* =========================================================
-          SCROLL PINNING TRACK (180vh provides smooth scrub distance)
-          Sticky viewport container ensures exact sequence pacing
+          DESKTOP: SCROLL PINNING TRACK (180vh) - LOCKED FOR ≥1024px
+          Preserves the exact approved Framer University interactive
+          concentric circle sequence without touching a single pixel.
           ========================================================= */}
-      <div ref={trackRef} className="relative w-full h-[180vh] bg-black">
+      <div ref={trackRef} className="hidden lg:block relative w-full h-[180vh] bg-black">
         <div className="sticky top-0 w-full h-screen p-3 sm:p-5 lg:p-6 flex flex-col justify-between overflow-hidden">
           
           {/* =========================================================
@@ -333,6 +334,183 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#222426] text-slate-300 text-[11px]">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
               <span>Made in Framer</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* =========================================================
+          MOBILE & TABLET: DEDICATED RESPONSIVE FOOTER (< 1024px)
+          - No scroll trap or sticky sequence
+          - Vertical stacked columns with comfortable touch targets (≥44px)
+          - Zero horizontal overflow, fits 320px up to 1023px
+          ========================================================= */}
+      <div className="block lg:hidden relative w-full bg-[#080A10] border-t border-white/[0.08] px-5 sm:px-8 py-12 sm:py-16 text-white overflow-hidden">
+        {/* Ambient background illumination */}
+        <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-[240px] h-[240px] bg-purple-600/10 rounded-full blur-[90px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-10">
+          
+          {/* Top Row: Arclyn Studio Branding & Mission */}
+          <div className="flex flex-col gap-4">
+            <Logo size="md" />
+            <p className="text-sm text-slate-400 max-w-md leading-relaxed">
+              Engineering high-performance web applications, bespoke design systems, and autonomous AI automation pipelines with sub-second execution and zero technical debt.
+            </p>
+            <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Q1/Q2 Project Slots Open</span>
+            </div>
+          </div>
+
+          {/* Action CTAs: Minimum 48px Touch Targets */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-[0_0_25px_rgba(37,99,235,0.35)] active:scale-[0.98] transition-transform"
+            >
+              <span>Start Your Project</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white font-semibold text-sm active:scale-[0.98] transition-all"
+            >
+              <span>Book Discovery Call</span>
+              <ArrowUpRight className="w-4 h-4 text-slate-400" />
+            </Link>
+          </div>
+
+          {/* Navigation & Services Stack: 2 columns on tablet, clean stack on mobile */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 pt-6 border-t border-white/[0.08]">
+            {/* Services Column */}
+            <div>
+              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-4">
+                Services
+              </h4>
+              <ul className="space-y-2.5 text-sm text-slate-400">
+                <li>
+                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
+                    Web Development
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
+                    Autonomous AI
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
+                    Creative 3D &amp; WebGL
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
+                    Brand Systems
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
+                    Mobile &amp; Apps
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Navigation Column */}
+            <div>
+              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-4">
+                Ecosystem
+              </h4>
+              <ul className="space-y-2.5 text-sm text-slate-400">
+                <li>
+                  <Link href="/" className="hover:text-white transition-colors block py-0.5">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/work" className="hover:text-white transition-colors block py-0.5">
+                    Portfolio
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="hover:text-white transition-colors block py-0.5">
+                    Pricing &amp; Plans
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="hover:text-white transition-colors block py-0.5">
+                    About Arclyn
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-white transition-colors block py-0.5">
+                    Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact & Socials Column */}
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-4">
+                Direct Contact
+              </h4>
+              <ul className="space-y-2.5 text-sm text-slate-400">
+                <li>
+                  <a
+                    href="mailto:hello@arclynstudio.com"
+                    className="hover:text-white transition-colors flex items-center gap-2 py-0.5"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                    <span>hello@arclynstudio.com</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/arclyn_studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors block py-0.5"
+                  >
+                    𝕏 Twitter / @arclyn_studio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/saadrehman04/Arclyn-Studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors block py-0.5"
+                  >
+                    ⌨ GitHub / @saadrehman04
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://instagram.com/arclyn_studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors block py-0.5"
+                  >
+                     Instagram / @arclyn_studio
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Copyright & Status */}
+          <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-500 font-mono">
+            <div>
+              &copy; {new Date().getFullYear()} Arclyn Studio. All rights reserved.
+            </div>
+            <div className="flex items-center gap-2 text-slate-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <span>Full-Stack &amp; AI Systems</span>
             </div>
           </div>
 

@@ -295,28 +295,37 @@ export const ServicesEditorialShowcase: React.FC = () => {
           MOBILE & TABLET VIEW: CLEAN VERTICAL EDITORIAL LAYOUT
           (Active on < 1024px screens)
           ========================================================= */}
-      <div className="block lg:hidden w-full py-20 px-6 sm:px-8">
+      <div className="block lg:hidden w-full py-14 sm:py-20 px-4 sm:px-8">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="mb-14">
-            <h2 className="text-4xl sm:text-5xl font-light tracking-tight leading-[1.05] text-[#1A1A1A] mb-6">
+          <div className="mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase text-[#1A1A1A]/50 mb-3 sm:mb-4">
+              <span>✦</span>
+              <span>SERVICES &amp; CAPABILITIES</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-light tracking-tight leading-[1.08] text-[#1A1A1A] mb-5">
               Selected services <br />
               &amp; capabilities
             </h2>
             <Link 
               href="/services"
-              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.12em] uppercase text-[#1A1A1A] border-b border-[#1A1A1A]/30 hover:border-[#1A1A1A] pb-1 transition-all"
+              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.12em] uppercase text-[#1A1A1A] border-b border-[#1A1A1A]/30 hover:border-[#1A1A1A] pb-1 transition-all min-h-[44px]"
             >
               <span>VIEW ALL SERVICES</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Cards List */}
-          <div className="flex flex-col gap-12">
+          {/* Cards List: Entire Item Clickable */}
+          <div className="flex flex-col gap-10 sm:gap-12">
             {SERVICES_GALLERY.map((service) => (
-              <div key={service.id} className="flex flex-col group">
-                <Link href={service.route} className="block overflow-hidden rounded-xl mb-5 bg-black/5 aspect-[16/10] relative shadow-sm border border-[#1A1A1A]/10">
+              <Link 
+                key={service.id} 
+                href={service.route}
+                className="group flex flex-col p-4 sm:p-5 rounded-3xl bg-white/60 hover:bg-white border border-[#1A1A1A]/08 hover:border-[#1A1A1A]/20 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+              >
+                {/* [IMAGE] - Visually prominent */}
+                <div className="block overflow-hidden rounded-2xl mb-4 bg-black/5 aspect-[16/10] relative shadow-sm border border-[#1A1A1A]/10">
                   <Image 
                     src={service.image} 
                     alt={service.title}
@@ -324,28 +333,38 @@ export const ServicesEditorialShowcase: React.FC = () => {
                     sizes="(max-width: 768px) 100vw, 640px"
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
-                </Link>
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-xs font-mono text-[#1A1A1A]/50">
-                    {service.displayNumber}
-                  </span>
-                  <h3 className="text-2xl font-medium tracking-tight text-[#1A1A1A]">
+                </div>
+
+                <div className="flex flex-col gap-1.5 px-1">
+                  {/* 01 / 05 */}
+                  <div className="flex items-center justify-between text-xs font-mono text-[#1A1A1A]/60 mb-0.5">
+                    <span className="font-bold text-[#1A1A1A]">
+                      {service.displayNumber}
+                    </span>
+                    <span className="uppercase tracking-wider text-[10px] text-[#1A1A1A]/40 font-mono">
+                      DISCIPLINE
+                    </span>
+                  </div>
+
+                  {/* WEB DEVELOPMENT */}
+                  <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#1A1A1A] group-hover:text-black transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
+
+                  {/* Short Description */}
+                  <p className="text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed">
                     {service.desc}
                   </p>
-                  <div className="pt-2">
-                    <Link 
-                      href={service.route}
-                      className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.08em] uppercase text-[#1A1A1A]/80 hover:text-[#1A1A1A] border-b border-[#1A1A1A]/20 hover:border-[#1A1A1A] pb-1 transition-colors"
-                    >
+
+                  {/* EXPLORE SERVICE → with min 44px tap target */}
+                  <div className="pt-3">
+                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase text-[#1A1A1A] border-b border-[#1A1A1A]/30 group-hover:border-[#1A1A1A] pb-1 transition-colors min-h-[44px]">
                       <span>EXPLORE SERVICE</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -243,7 +243,7 @@ export const ProjectScrollSection: React.FC = () => {
         {/* 3D Container Scroll Animation Wrapper */}
         <ContainerScroll
           className="py-1 sm:py-2 md:py-3 px-2 sm:px-4"
-          cardClassName="relative max-w-[940px] mx-auto h-[480px] sm:h-[540px] md:h-[580px] border-2 sm:border-[3px] border-white/15 p-1.5 sm:p-2.5 bg-[#0a0a0c]/95 rounded-[22px] sm:rounded-[28px] shadow-[0_25px_80px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
+          cardClassName="relative max-w-[940px] mx-auto h-[460px] sm:h-[540px] md:h-[580px] border-2 sm:border-[3px] border-white/15 p-1.5 sm:p-2.5 bg-[#0a0a0c]/95 rounded-[22px] sm:rounded-[28px] shadow-[0_25px_80px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
           cardInnerClassName="bg-[#050507] rounded-[16px] sm:rounded-[20px] overflow-hidden flex flex-col relative"
           titleComponent={
             <div ref={headerRef} className="flex flex-col items-center text-center px-4 mb-2 sm:mb-4 will-change-transform">
@@ -262,16 +262,16 @@ export const ProjectScrollSection: React.FC = () => {
           }
         >
           {/* Compact Browser Frame with Controls & Project Selector Tabs */}
-          <div className="shrink-0 px-3 sm:px-4 py-2 border-b border-white/10 bg-[#08080a] flex items-center justify-between gap-2 relative">
+          <div className="shrink-0 px-2.5 sm:px-4 py-2 border-b border-white/10 bg-[#08080a] flex items-center justify-between gap-1.5 sm:gap-2 relative">
             
             {/* Traffic Lights & Active URL */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5 shrink-0">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
               </div>
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 border border-white/10 text-[10px] font-mono text-neutral-300 truncate max-w-[200px]">
+              <div className="hidden md:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 border border-white/10 text-[10px] font-mono text-neutral-300 truncate max-w-[200px]">
                 <span className="text-neutral-500 text-[9px]">🔒</span>
                 <span className="truncate">https://{activeProject.displayUrl}</span>
               </div>
@@ -286,7 +286,7 @@ export const ProjectScrollSection: React.FC = () => {
                     key={project.id}
                     onClick={() => handleTabClick(idx)}
                     type="button"
-                    className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-semibold tracking-tight transition-all duration-300 shrink-0 cursor-pointer flex items-center gap-1.5 border ${
+                    className={`px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-tight transition-all duration-300 shrink-0 cursor-pointer flex items-center gap-1.5 border min-h-[34px] ${
                       isActive
                         ? 'bg-white text-black font-bold border-white shadow-sm'
                         : 'bg-white/[0.04] hover:bg-white/[0.08] border-white/10 text-neutral-400 hover:text-white'
@@ -330,12 +330,12 @@ export const ProjectScrollSection: React.FC = () => {
               );
             })}
 
-            {/* Quick Prev / Next Arrows */}
-            <div className="absolute top-1/2 -translate-y-1/2 inset-x-2.5 flex items-center justify-between pointer-events-none z-20">
+            {/* Quick Prev / Next Arrows with Touch-Comfortable Targets */}
+            <div className="absolute top-1/2 -translate-y-1/2 inset-x-2 sm:inset-x-2.5 flex items-center justify-between pointer-events-none z-20">
               <button
                 onClick={handlePrev}
                 type="button"
-                className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all duration-200 pointer-events-auto shadow-lg backdrop-blur-md hover:scale-105 active:scale-95"
+                className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all duration-200 pointer-events-auto shadow-lg backdrop-blur-md hover:scale-105 active:scale-95 min-w-[38px] min-h-[38px]"
                 aria-label="Previous Project"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -343,7 +343,7 @@ export const ProjectScrollSection: React.FC = () => {
               <button
                 onClick={handleNext}
                 type="button"
-                className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all duration-200 pointer-events-auto shadow-lg backdrop-blur-md hover:scale-105 active:scale-95"
+                className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all duration-200 pointer-events-auto shadow-lg backdrop-blur-md hover:scale-105 active:scale-95 min-w-[38px] min-h-[38px]"
                 aria-label="Next Project"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -351,7 +351,7 @@ export const ProjectScrollSection: React.FC = () => {
             </div>
 
             {/* Bottom Floating Info Strip */}
-            <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20 bg-gradient-to-t from-black/95 via-black/80 to-transparent flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-white/10 backdrop-blur-sm">
+            <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-20 bg-gradient-to-t from-black/95 via-black/85 to-transparent flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-t border-white/10 backdrop-blur-sm">
               <div className="space-y-0.5 max-w-md">
                 <div className="flex items-center gap-2">
                   <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-white/15 text-white border border-white/20">
@@ -361,7 +361,7 @@ export const ProjectScrollSection: React.FC = () => {
                     {activeProject.title}
                   </h3>
                 </div>
-                <p className="text-[11px] text-neutral-300 line-clamp-1">
+                <p className="text-[10px] sm:text-[11px] text-neutral-300 line-clamp-1">
                   {activeProject.metric}
                 </p>
               </div>
@@ -370,7 +370,7 @@ export const ProjectScrollSection: React.FC = () => {
                 href={activeProject.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-black hover:bg-neutral-200 text-xs font-bold tracking-tight transition-all shrink-0 shadow-sm active:scale-95"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-white text-black hover:bg-neutral-200 text-xs font-bold tracking-tight transition-all shrink-0 shadow-sm active:scale-95 min-h-[38px]"
               >
                 <span>Visit Live</span>
                 <ExternalLink className="w-3 h-3" />

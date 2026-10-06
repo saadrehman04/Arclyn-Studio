@@ -175,28 +175,118 @@ export const CinematicHero: React.FC = () => {
           pointer-events: none;
         }
 
-        @media (max-aspect-ratio: 11/10) {
+        @media (max-width: 1023px) {
+          .cinematic-hero {
+            padding-left: clamp(20px, 5vw, 36px);
+            padding-right: clamp(20px, 5vw, 36px);
+            padding-top: max(80px, 11vh);
+            padding-bottom: max(85px, 12vh);
+            justify-content: flex-start;
+          }
+          .cinematic-content {
+            max-width: 100%;
+            z-index: 10;
+          }
+          .cinematic-headline {
+            font-size: clamp(30px, 7vw, 48px);
+            line-height: 1.1;
+            margin-bottom: 12px;
+          }
+          .cinematic-sub {
+            font-size: clamp(14px, 3.6vw, 16px);
+            line-height: 1.5;
+            max-width: 100%;
+            margin-bottom: 22px;
+            color: #d1d5db;
+          }
+          .cinematic-actions {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px;
+          }
+          .cinematic-pill-cta {
+            min-height: 48px;
+            padding: 0 24px;
+            font-size: 15px;
+          }
+          .cinematic-ghost {
+            min-height: 48px;
+            padding: 0 20px;
+            font-size: 15px;
+          }
           .cinematic-plate-video {
-            left: 58%;
+            left: 52%;
+            top: 50%;
+            height: 100%;
+            width: auto;
+            opacity: 0.55;
           }
           .cinematic-plate::after {
             background: 
-              linear-gradient(to right,
-                rgba(7,7,8,0.76) 0%, rgba(9,8,10,0.58) 50%, rgba(14,13,15,0.18) 82%, rgba(5,5,5,0.06) 100%),
               linear-gradient(to bottom,
-                rgba(5,5,5,0.70) 0%, rgba(5,5,5,0.30) 24%, rgba(5,5,5,0.30) 56%, rgba(5,5,5,0.78) 82%, rgba(5,5,5,0.96) 94%, #050505 100%);
+                rgba(5,5,5,0.85) 0%,
+                rgba(5,5,5,0.38) 28%,
+                rgba(5,5,5,0.32) 65%,
+                rgba(5,5,5,0.92) 88%,
+                #050505 100%),
+              linear-gradient(to right,
+                rgba(5,5,5,0.8) 0%,
+                rgba(5,5,5,0.5) 60%,
+                rgba(5,5,5,0.2) 100%);
+          }
+          .cinematic-logos {
+            left: clamp(20px, 5vw, 36px);
+            right: clamp(20px, 5vw, 36px);
+            bottom: max(16px, 2.5vh);
+          }
+          .cinematic-logos-list {
+            gap: 16px;
+            justify-content: space-between;
+            width: 100%;
+          }
+          .cinematic-lg svg {
+            height: 16px;
+          }
+          .cinematic-lg span {
+            font-size: 12px;
           }
         }
-        @media (min-width: 600px) and (max-aspect-ratio: 11/10) {
-          .cinematic-plate-video {
-            left: 60%;
+
+        @media (max-width: 540px) {
+          .cinematic-hero {
+            padding-top: max(75px, 10vh);
+            padding-bottom: max(80px, 11vh);
           }
-          .cinematic-plate::after {
-            background: 
-              linear-gradient(to right,
-                rgba(7,7,8,0.74) 0%, rgba(9,8,10,0.56) 50%, rgba(14,13,15,0.15) 82%, rgba(5,5,5,0.05) 100%),
-              linear-gradient(to bottom,
-                rgba(5,5,5,0.65) 0%, rgba(5,5,5,0.26) 24%, rgba(5,5,5,0.28) 56%, rgba(5,5,5,0.75) 82%, rgba(5,5,5,0.95) 94%, #050505 100%);
+          .cinematic-headline {
+            font-size: clamp(26px, 7.8vw, 34px);
+            line-height: 1.15;
+          }
+          .cinematic-sub {
+            font-size: 13.5px;
+            margin-bottom: 18px;
+          }
+          .cinematic-actions {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+          }
+          .cinematic-pill-cta, .cinematic-ghost {
+            width: 100%;
+            justify-content: center;
+            min-height: 46px;
+          }
+          .cinematic-logos-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 16px;
+          }
+          .cinematic-lg svg {
+            height: 14px;
+          }
+          .cinematic-lg span {
+            font-size: 11px;
           }
         }
 

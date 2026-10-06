@@ -222,7 +222,7 @@ export const FeaturedProjects: React.FC = () => {
                 href={proj.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#1A1A1A] hover:bg-black text-white flex items-center justify-center border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-110 shadow-md group/btn"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-[#1A1A1A] hover:bg-black text-white flex items-center justify-center border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-110 shadow-md group/btn"
                 title={`Open Live ${proj.name}`}
               >
                 <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
@@ -232,7 +232,7 @@ export const FeaturedProjects: React.FC = () => {
         </div>
 
         {/* Content Block */}
-        <div className="p-7 sm:p-8 flex flex-col flex-1 justify-between bg-white">
+        <div className="p-5 sm:p-8 flex flex-col flex-1 justify-between bg-white">
           <div>
             <div className="flex items-center justify-between mb-2">
               <h3 className="trionn-heading text-2xl sm:text-3xl font-bold text-[#1E1E1E] group-hover:text-black transition-colors">
@@ -269,7 +269,7 @@ export const FeaturedProjects: React.FC = () => {
             <div className="pt-4 border-t border-[#1A1A1A]/10 flex items-center justify-between">
               <Link
                 href="/work"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:text-black transition-colors group/link"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:text-black transition-colors group/link min-h-[44px]"
               >
                 <span>Explore Case Study</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
@@ -280,7 +280,7 @@ export const FeaturedProjects: React.FC = () => {
                   href={proj.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5E5E5E] hover:text-[#1A1A1A] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5E5E5E] hover:text-[#1A1A1A] transition-colors min-h-[44px]"
                 >
                   <span>Live Deployment</span>
                   <ExternalLink className="w-3 h-3 text-[#1A1A1A]" />

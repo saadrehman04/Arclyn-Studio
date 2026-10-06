@@ -56,7 +56,7 @@ export const FinalCta: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-8"
+          className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] sm:leading-[1.05] mb-6 sm:mb-8"
         >
           Let’s Build Your Next <br />
           <span className="text-gradient-hero">Big Thing Together.</span>
@@ -68,7 +68,7 @@ export const FinalCta: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-12 font-normal"
+          className="text-sm sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-12 font-normal"
         >
           Whether you need a high-converting web application, custom SaaS platform, or autonomous AI agents — we engineer production systems that scale.
         </motion.p>
@@ -79,24 +79,24 @@ export const FinalCta: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-14 w-full"
         >
-          <MagneticButton>
+          <MagneticButton className="w-full sm:w-auto">
             <Link
               href="/contact"
-              className="px-9 py-4 rounded-full text-base font-bold text-white btn-pill-primary inline-flex items-center gap-2.5 group shadow-[0_0_35px_rgba(147,51,234,0.4)]"
+              className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-white btn-pill-primary inline-flex items-center justify-center gap-2.5 group shadow-[0_0_35px_rgba(147,51,234,0.4)] min-h-[48px]"
             >
               <span>Start Your Project</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </MagneticButton>
 
-          <MagneticButton>
+          <MagneticButton className="w-full sm:w-auto">
             <a
               href="https://calendly.com/saadrehman"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full text-base font-semibold text-slate-200 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.12] hover:border-cyan-400/40 transition-all duration-300 inline-flex items-center gap-2 group shadow-lg"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.12] hover:border-cyan-400/40 transition-all duration-300 inline-flex items-center justify-center gap-2 group shadow-lg min-h-[48px]"
             >
               <Calendar className="w-4 h-4 text-cyan-400" />
               <span>Book 15-Min Discovery Call</span>
@@ -110,19 +110,19 @@ export const FinalCta: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#090d1a] border border-white/[0.1] text-xs text-slate-300 backdrop-blur-md shadow-xl"
+          className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl sm:rounded-full bg-[#090d1a] border border-white/[0.1] text-[11px] sm:text-xs text-slate-300 backdrop-blur-md shadow-xl"
         >
           <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
             Active Sprint Capacity
           </span>
-          <span className="text-slate-600">•</span>
+          <span className="text-slate-600 hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5 text-slate-400">
             <Clock className="w-3.5 h-3.5 text-cyan-400" />
-            Founder Response Time: &lt; 4 Hours
+            Founder Response: &lt; 4 Hours
           </span>
-          <span className="text-slate-600 hidden sm:inline">•</span>
-          <span className="hidden sm:inline text-slate-400">Fixed Milestone Pricing</span>
+          <span className="text-slate-600 hidden md:inline">•</span>
+          <span className="hidden md:inline text-slate-400">Fixed Milestone Pricing</span>
         </motion.div>
 
       </div>

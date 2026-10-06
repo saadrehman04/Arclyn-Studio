@@ -369,7 +369,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         {/* THREE-CARD DISPLAY STAGE (LEFT PEEK, CENTER ACTIVE, RIGHT PEEK) */}
         {/* ========================================================================= */}
         <div className="relative w-full overflow-hidden py-4">
-          <div className="relative flex items-center justify-center min-h-[460px] sm:min-h-[400px]">
+          <div className="relative flex items-center justify-center min-h-[560px] xs:min-h-[500px] sm:min-h-[440px] md:min-h-[390px]">
             {visibleOffsets.map((offset) => {
               const itemIndex = (activeIndex + offset + total) % total;
               const t = TESTIMONIALS_DATA[itemIndex];
@@ -480,7 +480,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     </div>
 
                     {/* RIGHT COLUMN: Monochrome Client Portrait (Exact Match with Reference) */}
-                    <div className="md:col-span-5 relative w-full h-[240px] sm:h-[280px] md:h-[310px] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 shadow-lg">
+                    <div className="md:col-span-5 relative w-full h-[190px] sm:h-[240px] md:h-[310px] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 shadow-lg">
                       <Image
                         src={t.image}
                         alt={`${t.author} - ${t.brand}`}
@@ -511,13 +511,13 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         {/* ========================================================================= */}
         {/* INTERACTIVE CONTROLS: Autoscroll Progress Bar, Dots, & Navigation Arrows */}
         {/* ========================================================================= */}
-        <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-5 max-w-[840px] mx-auto px-4">
+        <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-5 max-w-[840px] mx-auto px-4">
           {/* Autoscroll Progress Indicator with Play/Pause button */}
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setIsPaused((prev) => !prev)}
-              className="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 text-white/80 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+              className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 text-white/80 hover:text-white flex items-center justify-center transition-all cursor-pointer"
               title={isPaused ? "Resume Autoscroll" : "Pause Autoscroll"}
               aria-label={isPaused ? "Resume Autoscroll" : "Pause Autoscroll"}
             >
@@ -544,10 +544,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                 key={t.id}
                 type="button"
                 onClick={() => goToSlide(idx)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   idx === activeIndex
                     ? 'w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]'
-                    : 'w-2 bg-white/20 hover:bg-white/40'
+                    : 'w-2.5 bg-white/20 hover:bg-white/40'
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
                 title={`${t.brand} - ${t.author}`}
@@ -560,19 +560,19 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
             <button
               type="button"
               onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+              className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5 sm:w-4 sm:h-4" />
             </button>
 
             <button
               type="button"
               onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+              className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-5 h-5 sm:w-4 sm:h-4" />
             </button>
           </div>
         </div>

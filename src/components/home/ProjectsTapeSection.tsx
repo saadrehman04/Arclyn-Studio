@@ -201,8 +201,10 @@ export const ProjectsTapeSection: React.FC = () => {
   const updateGeometry = useCallback(() => {
     if (typeof window === 'undefined') return;
     const width = window.innerWidth;
-    if (width < 640) {
-      setGeometry({ radius: 320, cardWidth: 150, cardHeight: 210 });
+    if (width < 420) {
+      setGeometry({ radius: 290, cardWidth: 135, cardHeight: 190 });
+    } else if (width < 640) {
+      setGeometry({ radius: 330, cardWidth: 155, cardHeight: 215 });
     } else if (width < 1024) {
       setGeometry({ radius: 420, cardWidth: 185, cardHeight: 255 });
     } else {
@@ -590,6 +592,7 @@ export const ProjectsTapeSection: React.FC = () => {
         style={{
           perspective: '1100px',
           perspectiveOrigin: '50% 50%',
+          touchAction: 'pan-y',
         }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}

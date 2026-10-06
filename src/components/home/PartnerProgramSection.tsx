@@ -113,19 +113,19 @@ export const PartnerProgramSection: React.FC = () => {
             animated={true}
             className="w-full"
           >
-            <div className="relative p-6 sm:p-10 lg:p-12 flex flex-col justify-between h-full group">
+            <div className="relative p-4 sm:p-10 lg:p-12 flex flex-col justify-between h-full group">
               
               {/* Floating Header Pill */}
-              <div className="absolute -top-3.5 left-6 sm:left-10 px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider bg-[#0f172a] border border-cyan-400/40 text-cyan-300 shadow-[0_4px_20px_rgba(6,182,212,0.25)] flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Strategic Referral Partner • Deal #1 Onwards</span>
+              <div className="absolute -top-3.5 left-4 sm:left-10 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider bg-[#0f172a] border border-cyan-400/40 text-cyan-300 shadow-[0_4px_20px_rgba(6,182,212,0.25)] flex items-center gap-1.5 sm:gap-2">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400" />
+                <span className="truncate">Strategic Referral Partner</span>
               </div>
 
               <div>
                 {/* 30% Hero Metric Display */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 mt-4 pb-8 border-b border-white/10">
-                  <div className="flex items-baseline gap-4 sm:gap-6">
-                    <span className="font-display text-6xl sm:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400 tracking-tight leading-none filter drop-shadow-[0_0_35px_rgba(56,189,248,0.3)]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 mt-4 pb-6 sm:pb-8 border-b border-white/10">
+                  <div className="flex items-baseline gap-3 sm:gap-6">
+                    <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400 tracking-tight leading-none filter drop-shadow-[0_0_35px_rgba(56,189,248,0.3)]">
                       30%
                     </span>
                     <div>
@@ -139,7 +139,7 @@ export const PartnerProgramSection: React.FC = () => {
                     </div>
                   </div>
                   
-                  <span className="self-start sm:self-auto text-xs font-semibold text-emerald-300 bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/30 flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                  <span className="self-start sm:self-auto text-xs font-semibold text-emerald-300 bg-emerald-500/10 px-3.5 py-1.5 sm:py-2 rounded-full border border-emerald-500/30 flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     Instant Payouts Guaranteed
                   </span>
