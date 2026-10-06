@@ -221,7 +221,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   const [cardWidth, setCardWidth] = useState(840);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const SLIDE_DURATION = 5500; // 5.5s per card
+  const SLIDE_DURATION = 2000; // 2 seconds per card (automove next)
 
   // Responsive card measurement
   useEffect(() => {
@@ -257,14 +257,14 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     setProgress(0);
   };
 
-  // Autoscroll timer + animated progress bar
+  // Autoscroll timer + animated progress bar (2 seconds per testimonial)
   useEffect(() => {
     if (isPaused) {
       if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
       return;
     }
 
-    const intervalStep = 50;
+    const intervalStep = 25;
     progressIntervalRef.current = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -287,8 +287,6 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     <section
       id="testimonials"
       className={`relative bg-[#0d0e12] text-white py-20 sm:py-28 md:py-32 overflow-hidden select-none ${className}`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       {/* ========================================================================= */}
       {/* MOTION GRAPHICS: Ambient Background Light, Grid & Animated Energy Particles */}
@@ -394,7 +392,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     width: `${cardWidth}px`,
                     transform: `translate3d(${translateX}px, 0, 0) scale(${isCenter ? 1 : 0.92})`,
                   }}
-                  className={`absolute rounded-3xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden p-6 sm:p-8 md:p-10 select-none ${
+                  className={`absolute rounded-3xl transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] overflow-hidden p-6 sm:p-8 md:p-10 select-none ${
                     isCenter
                       ? 'bg-[#15161b] border border-white/[0.12] shadow-[0_24px_70px_-15px_rgba(0,0,0,0.85),0_0_50px_rgba(255,255,255,0.03)] opacity-100 z-20 cursor-default'
                       : 'bg-[#121317] border border-white/[0.05] shadow-xl opacity-35 hover:opacity-60 z-10 cursor-pointer hidden md:block'
