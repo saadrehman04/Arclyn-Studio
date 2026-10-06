@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, Mail, MessageCircle, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Mail } from 'lucide-react';
 import { Logo } from '../shared/Logo';
 
 if (typeof window !== 'undefined') {
@@ -140,10 +140,10 @@ export const Footer: React.FC = () => {
               {/* Col 1: Tagline */}
               <div className="max-w-xs sm:max-w-sm">
                 <p className="text-lg sm:text-xl lg:text-[22px] font-bold text-white tracking-tight leading-[1.3]">
-                  Learn how to design &amp; publish pro sites with Arclyn Studio.
+                  Build standout websites and AI systems with Arclyn Studio.
                 </p>
                 <p className="text-xs sm:text-sm text-slate-400 mt-2 font-normal">
-                  High-performance web development &amp; AI engineering.
+                  Full-stack design, web engineering, and automation built for growth.
                 </p>
               </div>
 
@@ -157,17 +157,17 @@ export const Footer: React.FC = () => {
                   <ul className="space-y-2 text-xs sm:text-sm font-medium text-[#9ba1a5]">
                     <li>
                       <Link href="/work" className="hover:text-white transition-colors">
-                        Resources
+                        Work
                       </Link>
                     </li>
                     <li>
                       <Link href="/about" className="hover:text-white transition-colors">
-                        Lessons
+                        About
                       </Link>
                     </li>
                     <li>
                       <Link href="/services" className="hover:text-white transition-colors">
-                        Blog
+                        Services
                       </Link>
                     </li>
                     <li>
@@ -191,7 +191,7 @@ export const Footer: React.FC = () => {
                         rel="noopener noreferrer"
                         className="hover:text-white transition-colors"
                       >
-                        𝕏 @learnframer
+                        𝕏 @arclyn_studio
                       </a>
                     </li>
                     <li>
@@ -201,7 +201,7 @@ export const Footer: React.FC = () => {
                         rel="noopener noreferrer"
                         className="hover:text-white transition-colors"
                       >
-                        ▶ @framer.university
+                        ▶ @saadrehman04
                       </a>
                     </li>
                     <li>
@@ -211,7 +211,7 @@ export const Footer: React.FC = () => {
                         rel="noopener noreferrer"
                         className="hover:text-white transition-colors"
                       >
-                         @framer.university
+                         @arclyn_studio
                       </a>
                     </li>
                   </ul>
@@ -226,20 +226,20 @@ export const Footer: React.FC = () => {
                   className="group inline-flex items-center gap-3 sm:gap-4 transition-transform active:scale-[0.98]"
                 >
                   <span className="text-xl sm:text-2xl lg:text-[28px] font-bold tracking-tight text-[#0080ff] group-hover:text-blue-400 transition-colors">
-                    Contact me
+                    Book a call
                   </span>
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#0080ff] text-white flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_0_20px_rgba(0,128,255,0.4)]">
                     <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </Link>
 
-                {/* Button 2: Resources (Pure White Highlight) */}
+                {/* Button 2: View work (Pure White Highlight) */}
                 <Link
                   href="/work"
                   className="group inline-flex items-center gap-3 sm:gap-4 transition-transform active:scale-[0.98]"
                 >
                   <span className="text-xl sm:text-2xl lg:text-[28px] font-bold tracking-tight text-white group-hover:text-slate-200 transition-colors">
-                    Resources
+                    View work
                   </span>
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#131415] flex items-center justify-center transition-transform group-hover:scale-105 shadow-sm">
                     <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -328,12 +328,12 @@ export const Footer: React.FC = () => {
               <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 fill-current">
                 <path d="M 12 10.667 L 12 4 L 5.333 4 M 4 12 L 11.667 4.333" fill="transparent" strokeWidth="1.5" stroke="currentColor" strokeMiterlimit="10" />
               </svg>
-              <span>Copyright &copy; 2024 Framer University. All rights reserved.</span>
+              <span>Copyright &copy; {new Date().getFullYear()} Arclyn Studio. All rights reserved.</span>
             </div>
 
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#222426] text-slate-300 text-[11px]">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <span>Made in Framer</span>
+              <span>Full-Stack &amp; AI Systems</span>
             </div>
           </div>
 
