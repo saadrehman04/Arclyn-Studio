@@ -79,13 +79,13 @@ export const HeroShowcaseExperience: React.FC = () => {
 
       const isMobile = window.innerWidth < 768;
 
-      // Extended scroll runway for a smooth, relaxed scroll transition
+      // Harmonized scroll runway matching timeline duration perfectly
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: isMobile ? '+=180%' : '+=230%',
-          scrub: 1.5,
+          end: 'bottom bottom',
+          scrub: 1.2,
           pin: stageRef.current,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -164,7 +164,7 @@ export const HeroShowcaseExperience: React.FC = () => {
     <div 
       ref={containerRef} 
       id="hero-showcase-experience"
-      className="relative w-full h-[320vh] sm:h-[350vh] bg-[#050505]"
+      className="relative w-full h-[210vh] sm:h-[230vh] bg-[#050505]"
     >
       {/* Pinned Full-Viewport Stage */}
       <div 

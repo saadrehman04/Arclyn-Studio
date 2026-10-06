@@ -43,7 +43,7 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className={`flex items-center justify-center relative p-2 sm:p-6 md:p-12 ${className || "py-12 md:py-20"}`}
+      className={`flex items-center justify-center relative p-1 sm:p-4 md:p-6 ${className || "py-4 md:py-8"}`}
       ref={containerRef}
     >
       <div
@@ -73,7 +73,7 @@ export const Header = ({ translate, titleComponent }: any) => {
       style={{
         translateY: translate,
       }}
-      className="max-w-4xl mx-auto text-center mb-6 sm:mb-10"
+      className="max-w-4xl mx-auto text-center mb-3 sm:mb-6"
     >
       {titleComponent}
     </motion.div>
