@@ -181,11 +181,11 @@ export const ProjectsTapeSection: React.FC = () => {
   const bottomCtaRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
 
-  // Dynamic responsive cylindrical geometry
+  // Dynamic responsive cylindrical geometry (compact size & height)
   const [geometry, setGeometry] = useState({
-    radius: 640,
-    cardWidth: 260,
-    cardHeight: 370,
+    radius: 520,
+    cardWidth: 215,
+    cardHeight: 295,
   });
 
   // Continuous rotation angle and interaction physics
@@ -197,16 +197,16 @@ export const ProjectsTapeSection: React.FC = () => {
   const isHoveredRef = useRef<boolean>(false);
   const hasMovedRef = useRef<boolean>(false);
 
-  // Responsive geometry calculation
+  // Responsive geometry calculation (tight compact scaling)
   const updateGeometry = useCallback(() => {
     if (typeof window === 'undefined') return;
     const width = window.innerWidth;
     if (width < 640) {
-      setGeometry({ radius: 360, cardWidth: 175, cardHeight: 250 });
+      setGeometry({ radius: 320, cardWidth: 150, cardHeight: 210 });
     } else if (width < 1024) {
-      setGeometry({ radius: 490, cardWidth: 220, cardHeight: 310 });
+      setGeometry({ radius: 420, cardWidth: 185, cardHeight: 255 });
     } else {
-      setGeometry({ radius: 640, cardWidth: 260, cardHeight: 370 });
+      setGeometry({ radius: 520, cardWidth: 215, cardHeight: 295 });
     }
   }, []);
 
@@ -531,47 +531,47 @@ export const ProjectsTapeSection: React.FC = () => {
     <section
       id="products-tape"
       ref={sectionRef}
-      className="relative w-full -mt-10 sm:-mt-14 lg:-mt-20 pt-24 sm:pt-32 pb-24 sm:pb-36 bg-[#040406] text-white rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_70px_rgba(0,0,0,0.7)] overflow-hidden select-none z-30 will-change-transform transform-gpu"
+      className="relative w-full -mt-8 sm:-mt-12 pt-14 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#040406] text-white rounded-t-[32px] sm:rounded-t-[44px] lg:rounded-t-[56px] border-t border-white/10 shadow-[0_-25px_60px_rgba(0,0,0,0.7)] overflow-hidden select-none z-30 will-change-transform transform-gpu"
     >
       {/* =========================================================
           BACKGROUND AMBIENT ATMOSPHERE & SCANNER GLOW
           ========================================================= */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Subtle top transition vignette */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#040406] via-[#040406]/85 to-transparent z-10" />
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#040406] via-[#040406]/85 to-transparent z-10" />
 
         {/* Central ambient cyan-blue radial spotlight */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] sm:w-[1100px] h-[550px] sm:h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.18)_0%,rgba(14,165,233,0.06)_45%,transparent_75%)] blur-3xl will-change-transform transform-gpu" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[450px] sm:h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.18)_0%,rgba(14,165,233,0.06)_45%,transparent_75%)] blur-3xl will-change-transform transform-gpu" />
 
         {/* Soft bottom vignette */}
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#040406] to-transparent z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#040406] to-transparent z-10" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* =========================================================
-            HEADER (Clean reduced typography requested by user)
+            HEADER (Clean reduced typography, compact spacing)
             ========================================================= */}
         <div
           ref={headerRef}
-          className="text-center max-w-4xl mx-auto mb-10 sm:mb-14 will-change-transform transform-gpu"
+          className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 will-change-transform transform-gpu"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-medium mb-4 backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-[11px] font-medium mb-2.5 backdrop-blur-md">
+            <Sparkles className="w-3 h-3 text-cyan-400" />
             <span>Interactive 3D Before / After Showcase</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-2.5">
             Complete Project Portfolio
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed mb-6 font-normal">
+          <p className="text-sm sm:text-base text-slate-400 max-w-lg mx-auto leading-relaxed mb-4 font-normal">
             View all our Recent Works
           </p>
 
-          {/* Subtitle Action Pill (Matches "Get started →" pill in sample) */}
+          {/* Subtitle Action Pill */}
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/20 hover:border-white/40 text-xs sm:text-sm font-medium text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] group"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/20 hover:border-white/40 text-xs font-medium text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.18)] group"
           >
             <span>Get started</span>
             <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-1 transition-transform" />
@@ -582,12 +582,13 @@ export const ProjectsTapeSection: React.FC = () => {
       {/* =========================================================
           THE 3D BEFORE / AFTER REVOLVING CYLINDRICAL CAROUSEL
           Matching Framer University Architecture with Exact Mask Split
+          Compact height: 320px on mobile, 370px on tablet, 410px on desktop
           ========================================================= */}
       <div
         ref={containerRef}
-        className="relative w-full h-[420px] sm:h-[490px] lg:h-[540px] overflow-hidden cursor-grab active:cursor-grabbing will-change-transform transform-gpu"
+        className="relative w-full h-[320px] sm:h-[370px] lg:h-[410px] overflow-hidden cursor-grab active:cursor-grabbing will-change-transform transform-gpu"
         style={{
-          perspective: '1200px',
+          perspective: '1100px',
           perspectiveOrigin: '50% 50%',
         }}
         onPointerDown={handlePointerDown}
@@ -602,8 +603,8 @@ export const ProjectsTapeSection: React.FC = () => {
         }}
       >
         {/* Soft Edge Vignettes on Extreme Left and Right of Viewport */}
-        <div className="absolute inset-y-0 left-0 w-20 sm:w-40 bg-gradient-to-r from-[#040406] to-transparent pointer-events-none z-30" />
-        <div className="absolute inset-y-0 right-0 w-20 sm:w-40 bg-gradient-to-l from-[#040406] to-transparent pointer-events-none z-30" />
+        <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#040406] to-transparent pointer-events-none z-30" />
+        <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#040406] to-transparent pointer-events-none z-30" />
 
         {/* =========================================================
             LAYER 1: LEFT MASK (BEFORE STATE: WIREFRAME / BLUEPRINT)
@@ -645,65 +646,65 @@ export const ProjectsTapeSection: React.FC = () => {
 
         {/* =========================================================
             CENTER SCANNER / OPTICAL LASER SPLIT (AT EXACT 50% DIVIDER)
-            Exact 4-layer optical stack extracted from Framer Reference
+            Proportionately scaled to match compact card height
             ========================================================= */}
         <div
           ref={laserRef}
           className="absolute inset-y-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center will-change-transform origin-center"
         >
           {/* Layer A: Radial Ambient Aperture Bloom */}
-          <div className="absolute w-[360px] sm:w-[520px] h-[320px] sm:h-[440px] bg-[radial-gradient(ellipse_at_center,rgba(0,234,255,0.42)_0%,rgba(27,183,250,0.18)_42%,transparent_75%)] blur-2xl" />
+          <div className="absolute w-[280px] sm:w-[420px] h-[260px] sm:h-[340px] bg-[radial-gradient(ellipse_at_center,rgba(0,234,255,0.42)_0%,rgba(27,183,250,0.18)_42%,transparent_75%)] blur-2xl" />
 
-          {/* Layer B: Center Color Top 2 (Cyan Wide Bloom, blur 8px) */}
-          <div className="absolute w-[31px] h-[300px] sm:h-[400px] rounded-full bg-gradient-to-b from-[#00eaff]/15 via-[#00eaff] to-[#00eaff]/15 blur-[8px] opacity-40" />
+          {/* Layer B: Center Color Top 2 */}
+          <div className="absolute w-[24px] h-[240px] sm:h-[310px] rounded-full bg-gradient-to-b from-[#00eaff]/15 via-[#00eaff] to-[#00eaff]/15 blur-[6px] opacity-40" />
 
-          {/* Layer C: Center Color Top 1 (Cyan Core, blur 4px) */}
-          <div className="absolute w-[21px] h-[260px] sm:h-[350px] rounded-full bg-gradient-to-b from-[#1bb7fa]/25 via-[#1bb7fa] to-[#1bb7fa]/25 blur-[4px] opacity-65" />
+          {/* Layer C: Center Color Top 1 */}
+          <div className="absolute w-[18px] h-[210px] sm:h-[270px] rounded-full bg-gradient-to-b from-[#1bb7fa]/25 via-[#1bb7fa] to-[#1bb7fa]/25 blur-[3px] opacity-65" />
 
-          {/* Layer D: Center White Top 3 (White Soft Flare, blur 2px) */}
-          <div className="absolute w-[20px] h-[270px] sm:h-[360px] rounded-full bg-gradient-to-b from-transparent via-white 46% to-transparent blur-[2px] opacity-85" />
+          {/* Layer D: Center White Top 3 */}
+          <div className="absolute w-[16px] h-[220px] sm:h-[280px] rounded-full bg-gradient-to-b from-transparent via-white 46% to-transparent blur-[2px] opacity-85" />
 
           {/* Layer E: Center White Top 4 (Razor-Sharp White/Cyan Core Beam) */}
-          <div className="w-[3px] sm:w-[3.5px] h-[360px] sm:h-[450px] rounded-full bg-gradient-to-b from-transparent via-white 25% via-cyan-300 70% to-transparent shadow-[0_0_15px_#ffffff,0_0_35px_#00eaff,0_0_70px_#0284c7] opacity-95" />
+          <div className="w-[2.5px] sm:w-[3px] h-[280px] sm:h-[340px] rounded-full bg-gradient-to-b from-transparent via-white 25% via-cyan-300 70% to-transparent shadow-[0_0_12px_#ffffff,0_0_25px_#00eaff,0_0_50px_#0284c7] opacity-95" />
 
           {/* Layer F: Horizontal Telemetry HUD Scanlines radiating across center */}
-          <div className="absolute w-56 sm:w-72 h-56 sm:h-72 pointer-events-none flex flex-col justify-between py-5">
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_10px_#38bdf8] opacity-75" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_8px_#38bdf8] opacity-60" />
-            <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_16px_#38bdf8] opacity-95" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-70" />
-            <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_16px_#38bdf8] opacity-95" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-60" />
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_10px_#38bdf8] opacity-75" />
+          <div className="absolute w-44 sm:w-56 h-44 sm:h-56 pointer-events-none flex flex-col justify-between py-4">
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-75" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_6px_#38bdf8] opacity-60" />
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_12px_#38bdf8] opacity-95" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_6px_#38bdf8] opacity-70" />
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_12px_#38bdf8] opacity-95" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_6px_#38bdf8] opacity-60" />
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_8px_#38bdf8] opacity-75" />
           </div>
         </div>
 
         {/* Drag Helper Pill Indicator */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 border border-white/10 text-[10px] text-slate-400 backdrop-blur-md">
+        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/70 border border-white/10 text-[10px] text-slate-400 backdrop-blur-md">
           <MoveHorizontal className="w-3 h-3 text-cyan-400 animate-pulse" />
           <span>Drag left or right to rotate</span>
         </div>
       </div>
 
       {/* =========================================================
-          BOTTOM CTA: "VIEW ALL PRODUCTS"
+          BOTTOM CTA: "VIEW ALL PRODUCTS" (Compact spacing)
           ========================================================= */}
       <div
         ref={bottomCtaRef}
-        className="mt-14 sm:mt-20 text-center relative z-20 will-change-transform transform-gpu"
+        className="mt-8 sm:mt-12 text-center relative z-20 will-change-transform transform-gpu"
       >
-        <div className="max-w-xl mx-auto px-4 flex flex-col items-center gap-4">
+        <div className="max-w-xl mx-auto px-4 flex flex-col items-center gap-3">
           <Link
             href="/work"
-            className="group relative inline-flex items-center gap-3.5 px-8 sm:px-10 py-4 rounded-full bg-white hover:bg-slate-100 text-[#050505] text-sm sm:text-base font-bold tracking-tight shadow-[0_0_35px_rgba(255,255,255,0.22)] hover:shadow-[0_0_50px_rgba(255,255,255,0.45)] transition-all duration-300 active:scale-95"
+            className="group relative inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-white hover:bg-slate-100 text-[#050505] text-xs sm:text-sm font-bold tracking-tight shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-all duration-300 active:scale-95"
           >
             <span>View All Products</span>
-            <div className="w-7 h-7 rounded-full bg-[#050505] text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
-              <ArrowRight className="w-3.5 h-3.5" />
+            <div className="w-6 h-6 rounded-full bg-[#050505] text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
+              <ArrowRight className="w-3 h-3" />
             </div>
           </Link>
 
-          <p className="text-xs text-slate-400 flex items-center gap-2">
+          <p className="text-[11px] text-slate-400 flex items-center gap-2">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             <span>Curated architectural &amp; industrial product engineering systems</span>
           </p>
