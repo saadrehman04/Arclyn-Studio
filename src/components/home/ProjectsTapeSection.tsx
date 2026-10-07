@@ -193,6 +193,29 @@ export const ProjectsTapeSection: React.FC = () => {
   });
 
   const [isDesktop, setIsDesktop] = useState(true);
+  const mobileTapeTrackRef = useRef<HTMLDivElement>(null);
+  const [isMobileTapePaused, setIsMobileTapePaused] = useState(false);
+
+  // Fast auto-scroll for mobile projects tape
+  useEffect(() => {
+    if (isDesktop || isMobileTapePaused) return;
+
+    const interval = setInterval(() => {
+      const track = mobileTapeTrackRef.current;
+      if (!track) return;
+      const cardStep = geometry.cardWidth + 16;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll <= 0) return;
+
+      if (track.scrollLeft >= maxScroll - 20) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: cardStep, behavior: 'smooth' });
+      }
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, [isDesktop, isMobileTapePaused, geometry.cardWidth]);
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -786,7 +809,14 @@ export const ProjectsTapeSection: React.FC = () => {
             ========================================================= */
         <div ref={containerRef} className="relative w-full overflow-hidden px-4 sm:px-6">
           <div 
-            className="flex items-center gap-4 overflow-x-auto no-scrollbar py-3 px-1 snap-x snap-mandatory"
+            ref={mobileTapeTrackRef}
+            onMouseEnter={() => setIsMobileTapePaused(true)}
+            onMouseLeave={() => setIsMobileTapePaused(false)}
+            onTouchStart={() => setIsMobileTapePaused(true)}
+            onTouchEnd={() => {
+              setTimeout(() => setIsMobileTapePaused(false), 2200);
+            }}
+            className="flex items-center gap-4 overflow-x-auto no-scrollbar py-3 px-1 snap-x snap-mandatory scroll-smooth"
             style={{
               WebkitOverflowScrolling: 'touch',
               touchAction: 'pan-x pan-y',

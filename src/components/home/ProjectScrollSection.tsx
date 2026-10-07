@@ -114,13 +114,13 @@ export const ProjectScrollSection: React.FC = () => {
     setActiveIndex((prev) => (prev - 1 + SHOWCASE_PROJECTS.length) % SHOWCASE_PROJECTS.length);
   };
 
-  // Auto-cycle through projects every 6 seconds when not hovered
+  // Auto-cycle through projects fast every 2.6 seconds when not hovered/touched
   useEffect(() => {
     if (isPaused || !isVisible) return;
 
     autoPlayTimerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % SHOWCASE_PROJECTS.length);
-    }, 6000);
+    }, 2600);
 
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
@@ -201,6 +201,10 @@ export const ProjectScrollSection: React.FC = () => {
       className="font-helvetica-neue relative z-20 -mt-16 w-full select-none overflow-hidden border-t border-[#1A1A1A]/10 bg-[#E8E8E8] pt-10 text-[#1A1A1A] shadow-[0_-18px_55px_rgba(0,0,0,0.18)] sm:-mt-24 sm:pt-16 lg:-mt-32 lg:pt-20"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => {
+        setTimeout(() => setIsPaused(false), 2000);
+      }}
     >
       {/* Unmask Parallax Container */}
       <div ref={unmaskCardRef} className="w-full relative will-change-transform">

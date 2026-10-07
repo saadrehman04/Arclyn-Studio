@@ -264,48 +264,35 @@ export const FeaturedProjects: React.FC = () => {
           )}
         </div>
 
-        {/* Content Block */}
-        <div className="flex flex-1 flex-col justify-between bg-white p-4 sm:p-6">
+        {/* Concise Content Block */}
+        <div className="flex flex-1 flex-col justify-between bg-white p-3.5 sm:p-5">
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="trionn-heading line-clamp-2 text-sm font-bold leading-tight text-[#1E1E1E] transition-colors group-hover:text-black sm:text-xl lg:text-2xl">
+            <div className="flex items-center justify-between mb-1.5">
+              <h3 className="trionn-heading line-clamp-1 text-sm font-bold leading-tight text-[#1E1E1E] transition-colors group-hover:text-black sm:text-lg lg:text-xl">
                 {proj.name}
               </h3>
             </div>
 
-            {/* Result / Stat Highlight */}
-            <div className="mb-2 inline-flex max-w-full items-center gap-1.5 border border-[#1A1A1A]/10 bg-[#1A1A1A]/5 px-2 py-1 text-[9px] font-semibold leading-tight text-[#1A1A1A] sm:mb-3.5 sm:gap-2 sm:rounded-full sm:px-3 sm:text-xs">
+            {/* Concise Result Highlight */}
+            <div className="mb-2 inline-flex max-w-full items-center gap-1.5 border border-[#1A1A1A]/10 bg-[#1A1A1A]/5 px-2 py-0.5 text-[9px] font-semibold leading-tight text-[#1A1A1A] sm:mb-2.5 sm:gap-2 sm:rounded-full sm:px-2.5 sm:text-xs">
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-600 animate-pulse" />
-              <span>{proj.stat}</span>
+              <span className="truncate">{proj.stat}</span>
             </div>
 
-            {/* Description */}
-            <p className="trionn-subheading mb-3 line-clamp-3 text-[10px] font-normal leading-snug text-[#5E5E5E] sm:mb-5 sm:text-xs sm:leading-relaxed lg:text-sm">
+            {/* Concise 1-Line Impact Summary */}
+            <p className="trionn-subheading mb-2 line-clamp-2 text-[10px] font-normal leading-snug text-[#5E5E5E] sm:mb-3 sm:text-xs">
               {proj.shortDesc}
             </p>
           </div>
 
           <div>
-            {/* Tech Stack Tags */}
-            <div className="mb-3 flex flex-wrap gap-1 sm:mb-5 sm:gap-1.5 lg:gap-2">
-              {proj.tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-sm border border-[#1A1A1A]/10 bg-[#1A1A1A]/5 px-1.5 py-0.5 text-[8px] font-mono font-medium text-[#2B2B2B] sm:rounded-md sm:px-2 sm:py-1 sm:text-[10px] lg:text-[11px]"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* Bottom Action Row */}
-            <div className="flex flex-wrap items-center justify-between gap-x-1 border-t border-[#1A1A1A]/10 pt-2 sm:pt-3">
+            {/* Single Crisp Action Link */}
+            <div className="flex items-center justify-between border-t border-[#1A1A1A]/10 pt-2 sm:pt-2.5">
               <Link
                 href="/work"
-                className="inline-flex min-h-9 items-center gap-1 text-[9px] font-bold uppercase text-[#1A1A1A] transition-colors group/link hover:text-black sm:min-h-11 sm:gap-2 sm:text-xs sm:tracking-wider"
+                className="inline-flex items-center gap-1 text-[10px] font-bold uppercase text-[#1A1A1A] transition-colors group/link hover:text-black sm:text-xs sm:tracking-wider"
               >
-                <span className="sm:hidden">Explore</span>
-                <span className="hidden sm:inline">Explore Case Study</span>
+                <span>Explore Case</span>
                 <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-1 sm:h-3.5 sm:w-3.5" />
               </Link>
 
@@ -314,11 +301,10 @@ export const FeaturedProjects: React.FC = () => {
                   href={proj.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-9 items-center gap-1 text-[9px] font-mono text-[#5E5E5E] transition-colors hover:text-[#1A1A1A] sm:min-h-11 sm:gap-1.5 sm:text-xs"
+                  className="inline-flex items-center gap-1 text-[9px] font-mono text-[#5E5E5E] transition-colors hover:text-[#1A1A1A] sm:text-xs"
                 >
-                  <span className="sm:hidden">Live</span>
-                  <span className="hidden sm:inline">Live Deployment</span>
-                  <ExternalLink className="w-3 h-3 text-[#1A1A1A]" />
+                  <span>Live</span>
+                  <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#1A1A1A]" />
                 </a>
               )}
             </div>

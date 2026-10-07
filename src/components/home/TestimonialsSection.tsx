@@ -216,7 +216,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   const [cardWidth, setCardWidth] = useState(840);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const SLIDE_DURATION = 4500;
+  const SLIDE_DURATION = 2600; // Fast auto-scroll for dynamic testimonials cycling
 
   // Responsive card measurement
   useEffect(() => {

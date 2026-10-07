@@ -81,7 +81,9 @@ export const ServicesEditorialShowcase: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
   const [mobileProgress, setMobileProgress] = useState(20);
+  const [isMobilePaused, setIsMobilePaused] = useState(false);
   const mobileTrackRef = useRef<HTMLDivElement>(null);
+  const mobileAutoScrollTimer = useRef<NodeJS.Timeout | null>(null);
 
   const handleMobileScroll = () => {
     const el = mobileTrackRef.current;
@@ -101,6 +103,30 @@ export const ServicesEditorialShowcase: React.FC = () => {
     const scrollAmount = 286;
     el.scrollBy({ left: dir === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
   };
+
+  // Fast auto-scroll effect on mobile (< 1024px)
+  useEffect(() => {
+    if (isDesktop || isMobilePaused) return;
+
+    mobileAutoScrollTimer.current = setInterval(() => {
+      const el = mobileTrackRef.current;
+      if (!el) return;
+      const cardWidth = 286;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 0) return;
+
+      if (el.scrollLeft >= maxScroll - 16) {
+        // Smoothly loop back to first service
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: cardWidth, behavior: 'smooth' });
+      }
+    }, 2400);
+
+    return () => {
+      if (mobileAutoScrollTimer.current) clearInterval(mobileAutoScrollTimer.current);
+    };
+  }, [isDesktop, isMobilePaused]);
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -343,12 +369,16 @@ export const ServicesEditorialShowcase: React.FC = () => {
               <span className="font-mono text-xs font-bold text-[#1A1A1A]">
                 0{mobileIndex + 1} / 05
               </span>
-              <div className="w-24 sm:w-32 h-[2.5px] bg-[#1A1A1A]/10 rounded-full overflow-hidden">
+              <div className="w-20 sm:w-28 h-[2.5px] bg-[#1A1A1A]/10 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-[#1A1A1A] rounded-full transition-all duration-200"
                   style={{ width: `${mobileProgress}%` }}
                 />
               </div>
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-medium text-emerald-700 bg-emerald-500/10">
+                <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+                Auto
+              </span>
             </div>
 
             {/* Smooth Scroll Navigation Buttons */}
@@ -374,10 +404,16 @@ export const ServicesEditorialShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Smooth Horizontal Scrolling Gallery Track */}
+          {/* Smooth Horizontal Scrolling Gallery Track with Auto-Scroll Support */}
           <div
             ref={mobileTrackRef}
             onScroll={handleMobileScroll}
+            onMouseEnter={() => setIsMobilePaused(true)}
+            onMouseLeave={() => setIsMobilePaused(false)}
+            onTouchStart={() => setIsMobilePaused(true)}
+            onTouchEnd={() => {
+              setTimeout(() => setIsMobilePaused(false), 2200);
+            }}
             className="flex flex-row items-stretch gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2 -mx-4 px-4 scroll-smooth"
             style={{
               WebkitOverflowScrolling: 'touch',

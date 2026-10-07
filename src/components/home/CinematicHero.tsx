@@ -11,11 +11,15 @@ export const CinematicHero: React.FC = () => {
 
   // Smooth scroll animations for mobile transition into next section
   const { scrollY } = useScroll();
-  const heroContentY = useTransform(scrollY, [0, 360], [0, -50]);
-  const heroContentOpacity = useTransform(scrollY, [0, 260], [1, 0.15]);
-  const heroContentScale = useTransform(scrollY, [0, 360], [1, 0.95]);
-  const archScale = useTransform(scrollY, [0, 360], [1, 1.15]);
-  const archY = useTransform(scrollY, [0, 360], [0, 24]);
+  const heroContentY = useTransform(scrollY, [0, 420], [0, -85]);
+  const heroContentOpacity = useTransform(scrollY, [0, 260], [1, 0]);
+  const heroContentScale = useTransform(scrollY, [0, 420], [1, 0.92]);
+  
+  // Unified celestial glow circle & event horizon parallax transforms
+  const portalScale = useTransform(scrollY, [0, 460], [1, 1.48]);
+  const portalY = useTransform(scrollY, [0, 460], [0, 95]);
+  const portalOpacity = useTransform(scrollY, [0, 360], [1, 0.25]);
+  const cosmicNebulaY = useTransform(scrollY, [0, 460], [0, 50]);
   const scrollIndicatorOpacity = useTransform(scrollY, [0, 70], [1, 0]);
 
   useEffect(() => {
@@ -860,24 +864,140 @@ export const CinematicHero: React.FC = () => {
 
       </div>
 
-      {/* Mobile & Tablet Celestial Glowing Arch Hero (< 1024px) */}
-      <div className="block lg:hidden relative w-full h-[100dvh] bg-[#070314] overflow-hidden flex flex-col justify-between pt-24 pb-6 px-4 sm:px-6 z-10 select-none">
-        {/* Background Ambient Cosmic Nebulae */}
-        <div className="absolute inset-0 pointer-events-none">
+      {/* Mobile & Tablet Celestial Unified Glowing Portal Hero (< 1024px) */}
+      <div className="block lg:hidden relative w-full h-[100dvh] bg-[#05020d] overflow-hidden flex flex-col justify-between pt-24 pb-6 px-4 sm:px-6 z-10 select-none">
+        {/* Background Layer: Parallax Cosmic Nebulae */}
+        <motion.div 
+          style={{ y: cosmicNebulaY }}
+          className="absolute inset-0 pointer-events-none"
+        >
           {/* Deep celestial radial wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,_rgba(147,51,234,0.22)_0%,_rgba(88,28,135,0.12)_35%,_rgba(7,3,20,0.95)_80%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,_rgba(147,51,234,0.25)_0%,_rgba(88,28,135,0.14)_35%,_rgba(5,2,13,0.95)_80%)]" />
           
           {/* Subtle cosmic stardust particles */}
-          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#c084fc_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_35%,#000_70%,transparent_100%)]" />
+          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#c084fc_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_45%,#000_70%,transparent_100%)]" />
 
-          {/* Central subtle violet beam radiating up toward the headline */}
-          <div className="absolute top-[25%] left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-purple-600/15 blur-3xl pointer-events-none" />
-        </div>
+          {/* Central subtle violet volumetric beam radiating upward */}
+          <div className="absolute top-[28%] left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-purple-600/18 blur-3xl pointer-events-none" />
+        </motion.div>
 
-        {/* Content Stack: Centered & Concise with Smooth Scroll-Away Animation */}
+        {/* =========================================================================
+            ONE UNIFIED CELESTIAL GLOW PORTAL & EVENT HORIZON RING (PARALLAX DEPTH)
+            Merged into a single seamless, high-tech orbital design framing the hero.
+            ========================================================================= */}
+        <motion.div 
+          style={{ scale: portalScale, y: portalY, opacity: portalOpacity }}
+          className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] pointer-events-none z-10 flex items-center justify-center will-change-transform"
+        >
+          {/* Layer A: Atmospheric Backlight Glow Blooms */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-700/25 via-fuchsia-600/30 to-violet-500/20 blur-3xl" />
+          <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] rounded-full bg-purple-500/30 blur-2xl" />
+
+          {/* Layer B: Precision Celestial Vector Orbital Portal */}
+          <svg 
+            viewBox="0 0 320 320" 
+            className="w-full h-full overflow-visible drop-shadow-[0_0_35px_rgba(192,132,252,0.85)]"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <defs>
+              <radialGradient id="portalVoidGradMobile" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#05010a" stopOpacity="0.95" />
+                <stop offset="65%" stopColor="#0a0316" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#2e0854" stopOpacity="0.2" />
+              </radialGradient>
+              <linearGradient id="portalRingGradMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#c084fc" stopOpacity="0.95" />
+                <stop offset="35%" stopColor="#ffffff" stopOpacity="1" />
+                <stop offset="70%" stopColor="#a855f7" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#6b21a8" stopOpacity="0.6" />
+              </linearGradient>
+              <filter id="portalGlowFilterMobile" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="6" result="blur1" />
+                <feGaussianBlur stdDeviation="16" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Deep Obsidian Interior Void Disc */}
+            <circle cx="160" cy="160" r="140" fill="url(#portalVoidGradMobile)" />
+
+            {/* Outermost Soft Atmospheric Violet Halo */}
+            <circle 
+              cx="160" 
+              cy="160" 
+              r="142" 
+              fill="none" 
+              stroke="#a855f7" 
+              strokeWidth="12" 
+              opacity="0.4" 
+              filter="url(#portalGlowFilterMobile)" 
+            />
+
+            {/* Concentric Telemetry Coordinate Rings */}
+            <circle 
+              cx="160" 
+              cy="160" 
+              r="136" 
+              fill="none" 
+              stroke="#e9d5ff" 
+              strokeWidth="1" 
+              strokeDasharray="4 8" 
+              opacity="0.4" 
+            />
+            <circle 
+              cx="160" 
+              cy="160" 
+              r="118" 
+              fill="none" 
+              stroke="#c084fc" 
+              strokeWidth="0.75" 
+              strokeDasharray="2 12" 
+              opacity="0.3" 
+            />
+
+            {/* Brilliant White-to-Violet Luminous Perimeter Ring */}
+            <circle 
+              cx="160" 
+              cy="160" 
+              r="140" 
+              fill="none" 
+              stroke="url(#portalRingGradMobile)" 
+              strokeWidth="3.2" 
+              filter="url(#portalGlowFilterMobile)" 
+            />
+
+            {/* Soft Central Event Horizon Light Beam Streak */}
+            <line 
+              x1="20" 
+              y1="160" 
+              x2="300" 
+              y2="160" 
+              stroke="#ffffff" 
+              strokeWidth="1.2" 
+              strokeOpacity="0.75" 
+              filter="url(#portalGlowFilterMobile)" 
+            />
+            <line 
+              x1="40" 
+              y1="160" 
+              x2="280" 
+              y2="160" 
+              stroke="#c084fc" 
+              strokeWidth="2.5" 
+              strokeOpacity="0.4" 
+              filter="url(#portalGlowFilterMobile)" 
+            />
+          </svg>
+        </motion.div>
+
+        {/* Content Stack: Centered & Framed by the Luminous Portal */}
         <motion.div 
           style={{ y: heroContentY, opacity: heroContentOpacity, scale: heroContentScale }}
-          className="relative z-20 flex flex-col items-center text-center max-w-sm sm:max-w-md mx-auto my-auto pt-2"
+          className="relative z-20 flex flex-col items-center text-center max-w-sm sm:max-w-md mx-auto my-auto pt-2 will-change-transform"
         >
           {/* Eyebrow Pill Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-200 text-[11px] font-mono tracking-wider uppercase mb-4 backdrop-blur-xl shadow-[0_0_20px_rgba(168,85,247,0.25)]">
@@ -886,7 +1006,7 @@ export const CinematicHero: React.FC = () => {
           </div>
 
           {/* Hero Headline */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-[1.12] mb-3">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-[1.12] mb-3 drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
             Arclyn Studio
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-fuchsia-100 to-purple-300 font-bold mt-1 text-2xl sm:text-3xl">
               Autonomous Web &amp; AI
@@ -894,7 +1014,7 @@ export const CinematicHero: React.FC = () => {
           </h1>
 
           {/* Concise Subtitle */}
-          <p className="text-sm sm:text-base text-purple-200/80 font-normal leading-relaxed max-w-xs sm:max-w-sm mb-6">
+          <p className="text-sm sm:text-base text-purple-200/80 font-normal leading-relaxed max-w-xs sm:max-w-sm mb-6 drop-shadow-[0_1px_10px_rgba(0,0,0,0.8)]">
             Engineering bespoke digital platforms and autonomous AI systems built for measurable scale.
           </p>
 
@@ -924,99 +1044,6 @@ export const CinematicHero: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Glowing Celestial Event Horizon Arch with Parallax Scroll Transition */}
-        <motion.div 
-          style={{ scale: archScale, y: archY }}
-          className="relative w-full max-w-md mx-auto h-40 sm:h-48 flex items-end justify-center overflow-hidden pointer-events-none mt-2"
-        >
-          {/* Intense upward volumetric bloom */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-72 h-44 rounded-full bg-purple-600/35 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-28 rounded-full bg-fuchsia-500/40 blur-2xl pointer-events-none" />
-
-          {/* Vector Celestial Arch */}
-          <svg 
-            viewBox="0 0 400 180" 
-            className="w-full h-full overflow-visible drop-shadow-[0_0_35px_rgba(192,132,252,0.95)]"
-            preserveAspectRatio="xMidYMax meet"
-          >
-            <defs>
-              <linearGradient id="celestialArchGradMobile" x1="0%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="#7e22ce" stopOpacity="0.8" />
-                <stop offset="40%" stopColor="#c084fc" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-              </linearGradient>
-              <linearGradient id="horizontalDiscGradMobile" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#c084fc" stopOpacity="0" />
-                <stop offset="25%" stopColor="#c084fc" stopOpacity="0.4" />
-                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-                <stop offset="75%" stopColor="#c084fc" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#c084fc" stopOpacity="0" />
-              </linearGradient>
-              <radialGradient id="portalCoreDarkMobile" cx="50%" cy="100%" r="90%">
-                <stop offset="0%" stopColor="#05010a" stopOpacity="1" />
-                <stop offset="85%" stopColor="#0a0218" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#3b0764" stopOpacity="0" />
-              </radialGradient>
-              <filter id="neonBlurMobile" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="8" result="blur1" />
-                <feGaussianBlur stdDeviation="20" result="blur2" />
-                <feMerge>
-                  <feMergeNode in="blur2" />
-                  <feMergeNode in="blur1" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            {/* Pitch-black interior portal core */}
-            <path 
-              d="M 50 180 A 150 150 0 0 1 350 180 Z" 
-              fill="url(#portalCoreDarkMobile)" 
-            />
-
-            {/* Outer Wide Violet Neon Halo */}
-            <path 
-              d="M 50 180 A 150 150 0 0 1 350 180" 
-              fill="none" 
-              stroke="#a855f7" 
-              strokeWidth="22" 
-              strokeLinecap="round"
-              opacity="0.6"
-              filter="url(#neonBlurMobile)"
-            />
-
-            {/* Mid Electric Purple Ring */}
-            <path 
-              d="M 50 180 A 150 150 0 0 1 350 180" 
-              fill="none" 
-              stroke="#c084fc" 
-              strokeWidth="10" 
-              strokeLinecap="round"
-              opacity="0.9"
-            />
-
-            {/* Intense Luminous Core Arch (White-violet Crest) */}
-            <path 
-              d="M 50 180 A 150 150 0 0 1 350 180" 
-              fill="none" 
-              stroke="url(#celestialArchGradMobile)" 
-              strokeWidth="4" 
-              strokeLinecap="round"
-            />
-
-            {/* Horizontal Horizon Flare Streak across base */}
-            <line 
-              x1="10" 
-              y1="178" 
-              x2="390" 
-              y2="178" 
-              stroke="url(#horizontalDiscGradMobile)" 
-              strokeWidth="2.5" 
-              filter="url(#neonBlurMobile)"
-            />
-          </svg>
-        </motion.div>
-
         {/* Animated Scroll Prompt Indicator */}
         <motion.div 
           style={{ opacity: scrollIndicatorOpacity }}
@@ -1043,7 +1070,7 @@ export const CinematicHero: React.FC = () => {
         </div>
 
         {/* Seamless Bottom Gradient Fade into Next Section */}
-        <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#070314] via-[#070314]/75 to-transparent pointer-events-none z-15" />
+        <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#05020d] via-[#05020d]/75 to-transparent pointer-events-none z-15" />
       </div>
     </>
   );
