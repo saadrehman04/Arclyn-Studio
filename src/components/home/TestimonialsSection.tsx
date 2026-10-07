@@ -219,7 +219,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   const [cardWidth, setCardWidth] = useState(840);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const SLIDE_DURATION = 1500;
+  const SLIDE_DURATION = 4500;
 
   // Responsive card measurement
   useEffect(() => {
@@ -308,8 +308,8 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         {/* ========================================================================= */}
         {/* THREE-CARD DISPLAY STAGE (LEFT PEEK, CENTER ACTIVE, RIGHT PEEK) */}
         {/* ========================================================================= */}
-        <div className="relative w-full overflow-hidden py-2">
-          <div className="relative flex items-center justify-center min-h-[410px] sm:min-h-[340px] md:min-h-[300px]">
+        <div className="relative w-full overflow-hidden py-1">
+          <div className="relative flex items-center justify-center min-h-[220px] sm:min-h-[270px] md:min-h-[300px]">
             {visibleOffsets.map((offset) => {
               const itemIndex = (activeIndex + offset + total) % total;
               const t = TESTIMONIALS_DATA[itemIndex];
@@ -338,28 +338,28 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                   }`}
                 >
                   {/* Card Interior Grid: Text on Left, Client Portrait on Right */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 items-center relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-5 items-center relative z-10">
                     {/* LEFT COLUMN: Brand, Stars, Headline, Quote, Author */}
-                    <div className="md:col-span-7 flex flex-col justify-between h-full space-y-3 sm:space-y-4">
+                    <div className="md:col-span-7 flex flex-col justify-between h-full space-y-2.5 sm:space-y-4">
                       {/* Top Row: Brand & Rating */}
-                      <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
                         {/* Brand Icon + Name */}
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center p-1.5">
-                            <BrandIcon type={t.brandIcon} className="w-4 h-4" />
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center p-1 sm:p-1.5">
+                            <BrandIcon type={t.brandIcon} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </div>
-                          <span className="text-white text-sm sm:text-base font-semibold tracking-tight">
+                          <span className="text-white text-xs sm:text-base font-semibold tracking-tight">
                             {t.brand}
                           </span>
                         </div>
 
-                        {/* Star Rating Badge (5 and 4 stars) */}
-                        <div className="flex items-center gap-1.5 bg-white/[0.03] border border-white/10 px-2.5 py-0.5 rounded-full">
+                        {/* Star Rating Badge */}
+                        <div className="flex items-center gap-1.5 bg-white/[0.03] border border-white/10 px-2 py-0.5 rounded-full">
                           <div className="flex items-center gap-0.5">
                             {[1, 2, 3, 4, 5].map((s) => (
                               <Star
                                 key={s}
-                                className={`w-3 h-3 ${
+                                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${
                                   s <= t.rating
                                     ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]'
                                     : 'fill-neutral-700 text-neutral-700'
@@ -367,35 +367,48 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                               />
                             ))}
                           </div>
-                          <span className="text-[10px] font-semibold text-white/90 font-mono">
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-white/90 font-mono">
                             {t.ratingValue}
                           </span>
                         </div>
                       </div>
 
                       {/* Review Title & Body Quote */}
-                      <div className="space-y-2">
-                        <h3 className="text-base sm:text-lg font-semibold text-white tracking-tight leading-snug">
+                      <div className="space-y-1 sm:space-y-2">
+                        <h3 className="text-sm sm:text-lg font-semibold text-white tracking-tight leading-snug line-clamp-1">
                           {t.title}
                         </h3>
-                        <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-normal">
+                        <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-normal line-clamp-3">
                           &ldquo;{t.quote}&rdquo;
                         </p>
                       </div>
 
-                      {/* Author Credentials & Tag */}
+                      {/* Author Credentials & Avatar */}
                       <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between">
-                        <div>
-                          <div className="text-white text-xs sm:text-sm font-semibold tracking-tight">
-                            {t.author}, {t.role}
+                        <div className="flex items-center gap-2.5">
+                          {/* Compact Author Avatar on mobile (< md) */}
+                          <div className="md:hidden relative w-8 h-8 rounded-full overflow-hidden border border-white/20 bg-neutral-800 shrink-0">
+                            <Image
+                              src={t.image}
+                              alt={t.author}
+                              fill
+                              sizes="32px"
+                              className="object-cover object-center grayscale"
+                            />
                           </div>
-                          <div className="text-neutral-400 text-[11px] mt-0.5 flex items-center gap-1.5">
-                            <span className="text-white/70">{t.brand}</span>
-                            <span>•</span>
-                            <span className="text-emerald-400 flex items-center gap-1">
-                              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                              Verified Client
-                            </span>
+
+                          <div>
+                            <div className="text-white text-xs sm:text-sm font-semibold tracking-tight">
+                              {t.author}, {t.role}
+                            </div>
+                            <div className="text-neutral-400 text-[10px] sm:text-[11px] flex items-center gap-1.5">
+                              <span className="text-white/70">{t.brand}</span>
+                              <span>•</span>
+                              <span className="text-emerald-400 flex items-center gap-1">
+                                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                                Verified
+                              </span>
+                            </div>
                           </div>
                         </div>
 
@@ -408,23 +421,18 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                       </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Monochrome Client Portrait (Exact Match with Reference) */}
-                    <div className="md:col-span-5 relative w-full h-[150px] sm:h-[180px] md:h-[210px] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 shadow-sm">
+                    {/* RIGHT COLUMN: Monochrome Client Portrait (Desktop/Tablet Only) */}
+                    <div className="hidden md:block md:col-span-5 relative w-full h-[180px] md:h-[210px] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 shadow-sm">
                       <Image
                         src={t.image}
                         alt={`${t.author} - ${t.brand}`}
                         fill
-                        sizes="(max-width: 768px) 100vw, 360px"
+                        sizes="360px"
                         className="object-cover object-center grayscale contrast-105 brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
                       {/* Studio edge gradients */}
                       <div className="absolute inset-0 bg-gradient-to-t from-[#15161b]/80 via-transparent to-transparent pointer-events-none" />
                       <div className="absolute inset-0 bg-gradient-to-r from-[#15161b]/35 via-transparent to-transparent pointer-events-none" />
-
-                      {/* Author pill on mobile */}
-                      <div className="absolute bottom-2.5 left-2.5 md:hidden z-10 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[10px] text-white">
-                        {t.author} • {t.role}
-                      </div>
                     </div>
                   </div>
                 </div>

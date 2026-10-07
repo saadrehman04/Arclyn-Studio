@@ -221,27 +221,44 @@ export const CinematicHero: React.FC = () => {
 
         @media (max-width: 1023px) {
           .cinematic-hero {
-            padding-left: clamp(20px, 5vw, 36px);
-            padding-right: clamp(20px, 5vw, 36px);
-            padding-top: max(80px, 11vh);
-            padding-bottom: max(85px, 12vh);
-            justify-content: flex-start;
+            padding-left: clamp(20px, 5.5vw, 40px);
+            padding-right: clamp(20px, 5.5vw, 40px);
+            padding-top: max(90px, 12vh);
+            padding-bottom: max(100px, 14vh);
+            justify-content: center;
           }
           .cinematic-content {
-            max-width: 100%;
+            max-width: min(540px, 92vw);
             z-index: 10;
+            padding: 12px 0;
+            position: relative;
           }
           .cinematic-headline {
-            font-size: clamp(30px, 7vw, 48px);
+            font-size: clamp(30px, 7.5vw, 48px);
             line-height: 1.1;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            letter-spacing: -0.03em;
+          }
+          .cinematic-title-brand {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.95);
+          }
+          .cinematic-title-sub {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: #f1f5f9 !important;
+            color: #f1f5f9 !important;
+            font-weight: 600 !important;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.95);
           }
           .cinematic-sub {
-            font-size: clamp(14px, 3.6vw, 16px);
-            line-height: 1.5;
-            max-width: 100%;
-            margin-bottom: 22px;
-            color: #d1d5db;
+            font-size: clamp(14px, 3.8vw, 16px);
+            line-height: 1.55;
+            max-width: 480px;
+            margin-bottom: 24px;
+            color: #e2e8f0;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.9);
           }
           .cinematic-actions {
             width: 100%;
@@ -254,36 +271,43 @@ export const CinematicHero: React.FC = () => {
             min-height: 48px;
             padding: 0 24px;
             font-size: 15px;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
           }
           .cinematic-ghost {
             min-height: 48px;
             padding: 0 20px;
             font-size: 15px;
+            background: rgba(10,10,12,0.7);
+            border-color: rgba(255,255,255,0.25);
+            color: #ffffff;
           }
           .cinematic-plate-video {
-            left: 52%;
+            left: 68%;
             top: 50%;
             height: 100%;
             width: auto;
-            opacity: 0.55;
+            opacity: 0.42;
+            filter: brightness(0.85) contrast(1.1);
           }
           .cinematic-plate::after {
             background: 
               linear-gradient(to bottom,
-                rgba(5,5,5,0.85) 0%,
-                rgba(5,5,5,0.38) 28%,
-                rgba(5,5,5,0.32) 65%,
-                rgba(5,5,5,0.92) 88%,
+                rgba(5,5,5,0.92) 0%,
+                rgba(5,5,5,0.72) 25%,
+                rgba(5,5,5,0.68) 65%,
+                rgba(5,5,5,0.96) 90%,
                 #050505 100%),
               linear-gradient(to right,
-                rgba(5,5,5,0.8) 0%,
-                rgba(5,5,5,0.5) 60%,
-                rgba(5,5,5,0.2) 100%);
+                rgba(5,5,5,0.98) 0%,
+                rgba(5,5,5,0.92) 50%,
+                rgba(5,5,5,0.55) 78%,
+                rgba(5,5,5,0.20) 100%);
           }
           .cinematic-logos {
-            left: clamp(20px, 5vw, 36px);
-            right: clamp(20px, 5vw, 36px);
-            bottom: max(16px, 2.5vh);
+            left: clamp(20px, 5.5vw, 40px);
+            right: clamp(20px, 5.5vw, 40px);
+            bottom: max(18px, 2.8vh);
           }
           .cinematic-logos-list {
             gap: 16px;
@@ -300,16 +324,18 @@ export const CinematicHero: React.FC = () => {
 
         @media (max-width: 540px) {
           .cinematic-hero {
-            padding-top: max(75px, 10vh);
-            padding-bottom: max(80px, 11vh);
+            padding-top: max(85px, 12vh);
+            padding-bottom: max(95px, 13vh);
           }
           .cinematic-headline {
-            font-size: clamp(26px, 7.8vw, 34px);
-            line-height: 1.15;
+            font-size: clamp(27px, 8vw, 36px);
+            line-height: 1.12;
+            margin-bottom: 12px;
           }
           .cinematic-sub {
-            font-size: 13.5px;
-            margin-bottom: 18px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
           }
           .cinematic-actions {
             flex-direction: column;
@@ -319,7 +345,7 @@ export const CinematicHero: React.FC = () => {
           .cinematic-pill-cta, .cinematic-ghost {
             width: 100%;
             justify-content: center;
-            min-height: 46px;
+            min-height: 48px;
           }
           .cinematic-logos-list {
             display: grid;

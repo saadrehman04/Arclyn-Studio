@@ -334,133 +334,60 @@ export const Footer: React.FC = () => {
 
       {/* =========================================================
           MOBILE & TABLET: DEDICATED RESPONSIVE FOOTER (< 1024px)
-          - No scroll trap or sticky sequence
-          - Vertical stacked columns with comfortable touch targets (≥44px)
-          - Zero horizontal overflow, fits 320px up to 1023px
+          Matching the exact Laptop rounded card aesthetic, typography,
+          navigation, action buttons, and signature Arclyn Studio wordmark.
           ========================================================= */}
-      <div className="block lg:hidden relative w-full bg-[#080A10] border-t border-white/[0.08] px-5 sm:px-8 py-12 sm:py-16 text-white overflow-hidden">
-        {/* Ambient background illumination */}
-        <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-[240px] h-[240px] bg-purple-600/10 rounded-full blur-[90px] pointer-events-none" />
-
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-10">
+      <div className="block lg:hidden relative w-full bg-black p-3 sm:p-4 text-white overflow-hidden">
+        {/* Single Rounded Footer Card matching laptop */}
+        <div className="relative w-full bg-[#131415] rounded-[24px] sm:rounded-[36px] border border-white/[0.08] overflow-hidden flex flex-col pt-6 px-5 sm:px-7 pb-0 shadow-[0_20px_50px_rgba(0,0,0,0.85)]">
           
-          {/* Top Row: Arclyn Studio Branding & Mission */}
-          <div className="flex flex-col gap-4">
-            <Logo size="md" />
-            <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-              Engineering high-performance web applications, bespoke design systems, and autonomous AI automation pipelines with sub-second execution and zero technical debt.
+          {/* Mission Tagline */}
+          <div className="mb-6">
+            <p className="text-lg sm:text-xl font-bold text-white tracking-tight leading-[1.3]">
+              Build standout websites and AI systems with Arclyn Studio.
             </p>
-            <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Q1/Q2 Project Slots Open</span>
-            </div>
+            <p className="text-xs sm:text-sm text-slate-400 mt-2 font-normal">
+              Full-stack design, web engineering, and automation built for growth.
+            </p>
           </div>
 
-          {/* Action CTAs: Minimum 48px Touch Targets */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-[0_0_25px_rgba(37,99,235,0.35)] active:scale-[0.98] transition-transform"
-            >
-              <span>Start Your Project</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white font-semibold text-sm active:scale-[0.98] transition-all"
-            >
-              <span>Book Discovery Call</span>
-              <ArrowUpRight className="w-4 h-4 text-slate-400" />
-            </Link>
-          </div>
-
-          {/* Navigation & Services Stack: 2 columns on tablet, clean stack on mobile */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 pt-6 border-t border-white/[0.08]">
-            {/* Services Column */}
+          {/* Navigation Links: Explore & Socials in clean 2-column grid */}
+          <div className="grid grid-cols-2 gap-6 sm:gap-10 py-5 border-y border-white/[0.08]">
+            {/* Explore */}
             <div>
-              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-4">
-                Services
+              <h4 className="text-xs sm:text-sm font-bold text-white mb-2.5 tracking-tight">
+                Explore
               </h4>
-              <ul className="space-y-2.5 text-sm text-slate-400">
-                <li>
-                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
-                    Web Development
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
-                    Autonomous AI
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
-                    Creative 3D &amp; WebGL
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
-                    Brand Systems
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
-                    Mobile &amp; Apps
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Navigation Column */}
-            <div>
-              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-4">
-                Ecosystem
-              </h4>
-              <ul className="space-y-2.5 text-sm text-slate-400">
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors block py-0.5">
-                    Home
-                  </Link>
-                </li>
+              <ul className="space-y-2 text-xs sm:text-sm font-medium text-[#9ba1a5]">
                 <li>
                   <Link href="/work" className="hover:text-white transition-colors block py-0.5">
-                    Portfolio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="hover:text-white transition-colors block py-0.5">
-                    Pricing &amp; Plans
+                    Work
                   </Link>
                 </li>
                 <li>
                   <Link href="/about" className="hover:text-white transition-colors block py-0.5">
-                    About Arclyn
+                    About
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="hover:text-white transition-colors block py-0.5">
-                    Contact Us
+                  <Link href="/services" className="hover:text-white transition-colors block py-0.5">
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="hover:text-white transition-colors block py-0.5">
+                    Pricing
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Contact & Socials Column */}
-            <div className="col-span-2 sm:col-span-1">
-              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-4">
-                Direct Contact
+            {/* Socials */}
+            <div>
+              <h4 className="text-xs sm:text-sm font-bold text-white mb-2.5 tracking-tight">
+                Socials
               </h4>
-              <ul className="space-y-2.5 text-sm text-slate-400">
-                <li>
-                  <a
-                    href="mailto:hello@arclynstudio.com"
-                    className="hover:text-white transition-colors flex items-center gap-2 py-0.5"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                    <span>hello@arclynstudio.com</span>
-                  </a>
-                </li>
+              <ul className="space-y-2 text-xs sm:text-sm font-medium text-[#9ba1a5]">
                 <li>
                   <a
                     href="https://twitter.com/arclyn_studio"
@@ -468,7 +395,7 @@ export const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors block py-0.5"
                   >
-                    𝕏 Twitter / @arclyn_studio
+                    𝕏 @arclyn_studio
                   </a>
                 </li>
                 <li>
@@ -478,7 +405,7 @@ export const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors block py-0.5"
                   >
-                    ⌨ GitHub / @saadrehman04
+                    ▶ @saadrehman04
                   </a>
                 </li>
                 <li>
@@ -488,25 +415,64 @@ export const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors block py-0.5"
                   >
-                     Instagram / @arclyn_studio
+                     @arclyn_studio
                   </a>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Bottom Copyright & Status */}
-          <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-500 font-mono">
-            <div>
-              &copy; {new Date().getFullYear()} Arclyn Studio. All rights reserved.
-            </div>
-            <div className="flex items-center gap-2 text-slate-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <span>Full-Stack &amp; AI Systems</span>
+          {/* Signature Action Buttons matching laptop ('Book a call' & 'View work') */}
+          <div className="flex flex-col gap-3.5 py-6">
+            <Link
+              href="/contact"
+              className="group flex items-center justify-between w-full py-1 transition-transform active:scale-[0.98]"
+            >
+              <span className="text-xl sm:text-2xl font-bold tracking-tight text-[#0080ff] group-hover:text-blue-400 transition-colors">
+                Book a call
+              </span>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0080ff] text-white flex items-center justify-center shadow-[0_0_18px_rgba(0,128,255,0.45)] group-hover:scale-105 transition-transform">
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+            </Link>
+
+            <Link
+              href="/work"
+              className="group flex items-center justify-between w-full py-1 transition-transform active:scale-[0.98]"
+            >
+              <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-slate-200 transition-colors">
+                View work
+              </span>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#131415] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+            </Link>
+          </div>
+
+          {/* Bottom Stage: Big Bold Wordmark 'Arclyn Studio' matching laptop */}
+          <div className="relative w-full overflow-hidden pt-4 pb-2 text-center border-t border-white/[0.06]">
+            <div
+              className="w-full text-center select-none text-[clamp(2.6rem,11.5vw,5.5rem)] font-black tracking-[-0.08em] text-white leading-none"
+              aria-label="Arclyn Studio"
+            >
+              {ARCLYN_WORDMARK}
             </div>
           </div>
 
         </div>
+
+        {/* Bottom Meta Credits Bar matching laptop */}
+        <div className="pt-3 px-2 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[10px] sm:text-xs text-[#9ba1a5]">
+          <div className="flex items-center gap-1.5 text-center sm:text-left">
+            <span>Copyright &copy; {new Date().getFullYear()} Arclyn Studio. All rights reserved.</span>
+          </div>
+
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#222426] text-slate-300 text-[10px] sm:text-[11px]">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+            <span>Full-Stack &amp; AI Systems</span>
+          </div>
+        </div>
+
       </div>
     </footer>
   );

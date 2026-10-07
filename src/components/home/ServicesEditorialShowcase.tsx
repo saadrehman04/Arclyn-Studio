@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -79,6 +79,28 @@ export const ServicesEditorialShowcase: React.FC = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const [mobileProgress, setMobileProgress] = useState(20);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+
+  const handleMobileScroll = () => {
+    const el = mobileTrackRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+    const progress = Math.min(100, Math.max(20, (el.scrollLeft / maxScroll) * 100));
+    setMobileProgress(progress);
+    const cardWidth = 286; // card width (270px) + gap (16px)
+    const idx = Math.min(SERVICES_GALLERY.length - 1, Math.max(0, Math.round(el.scrollLeft / cardWidth)));
+    setMobileIndex(idx);
+  };
+
+  const scrollMobile = (dir: 'left' | 'right') => {
+    const el = mobileTrackRef.current;
+    if (!el) return;
+    const scrollAmount = 286;
+    el.scrollBy({ left: dir === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -289,80 +311,136 @@ export const ServicesEditorialShowcase: React.FC = () => {
       </div>
 
       {/* =========================================================
-          MOBILE & TABLET VIEW: CLEAN VERTICAL EDITORIAL LAYOUT
+          MOBILE & TABLET VIEW: SMOOTH HORIZONTAL RIGHT-SCROLL GALLERY
           (Active on < 1024px screens)
+          Smooth touch momentum carousel, interactive counter & progress bar,
+          and smooth navigation arrows just like the laptop experience.
           ========================================================= */}
-      <div className="block lg:hidden w-full py-14 sm:py-20 px-4 sm:px-8">
+      <div className="block lg:hidden w-full py-12 sm:py-16 px-4 sm:px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="mb-10 sm:mb-14">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase text-[#1A1A1A]/50 mb-3 sm:mb-4">
+          <div className="mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase text-[#1A1A1A]/50 mb-3">
               <span>✦</span>
               <span>SERVICES &amp; CAPABILITIES</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-light tracking-tight leading-[1.08] text-[#1A1A1A] mb-5">
+            <h2 className="text-3xl sm:text-4xl font-light tracking-tight leading-[1.08] text-[#1A1A1A] mb-3">
               Selected services <br />
               &amp; capabilities
             </h2>
             <Link 
               href="/services"
-              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.12em] uppercase text-[#1A1A1A] border-b border-[#1A1A1A]/30 hover:border-[#1A1A1A] pb-1 transition-all min-h-[44px]"
+              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.12em] uppercase text-[#1A1A1A] border-b border-[#1A1A1A]/30 hover:border-[#1A1A1A] pb-1 transition-all"
             >
               <span>VIEW ALL SERVICES</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Cards List: Entire Item Clickable */}
-          <div className="flex flex-col gap-10 sm:gap-12">
-            {SERVICES_GALLERY.map((service) => (
-              <Link 
-                key={service.id} 
-                href={service.route}
-                className="group flex flex-col p-4 sm:p-5 rounded-3xl bg-white/60 hover:bg-white border border-[#1A1A1A]/08 hover:border-[#1A1A1A]/20 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+          {/* Smooth Horizontal Progress & Navigation Controls */}
+          <div className="flex items-center justify-between py-3 border-y border-[#1A1A1A]/10 mb-5">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold text-[#1A1A1A]">
+                0{mobileIndex + 1} / 05
+              </span>
+              <div className="w-24 sm:w-32 h-[2.5px] bg-[#1A1A1A]/10 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-[#1A1A1A] rounded-full transition-all duration-200"
+                  style={{ width: `${mobileProgress}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Smooth Scroll Navigation Buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => scrollMobile('left')}
+                className="w-8 h-8 rounded-full border border-[#1A1A1A]/15 bg-white/70 active:bg-white flex items-center justify-center text-[#1A1A1A] active:scale-95 disabled:opacity-30 transition-all cursor-pointer shadow-sm"
+                disabled={mobileIndex === 0}
+                aria-label="Scroll previous service"
               >
-                {/* [IMAGE] - Visually prominent */}
-                <div className="block overflow-hidden rounded-2xl mb-4 bg-black/5 aspect-[16/10] relative shadow-sm border border-[#1A1A1A]/10">
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollMobile('right')}
+                className="w-8 h-8 rounded-full border border-[#1A1A1A]/15 bg-white/70 active:bg-white flex items-center justify-center text-[#1A1A1A] active:scale-95 disabled:opacity-30 transition-all cursor-pointer shadow-sm"
+                disabled={mobileIndex === SERVICES_GALLERY.length - 1}
+                aria-label="Scroll next service"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Smooth Horizontal Scrolling Gallery Track */}
+          <div
+            ref={mobileTrackRef}
+            onScroll={handleMobileScroll}
+            className="flex flex-row items-stretch gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2 -mx-4 px-4 scroll-smooth"
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-x pan-y',
+            }}
+          >
+            {SERVICES_GALLERY.map((service) => (
+              <div 
+                key={service.id} 
+                className="w-[270px] sm:w-[310px] shrink-0 snap-start flex flex-col p-4 rounded-3xl bg-white/80 hover:bg-white border border-[#1A1A1A]/10 shadow-sm transition-all duration-300"
+              >
+                {/* Image */}
+                <Link 
+                  href={service.route}
+                  className="block overflow-hidden rounded-2xl mb-3.5 bg-black/5 aspect-[16/10] relative shadow-sm border border-[#1A1A1A]/08"
+                >
                   <Image 
                     src={service.image} 
                     alt={service.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 640px"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 270px, 310px"
+                    className="object-cover object-center transition-transform duration-500 active:scale-105"
                   />
-                </div>
+                </Link>
 
-                <div className="flex flex-col gap-1.5 px-1">
-                  {/* 01 / 05 */}
-                  <div className="flex items-center justify-between text-xs font-mono text-[#1A1A1A]/60 mb-0.5">
-                    <span className="font-bold text-[#1A1A1A]">
-                      {service.displayNumber}
-                    </span>
-                    <span className="uppercase tracking-wider text-[10px] text-[#1A1A1A]/40 font-mono">
-                      DISCIPLINE
-                    </span>
+                {/* Content */}
+                <div className="flex flex-col gap-1.5 flex-1 justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-mono text-[#1A1A1A]/60 mb-1">
+                      <span className="font-bold text-[#1A1A1A]">
+                        {service.displayNumber}
+                      </span>
+                      <span className="uppercase tracking-wider text-[10px] text-[#1A1A1A]/40 font-mono">
+                        DISCIPLINE
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-[#1A1A1A] mb-1">
+                      {service.title}
+                    </h3>
+
+                    <p className="text-xs text-[#1A1A1A]/70 leading-relaxed line-clamp-2">
+                      {service.desc}
+                    </p>
                   </div>
 
-                  {/* WEB DEVELOPMENT */}
-                  <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#1A1A1A] group-hover:text-black transition-colors">
-                    {service.title}
-                  </h3>
-
-                  {/* Short Description */}
-                  <p className="text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed">
-                    {service.desc}
-                  </p>
-
-                  {/* EXPLORE SERVICE → with min 44px tap target */}
-                  <div className="pt-3">
-                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase text-[#1A1A1A] border-b border-[#1A1A1A]/30 group-hover:border-[#1A1A1A] pb-1 transition-colors min-h-[44px]">
+                  <div className="pt-3 border-t border-[#1A1A1A]/08 mt-2">
+                    <Link 
+                      href={service.route}
+                      className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] uppercase text-[#1A1A1A] hover:text-black transition-colors"
+                    >
                       <span>EXPLORE SERVICE</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
+          </div>
+
+          {/* Swipe indicator cue */}
+          <div className="flex items-center justify-center gap-1.5 pt-4 text-[11px] text-[#1A1A1A]/50 font-mono">
+            <span>Swipe right to explore services →</span>
           </div>
         </div>
       </div>

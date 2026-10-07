@@ -92,8 +92,10 @@ export const Capability3DSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* 2-Column Split: 3D Torus on Left + 2x2 Grid on Right proportioned to match image height */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+        {/* =========================================================
+            DESKTOP VIEW: 2-Column Split (>= 1024px) - 100% PRESERVED
+            ========================================================= */}
+        <div className="hidden lg:grid lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Column: Free-Floating Animated 3D Torus */}
           <div className="lg:col-span-5 xl:col-span-6 flex justify-center items-center relative">
@@ -108,40 +110,40 @@ export const Capability3DSection: React.FC = () => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               } : { duration: 0.2 }}
-              className="relative w-full max-w-[320px] sm:max-w-[460px] lg:max-w-[540px] xl:max-w-[580px] aspect-square flex items-center justify-center select-none"
+              className="relative w-full max-w-[540px] xl:max-w-[580px] aspect-square flex items-center justify-center select-none"
             >
               <Image
                 src="/images/iridescent-torus-clean.png"
                 alt="Arclyn Studio 3D Iridescent Fluid Core"
                 fill
                 className="object-contain drop-shadow-[0_0_100px_rgba(34,211,238,0.35)] filter contrast-110"
-                sizes="(max-width: 1024px) 100vw, 580px"
+                sizes="580px"
               />
             </motion.div>
           </div>
 
           {/* Right Column: 2x2 Grid fitting the 3D graphic height */}
           <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2">
+            <div className="grid grid-cols-2">
               {CAPABILITY_ITEMS.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div
                     key={item.title}
-                    className={`p-5 sm:p-8 lg:p-9 xl:p-10 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
+                    className={`p-6 xl:p-8 flex flex-col justify-start group hover:bg-white/[0.02] transition-colors duration-300 ${item.borderClasses}`}
                   >
-                    {/* Golden Icon - 48px to 56px prominent scale */}
-                    <div className="mb-6 text-[#F3F5B4] group-hover:scale-105 transition-transform duration-300 origin-left">
+                    {/* Golden Icon */}
+                    <div className="mb-5 text-[#F3F5B4] group-hover:scale-105 transition-transform duration-300 origin-left">
                       <IconComponent />
                     </div>
 
-                    {/* Headline - Bold, prominent, fitting image scale */}
-                    <h3 className="font-display text-2xl sm:text-[26px] lg:text-[28px] font-bold text-white mb-3 tracking-tight leading-snug group-hover:text-cyan-200 transition-colors">
+                    {/* Headline */}
+                    <h3 className="font-display text-xl xl:text-2xl font-bold text-white mb-2.5 tracking-tight leading-snug group-hover:text-cyan-200 transition-colors">
                       {item.title}
                     </h3>
 
-                    {/* Description - Readable, generous font size */}
-                    <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+                    {/* Description */}
+                    <p className="text-sm text-slate-300 font-light leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -150,6 +152,53 @@ export const Capability3DSection: React.FC = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* =========================================================
+            MOBILE & TABLET VIEW: SMALL & CONCISE (MAX 2 ROWS) (< 1024px)
+            Compact floating Torus accent + tight 2x2 grid (2 rows)
+            ========================================================= */}
+        <div className="block lg:hidden w-full py-4 sm:py-6">
+          {/* Centered Small Torus Accent */}
+          <div className="flex justify-center items-center mb-4 sm:mb-6">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 aspect-square flex items-center justify-center">
+              <Image
+                src="/images/iridescent-torus-clean.png"
+                alt="Arclyn Studio 3D Iridescent Core"
+                fill
+                className="object-contain drop-shadow-[0_0_35px_rgba(34,211,238,0.35)]"
+                sizes="(max-width: 640px) 96px, 128px"
+              />
+            </div>
+          </div>
+
+          {/* Concise 2x2 Grid (Strictly max 2 rows) */}
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 max-w-xl mx-auto">
+            {CAPABILITY_ITEMS.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <div
+                  key={`mobile-${item.title}`}
+                  className="p-3 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex flex-col justify-start shadow-sm"
+                >
+                  {/* Compact Icon */}
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 mb-2 text-[#F3F5B4] shrink-0 [&>svg]:w-full [&>svg]:h-full">
+                    <IconComponent />
+                  </div>
+
+                  {/* Concise Title */}
+                  <h3 className="font-display text-xs sm:text-sm font-bold text-white mb-1 tracking-tight leading-snug line-clamp-1">
+                    {item.title}
+                  </h3>
+
+                  {/* Concise Description */}
+                  <p className="text-[10px] sm:text-xs text-slate-400 font-light leading-relaxed line-clamp-2">
+                    {item.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
       </div>
