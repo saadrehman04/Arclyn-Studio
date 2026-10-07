@@ -192,6 +192,17 @@ export const ProjectsTapeSection: React.FC = () => {
     cardHeight: 295,
   });
 
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop, { passive: true });
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
+
   // Continuous rotation angle and interaction physics
   const angleRef = useRef<number>(0);
   const isDraggingRef = useRef<boolean>(false);
@@ -225,8 +236,16 @@ export const ProjectsTapeSection: React.FC = () => {
     };
   }, [updateGeometry]);
 
-  // Silky 60-120fps hardware-accelerated continuous rotation loop
+  // Silky 60-120fps hardware-accelerated continuous rotation loop (Desktop Only)
   useEffect(() => {
+    if (!isDesktop) {
+      if (animFrameRef.current !== null) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+      }
+      return;
+    }
+
     const loop = (timestamp: number) => {
       if (!isTapeVisibleRef.current || document.hidden) {
         animFrameRef.current = null;
@@ -301,7 +320,7 @@ export const ProjectsTapeSection: React.FC = () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       stopLoop();
     };
-  }, []);
+  }, [isDesktop]);
 
   // Parallax Scroll Entrance Animation
   useEffect(() => {
@@ -656,108 +675,181 @@ export const ProjectsTapeSection: React.FC = () => {
           Matching Framer University Architecture with Exact Mask Split
           Compact height: 320px on mobile, 370px on tablet, 410px on desktop
           ========================================================= */}
-      <div
-        ref={containerRef}
-        className="relative w-full h-[320px] sm:h-[370px] lg:h-[410px] overflow-hidden cursor-grab active:cursor-grabbing will-change-transform transform-gpu"
-        style={{
-          perspective: '1600px',
-          perspectiveOrigin: '50% 50%',
-          touchAction: 'pan-y',
-        }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={() => {
-          handlePointerUp();
-          isHoveredRef.current = false;
-        }}
-        onMouseEnter={() => {
-          isHoveredRef.current = true;
-        }}
-      >
-        {/* Soft Edge Vignettes on Extreme Left and Right of Viewport */}
-        <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#040406] to-transparent pointer-events-none z-30" />
-        <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#040406] to-transparent pointer-events-none z-30" />
-
-        {/* =========================================================
-            LAYER 1: LEFT MASK (BEFORE STATE: WIREFRAME / BLUEPRINT)
-            Masked from 0% to 50% across horizontal screen width
-            ========================================================= */}
+      {isDesktop ? (
         <div
-          className="absolute inset-0 pointer-events-none"
-          style={MASK_LEFT_STYLE}
+          ref={containerRef}
+          className="relative w-full h-[320px] sm:h-[370px] lg:h-[410px] overflow-hidden cursor-grab active:cursor-grabbing will-change-transform transform-gpu"
+          style={{
+            perspective: '1600px',
+            perspectiveOrigin: '50% 50%',
+            touchAction: 'pan-y',
+          }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={() => {
+            handlePointerUp();
+            isHoveredRef.current = false;
+          }}
+          onMouseEnter={() => {
+            isHoveredRef.current = true;
+          }}
         >
+          {/* Soft Edge Vignettes on Extreme Left and Right of Viewport */}
+          <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#040406] to-transparent pointer-events-none z-30" />
+          <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#040406] to-transparent pointer-events-none z-30" />
+
+          {/* =========================================================
+              LAYER 1: LEFT MASK (BEFORE STATE: WIREFRAME / BLUEPRINT)
+              Masked from 0% to 50% across horizontal screen width
+              ========================================================= */}
           <div
-            ref={leftCarouselRef}
-            className="absolute top-1/2 left-1/2 w-0 h-0 pointer-events-auto will-change-transform"
+            className="absolute inset-0 pointer-events-none"
+            style={MASK_LEFT_STYLE}
+          >
+            <div
+              ref={leftCarouselRef}
+              className="absolute top-1/2 left-1/2 w-0 h-0 pointer-events-auto will-change-transform"
+              style={{
+                transformStyle: 'preserve-3d',
+              }}
+            >
+              {PORTFOLIO_CARDS.map((card, idx) => renderBeforeCard(card, idx))}
+            </div>
+          </div>
+
+          {/* =========================================================
+              LAYER 2: RIGHT MASK (AFTER STATE: VIBRANT LIVE PRODUCTION)
+              Masked from 50% to 100% across horizontal screen width
+              ========================================================= */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={MASK_RIGHT_STYLE}
+          >
+            <div
+              ref={rightCarouselRef}
+              className="absolute top-1/2 left-1/2 w-0 h-0 pointer-events-auto will-change-transform"
+              style={{
+                transformStyle: 'preserve-3d',
+              }}
+            >
+              {PORTFOLIO_CARDS.map((card, idx) => renderAfterCard(card, idx))}
+            </div>
+          </div>
+
+          {/* =========================================================
+              CENTER SCANNER / OPTICAL LASER SPLIT (AT EXACT 50% DIVIDER)
+              Proportionately scaled to match compact card height
+              ========================================================= */}
+          <div
+            ref={laserRef}
+            className="absolute inset-y-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center will-change-transform origin-center"
+          >
+            {/* Layer A: Radial Ambient Aperture Bloom */}
+            <div className="absolute w-[280px] sm:w-[420px] h-[260px] sm:h-[340px] bg-[radial-gradient(ellipse_at_center,rgba(0,234,255,0.42)_0%,rgba(27,183,250,0.18)_42%,transparent_75%)] blur-2xl" />
+
+            {/* Layer B: Center Color Top 2 */}
+            <div className="absolute w-[24px] h-[240px] sm:h-[310px] rounded-full bg-gradient-to-b from-[#00eaff]/15 via-[#00eaff] to-[#00eaff]/15 blur-[6px] opacity-40" />
+
+            {/* Layer C: Center Color Top 1 */}
+            <div className="absolute w-[18px] h-[210px] sm:h-[270px] rounded-full bg-gradient-to-b from-[#1bb7fa]/25 via-[#1bb7fa] to-[#1bb7fa]/25 blur-[3px] opacity-65" />
+
+            {/* Layer D: Center White Top 3 */}
+            <div className="absolute w-[16px] h-[220px] sm:h-[280px] rounded-full bg-gradient-to-b from-transparent via-white 46% to-transparent blur-[2px] opacity-85" />
+
+            {/* Layer E: Center White Top 4 (Razor-Sharp White/Cyan Core Beam) */}
+            <div className="w-[2.5px] sm:w-[3px] h-[280px] sm:h-[340px] rounded-full bg-gradient-to-b from-transparent via-white 25% via-cyan-300 70% to-transparent shadow-[0_0_12px_#ffffff,0_0_25px_#00eaff,0_0_50px_#0284c7] opacity-95" />
+
+            {/* Layer F: Horizontal Telemetry HUD Scanlines radiating across center */}
+            <div className="absolute w-44 sm:w-56 h-44 sm:h-56 pointer-events-none flex flex-col justify-between py-4">
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-75" />
+              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_6px_#38bdf8] opacity-60" />
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_12px_#38bdf8] opacity-95" />
+              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_6px_#38bdf8] opacity-70" />
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_12px_#38bdf8] opacity-95" />
+              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_6px_#38bdf8] opacity-60" />
+              <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_8px_#38bdf8] opacity-75" />
+            </div>
+          </div>
+
+          {/* Drag Helper Pill Indicator */}
+          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/70 border border-white/10 text-[10px] text-slate-400 backdrop-blur-md">
+            <MoveHorizontal className="w-3 h-3 text-cyan-400 animate-pulse" />
+            <span>Drag left or right to rotate</span>
+          </div>
+        </div>
+      ) : (
+        /* =========================================================
+            LIGHTWEIGHT MOBILE/TABLET SWIPEABLE CAROUSEL
+            Single-pass 12-card horizontal native momentum track
+            No 24-card 3D duplication, no dual CSS masks, no RAF loop
+            ========================================================= */
+        <div ref={containerRef} className="relative w-full overflow-hidden px-4 sm:px-6">
+          <div 
+            className="flex items-center gap-4 overflow-x-auto no-scrollbar py-3 px-1 snap-x snap-mandatory"
             style={{
-              transformStyle: 'preserve-3d',
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-x pan-y',
             }}
           >
-            {PORTFOLIO_CARDS.map((card, idx) => renderBeforeCard(card, idx))}
+            {PORTFOLIO_CARDS.map((card) => (
+              <Link
+                key={`mobile-${card.id}`}
+                href={card.link}
+                className="relative shrink-0 snap-center w-[215px] sm:w-[250px] h-[295px] sm:h-[330px] rounded-[20px] bg-[#0c0d12] border border-white/15 overflow-hidden shadow-[0_16px_36px_rgba(0,0,0,0.85)] flex flex-col justify-between"
+              >
+                <div className="relative w-full h-full overflow-hidden">
+                  <Image
+                    src={card.image}
+                    alt={card.name}
+                    fill
+                    sizes="(max-width: 640px) 215px, 250px"
+                    className="object-cover object-center w-full h-full"
+                    loading="lazy"
+                  />
+
+                  {/* Top Badge: Live System */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/80 border border-emerald-400/40 text-[9px] font-semibold text-emerald-300 tracking-wide backdrop-blur-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      {card.tagAfter}
+                    </span>
+                  </div>
+
+                  {/* Top Right Category Pill */}
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="inline-flex px-2 py-0.5 rounded-full bg-black/70 border border-white/10 text-[9px] font-medium text-slate-300 backdrop-blur-md">
+                      {card.category}
+                    </span>
+                  </div>
+
+                  {/* Bottom Info Scrim */}
+                  <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black via-black/85 to-transparent flex flex-col justify-end">
+                    <h3 className="text-xs sm:text-sm font-bold text-white tracking-tight leading-snug line-clamp-1 mb-0.5">
+                      {card.name}
+                    </h3>
+                    <p className="text-[10px] text-slate-300 line-clamp-1 flex items-center justify-between">
+                      <span>{card.stat}</span>
+                      <span className="text-cyan-400 font-semibold flex items-center gap-0.5">
+                        View →
+                      </span>
+                    </p>
+                  </div>
+
+                  {/* Subtle Border Highlight */}
+                  <div className="absolute inset-0 rounded-[20px] border border-white/10 pointer-events-none" />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Swipe Helper Pill Indicator */}
+          <div className="flex items-center justify-center gap-1.5 pt-3 text-[10px] text-slate-400">
+            <MoveHorizontal className="w-3 h-3 text-cyan-400 animate-pulse" />
+            <span>Swipe horizontally to browse projects</span>
           </div>
         </div>
-
-        {/* =========================================================
-            LAYER 2: RIGHT MASK (AFTER STATE: VIBRANT LIVE PRODUCTION)
-            Masked from 50% to 100% across horizontal screen width
-            ========================================================= */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={MASK_RIGHT_STYLE}
-        >
-          <div
-            ref={rightCarouselRef}
-            className="absolute top-1/2 left-1/2 w-0 h-0 pointer-events-auto will-change-transform"
-            style={{
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            {PORTFOLIO_CARDS.map((card, idx) => renderAfterCard(card, idx))}
-          </div>
-        </div>
-
-        {/* =========================================================
-            CENTER SCANNER / OPTICAL LASER SPLIT (AT EXACT 50% DIVIDER)
-            Proportionately scaled to match compact card height
-            ========================================================= */}
-        <div
-          ref={laserRef}
-          className="absolute inset-y-0 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex flex-col items-center justify-center will-change-transform origin-center"
-        >
-          {/* Layer A: Radial Ambient Aperture Bloom */}
-          <div className="absolute w-[280px] sm:w-[420px] h-[260px] sm:h-[340px] bg-[radial-gradient(ellipse_at_center,rgba(0,234,255,0.42)_0%,rgba(27,183,250,0.18)_42%,transparent_75%)] blur-2xl" />
-
-          {/* Layer B: Center Color Top 2 */}
-          <div className="absolute w-[24px] h-[240px] sm:h-[310px] rounded-full bg-gradient-to-b from-[#00eaff]/15 via-[#00eaff] to-[#00eaff]/15 blur-[6px] opacity-40" />
-
-          {/* Layer C: Center Color Top 1 */}
-          <div className="absolute w-[18px] h-[210px] sm:h-[270px] rounded-full bg-gradient-to-b from-[#1bb7fa]/25 via-[#1bb7fa] to-[#1bb7fa]/25 blur-[3px] opacity-65" />
-
-          {/* Layer D: Center White Top 3 */}
-          <div className="absolute w-[16px] h-[220px] sm:h-[280px] rounded-full bg-gradient-to-b from-transparent via-white 46% to-transparent blur-[2px] opacity-85" />
-
-          {/* Layer E: Center White Top 4 (Razor-Sharp White/Cyan Core Beam) */}
-          <div className="w-[2.5px] sm:w-[3px] h-[280px] sm:h-[340px] rounded-full bg-gradient-to-b from-transparent via-white 25% via-cyan-300 70% to-transparent shadow-[0_0_12px_#ffffff,0_0_25px_#00eaff,0_0_50px_#0284c7] opacity-95" />
-
-          {/* Layer F: Horizontal Telemetry HUD Scanlines radiating across center */}
-          <div className="absolute w-44 sm:w-56 h-44 sm:h-56 pointer-events-none flex flex-col justify-between py-4">
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#38bdf8] opacity-75" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_6px_#38bdf8] opacity-60" />
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_12px_#38bdf8] opacity-95" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_6px_#38bdf8] opacity-70" />
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_12px_#38bdf8] opacity-95" />
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_6px_#38bdf8] opacity-60" />
-            <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_8px_#38bdf8] opacity-75" />
-          </div>
-        </div>
-
-        {/* Drag Helper Pill Indicator */}
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 pointer-events-none z-20 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/70 border border-white/10 text-[10px] text-slate-400 backdrop-blur-md">
-          <MoveHorizontal className="w-3 h-3 text-cyan-400 animate-pulse" />
-          <span>Drag left or right to rotate</span>
-        </div>
-      </div>
+      )}
 
       {/* =========================================================
           BOTTOM CTA: "VIEW ALL PRODUCTS" (Compact spacing)

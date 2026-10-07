@@ -179,10 +179,27 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
   className = ''
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    // Mobile (< 768px) performance optimization:
+    // DO NOT initialize the OGL/WebGL renderer, DO NOT start its RAF loop,
+    // and DO NOT attach mouse tracking.
+    if (window.innerWidth < 768) {
+      return;
+    }
 
     let renderer: InstanceType<typeof Renderer>;
     let gl: InstanceType<typeof Renderer>['gl'];
@@ -396,7 +413,20 @@ export const MoltenMetal: React.FC<MoltenMetalProps> = ({
     lightMode
   ]);
 
-  return <div ref={containerRef} className={`molten-metal-container ${className}`.trim()} />;
+  return (
+    <div ref={containerRef} className={`molten-metal-container ${className}`.trim()}>
+      {isMobile && (
+        <div 
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{
+            background: `radial-gradient(ellipse 70% 55% at 50% 50%, ${color2} 0%, ${color1} 45%, ${color3} 85%, transparent 100%)`,
+            opacity,
+            filter: 'blur(35px)',
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
 export default MoltenMetal;
