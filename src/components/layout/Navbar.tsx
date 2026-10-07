@@ -467,170 +467,170 @@ export const Navbar: React.FC = () => {
 
           </div>
         </div>
+      </header>
 
-        {/* Elegant Full-Screen Mobile Navigation Overlay */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-50 bg-[#050711]/98 backdrop-blur-2xl flex flex-col justify-between overflow-y-auto overscroll-contain">
-            {/* Top Bar inside Overlay */}
-            <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10">
-              <div className="cursor-pointer" onClick={handleHomeClick}>
-                <Logo size="md" />
-              </div>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-white/15 transition-all min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95"
-                aria-label="Close Menu"
-              >
-                <X className="w-6 h-6 text-white" />
-              </button>
+      {/* Elegant Full-Screen Mobile Navigation Overlay - Direct body-level sibling so backdrop-filter on header cannot trap it */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-[100] bg-[#050711]/98 backdrop-blur-2xl flex flex-col justify-between overflow-y-auto overscroll-contain">
+          {/* Top Bar inside Overlay */}
+          <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10">
+            <div className="cursor-pointer" onClick={handleHomeClick}>
+              <Logo size="md" />
             </div>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-white/15 transition-all min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95"
+              aria-label="Close Menu"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+          </div>
 
-            {/* Navigation Links List */}
-            <div className="flex-1 px-5 sm:px-6 py-6 flex flex-col justify-between gap-6 max-w-lg mx-auto w-full">
-              <nav className="flex flex-col space-y-2">
-                {/* 1. Home */}
-                <Link
-                  href="/"
-                  onClick={handleHomeClick}
-                  className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
-                    pathname === '/' 
-                      ? 'text-white bg-white/10 border border-white/15 shadow-sm' 
-                      : 'text-slate-200 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <span>Home</span>
-                  <ArrowRight className="w-4 h-4 text-cyan-400" />
-                </Link>
+          {/* Navigation Links List */}
+          <div className="flex-1 px-5 sm:px-6 py-6 flex flex-col justify-between gap-6 max-w-lg mx-auto w-full">
+            <nav className="flex flex-col space-y-2">
+              {/* 1. Home */}
+              <Link
+                href="/"
+                onClick={handleHomeClick}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
+                  pathname === '/' 
+                    ? 'text-white bg-white/10 border border-white/15 shadow-sm' 
+                    : 'text-slate-200 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <span>Home</span>
+                <ArrowRight className="w-4 h-4 text-cyan-400" />
+              </Link>
 
-                {/* 2. Services */}
-                <div>
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href="/services"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`flex-1 flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
-                        pathname.startsWith('/services') 
-                          ? 'text-white bg-white/10 border border-white/15' 
-                          : 'text-slate-200 hover:text-white hover:bg-white/5'
-                      }`}
-                    >
-                      <span>Services</span>
-                      <ArrowRight className="w-4 h-4 text-cyan-400" />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-                      className="ml-1 p-3 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 min-h-[50px] min-w-[50px] flex items-center justify-center"
-                      aria-label="Toggle Services submenu"
-                    >
-                      <ChevronDown className={`w-4 h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180 text-white' : ''}`} />
-                    </button>
+              {/* 2. Services */}
+              <div>
+                <div className="flex items-center justify-between">
+                  <Link
+                    href="/services"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex-1 flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
+                      pathname.startsWith('/services') 
+                        ? 'text-white bg-white/10 border border-white/15' 
+                        : 'text-slate-200 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span>Services</span>
+                    <ArrowRight className="w-4 h-4 text-cyan-400" />
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                    className="ml-1 p-3 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 min-h-[50px] min-w-[50px] flex items-center justify-center"
+                    aria-label="Toggle Services submenu"
+                  >
+                    <ChevronDown className={`w-4 h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180 text-white' : ''}`} />
+                  </button>
+                </div>
+                {servicesDropdownOpen && (
+                  <div className="pl-4 pr-2 pt-2 pb-1 space-y-1">
+                    {SERVICE_LINKS.map((sub) => {
+                      const Icon = sub.icon;
+                      return (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-3 p-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px]"
+                        >
+                          <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
+                          <span className="truncate">{sub.title}</span>
+                        </Link>
+                      );
+                    })}
                   </div>
-                  {servicesDropdownOpen && (
-                    <div className="pl-4 pr-2 pt-2 pb-1 space-y-1">
-                      {SERVICE_LINKS.map((sub) => {
-                        const Icon = sub.icon;
-                        return (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-center gap-3 p-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px]"
-                          >
-                            <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
-                            <span className="truncate">{sub.title}</span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
+                )}
+              </div>
+
+              {/* 3. Pricing */}
+              <Link
+                href="/pricing"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
+                  pathname === '/pricing' 
+                    ? 'text-white bg-white/10 border border-white/15' 
+                    : 'text-slate-200 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <span>Pricing</span>
+                <ArrowRight className="w-4 h-4 text-cyan-400" />
+              </Link>
+
+              {/* 4. Pages */}
+              <div>
+                <div className="flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setPagesDropdownOpen(!pagesDropdownOpen)}
+                    className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
+                      ['/work', '/industries', '/partner-program', '/about', '/testimonials'].includes(pathname)
+                        ? 'text-white bg-white/10 border border-white/15' 
+                        : 'text-slate-200 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span>Pages</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${pagesDropdownOpen ? 'rotate-180 text-white' : ''}`} />
+                  </button>
                 </div>
-
-                {/* 3. Pricing */}
-                <Link
-                  href="/pricing"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
-                    pathname === '/pricing' 
-                      ? 'text-white bg-white/10 border border-white/15' 
-                      : 'text-slate-200 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <span>Pricing</span>
-                  <ArrowRight className="w-4 h-4 text-cyan-400" />
-                </Link>
-
-                {/* 4. Pages */}
-                <div>
-                  <div className="flex items-center justify-between">
-                    <button
-                      type="button"
-                      onClick={() => setPagesDropdownOpen(!pagesDropdownOpen)}
-                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
-                        ['/work', '/industries', '/partner-program', '/about', '/testimonials'].includes(pathname)
-                          ? 'text-white bg-white/10 border border-white/15' 
-                          : 'text-slate-200 hover:text-white hover:bg-white/5'
-                      }`}
-                    >
-                      <span>Pages</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform ${pagesDropdownOpen ? 'rotate-180 text-white' : ''}`} />
-                    </button>
+                {pagesDropdownOpen && (
+                  <div className="pl-4 pr-2 pt-2 pb-1 space-y-1">
+                    {PAGES_LINKS.map((page) => {
+                      const Icon = page.icon;
+                      return (
+                        <Link
+                          key={page.href}
+                          href={page.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-3 p-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px]"
+                        >
+                          <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
+                          <span className="truncate">{page.title}</span>
+                        </Link>
+                      );
+                    })}
                   </div>
-                  {pagesDropdownOpen && (
-                    <div className="pl-4 pr-2 pt-2 pb-1 space-y-1">
-                      {PAGES_LINKS.map((page) => {
-                        const Icon = page.icon;
-                        return (
-                          <Link
-                            key={page.href}
-                            href={page.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-center gap-3 p-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px]"
-                          >
-                            <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
-                            <span className="truncate">{page.title}</span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
+                )}
+              </div>
 
-                {/* 5. Contacts */}
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
-                    pathname === '/contact' 
-                      ? 'text-white bg-white/10 border border-white/15' 
-                      : 'text-slate-200 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <span>Contacts</span>
-                  <ArrowRight className="w-4 h-4 text-cyan-400" />
-                </Link>
-              </nav>
+              {/* 5. Contacts */}
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-lg font-semibold tracking-tight transition-all min-h-[50px] ${
+                  pathname === '/contact' 
+                    ? 'text-white bg-white/10 border border-white/15' 
+                    : 'text-slate-200 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <span>Contacts</span>
+                <ArrowRight className="w-4 h-4 text-cyan-400" />
+              </Link>
+            </nav>
 
-              {/* Bottom Actions inside Overlay: Primary CTA & Studio Info */}
-              <div className="pt-4 border-t border-white/10 space-y-4">
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-full text-base font-bold bg-white text-black hover:bg-slate-100 shadow-[0_0_25px_rgba(255,255,255,0.25)] min-h-[50px] active:scale-98 transition-all"
-                >
-                  <span>Start Your Project</span>
-                  <ArrowRight className="w-4 h-4 text-black" />
-                </Link>
+            {/* Bottom Actions inside Overlay: Primary CTA & Studio Info */}
+            <div className="pt-4 border-t border-white/10 space-y-4">
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-full text-base font-bold bg-white text-black hover:bg-slate-100 shadow-[0_0_25px_rgba(255,255,255,0.25)] min-h-[50px] active:scale-98 transition-all"
+              >
+                <span>Start Your Project</span>
+                <ArrowRight className="w-4 h-4 text-black" />
+              </Link>
 
-                <div className="flex items-center justify-between text-xs text-slate-400 px-2 pt-1 font-mono">
-                  <span>contact@arclynstudio.com</span>
-                  <span>+92 319 6762317</span>
-                </div>
+              <div className="flex items-center justify-between text-xs text-slate-400 px-2 pt-1 font-mono">
+                <span>contact@arclynstudio.com</span>
+                <span>+92 319 6762317</span>
               </div>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       {/* Spotlight Quick Search Command Palette Modal */}
       {searchOpen && (

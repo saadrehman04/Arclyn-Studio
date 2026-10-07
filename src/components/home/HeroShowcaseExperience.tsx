@@ -77,7 +77,21 @@ export const HeroShowcaseExperience: React.FC = () => {
         return;
       }
 
-      // Harmonized scroll runway matching timeline duration perfectly
+      const isMobile = window.innerWidth < 1024;
+      if (isMobile) {
+        // On mobile & tablet, keep the hero fully visible in natural document flow without ScrollTrigger pinning
+        if (heroCopy) {
+          heroCopy.style.opacity = '1';
+          heroCopy.style.transform = 'none';
+        }
+        if (heroLogos) {
+          heroLogos.style.opacity = '1';
+          heroLogos.style.transform = 'none';
+        }
+        return;
+      }
+
+      // Harmonized scroll runway matching timeline duration perfectly (desktop only)
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -129,7 +143,7 @@ export const HeroShowcaseExperience: React.FC = () => {
     <div 
       ref={containerRef} 
       id="hero-showcase-experience"
-      className="relative w-full h-[108dvh] sm:h-[110dvh] lg:h-[112dvh] bg-[#050505]"
+      className="relative w-full h-[100dvh] lg:h-[112dvh] bg-[#050505]"
     >
       {/* Pinned Full-Viewport Stage */}
       <div 

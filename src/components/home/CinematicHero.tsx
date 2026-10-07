@@ -2,10 +2,21 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export const CinematicHero: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Smooth scroll animations for mobile transition into next section
+  const { scrollY } = useScroll();
+  const heroContentY = useTransform(scrollY, [0, 360], [0, -50]);
+  const heroContentOpacity = useTransform(scrollY, [0, 260], [1, 0.15]);
+  const heroContentScale = useTransform(scrollY, [0, 360], [1, 0.95]);
+  const archScale = useTransform(scrollY, [0, 360], [1, 1.15]);
+  const archY = useTransform(scrollY, [0, 360], [0, 24]);
+  const scrollIndicatorOpacity = useTransform(scrollY, [0, 70], [1, 0]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -223,26 +234,36 @@ export const CinematicHero: React.FC = () => {
           .cinematic-hero {
             padding-left: clamp(20px, 5.5vw, 40px);
             padding-right: clamp(20px, 5.5vw, 40px);
-            padding-top: max(90px, 12vh);
-            padding-bottom: max(100px, 14vh);
+            padding-top: max(85px, 12vh);
+            padding-bottom: max(95px, 13vh);
             justify-content: center;
+            pointer-events: auto;
           }
           .cinematic-content {
             max-width: min(540px, 92vw);
             z-index: 10;
             padding: 12px 0;
             position: relative;
+            opacity: 1 !important;
+            transform: none !important;
+            display: flex !important;
           }
           .cinematic-headline {
-            font-size: clamp(30px, 7.5vw, 48px);
+            font-size: clamp(30px, 7.8vw, 48px);
             line-height: 1.1;
             margin-bottom: 14px;
             letter-spacing: -0.03em;
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
           }
           .cinematic-title-brand {
             color: #ffffff !important;
             font-weight: 700 !important;
-            text-shadow: 0 2px 16px rgba(0,0,0,0.95);
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.95);
           }
           .cinematic-title-sub {
             background: none !important;
@@ -250,15 +271,21 @@ export const CinematicHero: React.FC = () => {
             -webkit-text-fill-color: #f1f5f9 !important;
             color: #f1f5f9 !important;
             font-weight: 600 !important;
-            text-shadow: 0 2px 16px rgba(0,0,0,0.95);
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.95);
           }
           .cinematic-sub {
             font-size: clamp(14px, 3.8vw, 16px);
             line-height: 1.55;
             max-width: 480px;
             margin-bottom: 24px;
-            color: #e2e8f0;
-            text-shadow: 0 1px 10px rgba(0,0,0,0.9);
+            color: #e2e8f0 !important;
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+            text-shadow: 0 1px 12px rgba(0,0,0,0.95);
           }
           .cinematic-actions {
             width: 100%;
@@ -266,53 +293,68 @@ export const CinematicHero: React.FC = () => {
             flex-direction: row;
             flex-wrap: wrap;
             gap: 12px;
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+            pointer-events: auto !important;
           }
           .cinematic-pill-cta {
             min-height: 48px;
             padding: 0 24px;
             font-size: 15px;
             font-weight: 700;
+            background: #ffffff !important;
+            color: #000000 !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            opacity: 1 !important;
+            pointer-events: auto !important;
           }
           .cinematic-ghost {
             min-height: 48px;
             padding: 0 20px;
             font-size: 15px;
-            background: rgba(10,10,12,0.7);
-            border-color: rgba(255,255,255,0.25);
-            color: #ffffff;
+            background: rgba(12,12,16,0.85) !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            color: #ffffff !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
           }
           .cinematic-plate-video {
-            left: 68%;
+            left: 70%;
             top: 50%;
             height: 100%;
             width: auto;
-            opacity: 0.42;
-            filter: brightness(0.85) contrast(1.1);
+            opacity: 0.38;
+            filter: brightness(0.8) contrast(1.1);
           }
           .cinematic-plate::after {
             background: 
               linear-gradient(to bottom,
-                rgba(5,5,5,0.92) 0%,
-                rgba(5,5,5,0.72) 25%,
-                rgba(5,5,5,0.68) 65%,
-                rgba(5,5,5,0.96) 90%,
+                rgba(5,5,5,0.78) 0%,
+                rgba(5,5,5,0.86) 30%,
+                rgba(5,5,5,0.88) 70%,
                 #050505 100%),
               linear-gradient(to right,
-                rgba(5,5,5,0.98) 0%,
-                rgba(5,5,5,0.92) 50%,
-                rgba(5,5,5,0.55) 78%,
-                rgba(5,5,5,0.20) 100%);
+                rgba(5,5,5,0.96) 0%,
+                rgba(5,5,5,0.88) 55%,
+                rgba(5,5,5,0.40) 100%);
           }
           .cinematic-logos {
             left: clamp(20px, 5.5vw, 40px);
             right: clamp(20px, 5.5vw, 40px);
             bottom: max(18px, 2.8vh);
+            opacity: 1 !important;
+            transform: none !important;
           }
           .cinematic-logos-list {
             gap: 16px;
             justify-content: space-between;
             width: 100%;
+            opacity: 1 !important;
+          }
+          .cinematic-lg {
+            opacity: 0.75 !important;
+            animation: none !important;
           }
           .cinematic-lg svg {
             height: 16px;
@@ -705,6 +747,7 @@ export const CinematicHero: React.FC = () => {
         /* Animations */
         @keyframes cinematic-rise {
           from { opacity: 0; transform: translateY(calc(14 * var(--u))); }
+          to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes cinematic-riseNav {
           from { opacity: 0; transform: translate(-50%, calc(-50% + calc(14 * var(--u)))); }
@@ -712,6 +755,7 @@ export const CinematicHero: React.FC = () => {
         }
         @keyframes cinematic-fade {
           from { opacity: 0; }
+          to   { opacity: 1; }
         }
         
         @media (prefers-reduced-motion: reduce) {
@@ -727,7 +771,8 @@ export const CinematicHero: React.FC = () => {
         }
       `}} />
 
-      <div className={`cinematic-stage ${isOpen ? 'is-open' : ''}`}>
+      {/* Desktop Stage (LOCKED: >= 1024px) */}
+      <div className={`cinematic-stage ${isOpen ? 'is-open' : ''} hidden lg:block`}>
         
         <div className="cinematic-plate">
           {/* Crisp primary video: Doorway portal, walking silhouette, and foreground rocky terrain */}
@@ -749,6 +794,11 @@ export const CinematicHero: React.FC = () => {
 
         <main className="cinematic-hero">
           <div id="hero-copy-block" className="cinematic-content will-change-transform">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-neutral-200 text-[11px] font-mono tracking-wider uppercase mb-3 sm:mb-4 shadow-sm backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+              <span>Full-Stack Web &amp; Autonomous AI</span>
+            </div>
+
             <h1 className="cinematic-headline">
               <span className="cinematic-title-brand">Arclyn Studio</span> 
               <span className="cinematic-title-sub">Autonomous Web & AI Systems</span>
@@ -808,6 +858,192 @@ export const CinematicHero: React.FC = () => {
           </div>
         </div>
 
+      </div>
+
+      {/* Mobile & Tablet Celestial Glowing Arch Hero (< 1024px) */}
+      <div className="block lg:hidden relative w-full h-[100dvh] bg-[#070314] overflow-hidden flex flex-col justify-between pt-24 pb-6 px-4 sm:px-6 z-10 select-none">
+        {/* Background Ambient Cosmic Nebulae */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Deep celestial radial wash */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,_rgba(147,51,234,0.22)_0%,_rgba(88,28,135,0.12)_35%,_rgba(7,3,20,0.95)_80%)]" />
+          
+          {/* Subtle cosmic stardust particles */}
+          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#c084fc_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_35%,#000_70%,transparent_100%)]" />
+
+          {/* Central subtle violet beam radiating up toward the headline */}
+          <div className="absolute top-[25%] left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-purple-600/15 blur-3xl pointer-events-none" />
+        </div>
+
+        {/* Content Stack: Centered & Concise with Smooth Scroll-Away Animation */}
+        <motion.div 
+          style={{ y: heroContentY, opacity: heroContentOpacity, scale: heroContentScale }}
+          className="relative z-20 flex flex-col items-center text-center max-w-sm sm:max-w-md mx-auto my-auto pt-2"
+        >
+          {/* Eyebrow Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-200 text-[11px] font-mono tracking-wider uppercase mb-4 backdrop-blur-xl shadow-[0_0_20px_rgba(168,85,247,0.25)]">
+            <Sparkles className="w-3.5 h-3.5 text-purple-300 animate-pulse" />
+            <span>Autonomous Web &amp; AI Systems</span>
+          </div>
+
+          {/* Hero Headline */}
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-[1.12] mb-3">
+            Arclyn Studio
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-fuchsia-100 to-purple-300 font-bold mt-1 text-2xl sm:text-3xl">
+              Autonomous Web &amp; AI
+            </span>
+          </h1>
+
+          {/* Concise Subtitle */}
+          <p className="text-sm sm:text-base text-purple-200/80 font-normal leading-relaxed max-w-xs sm:max-w-sm mb-6">
+            Engineering bespoke digital platforms and autonomous AI systems built for measurable scale.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs mx-auto">
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-bold bg-white text-black hover:bg-slate-100 inline-flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(192,132,252,0.45)] active:scale-95 transition-all"
+            >
+              <span>Start Your Project</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a
+              href="#production-showcase"
+              onClick={(e) => {
+                e.preventDefault();
+                const nextSec = document.getElementById('production-showcase');
+                if (nextSec) {
+                  nextSec.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="w-full sm:w-auto px-5 py-3 rounded-full text-sm font-medium text-white/90 bg-purple-950/50 hover:bg-purple-900/60 border border-purple-500/30 inline-flex items-center justify-center gap-1.5 backdrop-blur-md active:scale-95 transition-all cursor-pointer"
+            >
+              <span>Explore Systems</span>
+              <span>↓</span>
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Glowing Celestial Event Horizon Arch with Parallax Scroll Transition */}
+        <motion.div 
+          style={{ scale: archScale, y: archY }}
+          className="relative w-full max-w-md mx-auto h-40 sm:h-48 flex items-end justify-center overflow-hidden pointer-events-none mt-2"
+        >
+          {/* Intense upward volumetric bloom */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-72 h-44 rounded-full bg-purple-600/35 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-28 rounded-full bg-fuchsia-500/40 blur-2xl pointer-events-none" />
+
+          {/* Vector Celestial Arch */}
+          <svg 
+            viewBox="0 0 400 180" 
+            className="w-full h-full overflow-visible drop-shadow-[0_0_35px_rgba(192,132,252,0.95)]"
+            preserveAspectRatio="xMidYMax meet"
+          >
+            <defs>
+              <linearGradient id="celestialArchGradMobile" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#7e22ce" stopOpacity="0.8" />
+                <stop offset="40%" stopColor="#c084fc" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+              </linearGradient>
+              <linearGradient id="horizontalDiscGradMobile" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#c084fc" stopOpacity="0" />
+                <stop offset="25%" stopColor="#c084fc" stopOpacity="0.4" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                <stop offset="75%" stopColor="#c084fc" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#c084fc" stopOpacity="0" />
+              </linearGradient>
+              <radialGradient id="portalCoreDarkMobile" cx="50%" cy="100%" r="90%">
+                <stop offset="0%" stopColor="#05010a" stopOpacity="1" />
+                <stop offset="85%" stopColor="#0a0218" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#3b0764" stopOpacity="0" />
+              </radialGradient>
+              <filter id="neonBlurMobile" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="8" result="blur1" />
+                <feGaussianBlur stdDeviation="20" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Pitch-black interior portal core */}
+            <path 
+              d="M 50 180 A 150 150 0 0 1 350 180 Z" 
+              fill="url(#portalCoreDarkMobile)" 
+            />
+
+            {/* Outer Wide Violet Neon Halo */}
+            <path 
+              d="M 50 180 A 150 150 0 0 1 350 180" 
+              fill="none" 
+              stroke="#a855f7" 
+              strokeWidth="22" 
+              strokeLinecap="round"
+              opacity="0.6"
+              filter="url(#neonBlurMobile)"
+            />
+
+            {/* Mid Electric Purple Ring */}
+            <path 
+              d="M 50 180 A 150 150 0 0 1 350 180" 
+              fill="none" 
+              stroke="#c084fc" 
+              strokeWidth="10" 
+              strokeLinecap="round"
+              opacity="0.9"
+            />
+
+            {/* Intense Luminous Core Arch (White-violet Crest) */}
+            <path 
+              d="M 50 180 A 150 150 0 0 1 350 180" 
+              fill="none" 
+              stroke="url(#celestialArchGradMobile)" 
+              strokeWidth="4" 
+              strokeLinecap="round"
+            />
+
+            {/* Horizontal Horizon Flare Streak across base */}
+            <line 
+              x1="10" 
+              y1="178" 
+              x2="390" 
+              y2="178" 
+              stroke="url(#horizontalDiscGradMobile)" 
+              strokeWidth="2.5" 
+              filter="url(#neonBlurMobile)"
+            />
+          </svg>
+        </motion.div>
+
+        {/* Animated Scroll Prompt Indicator */}
+        <motion.div 
+          style={{ opacity: scrollIndicatorOpacity }}
+          className="relative z-20 flex items-center justify-center gap-1.5 text-[10px] font-mono tracking-widest uppercase text-purple-300/70 pb-1"
+        >
+          <span>Scroll to explore</span>
+          <motion.span
+            animate={{ y: [0, 4, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            className="inline-block"
+          >
+            ↓
+          </motion.span>
+        </motion.div>
+
+        {/* Minimalist Client Marks at Bottom */}
+        <div className="relative z-20 w-full pt-1 pb-1 flex items-center justify-center">
+          <div className="flex items-center justify-center gap-5 sm:gap-7 opacity-50 text-purple-200/70 font-mono text-[10px] tracking-widest uppercase">
+            <span>MERIDIAN</span>
+            <span>STELLEX</span>
+            <span>LUMINAR</span>
+            <span>OVERLAND</span>
+          </div>
+        </div>
+
+        {/* Seamless Bottom Gradient Fade into Next Section */}
+        <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#070314] via-[#070314]/75 to-transparent pointer-events-none z-15" />
       </div>
     </>
   );

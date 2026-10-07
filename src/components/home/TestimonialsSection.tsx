@@ -6,9 +6,6 @@ import {
   Star,
   ChevronLeft,
   ChevronRight,
-  Pause,
-  Play,
-  Sparkles,
   CheckCircle2,
 } from 'lucide-react';
 
@@ -226,7 +223,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) {
-        setCardWidth(Math.min(width - 32, 380));
+        setCardWidth(Math.min(width - 28, 410));
       } else if (width < 1024) {
         setCardWidth(Math.min(width - 64, 580));
       } else {
@@ -308,7 +305,13 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         {/* ========================================================================= */}
         {/* THREE-CARD DISPLAY STAGE (LEFT PEEK, CENTER ACTIVE, RIGHT PEEK) */}
         {/* ========================================================================= */}
-        <div className="relative w-full overflow-hidden py-1">
+        <div 
+          className="relative w-full overflow-hidden py-1"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
           <div className="relative flex items-center justify-center min-h-[220px] sm:min-h-[270px] md:min-h-[300px]">
             {visibleOffsets.map((offset) => {
               const itemIndex = (activeIndex + offset + total) % total;
@@ -383,45 +386,34 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                         </p>
                       </div>
 
-                      {/* Author Credentials & Avatar */}
-                      <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
-                          {/* Compact Author Avatar on mobile (< md) */}
-                          <div className="md:hidden relative w-8 h-8 rounded-full overflow-hidden border border-white/20 bg-neutral-800 shrink-0">
+                      {/* Author Credentials & Big Portrait */}
+                      <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+                        <div className="flex items-center gap-3.5">
+                          {/* Prominent Client Portrait on mobile (< md): Significantly bigger, crisp, stylish */}
+                          <div className="md:hidden relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-white/20 bg-neutral-800 shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
                             <Image
                               src={t.image}
                               alt={t.author}
                               fill
-                              sizes="32px"
-                              className="object-cover object-center grayscale"
+                              sizes="64px"
+                              className="object-cover object-center grayscale contrast-105"
                             />
                           </div>
 
-                          <div>
-                            <div className="text-white text-xs sm:text-sm font-semibold tracking-tight">
-                              {t.author}, {t.role}
+                          <div className="flex flex-col justify-center">
+                            <div className="text-white text-sm sm:text-base font-semibold tracking-tight flex items-center gap-1.5">
+                              <span>{t.author}</span>
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                             </div>
-                            <div className="text-neutral-400 text-[10px] sm:text-[11px] flex items-center gap-1.5">
-                              <span className="text-white/70">{t.brand}</span>
-                              <span>•</span>
-                              <span className="text-emerald-400 flex items-center gap-1">
-                                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                                Verified
-                              </span>
+                            <div className="text-neutral-400 text-xs sm:text-sm mt-0.5">
+                              {t.role} · <span className="text-neutral-300 font-medium">{t.brand}</span>
                             </div>
                           </div>
                         </div>
-
-                        {t.highlightTag && (
-                          <div className="hidden sm:inline-flex items-center gap-1 text-[10px] font-medium text-amber-300/90 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
-                            <Sparkles className="w-3 h-3 text-amber-400" />
-                            <span>{t.highlightTag}</span>
-                          </div>
-                        )}
                       </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Monochrome Client Portrait (Desktop/Tablet Only) */}
+                    {/* RIGHT COLUMN: Monochrome Client Portrait (Desktop/Tablet) */}
                     <div className="hidden md:block md:col-span-5 relative w-full h-[180px] md:h-[210px] rounded-xl overflow-hidden bg-neutral-900 border border-white/10 shadow-sm">
                       <Image
                         src={t.image}
@@ -446,39 +438,9 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         </div>
 
         {/* ========================================================================= */}
-        {/* INTERACTIVE CONTROLS: Autoscroll Progress Bar, Dots, & Navigation Arrows */}
+        {/* CONCISE INTERACTIVE CONTROLS: Dots & Navigation Arrows */}
         {/* ========================================================================= */}
-        <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-5 max-w-[840px] mx-auto px-4">
-          {/* Autoscroll Progress Indicator with Play/Pause button */}
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setIsPaused((prev) => !prev)}
-              className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 text-white/80 hover:text-white flex items-center justify-center transition-all cursor-pointer"
-              title={isPaused ? "Resume Autoscroll" : "Pause Autoscroll"}
-              aria-label={isPaused ? "Resume Autoscroll" : "Pause Autoscroll"}
-            >
-              {isPaused ? <Play className="w-3.5 h-3.5 fill-white" /> : <Pause className="w-3.5 h-3.5" />}
-            </button>
-
-            {/* Smooth Animated Autoscroll Progress Bar */}
-            <div className="w-28 sm:w-36 h-1.5 rounded-full bg-white/10 overflow-hidden relative">
-              <div
-                key={activeIndex}
-                className="h-full w-full origin-left rounded-full bg-gradient-to-r from-amber-400 via-violet-400 to-cyan-400"
-                style={{
-                  transform: 'scaleX(0)',
-                  animation: `testimonial-progress ${SLIDE_DURATION}ms linear forwards`,
-                  animationPlayState: isPaused || !isVisible || !isDocumentVisible ? 'paused' : 'running',
-                }}
-              />
-            </div>
-
-            <span className="text-[11px] text-neutral-400 font-mono tracking-wider">
-              {String(activeIndex + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-            </span>
-          </div>
-
+        <div className="mt-6 sm:mt-10 flex items-center justify-between max-w-[720px] mx-auto px-4">
           {/* Interactive Slide Dots */}
           <div className="flex items-center gap-2">
             {TESTIMONIALS_DATA.map((t, idx) => (
@@ -486,10 +448,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                 key={t.id}
                 type="button"
                 onClick={() => goToSlide(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   idx === activeIndex
-                    ? 'w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]'
-                    : 'w-2.5 bg-white/20 hover:bg-white/40'
+                    ? 'w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.7)]'
+                    : 'w-2 bg-white/20 hover:bg-white/40'
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
                 title={`${t.brand} - ${t.author}`}
@@ -502,19 +464,19 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
             <button
               type="button"
               onClick={prevSlide}
-              className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+              className="w-10 h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-5 h-5 sm:w-4 sm:h-4" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
 
             <button
               type="button"
               onClick={nextSlide}
-              className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+              className="w-10 h-10 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 hover:border-white/25 text-white/80 hover:text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-5 h-5 sm:w-4 sm:h-4" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
