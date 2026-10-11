@@ -156,11 +156,14 @@ export const Navbar: React.FC = () => {
 
   // Close menus on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setHomeDropdownOpen(false);
-    setServicesDropdownOpen(false);
-    setPagesDropdownOpen(false);
-    setSearchOpen(false);
+    const timer = setTimeout(() => {
+      setMobileMenuOpen(false);
+      setHomeDropdownOpen(false);
+      setServicesDropdownOpen(false);
+      setPagesDropdownOpen(false);
+      setSearchOpen(false);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   // Focus search input when modal opens

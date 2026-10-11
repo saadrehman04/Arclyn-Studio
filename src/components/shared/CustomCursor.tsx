@@ -18,7 +18,7 @@ export const CustomCursor: React.FC = () => {
     // Only enable on non-touch desktop screens
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouch || window.innerWidth < 1024) return;
-    setIsDesktop(true);
+    const timer = setTimeout(() => setIsDesktop(true), 0);
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
@@ -44,6 +44,7 @@ export const CustomCursor: React.FC = () => {
     document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseleave', handleMouseLeave);
