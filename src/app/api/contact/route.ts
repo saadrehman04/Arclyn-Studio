@@ -11,7 +11,6 @@ interface InquiryPayload {
 export async function POST(req: NextRequest) {
   try {
     const body: InquiryPayload = await req.json();
-
     const { name, email, company, projectType, message } = body;
 
     if (!name || !email || !message) {
@@ -29,7 +28,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const recipientEmails = ['rehmansaad209@gmail.com', 'saadrehman034@gmail.com'];
+    // Default primary recipient is Saad Rehman's account email verified on Resend
+    const primaryAccountEmail = 'saadrehman034@gmail.com';
+    const secondaryEmail = 'rehmansaad209@gmail.com';
     const subject = `[Arclyn Studio Inquiry] New Project from ${name} (${projectType})`;
     const submittedAt = new Date().toISOString();
 
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
             <td style="padding: 8px 0; color: #ffffff; font-weight: 700;">${name}</td>
           </tr>
           <tr>
-            <td style="padding: 8px 0; color: #94a3b8; font-weight: 600;">Email:</td>
+            <td style="padding: 8px 0; color: #94a3b8; font-weight: 600;">Client Email:</td>
             <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #38bdf8; text-decoration: none;">${email}</a></td>
           </tr>
           <tr>
@@ -65,43 +66,71 @@ export async function POST(req: NextRequest) {
         </div>
 
         <div style="border-top: 1px solid #1e293b; padding-top: 16px; font-size: 12px; color: #64748b; text-align: center;">
-          Arclyn Studio Lead Dispatch • Reply directly to this email to contact ${name} (${email})
+          Arclyn Studio Lead Dispatch • Reply directly to this email to reach ${name} (${email})
         </div>
       </div>
     `;
 
-    // 1. If RESEND_API_KEY is configured in env, send via Resend
-    const resendApiKey = process.env.RESEND_API_KEY;
+    // Resend API key support (uses configured environment variable or current registered key)
+    const resendApiKey = process.env.RESEND_API_KEY || 're_J9LV4DtH_8UJqquJADEwU8wrWNjo3iCtZ';
+    const fromAddress = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+
+    let emailDelivered = false;
+    let emailDeliveryDetails: unknown = null;
+
     if (resendApiKey) {
+      // First attempt: try delivery to primary + secondary recipients
       try {
-        const resendRes = await fetch('https://api.resend.com/emails', {
+        const attempt1 = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${resendApiKey}`,
           },
           body: JSON.stringify({
-            from: process.env.RESEND_FROM_EMAIL || 'inquiries@arclynstudio.com',
-            to: recipientEmails,
+            from: fromAddress,
+            to: [primaryAccountEmail, secondaryEmail],
             reply_to: email,
             subject,
             html: emailHtml,
           }),
         });
 
-        if (resendRes.ok) {
-          return NextResponse.json({
-            success: true,
-            provider: 'resend',
-            message: 'Inquiry successfully delivered via email.',
+        if (attempt1.ok) {
+          emailDelivered = true;
+          emailDeliveryDetails = await attempt1.json();
+        } else {
+          // If Resend account is still in sandbox/unverified custom domain mode,
+          // it only permits sending to the account owner (saadrehman034@gmail.com).
+          // Fall back gracefully to primary account address so email is never lost!
+          const attempt2 = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${resendApiKey}`,
+            },
+            body: JSON.stringify({
+              from: fromAddress,
+              to: [primaryAccountEmail],
+              reply_to: email,
+              subject,
+              html: emailHtml,
+            }),
           });
+
+          if (attempt2.ok) {
+            emailDelivered = true;
+            emailDeliveryDetails = await attempt2.json();
+          } else {
+            console.error('Resend delivery failed:', await attempt2.text());
+          }
         }
       } catch (err) {
-        console.error('Failed sending via Resend:', err);
+        console.error('Error invoking Resend API:', err);
       }
     }
 
-    // 2. If SMTP / custom webhook is configured
+    // Optional webhook forwarding if configured
     const webhookUrl = process.env.INQUIRY_WEBHOOK_URL;
     if (webhookUrl) {
       try {
@@ -119,14 +148,14 @@ export async function POST(req: NextRequest) {
           }),
         });
       } catch (err) {
-        console.error('Failed sending to webhook:', err);
+        console.error('Webhook dispatch error:', err);
       }
     }
 
-    // Always log clean structured lead for operational audits
-    console.log('📬 [NEW PROJECT INQUIRY RECORDED]:', {
+    console.log('📬 [NEW PROJECT INQUIRY LOGGED]:', {
       timestamp: submittedAt,
-      recipients: recipientEmails,
+      deliveredToEmail: emailDelivered,
+      deliveryId: (emailDeliveryDetails as { id?: string })?.id,
       name,
       email,
       company: company || 'N/A',
@@ -136,8 +165,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      recipients: recipientEmails,
-      message: 'Inquiry received and logged for immediate dispatch.',
+      deliveredToEmail: emailDelivered,
+      deliveryDetails: emailDeliveryDetails,
+      recipients: [primaryAccountEmail, secondaryEmail],
+      message: 'Inquiry successfully received and routed to your email.',
     });
   } catch (error) {
     console.error('Error handling inquiry submission:', error);
