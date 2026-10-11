@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { CustomCursor } from '@/components/shared/CustomCursor';
 import { LiquidChromeBackdrop } from '@/components/shared/LiquidChromeBackdrop';
+import { WhatsAppFloatingButton } from '@/components/shared/WhatsAppFloatingButton';
 
 const outfit = Outfit({
   variable: '--font-outfit',
@@ -114,6 +115,7 @@ export default function RootLayout({
           <LiquidChromeBackdrop />
           <Navbar />
           <main className="flex-1 relative z-10">{children}</main>
+          <WhatsAppFloatingButton />
           <Footer />
         </SmoothScroll>
       </body>
