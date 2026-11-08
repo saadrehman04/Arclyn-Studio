@@ -3,9 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
-import { MagneticButton } from '../shared/MagneticButton';
+import { ArrowRight } from 'lucide-react';
+import { Reveal, SplitText } from '@/components/motion/Reveal';
 
 interface TeamMember {
   name: string;
@@ -13,7 +12,6 @@ interface TeamMember {
   secondaryRole?: string;
   image: string;
   isLead?: boolean;
-  leadBadge?: string;
 }
 
 const TEAM_MEMBERS: TeamMember[] = [
@@ -23,170 +21,69 @@ const TEAM_MEMBERS: TeamMember[] = [
     secondaryRole: 'Senior Developer',
     image: '/images/team/saad-rehman-zoomed.jpg',
     isLead: true,
-    leadBadge: 'Leadership',
   },
-  {
-    name: 'Saad Rabbani',
-    role: 'Meta Ads Specialist',
-    image: '/images/team/saad-rabbani-zoomed.jpg',
-  },
-  {
-    name: 'Nadeem',
-    role: 'Full Stack AI Engineer',
-    image: '/images/team/nadeem.jpg',
-  },
-  {
-    name: 'Abdullah',
-    role: 'AI Automation Specialist',
-    image: '/images/team/abdullah.jpg',
-  },
+  { name: 'Saad Rabbani', role: 'Meta Ads Specialist', image: '/images/team/saad-rabbani-zoomed.jpg' },
+  { name: 'Nadeem', role: 'Full Stack AI Engineer', image: '/images/team/nadeem.jpg' },
+  { name: 'Abdullah', role: 'AI Automation Specialist', image: '/images/team/abdullah.jpg' },
 ];
 
 export const TeamSection: React.FC = () => {
   return (
-    <section 
-      id="team" 
-      className="relative pt-20 sm:pt-28 pb-24 sm:pb-32 bg-[#E6E6E6] overflow-hidden border-y border-[#1A1A1A]/10 select-none font-trionn"
-    >
-      {/* Subtle Architectural Matte Ambient Lighting */}
-      <div 
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[350px] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.7)_0%,transparent_70%)]" 
-        aria-hidden="true" 
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header Matching TRIONN Swiss Neo-Grotesque Aesthetic */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          {/* Eyebrow Pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-widest mb-5 shadow-sm select-none"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Meet the Team</span>
-          </motion.div>
-
-          {/* Large Editorial Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="trionn-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-[#1E1E1E] tracking-tight leading-[1.04] mb-4"
-          >
-            The minds behind the machines
-          </motion.h2>
-
-          {/* Subtitle Matching Reference Image */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="trionn-subheading text-sm sm:text-base text-[#5E5E5E] max-w-xl mx-auto leading-relaxed font-normal"
-          >
-            Our team blends engineering rigor, technical depth, and strategic thinking with autonomous AI innovation.
-          </motion.p>
-        </div>
-
-        {/* Team Cards Grid on TRIONN White Theme */}
-        <div className="relative max-w-6xl mx-auto pt-2 pb-2">
-          <div className="grid grid-cols-2 items-stretch gap-3 sm:gap-6 lg:grid-cols-4 lg:gap-7">
-            {TEAM_MEMBERS.map((member, idx) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: 0.1 + idx * 0.08 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#1A1A1A]/10 bg-white shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1A1A1A]/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] sm:rounded-3xl"
-              >
-                {/* Lead Badge for Saad Rehman */}
-                {member.isLead && (
-                  <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-[#1A1A1A] text-white text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Founder</span>
-                  </div>
-                )}
-
-                {/* Portrait Container */}
-                <div className="relative w-full aspect-[4/5] overflow-hidden border-b border-[#1A1A1A]/10 bg-[#ECECEC] sm:aspect-[3/4]">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-top grayscale contrast-[1.06] brightness-[0.98] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-                    priority={member.isLead}
-                  />
-                  
-                  {/* Subtle Natural Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity pointer-events-none" />
-                </div>
-
-                {/* Card Text Content */}
-                <div className="flex grow flex-col justify-center bg-white p-3 text-center sm:p-6">
-                  <h3 className="trionn-heading text-sm font-bold tracking-tight text-[#1E1E1E] transition-colors group-hover:text-black sm:text-2xl">
-                    {member.name}
-                  </h3>
-                  
-                  <div className="mt-2 flex flex-col items-center justify-center">
-                    {member.isLead ? (
-                      <>
-                        <span className="text-xs sm:text-[13px] font-semibold text-[#1A1A1A] bg-[#1A1A1A]/5 border border-[#1A1A1A]/10 px-3 py-0.5 rounded-full inline-block">
-                          {member.role}
-                        </span>
-                        {member.secondaryRole && (
-                          <span className="text-xs sm:text-[13px] font-medium text-[#5E5E5E] mt-1.5 leading-snug">
-                            {member.secondaryRole}
-                          </span>
-                        )}
-                      </>
-                    ) : (
-                      <span className="text-xs sm:text-[13px] font-medium text-[#5E5E5E] leading-snug">
-                        {member.role}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+    <section id="team" className="relative bg-[var(--bg)] px-5 py-24 sm:px-8 lg:py-36">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-14 flex flex-col gap-6 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <Reveal as="p" variant="fade" className="eyebrow mb-6">
+              The team
+            </Reveal>
+            <SplitText
+              text={'The minds behind\nthe machines.'}
+              accentWords={[4]}
+              accentClassName="font-serif-accent text-gradient-brand"
+              className="font-display text-[clamp(2.5rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
+            />
           </div>
+          <Reveal variant="up" delay={150} className="max-w-sm">
+            <p className="text-base leading-relaxed text-zinc-400">
+              A small senior team that blends engineering rigor and strategic thinking with AI innovation. You work
+              directly with the people building your product.
+            </p>
+            <Link href="/about" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white">
+              <span className="link-underline">More about Arclyn</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Reveal>
         </div>
 
-        {/* Bottom CTA Button Pair (TRIONN Signature Dark & Outline Pills) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 sm:mt-20 flex flex-wrap items-center justify-center gap-4"
-        >
-          <MagneticButton>
-            <Link
-              href="/about"
-              className="trionn-btn-dark"
-            >
-              <span>Learn More About Arclyn</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </MagneticButton>
-
-          <MagneticButton>
-            <Link
-              href="/contact"
-              className="trionn-btn-outline"
-            >
-              <span>Work With Us</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </MagneticButton>
-        </motion.div>
-
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          {TEAM_MEMBERS.map((member, idx) => (
+            <Reveal key={member.name} variant="up" delay={idx * 90} className="group">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#111118] sm:rounded-3xl">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  className="object-cover object-top grayscale transition-[filter,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                {member.isLead && (
+                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white sm:left-4 sm:top-4">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    Founder
+                  </span>
+                )}
+                <div className="absolute inset-x-3 bottom-3 sm:inset-x-5 sm:bottom-5">
+                  <h3 className="text-base font-semibold tracking-tight text-white sm:text-2xl">{member.name}</h3>
+                  <p className="mt-0.5 text-xs text-zinc-300 sm:text-sm">
+                    {member.role}
+                    {member.secondaryRole ? <span className="text-zinc-400"> · {member.secondaryRole}</span> : null}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

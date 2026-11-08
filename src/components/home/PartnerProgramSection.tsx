@@ -4,62 +4,93 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { MagneticButton } from '../shared/MagneticButton';
+import { Reveal, SplitText } from '@/components/motion/Reveal';
+
+const STEPS = [
+  { n: '01', t: 'Introduce', d: 'Tell a business owner — family, friends or anyone in your city — about Arclyn.' },
+  { n: '02', t: 'We deliver', d: 'We handle the proposal, the build and the launch. You stay in the loop.' },
+  { n: '03', t: 'You earn', d: 'Receive 30% of the project revenue once the client pays.' },
+];
 
 export const PartnerProgramSection: React.FC = () => {
   return (
-    <section id="partner-program" className="relative isolate overflow-hidden bg-[#090909] py-20 text-white sm:py-24 lg:py-28">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-          maskImage: 'linear-gradient(to bottom, black, transparent 92%)',
-        }}
-      />
+    <section id="partner-program" className="relative isolate overflow-hidden bg-[var(--bg)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/[0.09] bg-[#0b0b11] px-6 py-14 sm:rounded-[44px] sm:px-12 sm:py-20 lg:px-16">
+        {/* Glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 -top-48 h-[640px] w-[640px] rounded-full opacity-60"
+          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.35), rgba(56,189,248,0.08) 45%, transparent 68%)' }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-50"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+            maskImage: 'radial-gradient(ellipse 60% 70% at 80% 20%, #000, transparent 75%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 60% 70% at 80% 20%, #000, transparent 75%)',
+          }}
+        />
 
-      <div className="relative mx-auto grid max-w-7xl gap-9 px-5 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12 lg:px-10">
-        <div>
-          <div className="mb-6 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ff1010]">
-            <span className="h-px w-8 bg-[#ff1010]" />
-            <span>Partner Program</span>
-          </div>
-          <h2 className="max-w-4xl text-4xl font-black uppercase leading-[0.92] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
-            Earn money with us by becoming <span className="text-[#ff1010]">our partner.</span>
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#a0a0a0] sm:text-lg">
-            Introduce Arclyn Studio to businesses in your family, among your friends, or across your city.
-          </p>
-          <div className="mt-7 flex flex-col gap-2 border-l-2 border-[#ff1010] py-1 pl-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-7 sm:gap-y-3 sm:pl-5">
-            <span className="text-lg font-bold uppercase tracking-[0.02em] text-white sm:text-xl">Bring us a client.</span>
-            <span className="text-lg font-bold uppercase tracking-[0.02em] text-[#ff1010] sm:text-xl">Get 30% of project revenue.</span>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <MagneticButton strength={0.18}>
-              <Link
-                href="/partner-program"
-                className="inline-flex min-h-11 items-center justify-center gap-3 bg-[#ff1010] px-5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#e00000] active:scale-[0.98]"
+        <div className="relative grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+          <div>
+            <Reveal as="p" variant="fade" className="eyebrow mb-6">
+              Partner program
+            </Reveal>
+            <SplitText
+              text={'Bring us a client.\nKeep 30% of the project.'}
+              accentWords={[4, 5]}
+              accentClassName="font-serif-accent text-gradient-brand"
+              className="font-display text-[clamp(2.25rem,5.4vw,4.75rem)] font-semibold leading-[1] tracking-[-0.045em] text-white"
+            />
+            <Reveal as="p" variant="up" delay={150} className="mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+              Introduce Arclyn Studio to businesses in your family, among your friends, or across your city. No sales
+              experience needed — we do the heavy lifting.
+            </Reveal>
+            <Reveal variant="up" delay={250} className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <MagneticButton>
+                <Link href="/partner-program" className="btn-primary">
+                  <span>Become a partner</span>
+                  <span className="btn-arrow">
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </MagneticButton>
+              <a
+                href="https://wa.me/923196762317?text=Hi%20Saad,%20I%20want%20to%20learn%20more%20about%20the%20Arclyn%20Studio%2030%%20partner%20program."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors hover:text-white"
               >
-                <span>Partner with us</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </MagneticButton>
-            <a
-              href="https://wa.me/923196762317?text=Hi%20Saad,%20I%20want%20to%20learn%20more%20about%20the%20Arclyn%20Studio%2030%%20partner%20program."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#a0a0a0] transition-colors hover:text-white"
-            >
-              <MessageCircle className="h-4 w-4 text-[#ff1010]" />
-              <span>Ask us on WhatsApp</span>
-            </a>
+                <MessageCircle className="h-4 w-4 text-emerald-400" />
+                <span className="link-underline">Ask us on WhatsApp</span>
+              </a>
+            </Reveal>
           </div>
-        </div>
 
-        <div className="flex items-baseline gap-3 border-t border-white/10 pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-          <span className="text-8xl font-black leading-none tracking-[-0.09em] text-[#ff1010] sm:text-9xl lg:text-[10rem]">30%</span>
-          <span className="max-w-24 text-[10px] font-semibold uppercase leading-relaxed tracking-[0.17em] text-[#8a8a8a]">of project revenue</span>
+          <div>
+            <Reveal variant="scale" className="flex items-end gap-4">
+              <span className="font-display text-[clamp(6rem,14vw,11rem)] font-semibold leading-[0.8] tracking-[-0.07em] text-gradient-brand">
+                30%
+              </span>
+              <span className="mb-3 max-w-[7rem] font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-zinc-500">
+                of project revenue
+              </span>
+            </Reveal>
+            <ol className="mt-10 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+              {STEPS.map((s, i) => (
+                <Reveal as="li" key={s.n} variant="up" delay={i * 90} className="flex gap-5 py-4">
+                  <span className="font-mono text-xs text-violet-300/80">{s.n}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{s.t}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-zinc-500">{s.d}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>

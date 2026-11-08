@@ -2,87 +2,60 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { 
-  Building2, 
-  Utensils, 
-  ShoppingBag, 
-  Dumbbell, 
-  Wrench, 
-  Stethoscope, 
-  ArrowRight
-} from 'lucide-react';
+import { Building2, Utensils, ShoppingBag, Dumbbell, Wrench, Stethoscope, ArrowUpRight } from 'lucide-react';
+import { Reveal } from '@/components/motion/Reveal';
 
 const INDUSTRIES_LIST = [
-  { id: 'restaurants-hospitality', name: 'Restaurants & Hospitality', icon: Utensils, metric: 'Appetite UI & Direct Menus' },
-  { id: 'ecommerce-retail', name: 'E-Commerce & Retail', icon: ShoppingBag, metric: 'Sub-Second Storefronts' },
-  { id: 'real-estate-architecture', name: 'Real Estate & Architecture', icon: Building2, metric: 'Editorial Portals' },
-  { id: 'fitness-athletics', name: 'Fitness & Athletics', icon: Dumbbell, metric: 'Conversion Funnels' },
-  { id: 'home-services-trades', name: 'Home Services & Trades', icon: Wrench, metric: 'Dispatch & Booking' },
-  { id: 'medical-clinics', name: 'Medical & Specialty Clinics', icon: Stethoscope, metric: 'Patient Onboarding' },
+  { id: 'restaurants-hospitality', name: 'Restaurants & Hospitality', icon: Utensils, metric: 'Menus & direct ordering' },
+  { id: 'ecommerce-retail', name: 'E-Commerce & Retail', icon: ShoppingBag, metric: 'Sub-second storefronts' },
+  { id: 'real-estate-architecture', name: 'Real Estate', icon: Building2, metric: 'Editorial listing portals' },
+  { id: 'fitness-athletics', name: 'Fitness & Athletics', icon: Dumbbell, metric: 'Membership funnels' },
+  { id: 'home-services-trades', name: 'Home Services', icon: Wrench, metric: 'Dispatch & booking' },
+  { id: 'medical-clinics', name: 'Medical & Dental', icon: Stethoscope, metric: 'Patient onboarding' },
 ];
 
 export const IndustriesStrip: React.FC = () => {
   return (
-    <section className="relative z-20 overflow-hidden border-t border-white/10 bg-[#090909] py-14 text-white sm:py-16">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-          maskImage: 'linear-gradient(to bottom, black, transparent 92%)',
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Top Minimalist Header Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 text-center sm:text-left">
-          <div className="flex items-center gap-2.5">
-            <div className="h-2 w-2 rounded-full bg-[#ff1010]" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-[0.14em] text-[#ff1010]">
-              Specialized Industry Architectures
-            </span>
-          </div>
-
-          <Link
-            href="/industries"
-            className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#d5d5d5] transition-colors hover:text-white"
-          >
-            <span>Explore All 6 Industry Blueprints</span>
-            <ArrowRight className="h-3.5 w-3.5 text-[#ff1010] transition-transform group-hover:translate-x-1" />
-          </Link>
+    <section className="relative bg-[var(--bg)] px-5 py-20 sm:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <Reveal as="p" variant="fade" className="eyebrow">
+            Industries we know deeply
+          </Reveal>
+          <Reveal variant="fade">
+            <Link href="/industries" className="inline-flex items-center gap-2 text-sm font-medium text-white">
+              <span className="link-underline">Explore industry playbooks</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </Reveal>
         </div>
 
-        {/* Sleek, Reduced Horizontal Grid of Compact Industry Chips */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
-          {INDUSTRIES_LIST.map((ind) => {
+        <ul className="grid grid-cols-1 border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-3">
+          {INDUSTRIES_LIST.map((ind, i) => {
             const Icon = ind.icon;
             return (
-              <Link
-                key={ind.id}
-                href="/industries"
-                className="group relative flex flex-col justify-between rounded-xl border border-white/10 bg-[#0d0d0d] p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff1010]/50 hover:bg-[#111111] sm:rounded-2xl sm:p-5"
-              >
-                <div>
-                  <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-[#111111] text-[#ff1010] transition-colors group-hover:border-[#ff1010]/50">
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <h3 className="text-xs font-semibold leading-snug tracking-tight text-white transition-colors group-hover:text-[#ff1010] sm:text-sm">
-                    {ind.name}
-                  </h3>
-                </div>
-
-                <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-2.5 font-mono text-[10px] text-[#8a8a8a] group-hover:text-[#d5d5d5]">
-                  <span className="line-clamp-1">{ind.metric}</span>
-                  <ArrowRight className="ml-1 h-2.5 w-2.5 shrink-0 text-[#ff1010] opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
-                </div>
-              </Link>
+              <Reveal as="li" key={ind.id} variant="up" delay={(i % 3) * 80} className="border-b border-white/[0.08] sm:odd:border-r lg:border-r lg:[&:nth-child(3n)]:border-r-0">
+                <Link
+                  href="/industries"
+                  className="group relative flex items-center gap-5 overflow-hidden px-2 py-7 sm:px-6 sm:py-9"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 origin-bottom scale-y-0 bg-white/[0.03] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100"
+                  />
+                  <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300 transition-colors duration-300 group-hover:border-violet-400/50 group-hover:text-white">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="relative min-w-0 flex-1">
+                    <span className="block text-lg font-semibold tracking-tight text-white">{ind.name}</span>
+                    <span className="mt-0.5 block text-sm text-zinc-500">{ind.metric}</span>
+                  </span>
+                  <ArrowUpRight className="relative h-5 w-5 shrink-0 text-zinc-600 transition-all duration-500 group-hover:rotate-45 group-hover:text-white" />
+                </Link>
+              </Reveal>
             );
           })}
-        </div>
-
+        </ul>
       </div>
     </section>
   );

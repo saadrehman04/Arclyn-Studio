@@ -1,27 +1,34 @@
 import type { Metadata } from 'next';
-import { Outfit, JetBrains_Mono, Inter } from 'next/font/google';
+import { Geist, JetBrains_Mono, Inter, Instrument_Serif } from 'next/font/google';
+import 'lenis/dist/lenis.css';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { CustomCursor } from '@/components/shared/CustomCursor';
-import { LiquidChromeBackdrop } from '@/components/shared/LiquidChromeBackdrop';
 
-const outfit = Outfit({
-  variable: '--font-outfit',
+const geist = Geist({
+  variable: '--font-geist-raw',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
 
 const inter = Inter({
-  variable: '--font-inter',
+  variable: '--font-inter-raw',
   subsets: ['latin'],
   display: 'swap',
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: '--font-serif-raw',
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  display: 'swap',
+});
+
 const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-mono',
+  variable: '--font-mono-raw',
   subsets: ['latin'],
   weight: ['400', '500'],
   display: 'swap',
@@ -103,15 +110,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
+      className={`${geist.variable} ${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} dark`}
+      suppressHydrationWarning
     >
-      <head>
-        <link href="https://db.onlinewebfonts.com/c/0e6de1ec911a2e267ff136bbdd384a44?family=Helvetica+Neue+Light" rel="stylesheet" />
-      </head>
-      <body className="min-h-screen flex flex-col bg-[#050711] text-slate-100 font-sans antialiased selection:bg-purple-600/30 selection:text-white bg-noise">
+      <body className="min-h-screen flex flex-col bg-[var(--bg)] text-slate-100 font-sans antialiased selection:bg-violet-500/30 selection:text-white">
         <SmoothScroll>
           <CustomCursor />
-          <LiquidChromeBackdrop />
           <Navbar />
           <main className="flex-1 relative z-10">{children}</main>
           <Footer />

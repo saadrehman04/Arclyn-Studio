@@ -64,11 +64,11 @@ const SERVICE_LINKS = [
 ];
 
 const HOME_SECTIONS = [
-  { title: 'Hero (Start of Site)', href: '/#hero', desc: 'Interactive live production showcase' },
-  { title: 'Capabilities & 3D Torus', href: '/#capabilities', desc: 'AI-accelerated development & testing' },
-  { title: 'Bento Grid System', href: '/#bento', desc: 'Where AI meets human engineering' },
-  { title: 'Smart Solutions (Services)', href: '/#services', desc: 'Custom architectures built to dominate' },
-  { title: 'Verified Case Studies', href: '/#work', desc: 'Audited production architectures' },
+  { title: 'Start of Site', href: '/#hero', desc: 'Back to the top of the homepage' },
+  { title: 'Selected Work', href: '/#work', desc: 'Featured launches & case studies' },
+  { title: 'Services', href: '/#services', desc: 'Web, apps, AI, SaaS & custom software' },
+  { title: 'How We Work', href: '/#process', desc: 'AI-accelerated, human-crafted process' },
+  { title: 'Team', href: '/#team', desc: 'The people building your product' },
   { title: 'Milestone Pricing', href: '/pricing', desc: 'Transparent sprint-based investment' },
 ];
 
@@ -76,7 +76,7 @@ const PAGES_LINKS = [
   { title: 'Our Work', href: '/work', desc: 'Complete verified project portfolio', icon: Briefcase },
   { title: 'Testimonials', href: '/testimonials', desc: 'Verified reviews & client success stories', icon: Star },
   { title: 'Industries', href: '/industries', desc: 'Real Estate, Health, Dining, SaaS & more', icon: Compass },
-  { title: 'Partner Program', href: '/partner-program', desc: 'High-earning 10-15% agency referral rewards', icon: Users },
+  { title: 'Partner Program', href: '/partner-program', desc: 'Earn 30% of every project you refer', icon: Users },
   { title: 'About Arclyn', href: '/about', desc: 'Our engineering philosophy and team', icon: Sparkles },
 ];
 
@@ -115,7 +115,8 @@ export const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -154,14 +155,16 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  // Close menus on route change
-  useEffect(() => {
+  // Close menus on route change (adjust state during render instead of in an effect)
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
     setMobileMenuOpen(false);
     setHomeDropdownOpen(false);
     setServicesDropdownOpen(false);
     setPagesDropdownOpen(false);
     setSearchOpen(false);
-  }, [pathname]);
+  }
 
   // Focus search input when modal opens
   useEffect(() => {
@@ -206,7 +209,7 @@ export const Navbar: React.FC = () => {
               <Logo size="md" />
             </div>
 
-            <nav className="hidden lg:flex items-center relative rounded-full px-5 py-2 backdrop-blur-2xl bg-[#050505]/80 border border-white/10 hover:border-white/20 shadow-[0_0_35px_rgba(255,255,255,0.05),0_12px_40px_rgba(0,0,0,0.6)] hover:shadow-[0_0_55px_rgba(255,255,255,0.1),0_14px_45px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-all duration-300 ease-out group/nav overflow-hidden">
+            <nav className="hidden lg:flex items-center relative rounded-full px-5 py-2 backdrop-blur-2xl bg-[#050505]/80 border border-white/10 hover:border-white/20 shadow-[0_0_35px_rgba(255,255,255,0.05),0_12px_40px_rgba(0,0,0,0.6)] hover:shadow-[0_0_55px_rgba(255,255,255,0.1),0_14px_45px_rgba(0,0,0,0.7)] transition-[border-color,box-shadow] duration-300 ease-out group/nav overflow-hidden">
               {/* Internal Sheen */}
               <div className="absolute -left-4 -top-8 w-44 h-24 bg-gradient-to-r from-white/10 via-white/5 to-transparent blur-xl pointer-events-none group-hover/nav:scale-125 group-hover/nav:opacity-100 transition-all duration-500" />
               <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-white/10 via-white/40 to-transparent pointer-events-none" />

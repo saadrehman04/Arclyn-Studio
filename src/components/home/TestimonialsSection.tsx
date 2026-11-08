@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import { Reveal, SplitText } from '@/components/motion/Reveal';
 import {
   Star,
   ChevronLeft,
@@ -280,25 +281,26 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     <section
       id="testimonials"
       ref={sectionRef}
-      className={`relative bg-[#0d0e12] text-white py-8 sm:py-10 md:py-12 overflow-hidden select-none ${className}`}
+      className={`relative bg-[var(--bg)] text-white py-20 sm:py-28 overflow-hidden select-none ${className}`}
     >
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ========================================================================= */}
         {/* SECTION HEADER (PROPORTIONATE SCALE MATCHING SCREENSHOT) */}
         {/* ========================================================================= */}
         {!hideHeader && (
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-white mb-2 leading-[1.12]">
-              Hear from Brands
-              <br />
-              That Trust Us
-            </h2>
-
-            <p className="text-xs sm:text-sm text-neutral-400 max-w-lg mx-auto leading-relaxed">
-              Our clients&apos; success stories showcase the value we bring to every project.
-              <br className="hidden sm:inline" />
-              {' '}Here&apos;s what they have to say about working with us.
-            </p>
+          <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+            <Reveal as="p" variant="fade" className="eyebrow mb-6 justify-center">
+              Client stories
+            </Reveal>
+            <SplitText
+              text={'Hear it from the brands\nthat trust us.'}
+              accentWords={[6, 7]}
+              accentClassName="font-serif-accent text-gradient-brand"
+              className="font-display text-[clamp(2.25rem,5.4vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em] text-white"
+            />
+            <Reveal as="p" variant="up" delay={150} className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-zinc-400">
+              Founders and teams on what it&apos;s like to build with us.
+            </Reveal>
           </div>
         )}
 
@@ -433,8 +435,8 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
           </div>
 
           {/* Side Fade Vignettes for Seamless Depth */}
-          <div className="pointer-events-none absolute left-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-r from-[#0d0e12] to-transparent z-30" />
-          <div className="pointer-events-none absolute right-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-l from-[#0d0e12] to-transparent z-30" />
+          <div className="pointer-events-none absolute left-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-r from-[var(--bg)] to-transparent z-30" />
+          <div className="pointer-events-none absolute right-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-l from-[var(--bg)] to-transparent z-30" />
         </div>
 
         {/* ========================================================================= */}

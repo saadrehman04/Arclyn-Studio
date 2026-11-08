@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -10,39 +9,47 @@ interface MagneticButtonProps {
   strength?: number;
 }
 
+/**
+ * Pulls its child toward the cursor. Uses direct style writes + a CSS
+ * transition instead of React state, so hovering never triggers re-renders.
+ */
 export const MagneticButton: React.FC<MagneticButtonProps> = ({
   children,
   className = '',
   onClick,
-  strength = 0.35,
+  strength = 0.3,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const frame = useRef(0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+  const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return;
+    const el = ref.current;
+    if (!el) return;
     const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * strength, y: middleY * strength });
+    cancelAnimationFrame(frame.current);
+    frame.current = requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect();
+      const x = (clientX - (rect.left + rect.width / 2)) * strength;
+      const y = (clientY - (rect.top + rect.height / 2)) * strength;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    });
   };
 
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+  const handleLeave = () => {
+    cancelAnimationFrame(frame.current);
+    if (ref.current) ref.current.style.transform = 'translate3d(0, 0, 0)';
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', damping: 15, stiffness: 180, mass: 0.1 }}
-      className={`inline-block ${className}`}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
       onClick={onClick}
+      className={`magnetic inline-block ${className}`}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };

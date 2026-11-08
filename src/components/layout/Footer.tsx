@@ -2,15 +2,9 @@
 
 import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from '@/lib/gsap';
 import { ArrowUpRight, ArrowRight, Mail } from 'lucide-react';
 import { Logo } from '../shared/Logo';
-import { subscribeScrollTriggerUpdate } from '@/lib/scroll-trigger-bridge';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const ARCLYN_WORDMARK = 'Arclyn Studio';
 
@@ -44,11 +38,6 @@ export const Footer: React.FC = () => {
       gsap.set(blueCircle, { opacity: 0, scale: targetScale });
       return;
     }
-
-    const lenis = (window as unknown as { __lenis?: { on: (event: string, cb: () => void) => void; off: (event: string, cb: () => void) => void } }).__lenis;
-    const unsubscribeScrollUpdate = lenis
-      ? subscribeScrollTriggerUpdate(lenis, () => ScrollTrigger.update())
-      : undefined;
 
     const ctx = gsap.context(() => {
       // Dynamic target scale calculation based on actual rendered SVG width
@@ -99,7 +88,6 @@ export const Footer: React.FC = () => {
     }, track);
 
     return () => {
-      unsubscribeScrollUpdate?.();
       ctx.revert();
     };
   }, []);

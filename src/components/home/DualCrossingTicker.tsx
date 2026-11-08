@@ -1,59 +1,58 @@
 'use client';
 
 import React from 'react';
+import { useOffscreenPause } from '@/components/motion/useOffscreenPause';
 
 const DARK_ITEMS = [
-  'From Idea to MVP in 8 Weeks',
-  'Where AI Meets Human Expertise',
-  'AI-Accelerated Product Development',
-  'Autonomous Multi-Agent Systems',
-  'Sub-Second Next.js Performance',
-  'Zero Technical Debt Guarantee',
+  'From idea to MVP in 8 weeks',
+  'Where AI meets human expertise',
+  'AI-accelerated product development',
+  'Autonomous multi-agent systems',
+  'Sub-second Next.js performance',
 ];
 
-const GRADIENT_ITEMS = [
-  'Where AI Meets Human Expertise',
-  'AI-Accelerated Product Development',
-  'From Idea to MVP in 8 Weeks',
-  'High-Converting Digital Flagships',
-  'Autonomous Workflow Automation',
-  'Enterprise Data Privacy & Security',
+const LIGHT_ITEMS = [
+  'High-converting digital flagships',
+  'Autonomous workflow automation',
+  'Enterprise data privacy & security',
+  'Fixed milestone pricing',
+  'You own 100% of the code',
 ];
+
+const Row: React.FC<{ items: string[]; tone: 'dark' | 'light'; reverse?: boolean }> = ({ items, tone, reverse }) => (
+  <div className={`marquee ${reverse ? 'marquee-reverse' : ''}`} style={{ ['--marquee-duration' as string]: '50s' }}>
+    {[0, 1].map((dup) => (
+      <ul key={dup} aria-hidden={dup === 1} className="flex shrink-0 items-center">
+        {items.map((item) => (
+          <li key={`${dup}-${item}`} className="flex items-center gap-8 whitespace-nowrap px-6 sm:gap-10 sm:px-8">
+            <span
+              className={`font-display text-xl font-semibold uppercase tracking-[-0.01em] sm:text-3xl ${
+                tone === 'dark' ? 'text-white' : 'text-black'
+              }`}
+            >
+              {item}
+            </span>
+            <span className={tone === 'dark' ? 'text-violet-400' : 'text-violet-700'}>✦</span>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+);
 
 export const DualCrossingTicker: React.FC = () => {
+  const ref = useOffscreenPause<HTMLElement>();
   return (
-    <section className="relative py-14 sm:py-20 overflow-hidden bg-[#03050C] flex flex-col justify-center select-none">
-      {/* Ambient center illumination */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[220px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/3 translate-x-1/2 -translate-y-1/2 w-[550px] h-[220px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="relative w-full py-8 flex flex-col items-center justify-center">
-        {/* Ribbon 1: Dark Slate Band (Tilted -2.5deg) */}
-        <div className="w-[120vw] -ml-[10vw] transform -rotate-2 sm:-rotate-[2.5deg] bg-[#0A0E1D] border-y border-white/[0.12] py-3.5 sm:py-4 shadow-xl z-0">
-          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-            {[...DARK_ITEMS, ...DARK_ITEMS, ...DARK_ITEMS, ...DARK_ITEMS].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-6 sm:gap-8 mx-4 sm:mx-6">
-                <span className="font-display font-bold text-base sm:text-xl md:text-2xl tracking-wide text-white uppercase whitespace-nowrap">
-                  {item}
-                </span>
-                <span className="text-white/50 text-lg sm:text-2xl font-black">✱</span>
-              </div>
-            ))}
-          </div>
+    <section ref={ref} aria-label="What we stand for" className="relative overflow-hidden bg-[var(--bg)] py-16 sm:py-24">
+      <div className="relative flex flex-col items-center">
+        <div className="w-[120vw] -rotate-[2.5deg] border-y border-white/10 bg-[#0e0d16] py-4 sm:py-5">
+          <Row items={DARK_ITEMS} tone="dark" />
         </div>
-
-        {/* Ribbon 2: White Band (Crossing at +2.8deg over Ribbon 1) */}
-        <div className="w-[120vw] -ml-[10vw] -mt-6 sm:-mt-8 transform rotate-2 sm:rotate-[2.8deg] bg-white py-3.5 sm:py-4 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_45px_rgba(255,255,255,0.15)] border-y border-white/30 z-10">
-          <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused]">
-            {[...GRADIENT_ITEMS, ...GRADIENT_ITEMS, ...GRADIENT_ITEMS, ...GRADIENT_ITEMS].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-6 sm:gap-8 mx-4 sm:mx-6">
-                <span className="font-display font-black text-base sm:text-xl md:text-2xl tracking-wide text-black uppercase whitespace-nowrap">
-                  {item}
-                </span>
-                <span className="text-black/50 text-lg sm:text-2xl font-black">✱</span>
-              </div>
-            ))}
-          </div>
+        <div
+          className="-mt-6 w-[120vw] rotate-[2.5deg] py-4 shadow-[0_20px_60px_rgba(0,0,0,0.6)] sm:-mt-8 sm:py-5"
+          style={{ background: 'linear-gradient(100deg, #ede9fe, #c4b5fd 45%, #bae6fd)' }}
+        >
+          <Row items={LIGHT_ITEMS} tone="light" reverse />
         </div>
       </div>
     </section>

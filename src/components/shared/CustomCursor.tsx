@@ -1,93 +1,87 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
 
+/**
+ * Trailing cursor ring. Positions are written straight to `transform` inside a
+ * single rAF loop and the hover state is a CSS class — React never re-renders
+ * while the mouse moves. The loop sleeps when the pointer is idle.
+ */
 export const CustomCursor: React.FC = () => {
-  const [cursorState, setCursorState] = useState<'default' | 'hover' | 'hidden'>('default');
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  const mouseX = useMotionValue(-100);
-  const mouseY = useMotionValue(-100);
-
-  const springConfig = { damping: 28, stiffness: 350, mass: 0.5 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Only enable on non-touch desktop screens
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouch || window.innerWidth < 1024) return;
-    setIsDesktop(true);
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ring = ringRef.current;
+    const dot = dotRef.current;
+    if (!fine || reduce || !ring || !dot) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
+    let mx = -100;
+    let my = -100;
+    let rx = -100;
+    let ry = -100;
+    let raf = 0;
+    let running = false;
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const interactive = target.closest('a, button, [role="button"], input, select, textarea, .cursor-hover');
-      if (interactive) {
-        setCursorState('hover');
+    const render = () => {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+      dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+      if (Math.abs(mx - rx) > 0.1 || Math.abs(my - ry) > 0.1) {
+        raf = requestAnimationFrame(render);
       } else {
-        setCursorState('default');
+        running = false;
       }
     };
 
-    const handleMouseLeave = () => setCursorState('hidden');
+    const onMove = (e: PointerEvent) => {
+      mx = e.clientX;
+      my = e.clientY;
+      document.documentElement.classList.add('cursor-active');
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(render);
+      }
+    };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    const onOver = (e: PointerEvent) => {
+      const target = e.target as HTMLElement | null;
+      const interactive = target?.closest('a, button, [role="button"], input, select, textarea, label, .cursor-hover');
+      ring.classList.toggle('is-hover', Boolean(interactive));
+    };
+
+    const onLeave = () => document.documentElement.classList.remove('cursor-active');
+    const onDown = () => ring.classList.add('is-down');
+    const onUp = () => ring.classList.remove('is-down');
+
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerover', onOver, { passive: true });
+    window.addEventListener('pointerdown', onDown, { passive: true });
+    window.addEventListener('pointerup', onUp, { passive: true });
+    document.addEventListener('pointerleave', onLeave);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerover', onOver);
+      window.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointerup', onUp);
+      document.removeEventListener('pointerleave', onLeave);
+      document.documentElement.classList.remove('cursor-active');
     };
-  }, [mouseX, mouseY]);
-
-  if (!isDesktop || cursorState === 'hidden') return null;
+  }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
-      {/* Outer subtle glow ring */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border border-cyan-400/50 mix-blend-screen pointer-events-none"
-        style={{
-          x: smoothX,
-          y: smoothY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        animate={{
-          width: cursorState === 'hover' ? 48 : 26,
-          height: cursorState === 'hover' ? 48 : 26,
-          backgroundColor: cursorState === 'hover' ? 'rgba(139, 92, 246, 0.15)' : 'rgba(6, 182, 212, 0.04)',
-          borderColor: cursorState === 'hover' ? 'rgba(168, 85, 247, 0.8)' : 'rgba(56, 189, 248, 0.4)',
-        }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
-      />
-
-      {/* Center dot */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full bg-white pointer-events-none shadow-[0_0_10px_#38bdf8]"
-        style={{
-          x: mouseX,
-          y: mouseY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        animate={{
-          width: cursorState === 'hover' ? 6 : 4,
-          height: cursorState === 'hover' ? 6 : 4,
-          opacity: cursorState === 'hover' ? 0.8 : 1,
-        }}
-        transition={{ duration: 0.15 }}
-      />
+    <div aria-hidden="true" className="cursor-layer">
+      <div ref={ringRef} className="cursor-ring">
+        <span />
+      </div>
+      <div ref={dotRef} className="cursor-dot">
+        <span />
+      </div>
     </div>
   );
 };

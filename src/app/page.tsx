@@ -1,12 +1,12 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { HeroShowcaseExperience } from '@/components/home/HeroShowcaseExperience';
-import { ProjectScrollSection } from '@/components/home/ProjectScrollSection';
+import { Hero } from '@/components/home/Hero';
+import { Manifesto } from '@/components/home/Manifesto';
+import { WorkStack } from '@/components/home/WorkStack';
 import { DualCrossingTicker } from '@/components/home/DualCrossingTicker';
-import { Capability3DSection } from '@/components/home/Capability3DSection';
 import { ServicesOverview } from '@/components/home/ServicesOverview';
-import { FeaturedProjects } from '@/components/home/FeaturedProjects';
-import { ProjectsTapeSection } from '@/components/home/ProjectsTapeSection';
+import { Process } from '@/components/home/Process';
+import { ProjectsMarquee } from '@/components/home/ProjectsMarquee';
 import { PartnerProgramSection } from '@/components/home/PartnerProgramSection';
 import { TeamSection } from '@/components/home/TeamSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
@@ -36,41 +36,18 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#050711]">
-      {/* 1. Choreographed Hero & AI Motion Graphic Journey into Audited Systems */}
-      <HeroShowcaseExperience />
-
-      {/* 2. Full Section Scroll 4-Project Container Animation */}
-      <ProjectScrollSection />
-
-      {/* 3. Signature Dual Crossing Ticker */}
+    <div className="flex min-h-screen flex-col bg-[var(--bg)]">
+      <Hero />
+      <Manifesto />
+      <WorkStack />
       <DualCrossingTicker />
-
-      {/* 3. 3D Iridescent Torus & Asymmetric 2x2 Capabilities */}
-      <Capability3DSection />
-
-      {/* 4. Smart Solutions for Modern Businesses (Services Overview) */}
       <ServicesOverview />
-
-      {/* 5. Audited Case Studies & Shipped Products */}
-      <FeaturedProjects />
-
-      {/* 5b. 3D Panoramic Moving Tape of All Products */}
-      <ProjectsTapeSection />
-
-      {/* 6. Partner Program Section (30%-40% revenue share) */}
+      <Process />
+      <ProjectsMarquee />
       <PartnerProgramSection />
-
-      {/* 7. Senior Leadership (The Architects Behind the Code) - Placed before Testimonials */}
       <TeamSection />
-
-      {/* 8. What Founders Say (Real Client Testimonials & Verifiable ROI) */}
       <TestimonialsSection />
-
-      {/* 9. Industry Domains Strip */}
       <IndustriesStrip />
-
-      {/* 10. High-Impact Final CTA */}
       <FinalCta />
     </div>
   );
