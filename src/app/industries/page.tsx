@@ -42,7 +42,7 @@ export default function IndustriesPage() {
         description="Every category needs its own visual language, trust signals and conversion funnel. Here's how we approach the industries we know best."
       >
         <div className="mx-auto flex max-w-2xl items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-zinc-300" />
           <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm">
             <strong className="font-medium text-white">Editorial note:</strong> the concept previews below are original design
             explorations by Arclyn Studio to show vertical expertise. They are not past client endorsements and do not reuse
@@ -66,13 +66,13 @@ export default function IndustriesPage() {
                 <div className="grid items-center gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:gap-14 lg:p-14">
                   <div className={flip ? 'lg:order-2' : ''}>
                     <div className="flex items-center gap-3">
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-zinc-300">
                         <Icon className="h-5 w-5" />
                       </span>
                       <span className="font-mono text-xs text-zinc-500">{String(index + 1).padStart(2, '0')}</span>
                     </div>
                     <h2 className="mt-6 font-display text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl">{ind.name}</h2>
-                    <p className="mt-2 text-sm font-medium text-violet-300">{ind.tagline}</p>
+                    <p className="mt-2 text-sm font-medium text-zinc-300">{ind.tagline}</p>
                     <p className="mt-4 text-[15px] leading-relaxed text-zinc-400">{ind.description}</p>
 
                     <p className="mt-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm leading-relaxed text-zinc-400">
@@ -83,7 +83,7 @@ export default function IndustriesPage() {
                     <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
                       {ind.conversionFocus.map((c) => (
                         <li key={c} className="flex items-start gap-2.5 text-sm text-zinc-300">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-300" />
                           {c}
                         </li>
                       ))}
@@ -121,7 +121,7 @@ export default function IndustriesPage() {
 
                   {/* Concept preview */}
                   <div className={flip ? 'lg:order-1' : ''}>
-                    <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#111118]">
+                    <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#161618]">
                       <div className="flex items-center gap-1.5 border-b border-white/[0.08] px-4 py-3">
                         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
@@ -132,7 +132,7 @@ export default function IndustriesPage() {
                         <div
                           aria-hidden="true"
                           className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-50"
-                          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.35), transparent 65%)' }}
+                          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.087), transparent 65%)' }}
                         />
                         <span className="relative rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
                           Concept demo

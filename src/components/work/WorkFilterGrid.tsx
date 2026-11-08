@@ -97,10 +97,10 @@ export const WorkFilterGrid: React.FC = () => {
               variant="up"
               delay={(i % 3) * 80}
               id={project.id}
-              className="group relative flex scroll-mt-28 cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-[#0c0c12] transition-colors duration-300 hover:border-white/20"
+              className="group relative flex scroll-mt-28 cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-[#111113] transition-colors duration-300 hover:border-white/20"
               onClick={() => setSelectedProject(project)}
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#15151d]">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#1a1a1d]">
                 <Image
                   src={project.image}
                   alt={title}
@@ -154,7 +154,7 @@ export const WorkFilterGrid: React.FC = () => {
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-3xl rounded-t-[28px] border border-white/10 bg-[#0c0c12] p-5 shadow-2xl sm:my-8 sm:rounded-[28px] sm:p-8"
+            className="relative w-full max-w-3xl rounded-t-[28px] border border-white/10 bg-[#111113] p-5 shadow-2xl sm:my-8 sm:rounded-[28px] sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -176,14 +176,14 @@ export const WorkFilterGrid: React.FC = () => {
               <p className="mt-2 text-sm font-medium text-emerald-300/90">{selectedProject.stat}</p>
             </div>
 
-            <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#15151d]">
+            <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#1a1a1d]">
               <Image src={selectedProject.image} alt={selectedProject.name} fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover object-top" />
             </div>
 
             <div className="grid gap-3 text-sm sm:grid-cols-3">
               {[
                 { label: 'The challenge', text: selectedProject.problem, color: 'text-rose-300' },
-                { label: 'Our solution', text: selectedProject.solution, color: 'text-sky-300' },
+                { label: 'Our solution', text: selectedProject.solution, color: 'text-zinc-300' },
                 { label: 'The outcome', text: selectedProject.outcome, color: 'text-emerald-300' },
               ].map((block) => (
                 <div key={block.label} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">

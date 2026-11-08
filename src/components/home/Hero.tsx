@@ -137,7 +137,7 @@ export const Hero: React.FC = () => {
           intro
           text={'Build smarter.\nLaunch faster.'}
           accentWords={[3]}
-          accentClassName="font-serif-accent text-gradient-brand"
+          accentClassName="text-zinc-500"
           delay={180}
           stagger={70}
           className="mt-7 font-display text-[clamp(3rem,10.5vw,8.75rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
@@ -185,7 +185,7 @@ export const Hero: React.FC = () => {
                       key={`${dup}-${name}`}
                       className="flex items-center whitespace-nowrap px-6 text-sm font-medium tracking-tight text-zinc-400 sm:px-8 sm:text-base"
                     >
-                      <span className="mr-6 text-violet-400/60 sm:mr-8">✦</span>
+                      <span className="mr-6 text-zinc-400 sm:mr-8">•</span>
                       {name}
                     </li>
                   ))}

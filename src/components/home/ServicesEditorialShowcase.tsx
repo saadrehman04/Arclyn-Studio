@@ -123,7 +123,7 @@ export const ServicesEditorialShowcase: React.FC = () => {
             <SplitText
               text={'Services built\nfor growth.'}
               accentWords={[2, 3]}
-              accentClassName="font-serif-accent text-violet-700"
+              accentClassName="text-black/35"
               className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
             />
             <Reveal as="p" variant="up" delay={150} className="mt-6 max-w-xs text-[15px] leading-relaxed text-black/60">

@@ -39,7 +39,7 @@ export const TeamSection: React.FC = () => {
             <SplitText
               text={'The minds behind\nthe machines.'}
               accentWords={[4]}
-              accentClassName="font-serif-accent text-gradient-brand"
+              accentClassName="text-zinc-500"
               className="font-display text-[clamp(2.5rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
             />
           </div>
@@ -58,7 +58,7 @@ export const TeamSection: React.FC = () => {
         <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {TEAM_MEMBERS.map((member, idx) => (
             <Reveal key={member.name} variant="up" delay={idx * 90} className="group">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#111118] sm:rounded-3xl">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#161618] sm:rounded-3xl">
                 <Image
                   src={member.image}
                   alt={member.name}

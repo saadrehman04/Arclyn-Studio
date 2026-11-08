@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, JetBrains_Mono, Inter, Instrument_Serif } from 'next/font/google';
+import { Inter_Tight, JetBrains_Mono, Inter } from 'next/font/google';
 import 'lenis/dist/lenis.css';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
@@ -7,23 +7,16 @@ import { Footer } from '@/components/layout/Footer';
 import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { CustomCursor } from '@/components/shared/CustomCursor';
 
-const geist = Geist({
-  variable: '--font-geist-raw',
+const interTight = Inter_Tight({
+  variable: '--font-display-raw',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
 const inter = Inter({
   variable: '--font-inter-raw',
   subsets: ['latin'],
-  display: 'swap',
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: '--font-serif-raw',
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
   display: 'swap',
 });
 
@@ -110,10 +103,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} dark`}
+      className={`${interTight.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-[var(--bg)] text-slate-100 font-sans antialiased selection:bg-violet-500/30 selection:text-white">
+      <body className="min-h-screen flex flex-col bg-[var(--bg)] text-slate-100 font-sans antialiased selection:bg-white/25 selection:text-white">
         <SmoothScroll>
           <CustomCursor />
           <Navbar />

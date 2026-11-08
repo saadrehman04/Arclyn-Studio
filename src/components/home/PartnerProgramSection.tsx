@@ -15,12 +15,12 @@ const STEPS = [
 export const PartnerProgramSection: React.FC = () => {
   return (
     <section id="partner-program" className="relative isolate overflow-hidden bg-[var(--bg)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/[0.09] bg-[#0b0b11] px-6 py-14 sm:rounded-[44px] sm:px-12 sm:py-20 lg:px-16">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/[0.09] bg-[#111113] px-6 py-14 sm:rounded-[44px] sm:px-12 sm:py-20 lg:px-16">
         {/* Glow */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-32 -top-48 h-[640px] w-[640px] rounded-full opacity-60"
-          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.35), rgba(56,189,248,0.08) 45%, transparent 68%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.087), rgba(255,255,255,0.02) 45%, transparent 68%)' }}
         />
         <div
           aria-hidden="true"
@@ -42,7 +42,7 @@ export const PartnerProgramSection: React.FC = () => {
             <SplitText
               text={'Bring us a client.\nKeep 30% of the project.'}
               accentWords={[4, 5]}
-              accentClassName="font-serif-accent text-gradient-brand"
+              accentClassName="text-zinc-500"
               className="font-display text-[clamp(2.25rem,5.4vw,4.75rem)] font-semibold leading-[1] tracking-[-0.045em] text-white"
             />
             <Reveal as="p" variant="up" delay={150} className="mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">
@@ -72,7 +72,7 @@ export const PartnerProgramSection: React.FC = () => {
 
           <div>
             <Reveal variant="scale" className="flex items-end gap-4">
-              <span className="font-display text-[clamp(6rem,14vw,11rem)] font-semibold leading-[0.8] tracking-[-0.07em] text-gradient-brand">
+              <span className="font-display text-[clamp(6rem,14vw,11rem)] font-semibold leading-[0.8] tracking-[-0.07em] text-white">
                 30%
               </span>
               <span className="mb-3 max-w-[7rem] font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-zinc-500">
@@ -82,7 +82,7 @@ export const PartnerProgramSection: React.FC = () => {
             <ol className="mt-10 divide-y divide-white/[0.08] border-y border-white/[0.08]">
               {STEPS.map((s, i) => (
                 <Reveal as="li" key={s.n} variant="up" delay={i * 90} className="flex gap-5 py-4">
-                  <span className="font-mono text-xs text-violet-300/80">{s.n}</span>
+                  <span className="font-mono text-xs text-zinc-300">{s.n}</span>
                   <div>
                     <p className="text-sm font-semibold text-white">{s.t}</p>
                     <p className="mt-1 text-sm leading-relaxed text-zinc-500">{s.d}</p>

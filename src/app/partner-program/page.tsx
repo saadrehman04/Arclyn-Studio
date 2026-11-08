@@ -51,7 +51,7 @@ export default function PartnerProgramPage() {
         <Reveal variant="up" className="glass-panel mx-auto max-w-6xl rounded-[28px] p-6 sm:rounded-[36px] sm:p-10 lg:p-14">
           <div className="flex flex-col gap-6 border-b border-white/[0.08] pb-8 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex items-end gap-4">
-              <span className="font-display text-7xl font-semibold leading-[0.8] tracking-[-0.07em] text-gradient-brand sm:text-8xl">
+              <span className="font-display text-7xl font-semibold leading-[0.8] tracking-[-0.07em] text-white sm:text-8xl">
                 30%
               </span>
               <span className="pb-1 font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-zinc-500">
@@ -66,13 +66,13 @@ export default function PartnerProgramPage() {
             </span>
           </div>
 
-          <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">Milestone payouts</p>
+          <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-300">Milestone payouts</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {TRANCHES.map((t) => (
               <div key={t.label} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
                 <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
                   <span>{t.label}</span>
-                  <span className="rounded-full bg-violet-400/10 px-2 py-0.5 text-violet-200">{t.value}</span>
+                  <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-zinc-300">{t.value}</span>
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-white">{t.title}</h3>
                 <p className="mt-1 text-sm text-zinc-500">{t.detail}</p>
@@ -80,7 +80,7 @@ export default function PartnerProgramPage() {
             ))}
           </div>
 
-          <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">Typical project values</p>
+          <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-300">Typical project values</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {SERVICE_CARDS.map((c) => (
               <div key={c.name} className="flex items-start justify-between gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
@@ -88,7 +88,7 @@ export default function PartnerProgramPage() {
                   <h3 className="text-lg font-semibold text-white">{c.name}</h3>
                   <p className="mt-1 text-sm text-zinc-500">{c.detail}</p>
                 </div>
-                <span className="font-mono text-sm font-semibold text-violet-200">{c.amount}</span>
+                <span className="font-mono text-sm font-semibold text-zinc-300">{c.amount}</span>
               </div>
             ))}
           </div>
@@ -104,7 +104,7 @@ export default function PartnerProgramPage() {
           <SplitText
             text={'Simple, transparent\nprocess.'}
             accentWords={[2]}
-            accentClassName="font-serif-accent text-gradient-brand"
+            accentClassName="text-zinc-500"
             className="section-title"
           />
           <ol className="mt-12 border-t border-white/[0.08]">
@@ -142,7 +142,7 @@ export default function PartnerProgramPage() {
             <SplitText
               text={'Let’s work\ntogether.'}
               accentWords={[2]}
-              accentClassName="font-serif-accent text-gradient-brand"
+              accentClassName="text-zinc-500"
               className="section-title"
             />
             <Reveal as="p" variant="up" delay={120} className="mt-5 max-w-sm text-[15px] leading-relaxed text-zinc-400">

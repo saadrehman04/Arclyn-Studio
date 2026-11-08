@@ -69,7 +69,7 @@ export default function AboutPage() {
             <SplitText
               text={'Backed by 50+ real deployments\nand a 150k+ developer audience.'}
               accentWords={[2, 3]}
-              accentClassName="font-serif-accent text-gradient-brand"
+              accentClassName="text-zinc-500"
               className="section-title"
             />
             <Reveal variant="up" delay={120} className="mt-8 space-y-5 text-base leading-relaxed text-zinc-400 sm:text-lg">
@@ -115,7 +115,7 @@ export default function AboutPage() {
           <SplitText
             text={'How we work\ndifferently.'}
             accentWords={[3]}
-            accentClassName="font-serif-accent text-gradient-brand"
+            accentClassName="text-zinc-500"
             className="section-title"
           />
           <div className="mt-12 grid gap-4 sm:gap-5 md:grid-cols-2">
@@ -123,7 +123,7 @@ export default function AboutPage() {
               const Icon = val.icon;
               return (
                 <Reveal key={val.title} variant="up" delay={(i % 2) * 90} className="glass-panel rounded-3xl p-6 sm:p-9">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300">
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-zinc-300">
                     <Icon className="h-5 w-5" />
                   </span>
                   <h3 className="mt-6 text-2xl font-semibold tracking-tight text-white">{val.title}</h3>
@@ -144,7 +144,7 @@ export default function AboutPage() {
           <SplitText
             text={'Production tools,\nzero bloat.'}
             accentWords={[2, 3]}
-            accentClassName="font-serif-accent text-gradient-brand"
+            accentClassName="text-zinc-500"
             className="section-title"
           />
           <div className="mt-12 grid grid-cols-1 border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
@@ -155,7 +155,7 @@ export default function AboutPage() {
                 delay={i * 80}
                 className="border-b border-white/[0.08] py-7 sm:px-6 sm:[&:nth-child(odd)]:border-r lg:border-r lg:last:border-r-0"
               >
-                <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">{group.category}</h3>
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-300">{group.category}</h3>
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {group.items.map((item) => (
                     <li key={item} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-zinc-300">

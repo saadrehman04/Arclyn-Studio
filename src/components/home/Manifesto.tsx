@@ -8,9 +8,6 @@ import { PROJECTS } from '@/data/projects';
 const STATEMENT =
   'We are a full-stack and AI studio for ambitious founders. We design, engineer and automate products that look exceptional, perform flawlessly and turn visitors into revenue — shipped in weeks, not months.';
 
-// words that get the brand highlight once lit
-const HIGHLIGHT = new Set(['exceptional,', 'flawlessly', 'revenue', 'weeks,']);
-
 const STATS = [
   { value: `${PROJECTS.length}+`, label: 'Products shipped across 9 industries' },
   { value: '8 wks', label: 'Typical idea-to-MVP timeline' },
@@ -60,12 +57,7 @@ export const Manifesto: React.FC = () => {
         >
           {STATEMENT.split(' ').map((word, i) => (
             <React.Fragment key={i}>
-              <span
-                data-word
-                className={HIGHLIGHT.has(word) ? 'font-serif-accent text-gradient-brand' : undefined}
-              >
-                {word}
-              </span>{' '}
+              <span data-word>{word}</span>{' '}
             </React.Fragment>
           ))}
         </p>

@@ -57,7 +57,7 @@ export const Process: React.FC = () => {
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-[-10%] top-1/4 h-[600px] w-[600px] rounded-full opacity-40"
-        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.25), transparent 65%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.062), transparent 65%)' }}
       />
 
       <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
@@ -69,7 +69,7 @@ export const Process: React.FC = () => {
           <SplitText
             text={'AI-accelerated.\nHuman-crafted.'}
             accentWords={[1]}
-            accentClassName="font-serif-accent text-gradient-brand"
+            accentClassName="text-zinc-500"
             className="font-display text-[clamp(2.5rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
           />
           <Reveal as="p" variant="up" delay={150} className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
@@ -81,7 +81,7 @@ export const Process: React.FC = () => {
             <div
               aria-hidden="true"
               className="absolute inset-[12%] rounded-full opacity-70"
-              style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.35), rgba(139,92,246,0.15) 45%, transparent 70%)' }}
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.087), rgba(255,255,255,0.037) 45%, transparent 70%)' }}
             />
             <div className="float-y relative h-full w-full">
               <Image
@@ -101,7 +101,7 @@ export const Process: React.FC = () => {
           <div
             ref={lineRef}
             aria-hidden="true"
-            className="absolute bottom-0 left-[19px] top-0 w-px origin-top bg-gradient-to-b from-violet-400 via-sky-400 to-violet-400 sm:left-[27px]"
+            className="absolute bottom-0 left-[19px] top-0 w-px origin-top bg-white/60 sm:left-[27px]"
           />
           {STEPS.map((step, i) => (
             <Reveal
@@ -113,7 +113,7 @@ export const Process: React.FC = () => {
               <span className="absolute left-0 top-0 grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-[var(--bg)] font-mono text-xs text-white sm:h-14 sm:w-14 sm:text-sm">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">{step.meta}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-300">{step.meta}</p>
               <h3 className="mt-3 font-display text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl">
                 {step.title}
               </h3>

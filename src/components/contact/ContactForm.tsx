@@ -32,7 +32,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
 
   if (submitted) {
     return (
-      <div className="p-6 sm:p-12 rounded-3xl bg-[#0c0c12] border border-emerald-500/30 text-center space-y-4 shadow-2xl">
+      <div className="p-6 sm:p-12 rounded-3xl bg-[#111113] border border-emerald-500/30 text-center space-y-4 shadow-2xl">
         <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 className="w-8 h-8" />
         </div>
@@ -40,12 +40,12 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
           Project Inquiry Received!
         </h3>
         <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-          Thank you, <strong className="text-white">{formData.name}</strong>. Our engineering leads are reviewing your project requirements and will reply to <span className="text-violet-300">{formData.email}</span> within 12 hours with a preliminary scope roadmap.
+          Thank you, <strong className="text-white">{formData.name}</strong>. Our engineering leads are reviewing your project requirements and will reply to <span className="text-zinc-300">{formData.email}</span> within 12 hours with a preliminary scope roadmap.
         </p>
         <div className="pt-4">
           <button
             onClick={() => setSubmitted(false)}
-            className="text-xs font-semibold text-violet-300 hover:text-white underline underline-offset-4"
+            className="text-xs font-semibold text-zinc-300 hover:text-white underline underline-offset-4"
           >
             Submit Another Inquiry
           </button>
@@ -67,7 +67,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="e.g. Tariq Vance"
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-violet-400 transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-white/25 transition-colors"
           />
         </div>
 
@@ -81,7 +81,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="tariq@company.com"
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-violet-400 transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-white/25 transition-colors"
           />
         </div>
       </div>
@@ -96,7 +96,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             placeholder="e.g. Acme Health or Personal Startup"
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-violet-400 transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-white/25 transition-colors"
           />
         </div>
 
@@ -107,7 +107,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
           <select
             value={formData.projectType}
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-            className="w-full px-4 py-3 rounded-xl bg-[#0c0c12] border border-white/10 text-white text-sm focus:outline-none focus:border-violet-400 transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-[#111113] border border-white/10 text-white text-sm focus:outline-none focus:border-white/25 transition-colors"
           >
             {PROJECT_TYPES.map((pt) => (
               <option key={pt} value={pt}>
@@ -130,7 +130,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Describe your current situation, what you're trying to build or automate, and any specific deadlines..."
-          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-violet-400 transition-colors"
+          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-white/25 transition-colors"
         />
       </div>
 
