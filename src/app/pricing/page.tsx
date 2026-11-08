@@ -1,9 +1,8 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { ShieldCheck } from 'lucide-react';
 import { PricingCalculator } from '@/components/pricing/PricingCalculator';
-import { Sparkles, ShieldCheck } from 'lucide-react';
-import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
-import Link from 'next/link';
+import { PageHero, PageCta } from '@/components/shared/PageHero';
 
 export const metadata: Metadata = {
   title: 'Pricing & Add-Ons — Transparent Rates',
@@ -13,67 +12,32 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
-      {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon variant="strands" opacity={0.7} />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
+    <div className="relative min-h-screen bg-[var(--bg)]">
+      <PageHero
+        eyebrow="Pricing"
+        title={'Transparent pricing.\nEngineered for ROI.'}
+        accentWords={[2, 3, 4]}
+        description="No endless billable hours or vague retainers. Pick a package or configure add-ons with clear, milestone-based billing."
+      >
+        <span className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-4 py-2 text-xs font-medium text-emerald-300 sm:text-sm">
+          <ShieldCheck className="h-4 w-4 shrink-0" />
+          50% kickoff · 30% design approval · 20% launch
+        </span>
+      </PageHero>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/25 w-fit mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-purple-300">
-              Clear &amp; Predictable Investment
-            </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Transparent Pricing. <br />
-            <span className="text-gradient">Engineered for ROI.</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed">
-            No endless billable hours or ambiguous retainers. Select a package below or configure modular operational add-ons with clear milestone-based billing.
-          </p>
-
-          <div className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-emerald-400">
-            <ShieldCheck className="w-4 h-4" />
-            <span>Guaranteed Milestones: 50% Kickoff • 30% Design Approval • 20% Launch</span>
-          </div>
+      <section className="px-4 pb-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <PricingCalculator />
         </div>
+      </section>
 
-        {/* Pricing Interactive Grid & Calculator */}
-        <PricingCalculator />
-
-        {/* Bottom CTA */}
-        <div className="mt-24 rounded-3xl glass-panel p-8 sm:p-12 text-center max-w-3xl mx-auto border border-white/10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Need an Itemized Custom Quote?
-          </h2>
-          <p className="text-sm text-slate-300 mb-8 max-w-lg mx-auto">
-            Book a 15-minute scoping call or fill out our project questionnaire. We return an architectural recommendation with exact pricing within 12 hours.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold text-white btn-primary-gradient"
-            >
-              Get Your Custom Quote
-            </Link>
-            <a
-              href="https://calendly.com/saadrehman"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl text-sm font-semibold text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10"
-            >
-              Book Discovery Call
-            </a>
-          </div>
-        </div>
-
-      </div>
+      <PageCta
+        title={'Need an itemized\ncustom quote?'}
+        accentWords={[3, 4]}
+        description="Book a 15-minute scoping call or send us your brief. We reply with an architecture recommendation and exact pricing within 12 hours."
+        primary={{ href: '/contact', label: 'Get your custom quote' }}
+        secondary={{ href: 'https://calendly.com/saadrehman', label: 'Book a discovery call', external: true }}
+      />
     </div>
   );
 }

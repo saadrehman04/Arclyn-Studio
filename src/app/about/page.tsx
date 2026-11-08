@@ -1,20 +1,10 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  Code2, 
-  Users, 
-  ShieldCheck, 
-  Cpu, 
-  Zap, 
-  Layers, 
-  Award,
-  Terminal,
-  ExternalLink
-} from 'lucide-react';
+import { Code2, Users, ShieldCheck, Zap, ExternalLink, ArrowRight } from 'lucide-react';
+import { PageHero, PageCta } from '@/components/shared/PageHero';
+import { Reveal, SplitText } from '@/components/motion/Reveal';
+import { TeamSection } from '@/components/home/TeamSection';
 
 export const metadata: Metadata = {
   title: 'About Us — Engineering Philosophy & Story',
@@ -25,233 +15,169 @@ export const metadata: Metadata = {
 const VALUES = [
   {
     icon: Code2,
-    title: 'Code Craftsmanship Over Templates',
-    desc: 'We never wrap generic WordPress themes or bloated visual page builders. Every line of code is purpose-built in modern TypeScript and Next.js for sub-second performance.',
+    title: 'Craft over templates',
+    desc: 'We never wrap generic WordPress themes or bloated page builders. Every line is purpose-built in modern TypeScript and Next.js for sub-second performance.',
   },
   {
     icon: Zap,
-    title: 'AI Acceleration, Not AI Toys',
-    desc: 'We leverage AI where it moves the needle — rapid prototyping, code refactoring, and autonomous workflows — while keeping senior humans at the helm of architecture.',
+    title: 'AI acceleration, not AI toys',
+    desc: 'We use AI where it moves the needle — rapid prototyping, refactoring and autonomous workflows — while senior humans stay in charge of architecture.',
   },
   {
     icon: ShieldCheck,
-    title: 'Zero Vendor Lock-In',
-    desc: 'You own 100% of your source code, design assets, and cloud deployment pipelines from day one. Full IP handover with clean documentation.',
+    title: 'Zero vendor lock-in',
+    desc: 'You own 100% of your source code, design assets and deployment pipelines from day one. Full IP handover with clean documentation.',
   },
   {
     icon: Users,
-    title: 'Direct Engineering Access',
-    desc: 'No non-technical account managers playing telephone. You communicate directly with the engineers and architects building your product.',
+    title: 'Direct engineering access',
+    desc: 'No non-technical account managers playing telephone. You talk directly to the engineers building your product.',
   },
 ];
 
-const TECH_ARSENAL = [
-  { category: 'Frontend', items: ['Next.js 14/15 App Router', 'TypeScript', 'React 19', 'Tailwind CSS', 'Framer Motion'] },
-  { category: 'Backend & APIs', items: ['Node.js', 'Python', 'FastAPI', 'REST APIs', 'WebSockets', 'GraphQL'] },
-  { category: 'Databases & Cloud', items: ['Supabase', 'PostgreSQL', 'Redis', 'Vercel Edge', 'AWS', 'Google Cloud'] },
-  { category: 'AI & Automation', items: ['LangChain', 'LangGraph', 'OpenAI GPT-4o', 'Pinecone', 'n8n', 'Make.com', 'Whisper'] },
+const STATS = [
+  { value: '150k+', label: 'Developer community audience' },
+  { value: '50+', label: 'Web apps, AI agents & stores shipped' },
+  { value: '95+', label: 'Average Core Web Vitals score' },
+  { value: '2–4 wks', label: 'Typical kickoff-to-launch timeline' },
 ];
 
-import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
+const TECH_ARSENAL = [
+  { category: 'Frontend', items: ['Next.js App Router', 'TypeScript', 'React 19', 'Tailwind CSS', 'GSAP / Motion'] },
+  { category: 'Backend & APIs', items: ['Node.js', 'Python', 'FastAPI', 'REST', 'WebSockets', 'GraphQL'] },
+  { category: 'Data & Cloud', items: ['Supabase', 'PostgreSQL', 'Redis', 'Vercel Edge', 'AWS', 'Google Cloud'] },
+  { category: 'AI & Automation', items: ['LangChain', 'LangGraph', 'OpenAI', 'Pinecone', 'n8n', 'Make.com', 'Whisper'] },
+];
 
 export default function AboutPage() {
   return (
-    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
-      {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon variant="flow" opacity={0.7} />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
+    <div className="relative min-h-screen bg-[var(--bg)]">
+      <PageHero
+        eyebrow="About Arclyn"
+        title={'We build real products.\nNot generic templates.'}
+        accentWords={[4, 5, 6]}
+        description="Arclyn Studio was founded to fix what founders hate about agencies: slow delivery, bloated templates and a lack of real engineering depth."
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Hero */}
-        <div className="max-w-3xl mx-auto text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/25 w-fit mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-purple-300">
-              The Arclyn Philosophy
-            </span>
+      {/* Story + stats */}
+      <section className="px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+          <div>
+            <Reveal as="p" variant="fade" className="eyebrow mb-6">
+              Our story
+            </Reveal>
+            <SplitText
+              text={'Backed by 50+ real deployments\nand a 150k+ developer audience.'}
+              accentWords={[2, 3]}
+              accentClassName="font-serif-accent text-gradient-brand"
+              className="section-title"
+            />
+            <Reveal variant="up" delay={120} className="mt-8 space-y-5 text-base leading-relaxed text-zinc-400 sm:text-lg">
+              <p>
+                Founded by <strong className="font-semibold text-white">Saad Rehman</strong> — an AI &amp; ML engineer and
+                full-stack developer with 3+ years building high-scale automation systems and digital products — Arclyn
+                Studio combines developer craftsmanship with automated velocity.
+              </p>
+              <p>
+                Having taught a community of over 150,000 developers across LinkedIn and technical channels, we bring the same
+                transparency and engineering rigor to every client engagement.
+              </p>
+            </Reveal>
+            <Reveal variant="up" delay={200} className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="https://saadr.tech" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                Founder portfolio
+                <ExternalLink className="h-4 w-4" />
+              </a>
+              <Link href="/work" className="btn-ghost">
+                Client case studies
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            We Build Real Products. <br />
-            <span className="text-gradient">Not Generic Templates.</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed">
-            Arclyn Studio is a technical digital studio founded to solve the core frustration with traditional agencies: slow delivery cycles, bloated templates, and a lack of true engineering depth.
-          </p>
-        </div>
-
-        {/* Real Story & Background */}
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-white/10 mb-24 relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-                Founder Background &amp; Engineering Origin
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Backed by 50+ Real Deployments and a 150k+ Developer Audience
-              </h2>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                Founded by <strong className="text-white">Saad Rehman</strong> — an AI &amp; ML Engineer and Full Stack Developer with over 3+ years of experience building high-scale automation systems and digital products — Arclyn Studio represents the synthesis of developer craftsmanship and automated velocity.
-              </p>
-
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                Having educated and inspired a global community of over 150,000 developers across LinkedIn and technical channels, we take that same transparency and engineering rigor into every client engagement.
-              </p>
-
-              <div className="pt-2 flex flex-wrap items-center gap-4">
-                <a
-                  href="https://saadr.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/40 transition-colors"
-                >
-                  <span>Explore Founder Portfolio (saadr.tech)</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <Link
-                  href="/work"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
-                >
-                  <span>View Verified Client Case Studies</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Side Stats Window */}
-            <div className="lg:col-span-5">
-              <div className="p-7 rounded-2xl bg-[#080D22] border border-white/10 space-y-6 shadow-2xl">
-                <div className="flex items-center gap-3 pb-4 border-b border-white/10">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold font-mono">
-                    AS
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-white">Arclyn Studio Vital Metrics</div>
-                    <div className="text-[11px] text-slate-400">Verified track record</div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-3xl font-extrabold text-white">150k+</div>
-                    <div className="text-xs text-slate-400">Community audience across developer channels</div>
-                  </div>
-                  <div className="pt-3 border-t border-white/5">
-                    <div className="text-3xl font-extrabold text-white">50+</div>
-                    <div className="text-xs text-slate-400">Production web apps, AI agents &amp; stores shipped</div>
-                  </div>
-                  <div className="pt-3 border-t border-white/5">
-                    <div className="text-3xl font-extrabold text-white">95+</div>
-                    <div className="text-xs text-slate-400">Average Google Core Web Vitals score on client builds</div>
-                  </div>
-                  <div className="pt-3 border-t border-white/5">
-                    <div className="text-3xl font-extrabold text-white">2–4 Wks</div>
-                    <div className="text-xs text-slate-400">Standard project turnaround from kickoff to live launch</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+          <div className="grid grid-cols-2 gap-px self-start overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.08]">
+            {STATS.map((s, i) => (
+              <Reveal key={s.label} variant="up" delay={i * 90} className="flex min-h-[150px] flex-col justify-end bg-[var(--bg)] p-5 sm:min-h-[190px] sm:p-7">
+                <div className="font-display text-3xl font-semibold tracking-[-0.04em] text-white sm:text-5xl">{s.value}</div>
+                <p className="mt-2 text-sm leading-snug text-zinc-500">{s.label}</p>
+              </Reveal>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* 4 Core Pillars */}
-        <div className="mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-wider text-purple-400">
-              Core Principles
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-              How We Work Differently
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {VALUES.map((val) => {
+      {/* Values */}
+      <section className="px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal as="p" variant="fade" className="eyebrow mb-6">
+            Principles
+          </Reveal>
+          <SplitText
+            text={'How we work\ndifferently.'}
+            accentWords={[3]}
+            accentClassName="font-serif-accent text-gradient-brand"
+            className="section-title"
+          />
+          <div className="mt-12 grid gap-4 sm:gap-5 md:grid-cols-2">
+            {VALUES.map((val, i) => {
               const Icon = val.icon;
               return (
-                <div
-                  key={val.title}
-                  className="p-8 rounded-3xl glass-panel border border-white/10 flex items-start gap-5"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 text-cyan-400 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white mb-2">
-                      {val.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {val.desc}
-                    </p>
-                  </div>
-                </div>
+                <Reveal key={val.title} variant="up" delay={(i % 2) * 90} className="glass-panel rounded-3xl p-6 sm:p-9">
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-6 text-2xl font-semibold tracking-tight text-white">{val.title}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-zinc-400">{val.desc}</p>
+                </Reveal>
               );
             })}
           </div>
         </div>
+      </section>
 
-        {/* Tech Stack Matrix */}
-        <div className="mb-12 rounded-2xl glass-panel border border-white/10 p-4 sm:mb-24 sm:rounded-3xl sm:p-12">
-          <div className="mb-6 max-w-2xl sm:mb-10">
-            <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-              Our Technical Stack
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-              Production Frameworks &amp; Tooling
-            </h2>
-            <p className="text-sm text-slate-300 mt-2">
-              We select tools that offer exceptional speed, robust type safety, and zero bloat.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
-            {TECH_ARSENAL.map((group) => (
-              <div key={group.category} className="rounded-xl border border-white/5 bg-white/[0.02] p-3 sm:rounded-2xl sm:p-6">
-                <h3 className="mb-2 text-[10px] font-bold uppercase tracking-wider text-purple-400 sm:mb-4 sm:text-xs">
-                  {group.category}
-                </h3>
-                <div className="space-y-1.5 sm:space-y-2">
+      {/* Stack */}
+      <section className="px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal as="p" variant="fade" className="eyebrow mb-6">
+            Our stack
+          </Reveal>
+          <SplitText
+            text={'Production tools,\nzero bloat.'}
+            accentWords={[2, 3]}
+            accentClassName="font-serif-accent text-gradient-brand"
+            className="section-title"
+          />
+          <div className="mt-12 grid grid-cols-1 border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
+            {TECH_ARSENAL.map((group, i) => (
+              <Reveal
+                key={group.category}
+                variant="up"
+                delay={i * 80}
+                className="border-b border-white/[0.08] py-7 sm:px-6 sm:[&:nth-child(odd)]:border-r lg:border-r lg:last:border-r-0"
+              >
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">{group.category}</h3>
+                <ul className="mt-4 flex flex-wrap gap-2">
                   {group.items.map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-xs text-slate-300 font-mono">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                      <span>{item}</span>
-                    </div>
+                    <li key={item} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm text-zinc-300">
+                      {item}
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </Reveal>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Closing CTA */}
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 text-center max-w-3xl mx-auto border border-white/15">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Want to collaborate on your next build?
-          </h2>
-          <p className="text-sm text-slate-300 mb-8 max-w-lg mx-auto">
-            We are currently accepting new client projects for the upcoming sprint cycle.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-semibold text-white btn-primary-gradient"
-            >
-              Start Your Project
-            </Link>
-            <Link
-              href="/work"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl text-sm font-semibold text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10"
-            >
-              Explore Our Work
-            </Link>
-          </div>
-        </div>
+      <TeamSection />
 
-      </div>
+      <PageCta
+        title={'Want to collaborate\non your next build?'}
+        accentWords={[5, 6]}
+        description="We're accepting new client projects for the upcoming sprint cycle."
+        primary={{ href: '/contact', label: 'Start your project' }}
+        secondary={{ href: '/work', label: 'Explore our work' }}
+      />
     </div>
   );
 }

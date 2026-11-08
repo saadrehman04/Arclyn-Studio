@@ -17,7 +17,7 @@ export const PartnerForm: React.FC = () => {
   if (submitted) {
     return (
       <div className="space-y-3 border-t border-white/10 py-6 text-center">
-        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-[#ff1010]/35 bg-[#ff1010]/10 text-[#ff1010]">
+        <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-violet-400/35 bg-violet-400/10 text-violet-300">
           <CheckCircle2 className="w-6 h-6" />
         </div>
         <h3 className="text-lg font-medium text-white">Application received</h3>
@@ -41,7 +41,7 @@ export const PartnerForm: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="w-full rounded-[10px] border border-white/10 bg-[#111111] px-3.5 py-2.5 text-sm text-white placeholder:text-[#6e6e6e] transition-colors focus:border-[#ff1010] focus:outline-none"
+            className="w-full rounded-[10px] border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-[#6e6e6e] transition-colors focus:border-violet-400 focus:outline-none"
           />
         </div>
         <div>
@@ -54,7 +54,7 @@ export const PartnerForm: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@company.com"
-            className="w-full rounded-[10px] border border-white/10 bg-[#111111] px-3.5 py-2.5 text-sm text-white placeholder:text-[#6e6e6e] transition-colors focus:border-[#ff1010] focus:outline-none"
+            className="w-full rounded-[10px] border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-[#6e6e6e] transition-colors focus:border-violet-400 focus:outline-none"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@ export const PartnerForm: React.FC = () => {
         <select
           value={track}
           onChange={(e) => setTrack(e.target.value)}
-          className="w-full rounded-[10px] border border-white/10 bg-[#111111] px-3.5 py-2.5 text-sm text-white transition-colors focus:border-[#ff1010] focus:outline-none"
+          className="w-full rounded-[10px] border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-sm text-white transition-colors focus:border-violet-400 focus:outline-none"
         >
           <option value="referral">Refer a client</option>
           <option value="agency">Agency partnership</option>
@@ -76,7 +76,7 @@ export const PartnerForm: React.FC = () => {
 
       <button
         type="submit"
-        className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff1010] px-5 text-sm font-medium uppercase tracking-[0.12em] text-white transition-all duration-200 hover:bg-[#ff2b2b]"
+        className="btn-primary-gradient w-full px-6 text-sm font-semibold sm:w-auto"
       >
         Send application
       </button>

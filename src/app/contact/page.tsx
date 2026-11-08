@@ -1,18 +1,10 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { ContactForm } from '@/components/contact/ContactForm';
-import { 
-  Sparkles, 
-  Mail, 
-  Calendar, 
-  Clock, 
-  ShieldCheck, 
-  MessageSquare,
-  MessageCircle,
-  ArrowRight,
-  ExternalLink
-} from 'lucide-react';
+import { Mail, Calendar, Clock, ShieldCheck, MessageCircle, ExternalLink } from 'lucide-react';
 import { InstagramIcon } from '@/components/shared/SocialIcons';
+import { PageHero } from '@/components/shared/PageHero';
+import { Reveal } from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'Contact Us — Start Your Project',
@@ -24,174 +16,108 @@ interface Props {
   searchParams: Promise<{ tier?: string; service?: string }>;
 }
 
-import { PageHeroRibbon } from '@/components/shared/PageHeroRibbon';
+const CHANNELS = [
+  { icon: Mail, label: 'Email', value: 'saadrehman034@gmail.com', href: 'mailto:saadrehman034@gmail.com', color: 'text-violet-300' },
+  { icon: MessageCircle, label: 'WhatsApp', value: '+92 319 6762317', href: 'https://wa.me/923196762317', color: 'text-emerald-300' },
+  { icon: InstagramIcon, label: 'Instagram', value: '@arclyn_studio', href: 'https://instagram.com/arclyn_studio', color: 'text-pink-300' },
+];
+
+const EXPECT = [
+  'NDA signed upfront if proprietary IP is involved',
+  'Transparent fixed milestone pricing (50% / 30% / 20%)',
+  'No pressure, no aggressive sales follow-ups',
+];
 
 export default async function ContactPage({ searchParams }: Props) {
   const { tier, service } = await searchParams;
 
   return (
-    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-cosmic-grid min-h-screen relative overflow-hidden">
-      {/* 3D Liquid Chrome Ribbon Background */}
-      <PageHeroRibbon variant="flow" opacity={0.7} />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-radial-hero pointer-events-none opacity-60" />
+    <div className="relative min-h-screen bg-[var(--bg)]">
+      <PageHero
+        eyebrow="Contact"
+        title={'Let’s build something\nexceptional together.'}
+        accentWords={[3]}
+        description="Fill out the brief below or book a 15-minute call. We reply within 12 hours with a preliminary architecture and milestone plan."
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 w-fit mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-cyan-300">
-              Start The Conversation
-            </span>
-          </div>
+      <section className="px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-start gap-6 lg:grid-cols-12 lg:gap-10">
+          {/* Form first on mobile — it is the main action */}
+          <Reveal variant="up" className="lg:order-2 lg:col-span-7">
+            <ContactForm initialTier={tier} initialService={service} />
+          </Reveal>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Let’s Build Something <br />
-            <span className="text-gradient">Exceptional Together</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed">
-            Fill out our intake form below or schedule a direct 15-minute scoping call. We respond within 12 hours with a preliminary technical architecture and milestone plan.
-          </p>
-        </div>
-
-        {/* Form and Contact Channels Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          
-          {/* Left Column: Direct channels & Calendly card */}
-          <div className="lg:col-span-5 space-y-6">
-            
-            {/* Quick response badge */}
-            <div className="p-6 rounded-2xl glass-panel border border-emerald-500/30 flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
+          <div className="space-y-4 lg:order-1 lg:col-span-5">
+            <Reveal variant="up" className="glass-panel flex items-start gap-4 rounded-3xl p-6">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-400/10 text-emerald-300">
+                <Clock className="h-5 w-5" />
+              </span>
               <div>
-                <h2 className="text-sm font-bold text-white">
-                  12-Hour Response Time Guarantee
-                </h2>
-                <p className="text-xs text-slate-300 leading-relaxed mt-1">
-                  Every inquiry is evaluated directly by our technical architects — not non-technical sales agents.
+                <h2 className="text-base font-semibold text-white">Reply within 12 hours</h2>
+                <p className="mt-1 text-sm leading-relaxed text-zinc-400">
+                  Every inquiry is reviewed directly by our engineers — not a sales team.
                 </p>
               </div>
-            </div>
+            </Reveal>
 
-            {/* Direct Email, WhatsApp & Instagram Card */}
-            <div className="p-6 rounded-2xl glass-panel border border-white/10 space-y-4">
-              {/* Direct Email */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs text-slate-400">Direct Inquiries</div>
+            <Reveal variant="up" delay={80} className="glass-panel divide-y divide-white/[0.06] rounded-3xl px-6">
+              {CHANNELS.map((c) => {
+                const Icon = c.icon;
+                return (
                   <a
-                    href="mailto:saadrehman034@gmail.com"
-                    className="text-sm font-bold text-white hover:text-cyan-300 transition-colors"
-                  >
-                    saadrehman034@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              {/* WhatsApp Direct */}
-              <div className="pt-3 border-t border-white/5 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                  <MessageCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs text-slate-400">WhatsApp Instant Chat</div>
-                  <a
-                    href="https://wa.me/923196762317"
-                    target="_blank"
+                    key={c.label}
+                    href={c.href}
+                    target={c.href.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer"
-                    className="text-sm font-bold text-white hover:text-emerald-300 transition-colors"
+                    className="group flex items-center gap-4 py-5"
                   >
-                    +92 3196762317
+                    <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white/[0.04] ${c.color}`}>
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs text-zinc-500">{c.label}</span>
+                      <span className="block truncate text-[15px] font-medium text-white">{c.value}</span>
+                    </span>
+                    <ExternalLink className="h-4 w-4 shrink-0 text-zinc-600 transition-colors group-hover:text-white" />
                   </a>
-                </div>
-              </div>
+                );
+              })}
+            </Reveal>
 
-              {/* Instagram Direct */}
-              <div className="pt-3 border-t border-white/5 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center shrink-0">
-                  <InstagramIcon className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs text-slate-400">Instagram Direct</div>
-                  <a
-                    href="https://instagram.com/arclyn_studio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-bold text-white hover:text-pink-300 transition-colors"
-                  >
-                    @arclyn_studio
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Calendly Booking Placeholder Card */}
-            <div className="p-6 rounded-2xl bg-[#090E26] border border-cyan-500/30 space-y-4 relative overflow-hidden">
-              <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400">
-                  <Calendar className="w-4 h-4" />
-                  <span>Prefer Live Video?</span>
-                </div>
-                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-                  15 Min Scoping
+            <Reveal variant="up" delay={160} className="relative overflow-hidden rounded-3xl border border-violet-400/20 bg-gradient-to-br from-violet-500/[0.12] to-sky-500/[0.05] p-6">
+              <div className="flex items-center justify-between gap-3">
+                <span className="inline-flex items-center gap-2 text-sm font-medium text-violet-200">
+                  <Calendar className="h-4 w-4" />
+                  Prefer a live call?
                 </span>
+                <span className="rounded-full border border-white/10 px-2.5 py-0.5 font-mono text-[11px] text-zinc-300">15 min</span>
               </div>
-
-              <h2 className="text-lg font-bold text-white">
-                Book a 15-Minute Scoping Call
-              </h2>
-
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Walk through your project scope, tech stack requirements, and get direct architectural feedback on the spot with Saad Rehman.
+              <h2 className="mt-4 text-xl font-semibold tracking-tight text-white">Book a scoping call</h2>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                Walk through your scope and stack, and get direct architectural feedback from Saad Rehman.
               </p>
-
-              <a
-                href="https://calendly.com/saadrehman"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 rounded-xl text-xs font-bold text-white btn-primary-gradient flex items-center justify-center gap-2"
-              >
-                <span>Select a Time on Calendly</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+              <a href="https://calendly.com/saadrehman" target="_blank" rel="noopener noreferrer" className="btn-primary mt-6 w-full">
+                <span>Pick a time on Calendly</span>
+                <span className="btn-arrow">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </span>
               </a>
-            </div>
+            </Reveal>
 
-            {/* Reassurance Checklist */}
-            <div className="p-6 rounded-2xl glass-panel border border-white/5 space-y-3">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                What to Expect After Contacting:
-              </div>
-              <div className="flex items-start gap-2 text-xs text-slate-300">
-                <ShieldCheck className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                <span>NDA signed upfront if proprietary IP is involved</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs text-slate-300">
-                <ShieldCheck className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                <span>Transparent fixed milestone pricing (50% / 30% / 20%)</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs text-slate-300">
-                <ShieldCheck className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                <span>No pressure, no aggressive sales follow-ups</span>
-              </div>
-            </div>
-
+            <Reveal variant="up" delay={240} className="glass-panel rounded-3xl p-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-500">What happens next</p>
+              <ul className="mt-4 space-y-3">
+                {EXPECT.map((e) => (
+                  <li key={e} className="flex items-start gap-3 text-sm text-zinc-300">
+                    <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
+                    {e}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
-
-          {/* Right Column: Interactive Intake Form */}
-          <div className="lg:col-span-7">
-            <ContactForm initialTier={tier} initialService={service} />
-          </div>
-
         </div>
-
-      </div>
+      </section>
     </div>
   );
 }

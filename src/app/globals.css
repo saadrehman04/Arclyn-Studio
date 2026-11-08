@@ -204,19 +204,15 @@ p, blockquote, li {
   background-size: 48px 48px;
 }
 
-/* Glassmorphism Panel */
+/* Surface panel (formerly glassmorphism). Solid surface: backdrop blur on dozens
+   of cards was a major scroll cost on inner pages. */
 .glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #0c0c12;
+  border: 1px solid var(--line);
+  transition: border-color 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
 }
-
 .glass-panel:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(139, 92, 246, 0.45);
-  box-shadow: 0 15px 45px -10px rgba(139, 92, 246, 0.2);
+  border-color: rgba(167, 139, 250, 0.35);
 }
 
 /* Gradients */
@@ -754,3 +750,52 @@ p, blockquote, li {
   }
   .marquee { animation: none !important; }
 }
+
+
+/* =========================================================
+   Legacy utility classes used across inner pages, mapped onto the
+   new design system (several were referenced but never defined).
+   ========================================================= */
+.text-gradient {
+  background: linear-gradient(100deg, #ffffff 0%, #ddd6fe 35%, #a78bfa 62%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn-primary-gradient {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #09090b !important;
+  border-radius: 999px !important;
+  min-height: 44px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px -12px rgba(139, 92, 246, 0.6);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), background-color 0.3s;
+}
+.btn-primary-gradient:hover {
+  background: #ede9fe;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 16px 40px -10px rgba(139, 92, 246, 0.8);
+}
+.bg-radial-hero {
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.18), transparent 70%);
+}
+
+/* Inner-page rhythm: consistent section headings */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: #fff;
+  font-size: clamp(1.9rem, 4.4vw, 3.25rem);
+}
+
+/* ---------- Mobile ergonomics ---------- */
+@media (max-width: 640px) {
+  /* iOS zooms into inputs with font-size < 16px */
+  input, select, textarea { font-size: 16px !important; }
+}
+/* Long words / URLs never force horizontal scroll */
+h1, h2, h3, h4, p, a, li, span { overflow-wrap: break-word; }

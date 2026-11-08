@@ -9,13 +9,13 @@ import {
   Dumbbell, 
   Wrench, 
   Stethoscope, 
-  ArrowRight, 
-  CheckCircle2, 
-  Sparkles,
+  ArrowRight,
+  Check,
   ExternalLink,
-  Layers,
-  ShieldAlert
+  Info,
 } from 'lucide-react';
+import { PageHero, PageCta } from '@/components/shared/PageHero';
+import { Reveal } from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'Industries We Serve — Concept Architecture Showcases',
@@ -34,221 +34,141 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 export default function IndustriesPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#090909] pb-16 pt-24 text-[#f5f5f5] sm:pb-24 sm:pt-32">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-          maskImage: 'linear-gradient(to bottom, black, transparent 92%)',
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Page Header */}
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-16">
-          <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#ff1010]/30 bg-[#ff1010]/10 px-3.5 py-1.5">
-            <Layers className="h-3.5 w-3.5 text-[#ff1010]" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#ff1010]">
-              Vertical Blueprints
-            </span>
-          </div>
-
-          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-[#f5f5f5] sm:text-5xl lg:text-6xl">
-            Industries We Serve <br />
-            <span className="text-[#ff1010]">&amp; Concept Architectures</span>
-          </h1>
-
-          <p className="mt-4 text-sm leading-relaxed text-[#8a8a8a] sm:text-lg">
-            Every business category demands its own visual language, psychological triggers, and conversion funnel. Below is a showcase of the type of tailored websites and platforms Arclyn Studio designs and engineers.
+    <div className="relative min-h-screen bg-[var(--bg)]">
+      <PageHero
+        eyebrow="Industries"
+        title={'Built for the way\nyour industry sells.'}
+        accentWords={[4, 5, 6]}
+        description="Every category needs its own visual language, trust signals and conversion funnel. Here's how we approach the industries we know best."
+      >
+        <div className="mx-auto flex max-w-2xl items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
+          <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm">
+            <strong className="font-medium text-white">Editorial note:</strong> the concept previews below are original design
+            explorations by Arclyn Studio to show vertical expertise. They are not past client endorsements and do not reuse
+            proprietary brand assets.
           </p>
-
-          {/* Explicit disclaimer banner as requested */}
-          <div className="mx-auto mt-6 flex max-w-2xl items-start gap-3 rounded-xl border border-white/10 bg-[#0d0d0d] p-4 text-left sm:rounded-2xl">
-            <ShieldAlert className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#ff1010]" />
-            <p className="text-xs leading-relaxed text-[#8a8a8a]">
-              <strong className="text-white">Editorial Notice:</strong> The concept prototypes below represent original design blueprints and aesthetic explorations created by Arclyn Studio to demonstrate vertical expertise. They are not presented as past client endorsements, nor do they duplicate proprietary brand assets.
-            </p>
-          </div>
         </div>
+      </PageHero>
 
-        {/* 6 Industry Full Showcases */}
-          <div className="space-y-10 sm:space-y-16">
+      <section className="px-4 pb-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl space-y-5 sm:space-y-6">
           {INDUSTRIES.map((ind, index) => {
             const Icon = ICON_MAP[ind.id] || Building2;
-            const isEven = index % 2 === 1;
-
+            const flip = index % 2 === 1;
             return (
-              <div
+              <Reveal
                 key={ind.id}
                 id={ind.id}
-                className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d] p-4 sm:rounded-3xl sm:p-8 lg:p-12"
+                variant="up"
+                className="glass-panel scroll-mt-28 overflow-hidden rounded-[28px] sm:rounded-[36px]"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  
-                  {/* Left: Strategy, Conversion focus, & Real project link */}
-                  <div className={`lg:col-span-6 space-y-6 ${isEven ? 'lg:order-2' : ''}`}>
+                <div className="grid items-center gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:gap-14 lg:p-14">
+                  <div className={flip ? 'lg:order-2' : ''}>
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-[#111111] text-[#ff1010] sm:h-12 sm:w-12 sm:rounded-2xl">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-                          {ind.name}
-                        </h2>
-                        <span className="text-xs font-semibold text-[#ff1010]">
-                          {ind.tagline}
-                        </span>
-                      </div>
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span className="font-mono text-xs text-zinc-500">{String(index + 1).padStart(2, '0')}</span>
                     </div>
+                    <h2 className="mt-6 font-display text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl">{ind.name}</h2>
+                    <p className="mt-2 text-sm font-medium text-violet-300">{ind.tagline}</p>
+                    <p className="mt-4 text-[15px] leading-relaxed text-zinc-400">{ind.description}</p>
 
-                    <p className="text-sm leading-relaxed text-[#b0b0b0]">
-                      {ind.description}
+                    <p className="mt-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm leading-relaxed text-zinc-400">
+                      <span className="font-medium text-white">Design direction: </span>
+                      {ind.styleInspiration}
                     </p>
 
-                    {/* Style Inspiration */}
-                    <div className="rounded-xl border border-white/10 bg-[#111111] p-3 text-xs leading-relaxed text-[#8a8a8a] sm:rounded-2xl sm:p-4">
-                      <strong className="text-white">Aesthetic Moodboard Direction:</strong>{' '}
-                      {ind.styleInspiration}
-                    </div>
+                    <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                      {ind.conversionFocus.map((c) => (
+                        <li key={c} className="flex items-start gap-2.5 text-sm text-zinc-300">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
 
-                    {/* Conversion Focus Checklist */}
-                    <div className="space-y-2.5">
-                      <div className="text-xs font-bold uppercase tracking-wider text-[#ff1010]">
-                        High-Converting Capabilities:
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {ind.conversionFocus.map((c) => (
-                          <div key={c} className="flex items-start gap-2 text-xs text-[#b0b0b0]">
-                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[#ff1010]" />
-                            <span>{c}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Verified Arclyn Production Example if available */}
                     {ind.arclynExample && (
-                      <div className="flex flex-col justify-between gap-3 rounded-xl border border-[#ff1010]/20 bg-[#111111] p-3 sm:flex-row sm:items-center sm:rounded-2xl sm:p-4">
-                        <div>
-                          <div className="flex items-center gap-1.5 text-xs font-bold text-[#ff1010]">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            <span>Verified Production Project:</span>
-                          </div>
-                          <div className="mt-0.5 text-xs text-[#b0b0b0]">
+                      <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.04] p-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="text-sm">
+                          <p className="font-medium text-emerald-300">Shipped example</p>
+                          <p className="mt-0.5 text-zinc-400">
                             {ind.arclynExample.name} — {ind.arclynExample.note}
-                          </div>
+                          </p>
                         </div>
                         {ind.arclynExample.url && (
                           <a
                             href={ind.arclynExample.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-[#ff1010]/30 px-3 py-1.5 text-xs font-semibold text-[#ff1010] transition-colors hover:bg-[#ff1010] hover:text-white"
+                            className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full border border-white/15 px-3.5 py-2 text-xs font-medium text-white transition-colors hover:bg-white/[0.06] sm:self-auto"
                           >
-                            <span>Live Site</span>
-                            <ExternalLink className="w-3 h-3" />
+                            Live site
+                            <ExternalLink className="h-3.5 w-3.5" />
                           </a>
                         )}
                       </div>
                     )}
 
-                    {/* CTA */}
-                    <div className="pt-2">
-                      <Link
-                        href={`/contact?industry=${ind.id}`}
-                        className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#ff1010] px-5 py-3 text-xs font-semibold text-white transition-colors hover:bg-[#e00000] sm:rounded-xl sm:px-6 sm:text-sm"
-                      >
-                        <span>Build for {ind.name.split('&')[0].trim()}</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </div>
+                    <Link href="/contact" className="btn-primary mt-8 w-full sm:w-auto">
+                      <span>Build for {ind.name.split('&')[0].trim()}</span>
+                      <span className="btn-arrow">
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </Link>
                   </div>
 
-                  {/* Right: Original Concept Mockup Preview */}
-                  <div className={`lg:col-span-6 ${isEven ? 'lg:order-1' : ''}`}>
-                    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#111111] p-4 sm:rounded-2xl sm:p-8">
-                      
-                      {/* Browser header */}
-                      <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                        </div>
-                        <span className="text-[11px] font-mono text-slate-400">
-                          preview.arclynstudio.com/{ind.id}
-                        </span>
+                  {/* Concept preview */}
+                  <div className={flip ? 'lg:order-1' : ''}>
+                    <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#111118]">
+                      <div className="flex items-center gap-1.5 border-b border-white/[0.08] px-4 py-3">
+                        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                        <span className="ml-3 truncate font-mono text-[11px] text-zinc-500">concept.arclynstudio.com/{ind.id}</span>
                       </div>
-
-                      {/* Simulated UI layout */}
-                      <div className="space-y-4">
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold text-white tracking-wider uppercase">
-                          <span>Original Concept Demo</span>
-                        </div>
-
-                        <h3 className="text-2xl font-extrabold text-white leading-tight">
+                      <div className="relative p-6 sm:p-9">
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-50"
+                          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.35), transparent 65%)' }}
+                        />
+                        <span className="relative rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+                          Concept demo
+                        </span>
+                        <h3 className="relative mt-5 font-display text-2xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-3xl">
                           {ind.mockupTheme.demoHeadline}
                         </h3>
-
-                        <p className="text-xs leading-relaxed text-[#8a8a8a] sm:text-sm">
-                          {ind.mockupTheme.demoSub}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2 pt-2">
+                        <p className="relative mt-3 text-sm leading-relaxed text-zinc-400">{ind.mockupTheme.demoSub}</p>
+                        <div className="relative mt-5 flex flex-wrap gap-2">
                           {ind.mockupTheme.demoTags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-md border border-white/10 bg-[#090909] px-2.5 py-1 text-[10px] font-semibold text-[#d5d5d5]"
-                            >
+                            <span key={tag} className="rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[11px] text-zinc-300">
                               {tag}
                             </span>
                           ))}
                         </div>
-
-                        <div className="pt-4 flex items-center gap-3">
-                          <button
-                            type="button"
-                            className="rounded-lg bg-[#ff1010] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#e00000] sm:rounded-xl sm:px-5"
-                          >
-                            {ind.mockupTheme.demoCta}
-                          </button>
-                          <span className="text-[11px] text-[#8a8a8a]">
-                            Mobile-first responsive flow
-                          </span>
+                        <div className="relative mt-7 flex flex-wrap items-center gap-3">
+                          <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-black">{ind.mockupTheme.demoCta}</span>
+                          <span className="text-[11px] text-zinc-500">Mobile-first responsive flow</span>
                         </div>
                       </div>
-
                     </div>
                   </div>
-
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
+      </section>
 
-        {/* Bottom CTA */}
-        <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-white/10 bg-[#0d0d0d] p-5 text-center sm:mt-20 sm:rounded-3xl sm:p-12">
-          <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl">
-            Operating in a Different Vertical?
-          </h2>
-          <p className="mx-auto mb-8 max-w-lg text-sm text-[#8a8a8a]">
-            Our architectural process adapts to any high-intent commercial niche — B2B fintech, legal practices, educational academies, and industrial logistics.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#ff1010] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#e00000] sm:rounded-xl sm:px-8"
-          >
-            <span>Discuss Your Industry Requirements</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-      </div>
+      <PageCta
+        title={'Operating in a\ndifferent vertical?'}
+        accentWords={[3, 4]}
+        description="Our process adapts to any high-intent niche — B2B fintech, legal practices, education and logistics included."
+        primary={{ href: '/contact', label: 'Discuss your industry' }}
+        secondary={{ href: '/work', label: 'See our work' }}
+      />
     </div>
   );
 }

@@ -39,14 +39,14 @@ export const PricingCalculator: React.FC = () => {
             <div
               key={tier.id}
               onClick={() => setSelectedTierId(tier.id)}
-              className={`relative flex flex-col justify-between rounded-2xl p-4 cursor-pointer transition-all duration-300 sm:rounded-3xl sm:p-7 ${
+              className={`relative flex flex-col justify-between rounded-3xl p-6 cursor-pointer transition-all duration-300 sm:p-7 ${
                 isPopular
-                  ? 'bg-[#0E1535] border-2 border-purple-500/80 shadow-2xl shadow-purple-950/60 lg:-translate-y-2'
+                  ? 'bg-gradient-to-b from-violet-500/[0.14] to-[#0c0c12] border border-violet-400/50 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.6)] lg:-translate-y-2'
                   : 'glass-panel hover:border-white/20'
-              } ${isSelected ? 'ring-2 ring-cyan-400/80' : ''}`}
+              } ${isSelected ? 'ring-1 ring-white/70' : ''}`}
             >
               {isPopular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white text-black text-[11px] font-bold uppercase tracking-wider shadow-lg">
                   Most Popular
                 </div>
               )}
@@ -58,7 +58,7 @@ export const PricingCalculator: React.FC = () => {
                   </h3>
                 </div>
 
-                <div className="text-xs text-cyan-300 font-semibold mb-4">
+                <div className="text-xs text-violet-200 font-semibold mb-4">
                   {tier.timeline}
                 </div>
 
@@ -76,7 +76,7 @@ export const PricingCalculator: React.FC = () => {
                       Approx. {tier.pricePKR}
                     </div>
                   )}
-                  <div className="text-[11px] text-purple-300 font-medium mt-1">
+                  <div className="text-[11px] text-violet-300 font-medium mt-1">
                     {tier.billingPeriod}
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export const PricingCalculator: React.FC = () => {
                   </div>
                   {tier.features.map((f) => (
                     <div key={f} className="flex items-start gap-2 text-xs text-slate-300">
-                      <Check className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                      <Check className="w-3.5 h-3.5 text-violet-300 mt-0.5 flex-shrink-0" />
                       <span className="leading-tight">{f}</span>
                     </div>
                   ))}
@@ -98,9 +98,9 @@ export const PricingCalculator: React.FC = () => {
               <div>
                 <Link
                   href={tier.ctaHref}
-                  className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold transition-all ${
+                  className={`w-full flex items-center justify-center gap-2 py-3 rounded-full text-sm font-semibold transition-all min-h-[44px] ${
                     isPopular
-                      ? 'btn-primary-gradient text-white'
+                      ? 'btn-primary-gradient'
                       : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
                   }`}
                 >
@@ -114,9 +114,9 @@ export const PricingCalculator: React.FC = () => {
       </div>
 
       {/* Add-Ons Menu Section */}
-      <div className="rounded-2xl glass-panel border border-white/10 p-4 sm:rounded-3xl sm:p-12">
+      <div className="rounded-3xl glass-panel p-5 sm:rounded-[36px] sm:p-12">
         <div className="mb-6 max-w-3xl sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-semibold text-cyan-300 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-semibold text-violet-200 mb-3">
             <Plus className="w-3.5 h-3.5" />
             <span>Modular Enhancements</span>
           </div>
@@ -126,7 +126,7 @@ export const PricingCalculator: React.FC = () => {
           <p className="text-sm text-slate-300 mt-2">
             Bolt on specialized operational systems to any website or web app tier. Itemized scope with transparent pricing.
           </p>
-          <div className="text-xs text-purple-300 mt-1">
+          <div className="text-xs text-violet-300 mt-1">
             * Starting around 20,000–30,000 PKR, final quote confirmed after scope review.
           </div>
         </div>
@@ -141,7 +141,7 @@ export const PricingCalculator: React.FC = () => {
                 onClick={() => toggleAddOn(addon.id)}
                 className={`flex flex-col justify-between rounded-xl border p-4 cursor-pointer transition-all duration-200 sm:rounded-2xl sm:p-6 ${
                   isSelected
-                    ? 'bg-purple-950/30 border-purple-500/60 shadow-lg shadow-purple-950/40'
+                    ? 'bg-violet-500/[0.1] border-violet-400/60'
                     : 'bg-white/[0.02] border-white/10 hover:border-white/20'
                 }`}
               >
@@ -164,7 +164,7 @@ export const PricingCalculator: React.FC = () => {
 
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
                   <div>
-                    <div className="font-semibold text-cyan-300">
+                    <div className="font-semibold text-violet-200">
                       {addon.pricePKR}
                     </div>
                     <div className="text-[10px] text-slate-400">
@@ -181,7 +181,7 @@ export const PricingCalculator: React.FC = () => {
         </div>
 
         {/* Selected Config Summary */}
-        <div className="mt-7 flex flex-col justify-between gap-4 rounded-xl border border-white/10 bg-[#090E26] p-4 sm:mt-10 sm:gap-6 sm:rounded-2xl sm:p-6 md:flex-row md:items-center">
+        <div className="mt-7 flex flex-col justify-between gap-4 rounded-xl border border-white/10 bg-[#0c0c12] p-4 sm:mt-10 sm:gap-6 sm:rounded-2xl sm:p-6 md:flex-row md:items-center">
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Your Custom Scope Preview
@@ -205,7 +205,7 @@ export const PricingCalculator: React.FC = () => {
       </div>
 
       {/* Payment Structure Breakdown */}
-      <div className="rounded-2xl glass-panel border border-white/10 p-4 sm:rounded-3xl sm:p-12">
+      <div className="rounded-3xl glass-panel p-5 sm:rounded-[36px] sm:p-12">
         <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-semibold text-emerald-300 mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -254,7 +254,7 @@ export const PricingCalculator: React.FC = () => {
           </h2>
         </div>
 
-        <div className="space-y-2 rounded-xl glass-panel border border-white/10 p-4 sm:rounded-2xl sm:p-6">
+        <div className="space-y-2 rounded-2xl glass-panel p-5 sm:p-6">
           <h3 className="text-base font-bold text-white">
             Are there any monthly maintenance or hidden hosting fees?
           </h3>
@@ -263,7 +263,7 @@ export const PricingCalculator: React.FC = () => {
           </p>
         </div>
 
-        <div className="space-y-2 rounded-xl glass-panel border border-white/10 p-4 sm:rounded-2xl sm:p-6">
+        <div className="space-y-2 rounded-2xl glass-panel p-5 sm:p-6">
           <h3 className="text-base font-bold text-white">
             Can we pay in Pakistani Rupees (PKR) or USD?
           </h3>
@@ -272,7 +272,7 @@ export const PricingCalculator: React.FC = () => {
           </p>
         </div>
 
-        <div className="space-y-2 rounded-xl glass-panel border border-white/10 p-4 sm:rounded-2xl sm:p-6">
+        <div className="space-y-2 rounded-2xl glass-panel p-5 sm:p-6">
           <h3 className="text-base font-bold text-white">
             What happens if we need revisions during the project?
           </h3>
