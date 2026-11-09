@@ -60,7 +60,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
           intro
           text={title}
           accentWords={accentWords}
-          accentClassName="text-[var(--accent)]"
+          accentClassName="font-serif-accent text-gradient-brand"
           delay={120}
           stagger={60}
           className="font-display text-[clamp(2.5rem,7.5vw,6rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
@@ -114,7 +114,7 @@ const CtaAnchor: React.FC<{ link: CtaLink; className: string; children: React.Re
 /** Shared closing call-to-action card for inner pages. */
 export const PageCta: React.FC<PageCtaProps> = ({ title, accentWords = [], description, primary, secondary }) => (
   <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-    <div className="relative isolate mx-auto max-w-6xl overflow-hidden rounded-[28px] border border-white/[0.09] bg-[#111113] px-6 pb-36 pt-14 text-center sm:rounded-[40px] sm:px-12 sm:pb-44 sm:pt-20">
+    <div className="relative isolate mx-auto max-w-6xl overflow-hidden rounded-[28px] border border-white/[0.09] bg-[#0b0b11] px-6 pb-36 pt-14 text-center sm:rounded-[40px] sm:px-12 sm:pb-44 sm:pt-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[calc(100%-6rem)] -z-10 h-full sm:top-[calc(100%-8rem)]">
         <div className="hero-arc" />
         <div className="hero-arc-flare top-0" />
@@ -122,7 +122,7 @@ export const PageCta: React.FC<PageCtaProps> = ({ title, accentWords = [], descr
       <SplitText
         text={title}
         accentWords={accentWords}
-        accentClassName="text-[var(--accent)]"
+        accentClassName="font-serif-accent text-gradient-brand"
         className="mx-auto max-w-3xl font-display text-[clamp(2rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white"
       />
       {description && (

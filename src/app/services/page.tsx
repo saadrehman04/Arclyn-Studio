@@ -39,7 +39,7 @@ export default function ServicesPage() {
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
                       <span className="font-mono text-xs text-zinc-500">{String(index + 1).padStart(2, '0')}</span>
-                      <span className="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-zinc-300">
+                      <span className="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300">
                         <Icon className="h-5 w-5" />
                       </span>
                       <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-400">{service.badge}</span>
@@ -52,7 +52,7 @@ export default function ServicesPage() {
                     <ul className="mt-7 grid gap-3 sm:grid-cols-2">
                       {service.deliverables.slice(0, 4).map((d) => (
                         <li key={d.title} className="flex gap-3 text-sm">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-300" />
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
                           <span>
                             <span className="font-medium text-white">{d.title}</span>
                             <span className="block text-zinc-500">{d.desc}</span>
@@ -75,7 +75,7 @@ export default function ServicesPage() {
                   </div>
 
                   <div className="self-start rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 sm:p-7">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-300">Stack</p>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">Stack</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {service.technologies.map((t) => (
                         <span key={t} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300">
@@ -83,7 +83,7 @@ export default function ServicesPage() {
                         </span>
                       ))}
                     </div>
-                    <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-300">Business advantages</p>
+                    <p className="mt-7 font-mono text-[11px] uppercase tracking-[0.16em] text-violet-300/80">Business advantages</p>
                     <ul className="mt-4 space-y-2.5">
                       {service.benefits.map((b) => (
                         <li key={b} className="flex items-start gap-2.5 text-sm text-zinc-300">

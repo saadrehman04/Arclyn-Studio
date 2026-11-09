@@ -43,7 +43,7 @@ export const IndustriesStrip: React.FC = () => {
                     aria-hidden="true"
                     className="absolute inset-0 origin-bottom scale-y-0 bg-white/[0.03] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100"
                   />
-                  <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-zinc-300 transition-colors duration-300 group-hover:border-white/25 group-hover:text-white">
+                  <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-violet-300 transition-colors duration-300 group-hover:border-violet-400/50 group-hover:text-white">
                     <Icon className="h-5 w-5" />
                   </span>
                   <span className="relative min-w-0 flex-1">

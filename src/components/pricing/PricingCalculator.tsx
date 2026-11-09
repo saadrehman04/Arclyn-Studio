@@ -41,7 +41,7 @@ export const PricingCalculator: React.FC = () => {
               onClick={() => setSelectedTierId(tier.id)}
               className={`relative flex flex-col justify-between rounded-3xl p-6 cursor-pointer transition-all duration-300 sm:p-7 ${
                 isPopular
-                  ? 'bg-[#161618] border border-white/25 shadow-[0_30px_80px_-30px_rgba(255,255,255,0.15)] lg:-translate-y-2'
+                  ? 'bg-gradient-to-b from-violet-500/[0.14] to-[#0c0c12] border border-violet-400/50 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.6)] lg:-translate-y-2'
                   : 'glass-panel hover:border-white/20'
               } ${isSelected ? 'ring-1 ring-white/70' : ''}`}
             >
@@ -58,7 +58,7 @@ export const PricingCalculator: React.FC = () => {
                   </h3>
                 </div>
 
-                <div className="text-xs text-zinc-300 font-semibold mb-4">
+                <div className="text-xs text-violet-200 font-semibold mb-4">
                   {tier.timeline}
                 </div>
 
@@ -76,7 +76,7 @@ export const PricingCalculator: React.FC = () => {
                       Approx. {tier.pricePKR}
                     </div>
                   )}
-                  <div className="text-[11px] text-zinc-300 font-medium mt-1">
+                  <div className="text-[11px] text-violet-300 font-medium mt-1">
                     {tier.billingPeriod}
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export const PricingCalculator: React.FC = () => {
                   </div>
                   {tier.features.map((f) => (
                     <div key={f} className="flex items-start gap-2 text-xs text-slate-300">
-                      <Check className="w-3.5 h-3.5 text-zinc-300 mt-0.5 flex-shrink-0" />
+                      <Check className="w-3.5 h-3.5 text-violet-300 mt-0.5 flex-shrink-0" />
                       <span className="leading-tight">{f}</span>
                     </div>
                   ))}
@@ -116,7 +116,7 @@ export const PricingCalculator: React.FC = () => {
       {/* Add-Ons Menu Section */}
       <div className="rounded-3xl glass-panel p-5 sm:rounded-[36px] sm:p-12">
         <div className="mb-6 max-w-3xl sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/25 text-xs font-semibold text-zinc-300 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-semibold text-violet-200 mb-3">
             <Plus className="w-3.5 h-3.5" />
             <span>Modular Enhancements</span>
           </div>
@@ -126,7 +126,7 @@ export const PricingCalculator: React.FC = () => {
           <p className="text-sm text-slate-300 mt-2">
             Bolt on specialized operational systems to any website or web app tier. Itemized scope with transparent pricing.
           </p>
-          <div className="text-xs text-zinc-300 mt-1">
+          <div className="text-xs text-violet-300 mt-1">
             * Starting around 20,000–30,000 PKR, final quote confirmed after scope review.
           </div>
         </div>
@@ -141,7 +141,7 @@ export const PricingCalculator: React.FC = () => {
                 onClick={() => toggleAddOn(addon.id)}
                 className={`flex flex-col justify-between rounded-xl border p-4 cursor-pointer transition-all duration-200 sm:rounded-2xl sm:p-6 ${
                   isSelected
-                    ? 'bg-white/[0.06] border-white/25'
+                    ? 'bg-violet-500/[0.1] border-violet-400/60'
                     : 'bg-white/[0.02] border-white/10 hover:border-white/20'
                 }`}
               >
@@ -151,7 +151,7 @@ export const PricingCalculator: React.FC = () => {
                       {addon.title}
                     </h3>
                     <div className={`w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold ${
-                      isSelected ? 'bg-white/[0.06] text-white' : 'border border-white/20 text-slate-500'
+                      isSelected ? 'bg-purple-500 text-white' : 'border border-white/20 text-slate-500'
                     }`}>
                       {isSelected ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3 h-3" />}
                     </div>
@@ -164,7 +164,7 @@ export const PricingCalculator: React.FC = () => {
 
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
                   <div>
-                    <div className="font-semibold text-zinc-300">
+                    <div className="font-semibold text-violet-200">
                       {addon.pricePKR}
                     </div>
                     <div className="text-[10px] text-slate-400">
@@ -181,7 +181,7 @@ export const PricingCalculator: React.FC = () => {
         </div>
 
         {/* Selected Config Summary */}
-        <div className="mt-7 flex flex-col justify-between gap-4 rounded-xl border border-white/10 bg-[#111113] p-4 sm:mt-10 sm:gap-6 sm:rounded-2xl sm:p-6 md:flex-row md:items-center">
+        <div className="mt-7 flex flex-col justify-between gap-4 rounded-xl border border-white/10 bg-[#0c0c12] p-4 sm:mt-10 sm:gap-6 sm:rounded-2xl sm:p-6 md:flex-row md:items-center">
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Your Custom Scope Preview
@@ -225,7 +225,7 @@ export const PricingCalculator: React.FC = () => {
               key={m.percentage}
               className="relative rounded-xl border border-white/5 bg-white/[0.02] p-4 sm:rounded-2xl sm:p-6"
             >
-              <div className="text-4xl font-extrabold font-mono text-white mb-2">
+              <div className="text-4xl font-extrabold font-mono text-gradient mb-2">
                 {m.percentage}
               </div>
               <h3 className="text-base font-bold text-white mb-2">

@@ -18,7 +18,7 @@ const WHATSAPP_NUMBER = '923196762317';
 const EMPTY = { name: '', email: '', company: '', projectType: PROJECT_TYPES[0], message: '' };
 
 const inputClass =
-  'w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-zinc-600 transition-colors focus:border-white/40 focus:outline-none';
+  'w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-zinc-600 transition-colors focus:border-violet-400 focus:outline-none';
 const labelClass = 'mb-1.5 block text-xs font-medium text-zinc-400';
 
 export const ContactForm: React.FC<{ initialTier?: string; initialService?: string }> = ({ initialTier, initialService }) => {
@@ -84,7 +84,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
 
   if (submitted) {
     return (
-      <div className="space-y-6 rounded-3xl border border-white/10 bg-[#111113] p-6 text-center sm:p-12">
+      <div className="space-y-6 rounded-3xl border border-white/10 bg-[#0c0c12] p-6 text-center sm:p-12">
         <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-400/10 text-emerald-400">
           <CheckCircle2 className="h-7 w-7" />
         </div>
@@ -171,7 +171,7 @@ export const ContactForm: React.FC<{ initialTier?: string; initialService?: stri
             id="cf-type"
             value={formData.projectType}
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-            className={`${inputClass} bg-[#111113]`}
+            className={`${inputClass} bg-[#0c0c12]`}
           >
             {PROJECT_TYPES.map((pt) => (
               <option key={pt} value={pt}>

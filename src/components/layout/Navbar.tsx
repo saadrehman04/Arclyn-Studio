@@ -503,7 +503,7 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 <span>Home</span>
-                <ArrowRight className="w-4 h-4 text-zinc-400" />
+                <ArrowRight className="w-4 h-4 text-cyan-400" />
               </Link>
 
               {/* 2. Services */}
@@ -519,7 +519,7 @@ export const Navbar: React.FC = () => {
                     }`}
                   >
                     <span>Services</span>
-                    <ArrowRight className="w-4 h-4 text-zinc-400" />
+                    <ArrowRight className="w-4 h-4 text-cyan-400" />
                   </Link>
                   <button
                     type="button"
@@ -541,7 +541,7 @@ export const Navbar: React.FC = () => {
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-3 p-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px]"
                         >
-                          <Icon className="w-4 h-4 text-zinc-400 shrink-0" />
+                          <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
                           <span className="truncate">{sub.title}</span>
                         </Link>
                       );
@@ -561,7 +561,7 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 <span>Pricing</span>
-                <ArrowRight className="w-4 h-4 text-zinc-400" />
+                <ArrowRight className="w-4 h-4 text-cyan-400" />
               </Link>
 
               {/* 4. Pages */}
@@ -591,7 +591,7 @@ export const Navbar: React.FC = () => {
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-3 p-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px]"
                         >
-                          <Icon className="w-4 h-4 text-zinc-400 shrink-0" />
+                          <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
                           <span className="truncate">{page.title}</span>
                         </Link>
                       );
@@ -611,7 +611,7 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 <span>Contacts</span>
-                <ArrowRight className="w-4 h-4 text-zinc-400" />
+                <ArrowRight className="w-4 h-4 text-cyan-400" />
               </Link>
             </nav>
 

@@ -94,13 +94,13 @@ export default async function ServiceDetailPage({ params }: Props) {
           <SplitText
             text={'What every engagement\nincludes.'}
             accentWords={[3]}
-            accentClassName="text-[var(--accent)]"
+            accentClassName="font-serif-accent text-gradient-brand"
             className="section-title"
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {service.deliverables.map((item, index) => (
               <Reveal key={item.title} variant="up" delay={(index % 3) * 80} className="glass-panel rounded-3xl p-6 sm:p-7">
-                <span className="font-mono text-xs text-zinc-300">{String(index + 1).padStart(2, '0')}</span>
+                <span className="font-mono text-xs text-violet-300/80">{String(index + 1).padStart(2, '0')}</span>
                 <h3 className="mt-4 text-lg font-semibold tracking-tight text-white">{item.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.desc}</p>
               </Reveal>
@@ -118,7 +118,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <SplitText
             text={'Four steps from\nkickoff to launch.'}
             accentWords={[3, 4, 5]}
-            accentClassName="text-[var(--accent)]"
+            accentClassName="font-serif-accent text-gradient-brand"
             className="section-title"
           />
           <ol className="mt-12 grid border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
@@ -171,7 +171,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 )}
               </div>
             </div>
-            <div className="relative aspect-[16/11] bg-[#1a1a1d] lg:aspect-auto lg:min-h-[420px]">
+            <div className="relative aspect-[16/11] bg-[#15151d] lg:aspect-auto lg:min-h-[420px]">
               <Image src={caseStudy.image} alt={caseStudy.name} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-top" />
             </div>
           </Reveal>
@@ -187,7 +187,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <SplitText
             text={'Questions, answered.'}
             accentWords={[1]}
-            accentClassName="text-[var(--accent)]"
+            accentClassName="font-serif-accent text-gradient-brand"
             className="section-title"
           />
           <div className="mt-10 border-t border-white/[0.08]">

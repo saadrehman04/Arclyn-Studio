@@ -9,9 +9,18 @@ import { PROJECTS, type Project } from '@/data/projects';
 import { Reveal, SplitText } from '@/components/motion/Reveal';
 import { MagneticButton } from '@/components/shared/MagneticButton';
 
-const STACK_IDS = ['cheesecake-factory', 'prestige-estates', 'fitusion', 'mark-murphy-dds', 'querymind-ai-analyst'];
+const STACK: { id: string; accent: string }[] = [
+  { id: 'cheesecake-factory', accent: '#f59e0b' },
+  { id: 'prestige-estates', accent: '#a78bfa' },
+  { id: 'fitusion', accent: '#22d3ee' },
+  { id: 'mark-murphy-dds', accent: '#34d399' },
+  { id: 'querymind-ai-analyst', accent: '#818cf8' },
+];
 
-const items = STACK_IDS.map((id) => ({ project: PROJECTS.find((p) => p.id === id) as Project })).filter((x) => x.project);
+const items = STACK.map(({ id, accent }) => ({
+  project: PROJECTS.find((p) => p.id === id) as Project,
+  accent,
+})).filter((x) => x.project);
 
 function splitName(name: string) {
   const [title, subtitle] = name.split(' — ');
@@ -63,7 +72,7 @@ export const WorkStack: React.FC = () => {
             <SplitText
               text={'Products that\nmove the needle.'}
               accentWords={[3, 4]}
-              accentClassName="text-[var(--accent)]"
+              accentClassName="font-serif-accent text-gradient-brand"
               className="font-display text-[clamp(2.5rem,6.4vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
             />
           </div>
@@ -81,7 +90,7 @@ export const WorkStack: React.FC = () => {
 
         {/* Stack */}
         <div className="relative">
-          {items.map(({ project }, i) => {
+          {items.map(({ project, accent }, i) => {
             const { title, subtitle } = splitName(project.name);
             return (
               <article
@@ -92,8 +101,16 @@ export const WorkStack: React.FC = () => {
               >
                 <div
                   data-stack-inner
-                  className="relative origin-top overflow-hidden rounded-[28px] border border-white/[0.09] bg-[#111113] will-change-transform sm:rounded-[36px]"
+                  className="relative origin-top overflow-hidden rounded-[28px] border border-white/[0.09] bg-[#0b0b11] will-change-transform sm:rounded-[36px]"
+                  style={{ ['--accent' as string]: accent }}
                 >
+                  {/* accent glow */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full opacity-30"
+                    style={{ background: `radial-gradient(circle, ${accent} 0%, transparent 65%)` }}
+                  />
+
                   <div className="relative grid gap-8 p-5 sm:p-8 lg:min-h-[min(74vh,700px)] lg:grid-cols-[0.85fr_1.35fr] lg:gap-12 lg:p-12">
                     {/* Copy */}
                     <div className="flex flex-col justify-between gap-8">
@@ -104,7 +121,10 @@ export const WorkStack: React.FC = () => {
                           </span>
                           <span>{project.year}</span>
                         </div>
-                        <span className="mt-8 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-zinc-300">
+                        <span
+                          className="mt-8 inline-flex rounded-full border px-3 py-1 text-xs font-medium"
+                          style={{ borderColor: `${accent}55`, color: accent, background: `${accent}12` }}
+                        >
                           {project.category}
                         </span>
                         <h3 className="mt-5 font-display text-4xl font-semibold leading-[1] tracking-[-0.04em] text-white sm:text-5xl lg:text-[3.6rem]">
@@ -157,10 +177,10 @@ export const WorkStack: React.FC = () => {
                       href={project.liveUrl ?? '/work'}
                       target={project.liveUrl ? '_blank' : undefined}
                       rel="noopener noreferrer"
-                      className="group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#1a1a1d] sm:rounded-3xl"
+                      className="group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#15151d] sm:rounded-3xl"
                       aria-label={`Open ${title}`}
                     >
-                      <div className="flex items-center gap-1.5 border-b border-white/[0.08] bg-[#161618] px-4 py-3">
+                      <div className="flex items-center gap-1.5 border-b border-white/[0.08] bg-[#111118] px-4 py-3">
                         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />

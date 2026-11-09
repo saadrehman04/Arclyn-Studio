@@ -166,7 +166,7 @@ const BrandIcon: React.FC<{ type: Testimonial['brandIcon']; className?: string }
     case 'velocity':
       return (
         <div className={`relative flex items-center justify-center ${className}`}>
-          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-zinc-400">
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-cyan-400">
             <path
               d="M13 5L20 12L13 19M5 5L12 12L5 19"
               stroke="currentColor"
@@ -180,7 +180,7 @@ const BrandIcon: React.FC<{ type: Testimonial['brandIcon']; className?: string }
     case 'studioluxe':
       return (
         <div className={`relative flex items-center justify-center ${className}`}>
-          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-zinc-400">
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-violet-400">
             <path
               d="M12 2L21 9L12 22L3 9L12 2Z"
               stroke="currentColor"
@@ -295,7 +295,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
             <SplitText
               text={'Hear it from the brands\nthat trust us.'}
               accentWords={[6, 7]}
-              accentClassName="text-[var(--accent)]"
+              accentClassName="font-serif-accent text-gradient-brand"
               className="font-display text-[clamp(2.25rem,5.4vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em] text-white"
             />
             <Reveal as="p" variant="up" delay={150} className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-zinc-400">

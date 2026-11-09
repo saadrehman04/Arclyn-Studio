@@ -51,7 +51,7 @@ export const FinalCta: React.FC = () => {
         <SplitText
           text={'Let’s build your next\nbig thing together.'}
           accentWords={[4, 5]}
-          accentClassName="text-[var(--accent)]"
+          accentClassName="font-serif-accent text-gradient-brand"
           stagger={60}
           className="font-display text-[clamp(2.6rem,7.6vw,6.75rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white"
         />
@@ -75,7 +75,7 @@ export const FinalCta: React.FC = () => {
             rel="noopener noreferrer"
             className="btn-ghost w-full sm:w-auto"
           >
-            <Calendar className="h-4 w-4 text-zinc-300" />
+            <Calendar className="h-4 w-4 text-violet-300" />
             Book a 15-min call
           </a>
         </Reveal>

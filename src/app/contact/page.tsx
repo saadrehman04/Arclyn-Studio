@@ -17,9 +17,9 @@ interface Props {
 }
 
 const CHANNELS = [
-  { icon: Mail, label: 'Email', value: 'saadrehman034@gmail.com', href: 'mailto:saadrehman034@gmail.com', color: 'text-zinc-300' },
+  { icon: Mail, label: 'Email', value: 'saadrehman034@gmail.com', href: 'mailto:saadrehman034@gmail.com', color: 'text-violet-300' },
   { icon: MessageCircle, label: 'WhatsApp', value: '+92 319 6762317', href: 'https://wa.me/923196762317', color: 'text-emerald-300' },
-  { icon: InstagramIcon, label: 'Instagram', value: '@arclyn_studio', href: 'https://instagram.com/arclyn_studio', color: 'text-zinc-300' },
+  { icon: InstagramIcon, label: 'Instagram', value: '@arclyn_studio', href: 'https://instagram.com/arclyn_studio', color: 'text-pink-300' },
 ];
 
 const EXPECT = [
@@ -84,9 +84,9 @@ export default async function ContactPage({ searchParams }: Props) {
               })}
             </Reveal>
 
-            <Reveal variant="up" delay={160} className="relative overflow-hidden rounded-3xl border border-white/25 bg-white/[0.03] p-6">
+            <Reveal variant="up" delay={160} className="relative overflow-hidden rounded-3xl border border-violet-400/20 bg-gradient-to-br from-violet-500/[0.12] to-sky-500/[0.05] p-6">
               <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-zinc-300">
+                <span className="inline-flex items-center gap-2 text-sm font-medium text-violet-200">
                   <Calendar className="h-4 w-4" />
                   Prefer a live call?
                 </span>
@@ -109,7 +109,7 @@ export default async function ContactPage({ searchParams }: Props) {
               <ul className="mt-4 space-y-3">
                 {EXPECT.map((e) => (
                   <li key={e} className="flex items-start gap-3 text-sm text-zinc-300">
-                    <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-zinc-300" />
+                    <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-violet-300" />
                     {e}
                   </li>
                 ))}

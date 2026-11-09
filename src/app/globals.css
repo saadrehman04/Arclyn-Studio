@@ -2,10 +2,11 @@
 
 @theme {
   /* next/font exposes the raw families as --font-*-raw; these are the public stacks. */
-  --font-display: var(--font-display-raw), var(--font-inter-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: var(--font-inter-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-outfit: var(--font-inter-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-geist-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-geist-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-outfit: var(--font-geist-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-inter: var(--font-inter-raw), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-serif-raw), "Times New Roman", serif;
   --font-mono: var(--font-mono-raw), ui-monospace, SFMono-Regular, Menlo, monospace;
   --color-brand-dark: #2d3a2e;
   --color-brand-green: #3d5a3e;
@@ -37,18 +38,15 @@
 
 /* Arclyn design tokens */
 :root {
-  --bg: #0a0a0b;
-  --bg-elev: #111113;
-  --bg-elev-2: #161618;
+  --bg: #060609;
+  --bg-elev: #0c0c12;
+  --bg-elev-2: #12121a;
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
   --ink: #f5f5f7;
   --ink-dim: #a1a1aa;
   --ink-mute: #71717a;
   --violet: #8b5cf6;
-  /* Single solid brand accent (from the logo). Used sparingly, never as a gradient. */
-  --accent: #8b7bff;
-  --accent-on-light: #5b3fd6;
   --violet-soft: #c4b5fd;
   --sky: #38bdf8;
   --paper: #eeede9;
@@ -79,7 +77,7 @@ body {
 
 /* Premium Modern Typography System based on Reference */
 .font-display {
-  font-family: var(--font-display);
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   letter-spacing: -0.025em;
 }
 
@@ -88,7 +86,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   text-wrap: balance;
   letter-spacing: -0.025em;
 }
@@ -209,12 +207,12 @@ p, blockquote, li {
 /* Surface panel (formerly glassmorphism). Solid surface: backdrop blur on dozens
    of cards was a major scroll cost on inner pages. */
 .glass-panel {
-  background: #111113;
+  background: #0c0c12;
   border: 1px solid var(--line);
   transition: border-color 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
 }
 .glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(167, 139, 250, 0.35);
 }
 
 /* Gradients */
@@ -418,26 +416,38 @@ p, blockquote, li {
    which the browser composites on the GPU without layout or paint.
    ========================================================= */
 
-/* Two-tone headline accent: same face, muted tone (no italics, no gradients) */
-.font-serif-accent { color: var(--accent); }
+.font-serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
 
-.text-gradient-brand { color: inherit; }
+.text-gradient-brand {
+  background: linear-gradient(100deg, #ffffff 0%, #ddd6fe 35%, #a78bfa 62%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-right: 0.06em; /* keeps italic serif glyphs from clipping */
+}
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--ink-dim);
 }
 .eyebrow::before {
   content: "";
-  width: 20px;
-  height: 1px;
-  background: var(--accent);
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--violet);
+  box-shadow: 0 0 12px var(--violet);
 }
 
 /* ---------- Scroll reveals (driven by <Reveal/> + one IntersectionObserver) ---------- */
@@ -514,8 +524,8 @@ p, blockquote, li {
 }
 .cursor-ring.is-hover span {
   transform: scale(1.6);
-  background-color: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(139, 92, 246, 0.12);
+  border-color: rgba(196, 181, 253, 0.8);
 }
 .cursor-ring.is-down span { transform: scale(0.85); }
 .cursor-dot span {
@@ -548,17 +558,19 @@ p, blockquote, li {
   overflow: hidden;
   isolation: isolate;
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 10px 40px -10px rgba(139, 92, 246, 0.55);
 }
 .btn-primary::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: #e4e4e7;
+  background: linear-gradient(100deg, #ede9fe, #c4b5fd 50%, #bae6fd);
   transform: translate3d(0, 101%, 0);
   transition: transform 0.5s var(--ease-out);
 }
 .btn-primary:hover::before { transform: translate3d(0, 0, 0); }
+.btn-primary:hover { box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 16px 50px -8px rgba(139, 92, 246, 0.75); }
 .btn-primary .btn-arrow {
   display: inline-grid;
   place-items: center;
@@ -604,21 +616,26 @@ p, blockquote, li {
   aspect-ratio: 1;
   border-radius: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(circle at 50% 0%, #121214 0%, #0b0b0c 18%, #0a0a0b 40%);
+  background:
+    radial-gradient(50% 12% at 50% 0%, rgba(139, 92, 246, 0.22), transparent 70%),
+    radial-gradient(circle at 50% 0%, #110f1f 0%, #09080e 16%, #060609 40%);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.55),
-    inset 0 18px 60px -30px rgba(255, 255, 255, 0.18),
-    0 -1px 18px 0 rgba(255, 255, 255, 0.12),
-    0 -40px 160px 0 rgba(255, 255, 255, 0.05);
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.9),
+    inset 0 14px 36px -18px rgba(196, 181, 253, 0.7),
+    inset 0 40px 110px -60px rgba(139, 92, 246, 0.55),
+    0 -2px 30px 0 rgba(196, 181, 253, 0.55),
+    0 -20px 120px 10px rgba(139, 92, 246, 0.45),
+    0 -60px 260px 40px rgba(56, 189, 248, 0.18);
 }
 .hero-arc-flare {
   position: absolute;
   left: 50%;
-  width: min(700px, 80vw);
-  height: 140px;
+  width: min(900px, 90vw);
+  height: 220px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 30%, transparent 70%);
-  animation: arc-breathe 7s var(--ease-in-out) infinite;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(221, 214, 254, 0.55) 12%, rgba(139, 92, 246, 0.22) 38%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: arc-breathe 6s var(--ease-in-out) infinite;
 }
 .hero-arc-beam {
   position: absolute;
@@ -627,13 +644,14 @@ p, blockquote, li {
   width: 2px;
   height: 46vh;
   transform: translateX(-50%);
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08) 45%, transparent);
-  opacity: 0.4;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(196, 181, 253, 0.35) 40%, transparent);
+  filter: blur(0.5px);
+  opacity: 0.6;
   animation: arc-breathe 6s var(--ease-in-out) infinite;
 }
 @keyframes arc-breathe {
-  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
 }
 .hero-arc-beam { animation-name: beam-breathe; }
 @keyframes beam-breathe {
@@ -658,10 +676,10 @@ p, blockquote, li {
   background-image:
     radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,0.7), transparent),
     radial-gradient(1px 1px at 28% 64%, rgba(255,255,255,0.45), transparent),
-    radial-gradient(1.5px 1.5px at 44% 14%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 44% 14%, rgba(221,214,254,0.8), transparent),
     radial-gradient(1px 1px at 61% 41%, rgba(255,255,255,0.5), transparent),
     radial-gradient(1px 1px at 73% 18%, rgba(255,255,255,0.6), transparent),
-    radial-gradient(1.5px 1.5px at 86% 58%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 86% 58%, rgba(186,230,253,0.7), transparent),
     radial-gradient(1px 1px at 92% 28%, rgba(255,255,255,0.4), transparent),
     radial-gradient(1px 1px at 6% 48%, rgba(255,255,255,0.5), transparent),
     radial-gradient(1px 1px at 52% 72%, rgba(255,255,255,0.35), transparent),
@@ -682,7 +700,7 @@ p, blockquote, li {
   height: 720px;
   margin: -360px 0 0 -360px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.16) 0%, rgba(56, 189, 248, 0.06) 35%, transparent 65%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
@@ -738,7 +756,12 @@ p, blockquote, li {
    Legacy utility classes used across inner pages, mapped onto the
    new design system (several were referenced but never defined).
    ========================================================= */
-.text-gradient { color: #fff; }
+.text-gradient {
+  background: linear-gradient(100deg, #ffffff 0%, #ddd6fe 35%, #a78bfa 62%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .btn-primary-gradient {
   display: inline-flex;
   align-items: center;
@@ -747,11 +770,16 @@ p, blockquote, li {
   color: #09090b !important;
   border-radius: 999px !important;
   min-height: 44px;
-  transition: background-color 0.3s;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px -12px rgba(139, 92, 246, 0.6);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), background-color 0.3s;
 }
-.btn-primary-gradient:hover { background: #e4e4e7; }
+.btn-primary-gradient:hover {
+  background: #ede9fe;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 16px 40px -10px rgba(139, 92, 246, 0.8);
+}
 .bg-radial-hero {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.18), transparent 70%);
 }
 
 /* Inner-page rhythm: consistent section headings */
