@@ -69,7 +69,7 @@ export const Process: React.FC = () => {
           <SplitText
             text={'AI-accelerated.\nHuman-crafted.'}
             accentWords={[1]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="font-display text-[clamp(2.5rem,5.6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
           />
           <Reveal as="p" variant="up" delay={150} className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">

@@ -63,7 +63,7 @@ export const WorkStack: React.FC = () => {
             <SplitText
               text={'Products that\nmove the needle.'}
               accentWords={[3, 4]}
-              accentClassName="text-zinc-500"
+              accentClassName="text-[var(--accent)]"
               className="font-display text-[clamp(2.5rem,6.4vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
             />
           </div>

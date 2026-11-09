@@ -104,7 +104,7 @@ export default function PartnerProgramPage() {
           <SplitText
             text={'Simple, transparent\nprocess.'}
             accentWords={[2]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="section-title"
           />
           <ol className="mt-12 border-t border-white/[0.08]">
@@ -142,7 +142,7 @@ export default function PartnerProgramPage() {
             <SplitText
               text={'Let’s work\ntogether.'}
               accentWords={[2]}
-              accentClassName="text-zinc-500"
+              accentClassName="text-[var(--accent)]"
               className="section-title"
             />
             <Reveal as="p" variant="up" delay={120} className="mt-5 max-w-sm text-[15px] leading-relaxed text-zinc-400">

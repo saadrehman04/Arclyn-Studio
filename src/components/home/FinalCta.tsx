@@ -51,7 +51,7 @@ export const FinalCta: React.FC = () => {
         <SplitText
           text={'Let’s build your next\nbig thing together.'}
           accentWords={[4, 5]}
-          accentClassName="text-zinc-500"
+          accentClassName="text-[var(--accent)]"
           stagger={60}
           className="font-display text-[clamp(2.6rem,7.6vw,6.75rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white"
         />

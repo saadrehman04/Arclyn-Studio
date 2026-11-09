@@ -39,7 +39,7 @@ export const TeamSection: React.FC = () => {
             <SplitText
               text={'The minds behind\nthe machines.'}
               accentWords={[4]}
-              accentClassName="text-zinc-500"
+              accentClassName="text-[var(--accent)]"
               className="font-display text-[clamp(2.5rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
             />
           </div>

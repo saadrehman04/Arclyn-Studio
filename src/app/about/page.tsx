@@ -69,7 +69,7 @@ export default function AboutPage() {
             <SplitText
               text={'Backed by 50+ real deployments\nand a 150k+ developer audience.'}
               accentWords={[2, 3]}
-              accentClassName="text-zinc-500"
+              accentClassName="text-[var(--accent)]"
               className="section-title"
             />
             <Reveal variant="up" delay={120} className="mt-8 space-y-5 text-base leading-relaxed text-zinc-400 sm:text-lg">
@@ -115,7 +115,7 @@ export default function AboutPage() {
           <SplitText
             text={'How we work\ndifferently.'}
             accentWords={[3]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="section-title"
           />
           <div className="mt-12 grid gap-4 sm:gap-5 md:grid-cols-2">
@@ -144,7 +144,7 @@ export default function AboutPage() {
           <SplitText
             text={'Production tools,\nzero bloat.'}
             accentWords={[2, 3]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="section-title"
           />
           <div className="mt-12 grid grid-cols-1 border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">

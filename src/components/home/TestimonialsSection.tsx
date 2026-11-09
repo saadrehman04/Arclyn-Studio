@@ -295,7 +295,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
             <SplitText
               text={'Hear it from the brands\nthat trust us.'}
               accentWords={[6, 7]}
-              accentClassName="text-zinc-500"
+              accentClassName="text-[var(--accent)]"
               className="font-display text-[clamp(2.25rem,5.4vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em] text-white"
             />
             <Reveal as="p" variant="up" delay={150} className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-zinc-400">

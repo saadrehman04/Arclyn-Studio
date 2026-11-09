@@ -42,7 +42,7 @@ export const PartnerProgramSection: React.FC = () => {
             <SplitText
               text={'Bring us a client.\nKeep 30% of the project.'}
               accentWords={[4, 5]}
-              accentClassName="text-zinc-500"
+              accentClassName="text-[var(--accent)]"
               className="font-display text-[clamp(2.25rem,5.4vw,4.75rem)] font-semibold leading-[1] tracking-[-0.045em] text-white"
             />
             <Reveal as="p" variant="up" delay={150} className="mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">

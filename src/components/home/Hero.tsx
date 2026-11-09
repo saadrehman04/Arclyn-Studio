@@ -107,11 +107,10 @@ export const Hero: React.FC = () => {
       <div
         ref={arcRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[62%] -z-10 h-full will-change-transform sm:top-[64%]"
+        className="pointer-events-none absolute inset-x-0 top-[calc(100%-7.5rem)] -z-10 h-full will-change-transform sm:top-[calc(100%-9rem)]"
       >
         <div className="hero-arc" />
         <div className="hero-arc-flare top-0" />
-        <div className="hero-arc-beam" style={{ bottom: "100%", transformOrigin: "50% 100%" }} />
       </div>
 
       {/* Soft fade so the arc melts into the next section */}
@@ -120,7 +119,7 @@ export const Hero: React.FC = () => {
       {/* ---------- Copy ---------- */}
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-5 pb-[22vh] pt-32 text-center will-change-transform sm:px-8 sm:pt-36"
+        className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-5 pb-36 pt-32 sm:pb-44 text-center will-change-transform sm:px-8 sm:pt-36"
       >
         <Reveal intro variant="fade" delay={100}>
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2 pr-4 text-[12px] font-medium text-zinc-300 sm:text-[13px]">
@@ -137,7 +136,7 @@ export const Hero: React.FC = () => {
           intro
           text={'Build smarter.\nLaunch faster.'}
           accentWords={[3]}
-          accentClassName="text-zinc-500"
+          accentClassName="text-[var(--accent)]"
           delay={180}
           stagger={70}
           className="mt-7 font-display text-[clamp(3rem,10.5vw,8.75rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"

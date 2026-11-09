@@ -46,6 +46,9 @@
   --ink-dim: #a1a1aa;
   --ink-mute: #71717a;
   --violet: #8b5cf6;
+  /* Single solid brand accent (from the logo). Used sparingly, never as a gradient. */
+  --accent: #8b7bff;
+  --accent-on-light: #5b3fd6;
   --violet-soft: #c4b5fd;
   --sky: #38bdf8;
   --paper: #eeede9;
@@ -416,7 +419,7 @@ p, blockquote, li {
    ========================================================= */
 
 /* Two-tone headline accent: same face, muted tone (no italics, no gradients) */
-.font-serif-accent { color: #71717a; }
+.font-serif-accent { color: var(--accent); }
 
 .text-gradient-brand { color: inherit; }
 
@@ -434,8 +437,7 @@ p, blockquote, li {
   content: "";
   width: 20px;
   height: 1px;
-  background: currentColor;
-  opacity: 0.6;
+  background: var(--accent);
 }
 
 /* ---------- Scroll reveals (driven by <Reveal/> + one IntersectionObserver) ---------- */

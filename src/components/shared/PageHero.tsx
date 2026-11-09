@@ -60,7 +60,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
           intro
           text={title}
           accentWords={accentWords}
-          accentClassName="text-zinc-500"
+          accentClassName="text-[var(--accent)]"
           delay={120}
           stagger={60}
           className="font-display text-[clamp(2.5rem,7.5vw,6rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white"
@@ -122,7 +122,7 @@ export const PageCta: React.FC<PageCtaProps> = ({ title, accentWords = [], descr
       <SplitText
         text={title}
         accentWords={accentWords}
-        accentClassName="text-zinc-500"
+        accentClassName="text-[var(--accent)]"
         className="mx-auto max-w-3xl font-display text-[clamp(2rem,5vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white"
       />
       {description && (

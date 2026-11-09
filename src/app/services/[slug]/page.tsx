@@ -94,7 +94,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <SplitText
             text={'What every engagement\nincludes.'}
             accentWords={[3]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="section-title"
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -118,7 +118,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <SplitText
             text={'Four steps from\nkickoff to launch.'}
             accentWords={[3, 4, 5]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="section-title"
           />
           <ol className="mt-12 grid border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
@@ -187,7 +187,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <SplitText
             text={'Questions, answered.'}
             accentWords={[1]}
-            accentClassName="text-zinc-500"
+            accentClassName="text-[var(--accent)]"
             className="section-title"
           />
           <div className="mt-10 border-t border-white/[0.08]">
