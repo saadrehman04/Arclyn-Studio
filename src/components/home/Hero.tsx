@@ -84,6 +84,26 @@ export const Hero: React.FC = () => {
     };
   }, [sectionRef]);
 
+  // Keep the arc's crest just below the CTA buttons on every screen size, so it
+  // is always visible on the first screen but never crosses the text.
+  useEffect(() => {
+    const section = sectionRef.current;
+    const arc = arcRef.current;
+    const cta = section?.querySelector<HTMLElement>('[data-hero-cta]');
+    if (!section || !arc || !cta) return;
+    const place = () => {
+      const gap = window.innerWidth < 640 ? 64 : window.innerHeight < 820 ? 68 : 84;
+      const top = cta.offsetTop + cta.offsetHeight + (cta.offsetParent as HTMLElement | null)!.offsetTop + gap;
+      arc.style.top = `${Math.round(top)}px`;
+      arc.style.opacity = '1';
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(section);
+    document.fonts?.ready.then(place);
+    return () => ro.disconnect();
+  }, [sectionRef]);
+
   useEffect(() => {
     // Fonts swap can shift the hero height slightly; keep trigger positions exact.
     const id = window.setTimeout(() => ScrollTrigger.refresh(), 600);
@@ -107,7 +127,7 @@ export const Hero: React.FC = () => {
       <div
         ref={arcRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[calc(100%-7.5rem)] -z-10 h-full will-change-transform sm:top-[calc(100%-9rem)]"
+        className="pointer-events-none absolute inset-x-0 top-[calc(100%-9rem)] -z-10 h-full opacity-0 transition-opacity duration-1000 will-change-transform"
       >
         <div className="hero-arc" />
         <div className="hero-arc-flare top-0" />
@@ -119,7 +139,7 @@ export const Hero: React.FC = () => {
       {/* ---------- Copy ---------- */}
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-5 pb-36 pt-32 sm:pb-44 text-center will-change-transform sm:px-8 sm:pt-36"
+        className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-5 pb-48 pt-24 sm:pb-56 sm:pt-28 [@media(max-height:820px)]:sm:pt-24 text-center will-change-transform sm:px-8 sm:pt-36"
       >
         <Reveal intro variant="fade" delay={100}>
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2 pr-4 text-[12px] font-medium text-zinc-300 sm:text-[13px]">
@@ -139,7 +159,7 @@ export const Hero: React.FC = () => {
           accentClassName="font-serif-accent text-gradient-brand"
           delay={180}
           stagger={70}
-          className="mt-7 font-display text-[clamp(3rem,10.5vw,8.75rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
+          className="mt-7 font-display text-[clamp(2.75rem,min(9vw,12.5svh),7.5rem)] [@media(max-height:820px)]:mt-5 [@media(max-height:820px)]:text-[clamp(2.75rem,min(9vw,11svh),7.5rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
         />
 
         <Reveal
@@ -147,13 +167,13 @@ export const Hero: React.FC = () => {
           intro
           variant="up"
           delay={520}
-          className="mt-7 max-w-[34rem] text-[15px] leading-relaxed text-zinc-400 sm:text-lg"
+          className="mt-7 max-w-[34rem] text-[15px] leading-relaxed text-zinc-400 sm:text-lg [@media(max-height:820px)]:mt-5 [@media(max-height:820px)]:sm:text-base"
         >
           We combine full-stack engineering with AI automation to turn your idea into a market-ready
           product — websites, apps and intelligent systems built to grow your business.
         </Reveal>
 
-        <Reveal intro variant="up" delay={640} className="mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+        <Reveal intro variant="up" delay={640} data-hero-cta className="mt-10 [@media(max-height:820px)]:mt-7 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
           <MagneticButton className="w-full sm:w-auto">
             <Link href="/contact" className="btn-primary w-full sm:w-auto">
               <span>Start your project</span>
