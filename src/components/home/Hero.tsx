@@ -92,7 +92,7 @@ export const Hero: React.FC = () => {
     const cta = section?.querySelector<HTMLElement>('[data-hero-cta]');
     if (!section || !arc || !cta) return;
     const place = () => {
-      const gap = window.innerWidth < 640 ? 64 : window.innerHeight < 820 ? 68 : 84;
+      const gap = window.innerWidth < 640 ? 64 : window.innerHeight < 820 ? 64 : 72;
       const top = cta.offsetTop + cta.offsetHeight + (cta.offsetParent as HTMLElement | null)!.offsetTop + gap;
       arc.style.top = `${Math.round(top)}px`;
       arc.style.opacity = '1';
@@ -159,7 +159,7 @@ export const Hero: React.FC = () => {
           accentClassName="font-serif-accent text-gradient-brand"
           delay={180}
           stagger={70}
-          className="mt-7 font-display text-[clamp(2.75rem,min(9vw,12.5svh),7.5rem)] [@media(max-height:820px)]:mt-5 [@media(max-height:820px)]:text-[clamp(2.75rem,min(9vw,11svh),7.5rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
+          className="mt-7 font-display text-[clamp(3rem,min(10.5vw,15.5svh),8.75rem)] [@media(max-height:820px)]:mt-5 [@media(max-height:820px)]:text-[clamp(3rem,min(10.5vw,13.5svh),8.75rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
         />
 
         <Reveal
