@@ -1,3 +1,4 @@
+// Arclyn Studio — home page (hero, work, services, process, portfolio, team, testimonials, CTA).
 import React from 'react';
 import type { Metadata } from 'next';
 import { Hero } from '@/components/home/Hero';
